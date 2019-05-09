@@ -30,6 +30,7 @@ import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.enums.CharacterEnums;
+import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.ui.ChatBox;
 import もこけね.util.CardFilter;
@@ -97,7 +98,10 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     private static boolean startingGame = false;
     private static boolean gameStarted = false;
     private static float gameStartTimer = 0.0f;
+
+    private static float eventChooseTimer = 0.0f;
     private static int lastMilestone = 0;
+
 
     public static void beginGameStartTimer()
     {
@@ -116,6 +120,15 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
             startingGame = false;
             gameStartTimer = 0.0f;
             lastMilestone = 0;
+        }
+    }
+
+    public static void startEventChooseTimer(float startTime)
+    {
+        if (eventChooseTimer <= 0.0f)
+        {
+            eventChooseTimer = startTime;
+            lastMilestone = MathUtils.floor(startTime - 0.5f);
         }
     }
 
@@ -142,6 +155,20 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                     gameStarted = true;
 
                     startGame();
+                }
+            }
+
+            if (eventChooseTimer > 0.0f)
+            {
+                eventChooseTimer -= Gdx.graphics.getDeltaTime();
+                if (eventChooseTimer <= 0.0f)
+                {
+                    RoomEventVoting.resolveConflict();
+                }
+                else if (lastMilestone > eventChooseTimer)
+                {
+                    HandleMatchmaking.sendMessage(String.valueOf(lastMilestone));
+                    --lastMilestone;
                 }
             }
         }

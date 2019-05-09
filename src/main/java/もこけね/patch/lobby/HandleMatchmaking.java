@@ -47,7 +47,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
 
     public static boolean isMokou;
 
-    public boolean isHost;
+    public static boolean isHost;
 
 
     public static void init()
@@ -389,7 +389,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 matchmaking.setLobbyData(steamIDLobby, lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse);
                 matchmaking.setLobbyData(steamIDLobby, hostIsMokouKey, isMokou ? metadataTrue : metadataFalse);
 
-                this.isHost = true;
+                isHost = true;
 
                 currentLobbyID = steamIDLobby;
                 joinorcreate = false;

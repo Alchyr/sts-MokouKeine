@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.character.MokouKeine;
+import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
 
 import java.nio.ByteBuffer;
@@ -23,6 +24,8 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
     public static SteamNetworking communication;
     public static MultiplayerHelper callback;
     public static SteamID currentPartner;
+
+    public static boolean active;
     //When second player joins, send signal to start game start timer
     //Upon game start, host then sends necessary information (seed, which player is which character) to second player.
 
@@ -138,6 +141,14 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         {
             tryPlayCard(msg.substring(17));
         }
+        else if (msg.startsWith("room_option"))
+        {
+            RoomEventVoting.receiveVote(Integer.valueOf(msg.substring(11)));
+        }
+        else if (msg.startsWith("room_option_choose"))
+        {
+            RoomEventVoting.selectOption(Integer.valueOf(msg.substring(18)));
+        }
         else if (msg.equals("start_game"))
         {
             //Host has send start game message, and both parties are properly connected.
@@ -146,11 +157,14 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
         else if (msg.equals("leave"))
         {
+            active = false;
             HandleMatchmaking.leave();
         }
         else if (msg.equals("stop"))
         {
+            active = false;
             stopGameStart();
+            chat.receiveMessage("Other player left.");
             logger.info("Other player left.");
             currentPartner = null;
         }
@@ -182,8 +196,9 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
         else if (msg.equals("success"))
         {
+            active = true;
             currentPartner = sender;
-            if (HandleMatchmaking.handler.isHost)
+            if (HandleMatchmaking.isHost)
             {
                 chat.receiveMessage("Another player has joined the lobby.");
                 logger.info("Connection established.");
@@ -198,6 +213,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
         else if (msg.equals("connect"))
         {
+            active = true;
             currentPartner = sender;
             sendP2PString("success");
         }

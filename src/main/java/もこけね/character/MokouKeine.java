@@ -138,6 +138,9 @@ public class MokouKeine extends CustomPlayer {
 
         this.title = getTitle(this.chosenClass);
 
+        if (AbstractDungeon.topPanel != null)
+            AbstractDungeon.topPanel.setPlayerName();
+
         if (isMokou)
         {
             this.name = characterStrings.NAMES[1];

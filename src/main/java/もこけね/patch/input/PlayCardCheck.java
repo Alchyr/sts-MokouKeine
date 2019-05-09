@@ -26,7 +26,7 @@ public class PlayCardCheck {
     {
         if (__instance.chosenClass == CharacterEnums.MOKOUKEINE)
         {
-            if (HandleMatchmaking.handler.isHost)
+            if (HandleMatchmaking.isHost)
             {
                 if (__instance.hoveredCard.target != AbstractCard.CardTarget.ENEMY && __instance.hoveredCard.target != AbstractCard.CardTarget.SELF_AND_ENEMY)
                 {
