@@ -189,7 +189,7 @@ public class RoomEventVoting {
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(Hitbox.class, "render");
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(Hitbox.class, "render");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
