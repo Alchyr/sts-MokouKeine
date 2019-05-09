@@ -20,7 +20,7 @@ import com.megacrit.cardcrawl.helpers.TipTracker;
 import com.megacrit.cardcrawl.helpers.TrialHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.random.Random;
-import com.megacrit.cardcrawl.screens.mainMenu.MainMenuScreen;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.NotFoundException;
@@ -28,6 +28,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
+import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.ui.ChatBox;
@@ -47,7 +48,7 @@ import java.util.Collection;
 @SpireInitializer
 public class もこけねは神の国 implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber,
         EditCharactersSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber, PreStartGameSubscriber,
-        RenderSubscriber, PostUpdateSubscriber
+        RenderSubscriber, PostUpdateSubscriber, OnStartBattleSubscriber
 {
     public static final String modID = "もこけね";
 
@@ -145,6 +146,11 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
             }
         }
         MultiplayerHelper.readPostUpdate();
+    }
+
+    @Override
+    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+        DiscardToCorrectPile.reset();
     }
 
     public void startGame()

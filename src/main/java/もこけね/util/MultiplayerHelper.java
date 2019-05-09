@@ -255,7 +255,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                     toPlay.target_x = toPlay.current_x = x;
                     toPlay.target_y = toPlay.current_y = y;
 
-                    AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(toPlay, target));
+                    AbstractDungeon.actionManager.cardQueue.add(new OtherPlayerCardQueueItem(toPlay, target));
                 }
                 else
                 {
@@ -284,7 +284,6 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.hand.size())
             {
                 AbstractCard toPlay = AbstractDungeon.player.hand.group.get(cardIndex);
-                AbstractDungeon.player.hand.removeCard(toPlay);
 
                 AbstractMonster target = null;
                 if (targetIndex >= 0 && targetIndex < AbstractDungeon.getMonsters().monsters.size()) {

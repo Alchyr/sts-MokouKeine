@@ -7,6 +7,8 @@ import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
+import もこけね.character.MokouKeine;
 import もこけね.util.MultiplayerHelper;
 import もこけね.util.SteamUserCallbacks;
 
@@ -26,6 +28,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     private static final String lobbyCharacterKey = "character";
     private static final String lobbyPublicKey = "is_public";
     private static final String lobbyKeysUnlockedKey = "final_act";
+    private static final String hostIsMokouKey = "host_is_mokou";
     private static final String metadataTrue = "true";
     private static final String metadataFalse = "false";
 
@@ -42,7 +45,10 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     public static boolean activeMultiplayer;
     private static SteamID currentLobbyID;
 
+    public static boolean isMokou;
+
     public boolean isHost;
+
 
     public static void init()
     {
@@ -173,6 +179,19 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             for (int i = 0; i < numMembers; i++) {
                 SteamID member = matchmaking.getLobbyMemberByIndex(steamIDLobby, i);
                 logger.info("    - " + i + ": accountID=" + member.getAccountID());
+            }
+
+            isMokou = matchmaking.getLobbyData(steamIDLobby, hostIsMokouKey).equals(metadataFalse);
+
+            for (CharacterOption o : CardCrawlGame.mainMenuScreen.charSelectScreen.options)
+            {
+                if (o.c instanceof MokouKeine)
+                {
+                    if (((MokouKeine) o.c).isMokou ^ isMokou) //doesn't match
+                    {
+                        o.c = new MokouKeine(isMokou);
+                    }
+                }
             }
 
             currentLobbyID = steamIDLobby;
@@ -369,6 +388,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 matchmaking.setLobbyData(steamIDLobby, lobbyCharacterKey, CardCrawlGame.chosenCharacter.name());
                 matchmaking.setLobbyData(steamIDLobby, lobbyPublicKey, metadataTrue);
                 matchmaking.setLobbyData(steamIDLobby, lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse);
+                matchmaking.setLobbyData(steamIDLobby, hostIsMokouKey, isMokou ? metadataTrue : metadataFalse);
 
                 this.isHost = true;
 

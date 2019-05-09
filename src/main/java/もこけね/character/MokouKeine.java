@@ -68,7 +68,8 @@ public class MokouKeine extends CustomPlayer {
 
     private static final String SpritePath = assetPath("img/Character/spriter/Character.scml");
 
-    private boolean isMokou;
+    public boolean isMokou;
+
     private AbstractCard.CardColor cardColor;
     private BitmapFont energyFont;
 
@@ -566,7 +567,7 @@ public class MokouKeine extends CustomPlayer {
 
     @Override
     public AbstractPlayer newInstance() {
-        return new MokouKeine(!HandleMatchmaking.handler.isHost);
+        return new MokouKeine(isMokou);
     }
 
     @Override
