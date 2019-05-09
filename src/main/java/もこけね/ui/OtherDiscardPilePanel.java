@@ -199,7 +199,7 @@ public class OtherDiscardPilePanel extends AbstractPanel {
             MokouKeine p = (MokouKeine)AbstractDungeon.player;
 
             this.renderButton(sb);
-            String msg = Integer.toString(AbstractDungeon.player.discardPile.size());
+            String msg = Integer.toString(p.otherPlayerDiscard.size());
             this.gl.setText(FontHelper.deckCountFont, msg);
             sb.setColor(Color.WHITE);
             sb.draw(ImageMaster.DECK_COUNT_CIRCLE, this.current_x + COUNT_OFFSET_X, this.current_y + COUNT_OFFSET_Y, COUNT_CIRCLE_W, COUNT_CIRCLE_W);

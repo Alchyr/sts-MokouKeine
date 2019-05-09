@@ -69,6 +69,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         matchmaking.addRequestLobbyListStringFilter(lobbyModsKey, generateModList(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyCharacterKey, CardCrawlGame.chosenCharacter.name(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyPublicKey, metadataTrue, SteamMatchmaking.LobbyComparison.Equal);
+        Settings.setFinalActAvailability(); //ensure it's updated.
         matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
         SteamAPICall lobbySearch = matchmaking.requestLobbyList();
     }
@@ -181,18 +182,9 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 logger.info("    - " + i + ": accountID=" + member.getAccountID());
             }
 
-            isMokou = matchmaking.getLobbyData(steamIDLobby, hostIsMokouKey).equals(metadataFalse);
+            sendMessage(CardCrawlGame.playerName + " joined the lobby.");
 
-            for (CharacterOption o : CardCrawlGame.mainMenuScreen.charSelectScreen.options)
-            {
-                if (o.c instanceof MokouKeine)
-                {
-                    if (((MokouKeine) o.c).isMokou ^ isMokou) //doesn't match
-                    {
-                        o.c = new MokouKeine(isMokou);
-                    }
-                }
-            }
+            isMokou = matchmaking.getLobbyData(steamIDLobby, hostIsMokouKey).equals(metadataFalse);
 
             currentLobbyID = steamIDLobby;
             joinorcreate = false;
@@ -200,7 +192,16 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
 
             hostID = matchmaking.getLobbyOwner(steamIDLobby);
 
-            sendMessage(CardCrawlGame.playerName + " joined the lobby.");
+            for (int i = 0; i < CardCrawlGame.characterManager.getAllCharacters().size(); ++i)
+            {
+                if (CardCrawlGame.characterManager.getAllCharacters().get(i) instanceof MokouKeine)
+                {
+                    if (((MokouKeine) CardCrawlGame.characterManager.getAllCharacters().get(i)).isMokou ^ isMokou) //doesn't match
+                    {
+                        CardCrawlGame.characterManager.getAllCharacters().set(i, new MokouKeine(isMokou));
+                    }
+                }
+            }
 
             if (numMembers == 2)
             {

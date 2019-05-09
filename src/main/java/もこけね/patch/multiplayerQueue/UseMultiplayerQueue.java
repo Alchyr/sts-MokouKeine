@@ -2,6 +2,8 @@ package もこけね.patch.multiplayerQueue;
 
 import basemod.BaseMod;
 import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.characters.CharacterManager;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
@@ -11,6 +13,8 @@ import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.lobby.HandleMatchmaking;
+
+import java.util.ArrayList;
 
 import static もこけね.もこけねは神の国.chat;
 
@@ -35,11 +39,11 @@ public class UseMultiplayerQueue {
 
             BaseMod.setRichPresence("Playing as the Immortal and Guardian - In Queue");
 
-            for (CharacterOption o : __instance.options)
+            for (int i = 0; i < CardCrawlGame.characterManager.getAllCharacters().size(); ++i)
             {
-                if (o.c instanceof MokouKeine)
+                if (CardCrawlGame.characterManager.getAllCharacters().get(i) instanceof MokouKeine)
                 {
-                    HandleMatchmaking.isMokou = ((MokouKeine) o.c).isMokou;
+                    HandleMatchmaking.isMokou = ((MokouKeine) CardCrawlGame.characterManager.getAllCharacters().get(i)).isMokou;
                 }
             }
 

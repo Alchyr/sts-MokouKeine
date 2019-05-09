@@ -101,7 +101,7 @@ public class MokouKeine extends CustomPlayer {
         fakeLimbo = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
         this.isMokou = mokou;
-        this.mokouDraw = mokou;
+        this.mokouDraw = true;
         if (mokou)
         {
             this.cardColor = CharacterEnums.MOKOU;
@@ -131,6 +131,14 @@ public class MokouKeine extends CustomPlayer {
 
         this.dialogX = (this.drawX + 0.0F * Settings.scale); // set location for text bubbles
         this.dialogY = (this.drawY + 120.0F * Settings.scale);
+    }
+
+    @Override
+    public void preBattlePrep() {
+        this.otherPlayerHand.clear();
+        this.otherPlayerDiscard.clear();
+        this.mokouDraw = true;
+        super.preBattlePrep();
     }
 
     @Override
