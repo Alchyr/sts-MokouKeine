@@ -21,7 +21,6 @@ public class SoulAltOnToDeck {
             locator = Locator.class,
             localvars = { "group" }
     )
-
     public static void changeRandomSpotGroup(Soul __instance, AbstractCard c, boolean randomSpot, boolean isInvisible, @ByRef(type="com.megacrit.cardcrawl.cards.CardGroup") Object[] group)
     {
         if (altGroup != null)

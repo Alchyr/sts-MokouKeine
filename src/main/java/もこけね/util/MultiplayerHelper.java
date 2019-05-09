@@ -253,7 +253,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                         }
                     }
 
-                    AbstractDungeon.player.limbo.addToBottom(toPlay);
+                    //AbstractDungeon.player.limbo.addToBottom(toPlay);
                     toPlay.target_x = toPlay.current_x = x;
                     toPlay.target_y = toPlay.current_y = y;
 
@@ -295,7 +295,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                     }
                 }
 
-                AbstractDungeon.player.limbo.addToBottom(toPlay);
+                //AbstractDungeon.player.limbo.addToBottom(toPlay);
                 toPlay.target_x = toPlay.current_x = x;
                 toPlay.target_y = toPlay.current_y = y;
 

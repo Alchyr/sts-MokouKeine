@@ -24,6 +24,8 @@ public class OnUseCard {
         {
             if (DiscardToCorrectPile.useOtherDiscard) //This card was queued by other player, from other player hand.
             {
+                DiscardToCorrectPile.useOtherDiscard = false;
+
                 int index = AbstractDungeon.actionManager.actions.size();
                 UseCardAction action = null;
                 while (action == null && index > 0)

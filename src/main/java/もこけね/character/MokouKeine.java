@@ -42,7 +42,6 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.vfx.cardManip.CardDisappearEffect;
 import もこけね.actions.character.OtherPlayerDeckShuffleAction;
 import もこけね.patch.enums.CharacterEnums;
-import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.ui.AstrologerOrb;
 import もこけね.util.AltHandCardgroup;
 
@@ -136,6 +135,8 @@ public class MokouKeine extends CustomPlayer {
     public void setMokou(boolean isMokou)
     {
         this.isMokou = isMokou;
+
+        this.title = getTitle(this.chosenClass);
 
         if (isMokou)
         {
