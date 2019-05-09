@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.map.MapRoomNode;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
 import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
@@ -193,7 +194,7 @@ public class MapRoomVoting {
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(Hitbox.class, "hb");
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractRoom.class, "getMapImg");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
