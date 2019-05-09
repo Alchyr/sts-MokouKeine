@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.character.MokouKeine;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.patch.map.MapRoomVoting;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -148,6 +149,32 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("room_option"))
         {
             RoomEventVoting.receiveVote(Integer.valueOf(msg.substring(11)));
+        }
+        else if (msg.startsWith("vote_node"))
+        {
+            String[] params = msg.substring(9).split(" ");
+
+            if (params.length == 2)
+            {
+                MapRoomVoting.receiveVote(params);
+            }
+            else
+            {
+                logger.error("ERROR: Invalid map node vote.");
+            }
+        }
+        else if (msg.startsWith("choose_node"))
+        {
+            String[] params = msg.substring(11).split(" ");
+
+            if (params.length == 2)
+            {
+                MapRoomVoting.setNode(params);
+            }
+            else
+            {
+                logger.error("ERROR: Invalid map node vote.");
+            }
         }
         else if (msg.equals("start_game"))
         {

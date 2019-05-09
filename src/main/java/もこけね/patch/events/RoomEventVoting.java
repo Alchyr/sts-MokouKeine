@@ -223,6 +223,7 @@ public class RoomEventVoting {
             {
                 chat.receiveMessage("Option " + RoomEventDialog.selectedOption + ", " + SmartTextHelper.clearSmartText(RoomEventDialog.optionList.get(RoomEventDialog.selectedOption).msg) + " chosen!");
                 RoomEventDialog.waitForInput = false;
+                stopEventChooseTimer();
                 voteComplete = true;
                 MultiplayerHelper.sendP2PString("room_option_choose" + RoomEventDialog.selectedOption);
             }

@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.helpers.SeedHelper;
 import com.megacrit.cardcrawl.helpers.TipTracker;
 import com.megacrit.cardcrawl.helpers.TrialHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import javassist.CannotCompileException;
@@ -32,6 +33,7 @@ import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.patch.map.MapRoomVoting;
 import もこけね.ui.ChatBox;
 import もこけね.util.CardFilter;
 import もこけね.util.KeywordWithProper;
@@ -49,7 +51,7 @@ import java.util.Collection;
 @SpireInitializer
 public class もこけねは神の国 implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber,
         EditCharactersSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber, PreStartGameSubscriber,
-        RenderSubscriber, PostUpdateSubscriber, OnStartBattleSubscriber
+        RenderSubscriber, PostUpdateSubscriber, OnStartBattleSubscriber, StartGameSubscriber
 {
     public static final String modID = "もこけね";
 
@@ -98,8 +100,9 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     private static boolean startingGame = false;
     private static boolean gameStarted = false;
     private static float gameStartTimer = 0.0f;
-
     private static float eventChooseTimer = 0.0f;
+    private static float mapChooseTimer = 0.0f;
+
     private static int lastMilestone = 0;
 
 
@@ -131,7 +134,33 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
             lastMilestone = MathUtils.floor(startTime - 0.5f);
         }
     }
+    public static void stopEventChooseTimer()
+    {
+        eventChooseTimer = 0.0f;
+        lastMilestone = 0;
+    }
+    public static void startMapChooseTimer(float startTime)
+    {
+        if (mapChooseTimer <= 0.0f)
+        {
+            mapChooseTimer = startTime;
+            lastMilestone = MathUtils.floor(startTime - 0.5f);
+        }
+    }
+    public static void stopMapChooseTimer()
+    {
+        mapChooseTimer = 0.0f;
+        lastMilestone = 0;
+    }
 
+    @Override
+    public void receiveStartGame() {
+        if (AbstractDungeon.player instanceof MokouKeine)
+        {
+            AbstractDungeon.topPanel.setPlayerName();
+            MapRoomVoting.reset();
+        }
+    }
 
     @Override
     public void receivePostUpdate() {
@@ -166,6 +195,20 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                     RoomEventVoting.resolveConflict();
                 }
                 else if (lastMilestone > eventChooseTimer)
+                {
+                    HandleMatchmaking.sendMessage(String.valueOf(lastMilestone));
+                    --lastMilestone;
+                }
+            }
+
+            if (mapChooseTimer > 0.0f)
+            {
+                mapChooseTimer -= Gdx.graphics.getDeltaTime();
+                if (mapChooseTimer <= 0.0f)
+                {
+                    MapRoomVoting.resolveConflict();
+                }
+                else if (lastMilestone > mapChooseTimer)
                 {
                     HandleMatchmaking.sendMessage(String.valueOf(lastMilestone));
                     --lastMilestone;
