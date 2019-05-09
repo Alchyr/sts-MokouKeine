@@ -157,7 +157,6 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
         else if (msg.equals("leave"))
         {
-            active = false;
             HandleMatchmaking.leave();
         }
         else if (msg.equals("stop"))
