@@ -101,7 +101,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                         String msg = CHARSET.decode(packetReceiveBuffer).toString();
                         logger.info("Message: " + msg);
 
-                        processMessage(msg);
+                        processMessage(sender, msg);
                     }
                 }
             }
@@ -112,7 +112,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
     }
 
-    private static void processMessage(String msg)
+    private static void processMessage(SteamID sender, String msg)
     {
         if (msg.startsWith("chat_message"))
         {
@@ -157,6 +157,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
         else if (msg.equals("success"))
         {
+            currentPartner = sender;
             if (HandleMatchmaking.handler.isHost)
             {
                 logger.info("Connection established.");
@@ -168,6 +169,11 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             {
                 sendP2PString("success");
             }
+        }
+        else if (msg.equals("connect"))
+        {
+            currentPartner = sender;
+            sendP2PString("success");
         }
     }
 
@@ -184,8 +190,8 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         logger.info("Received session request from " + steamID.getAccountID());
         if (HandleMatchmaking.inLobby(steamID) || steamID.equals(currentPartner))
         {
+            logger.info("Accepted session request.");
             currentPartner = steamID;
-            sendP2PString("success");
             communication.acceptP2PSessionWithUser(steamID);
         }
     }

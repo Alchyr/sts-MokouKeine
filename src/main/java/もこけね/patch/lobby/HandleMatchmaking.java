@@ -12,6 +12,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import static もこけね.util.MultiplayerHelper.CHARSET;
+import static もこけね.util.MultiplayerHelper.currentPartner;
 import static もこけね.もこけねは神の国.*;
 
 public class HandleMatchmaking implements SteamMatchmakingCallback {
@@ -93,6 +94,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         activeMultiplayer = false;
         if (currentLobbyID != null)
         {
+            chat.receiveMessage("Left lobby.");
             logger.info("Left lobby " + currentLobbyID + ".");
             matchmaking.leaveLobby(currentLobbyID);
             currentLobbyID = null;
@@ -220,7 +222,11 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             {
                 stopGameStart();
             }
-            MultiplayerHelper.currentPartner = null;
+            if (currentPartner != null)
+            {
+                chat.receiveMessage("Partner left. Game start timer stopped.");
+                MultiplayerHelper.currentPartner = null;
+            }
         }
     }
 
