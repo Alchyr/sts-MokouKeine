@@ -189,6 +189,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                 AbstractDungeon.ascensionLevel = 0;
             }
             MultiplayerHelper.sendP2PString("ascension" + AbstractDungeon.ascensionLevel);
+            MultiplayerHelper.sendP2PString("");
             MultiplayerHelper.sendP2PString("start_game");
             MultiplayerHelper.sendP2PMessage("Starting game...");
         }

@@ -5,6 +5,8 @@ import com.codedisaster.steamworks.*;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import もこけね.util.MultiplayerHelper;
 import もこけね.util.SteamUserCallbacks;
 
@@ -23,6 +25,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     private static final String lobbyModsKey = "mod_list";
     private static final String lobbyCharacterKey = "character";
     private static final String lobbyPublicKey = "is_public";
+    private static final String lobbyKeysUnlockedKey = "final_act";
     private static final String metadataTrue = "true";
     private static final String metadataFalse = "false";
 
@@ -60,6 +63,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         matchmaking.addRequestLobbyListStringFilter(lobbyModsKey, generateModList(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyCharacterKey, CardCrawlGame.chosenCharacter.name(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyPublicKey, metadataTrue, SteamMatchmaking.LobbyComparison.Equal);
+        matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
         SteamAPICall lobbySearch = matchmaking.requestLobbyList();
     }
 
@@ -99,6 +103,12 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             matchmaking.leaveLobby(currentLobbyID);
             currentLobbyID = null;
         }
+        if (currentPartner != null)
+        {
+            MultiplayerHelper.sendP2PString("stop");
+            currentPartner = null;
+        }
+        stopGameStart();
     }
     public static void leave()
     {
@@ -213,19 +223,6 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 logger.info("This is host:");
                 logger.info("  - Establishing P2P connection with " + IDChanged.getAccountID());
                 MultiplayerHelper.sendP2PString(IDChanged, "connect");
-            }
-        }
-        else if (matchmaking.getNumLobbyMembers(lobbyID) != 2)
-        {
-            logger.info("Lobby does not have number of members needed to start.");
-            if (isHost)
-            {
-                stopGameStart();
-            }
-            if (currentPartner != null)
-            {
-                chat.receiveMessage("Partner left. Game start timer stopped.");
-                MultiplayerHelper.currentPartner = null;
             }
         }
     }
@@ -371,6 +368,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 matchmaking.setLobbyData(steamIDLobby, lobbyModsKey, modList);
                 matchmaking.setLobbyData(steamIDLobby, lobbyCharacterKey, CardCrawlGame.chosenCharacter.name());
                 matchmaking.setLobbyData(steamIDLobby, lobbyPublicKey, metadataTrue);
+                matchmaking.setLobbyData(steamIDLobby, lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse);
 
                 this.isHost = true;
 

@@ -57,7 +57,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             packetSendBuffer.flip();
 
             logger.info("Sending P2P message: " + msg);
-            communication.sendP2PPacket(dest, packetSendBuffer, SteamNetworking.P2PSend.Reliable, defaultChannel);
+            communication.sendP2PPacket(dest, packetSendBuffer, SteamNetworking.P2PSend.Unreliable, defaultChannel);
             currentPartner = dest;
         }
         catch (Exception e)
@@ -128,6 +128,12 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.equals("leave"))
         {
             HandleMatchmaking.leave();
+        }
+        else if (msg.equals("stop"))
+        {
+            stopGameStart();
+            logger.info("Other player left.");
+            currentPartner = null;
         }
         else if (msg.startsWith("trial"))
         {
