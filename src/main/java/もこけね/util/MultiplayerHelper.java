@@ -67,17 +67,19 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
     public static void sendP2PString(String msg)
     {
         if (currentPartner != null && currentPartner.isValid() && communication != null)
-        try
         {
-            packetSendBuffer.clear();
+            try
+            {
+                packetSendBuffer.clear();
 
-            packetSendBuffer.put(msg.getBytes(CHARSET));
+                packetSendBuffer.put(msg.getBytes(CHARSET));
 
-            communication.sendP2PPacket(currentPartner, packetSendBuffer, SteamNetworking.P2PSend.Reliable, defaultChannel);
-        }
-        catch (Exception e)
-        {
-            logger.error(e.getMessage());
+                communication.sendP2PPacket(currentPartner, packetSendBuffer, SteamNetworking.P2PSend.Reliable, defaultChannel);
+            }
+            catch (Exception e)
+            {
+                logger.error(e.getMessage());
+            }
         }
     }
     public static void sendP2PMessage(String msg)
@@ -178,12 +180,21 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             msg = msg.substring(4);
             Settings.seed = Long.valueOf(msg);
         }
+        else if (msg.equals("connect") && HandleMatchmaking.handler.isHost)
+        {
+            logger.info("Connection established.");
+            HandleMatchmaking.leave();
+            sendP2PString("leave");
+            beginGameStartTimer();
+        }
     }
 
 
     @Override
     public void onP2PSessionConnectFail(SteamID steamID, SteamNetworking.P2PSessionError p2pSessionError) {
             logger.error("Failed to connect to lobby partner.");
+            logger.error(p2pSessionError);
+            currentPartner = null;
     }
 
     @Override
@@ -191,6 +202,10 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         logger.info("Received session request from " + steamID.getAccountID());
         if (HandleMatchmaking.inLobby(steamID) || steamID.equals(currentPartner))
         {
+            if (!HandleMatchmaking.handler.isHost)
+            {
+                sendP2PString("connect");
+            }
             currentPartner = steamID;
             communication.acceptP2PSessionWithUser(steamID);
         }

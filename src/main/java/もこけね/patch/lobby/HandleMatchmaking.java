@@ -5,6 +5,7 @@ import com.codedisaster.steamworks.*;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import もこけね.util.MultiplayerHelper;
 import もこけね.util.SteamUserCallbacks;
 
 import java.nio.ByteBuffer;
@@ -205,8 +206,9 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             logger.info("Lobby is full!");
             if (isHost)
             {
-                logger.info("This is host: starting game.");
-                beginGameStartTimer();
+                logger.info("This is host:");
+                logger.info("  - Establishing P2P connection with " + IDChanged.getAccountID());
+                MultiplayerHelper.sendP2PString(IDChanged, "connect");
             }
         }
         else if (matchmaking.getNumLobbyMembers(lobbyID) != 2)
@@ -216,6 +218,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             {
                 stopGameStart();
             }
+            MultiplayerHelper.currentPartner = null;
         }
     }
 
@@ -261,9 +264,13 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 logger.error("Message failed to send.");
             }
         }
+        else if (MultiplayerHelper.currentPartner != null)
+        {
+            MultiplayerHelper.sendP2PMessage(msg);
+        }
         else
         {
-            logger.info("No current lobby to send message to!");
+            logger.info("No current lobby or p2p connection to send message to!");
         }
     }
 
