@@ -16,7 +16,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.EmptyDeckShuffleAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.cards.blue.Defend_Blue;
 import com.megacrit.cardcrawl.cards.blue.Strike_Blue;
 import com.megacrit.cardcrawl.cards.red.Defend_Red;
@@ -34,7 +33,9 @@ import com.megacrit.cardcrawl.helpers.input.InputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.ConfusionPower;
+import com.megacrit.cardcrawl.powers.CorruptionPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.BurningBlood;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -337,6 +338,116 @@ public class MokouKeine extends CustomPlayer {
         }
     }
 
+
+    public void updateCardsOnDiscard() {
+        if (isMokou) //keine is always updated first.
+        {
+            for (AbstractCard c : otherPlayerHand.group)
+            {
+                c.didDiscard();
+            }
+            for (AbstractCard c : otherPlayerDiscard.group)
+            {
+                c.didDiscard();
+            }
+            for (AbstractCard c : otherPlayerDraw.group)
+            {
+                c.didDiscard();
+            }
+        }
+        super.updateCardsOnDiscard();
+        if (!isMokou)
+        {
+            for (AbstractCard c : otherPlayerHand.group)
+            {
+                c.didDiscard();
+            }
+            for (AbstractCard c : otherPlayerDiscard.group)
+            {
+                c.didDiscard();
+            }
+            for (AbstractCard c : otherPlayerDraw.group)
+            {
+                c.didDiscard();
+            }
+        }
+    }
+
+    @Override
+    public void onCardDrawOrDiscard() {
+        for (AbstractPower p : this.powers)
+        {
+            p.onDrawOrDiscard();
+        }
+        for (AbstractRelic r : this.relics)
+        {
+            r.onDrawOrDiscard();
+        }
+
+        if (isMokou)
+        {
+            if (this.hasPower(CorruptionPower.POWER_ID)) {
+                for (AbstractCard c : this.otherPlayerHand.group)
+                {
+                    if (c.type == AbstractCard.CardType.SKILL && c.costForTurn != 0) {
+                        c.modifyCostForCombat(-99);
+                    }
+                }
+            }
+            this.otherPlayerHand.applyPowers();
+        }
+
+        if (this.hasPower(CorruptionPower.POWER_ID)) {
+            for (AbstractCard c : this.hand.group)
+            {
+                if (c.type == AbstractCard.CardType.SKILL && c.costForTurn != 0) {
+                    c.modifyCostForCombat(-99);
+                }
+            }
+        }
+        this.hand.applyPowers();
+        this.hand.glowCheck();
+
+        if (!isMokou)
+        {
+            if (this.hasPower(CorruptionPower.POWER_ID)) {
+                for (AbstractCard c : this.otherPlayerHand.group)
+                {
+                    if (c.type == AbstractCard.CardType.SKILL && c.costForTurn != 0) {
+                        c.modifyCostForCombat(-99);
+                    }
+                }
+            }
+            this.otherPlayerHand.applyPowers();
+        }
+    }
+
+    @Override
+    public void applyStartOfTurnCards() {
+        if (isMokou)
+        {
+            for (AbstractCard c : otherPlayerDraw.group)
+            {
+                if (c != null)
+                    c.atTurnStart();
+            }
+            for (AbstractCard c : otherPlayerHand.group)
+            {
+                if (c != null)
+                    c.atTurnStart();
+            }
+            for (AbstractCard c : otherPlayerDiscard.group)
+            {
+                if (c != null)
+                    c.atTurnStart();
+            }
+        }
+        super.applyStartOfTurnCards();
+        if (!isMokou)
+        {
+
+        }
+    }
 
     @Override
     public void renderHand(SpriteBatch sb) {

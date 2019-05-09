@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import もこけね.character.MokouKeine;
 import もこけね.もこけねは神の国;
 
 public class AltHandCardgroup extends CardGroup {
@@ -88,7 +89,6 @@ public class AltHandCardgroup extends CardGroup {
             }
 
             AbstractCard c;
-            handCardRendering:
             switch (this.group.size()) {
                 case 0:
                     return;
@@ -266,6 +266,11 @@ public class AltHandCardgroup extends CardGroup {
                     q.card.target_y = q.card.current_y;
                 }
             }
+        }
+
+        if (this.equals(AbstractDungeon.player.hand) && AbstractDungeon.player instanceof MokouKeine)
+        {
+            ((MokouKeine) AbstractDungeon.player).otherPlayerHand.refreshHandLayout();
         }
     }
 }

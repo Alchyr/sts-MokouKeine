@@ -112,9 +112,7 @@ public class RoomEventVoting {
     )
     public static class OnChooseOption
     {
-        @SpireInsertPatch(
-                locator = Locator.class
-        )
+        @SpirePostfixPatch
         public static void changeSelectionToVote(RoomEventDialog __instance)
         {
             if (AbstractDungeon.player instanceof MokouKeine && MultiplayerHelper.active)
@@ -132,16 +130,6 @@ public class RoomEventVoting {
                         handleSelection();
                     }
                 }
-            }
-        }
-
-        private static class Locator extends SpireInsertLocator
-        {
-            @Override
-            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
-            {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(Settings.class, "lineBreakViaCharacter");
-                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
     }
