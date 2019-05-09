@@ -19,7 +19,6 @@ import com.megacrit.cardcrawl.helpers.SeedHelper;
 import com.megacrit.cardcrawl.helpers.TrialHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.random.Random;
-import com.megacrit.cardcrawl.screens.charSelect.CharacterSelectScreen;
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.NotFoundException;
@@ -29,7 +28,6 @@ import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.lobby.HandleMatchmaking;
-import もこけね.patch.multiplayerQueue.UseMultiplayerQueue;
 import もこけね.ui.ChatBox;
 import もこけね.util.CardFilter;
 import もこけね.util.KeywordWithProper;
@@ -144,6 +142,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                 }
             }
         }
+        MultiplayerHelper.readPostUpdate();
     }
 
     public void startGame()
@@ -196,7 +195,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
             HandleMatchmaking.leave();
         }
     }
-    public void startSetupGame() //start game where settings have already been set
+    public static void startSetupGame() //start game where settings have already been set
     {
         CardCrawlGame.mainMenuScreen.isFadingOut = true;
         CardCrawlGame.mainMenuScreen.fadeOutMusic();

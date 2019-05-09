@@ -3,8 +3,6 @@ package もこけね.util;
 import com.codedisaster.steamworks.*;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.SeedHelper;
-import com.megacrit.cardcrawl.random.Random;
 import もこけね.patch.lobby.HandleMatchmaking;
 
 import java.nio.ByteBuffer;
@@ -149,7 +147,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
         else if (msg.equals("start_game"))
         {
-
+            startSetupGame();
         }
         else if (msg.startsWith("trial"))
         {
