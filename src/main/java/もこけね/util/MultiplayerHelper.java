@@ -155,7 +155,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             msg = msg.substring(4);
             Settings.seed = Long.valueOf(msg);
         }
-        else if (msg.equals("connect") && HandleMatchmaking.handler.isHost)
+        else if (msg.equals("success") && HandleMatchmaking.handler.isHost)
         {
             logger.info("Connection established.");
             HandleMatchmaking.leave();
@@ -177,10 +177,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         logger.info("Received session request from " + steamID.getAccountID());
         if (HandleMatchmaking.inLobby(steamID) || steamID.equals(currentPartner))
         {
-            if (!HandleMatchmaking.handler.isHost)
-            {
-                sendP2PString("connect");
-            }
+            sendP2PString("success");
             currentPartner = steamID;
             communication.acceptP2PSessionWithUser(steamID);
         }

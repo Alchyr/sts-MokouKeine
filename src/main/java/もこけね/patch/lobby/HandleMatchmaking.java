@@ -169,6 +169,8 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
 
             hostID = matchmaking.getLobbyOwner(steamIDLobby);
 
+            sendMessage(CardCrawlGame.playerName + " joined the lobby.");
+
             if (numMembers == 2)
             {
                 //start game
@@ -335,6 +337,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                     logger.info("Joining...");
                     matchmaking.joinLobby(lobbies.get(lastJoinAttempt));
                     searching = false;
+                    isHost = false;
                     joinorcreate = true;
                 }
             }
