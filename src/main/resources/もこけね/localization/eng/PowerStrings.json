@@ -1,0 +1,9 @@
+{
+  "もこけね:Starlit": {
+    "NAME": "Starlit",
+    "DESCRIPTIONS": [
+      "At the start of your turn, lose HP equal to the current #yStellar #yPhase, then reduce #yStarlit by #b1.",
+      "At the start of its turn, loses HP equal to the current #yStellar #yPhase, then reduce #yStarlit by #b1."
+    ]
+  }
+}

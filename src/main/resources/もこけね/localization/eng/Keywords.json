@@ -1,0 +1,10 @@
+[
+  {
+    "PROPER_NAME": "Star",
+    "NAMES": [
+      "star",
+      "stars"
+    ],
+    "DESCRIPTION": "When this card is played or #yExhausted, increment the #yStellar #yPhase and change the #yStellar #yAlignment."
+  }
+]

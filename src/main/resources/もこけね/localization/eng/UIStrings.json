@@ -1,0 +1,25 @@
+{
+  "もこけね:EndTurn": {
+    "TEXT": [
+      "I've already ended my turn!"
+    ]
+  },
+  "もこけね:DrawPilePanel": {
+    "TEXT": [
+      "'s Draw Pile is #rempty.",
+      "'s Draw Pile",
+      "At the start of each turn, NL #b",
+      " cards are drawn from here. NL NL Click to view the cards in ",
+      "'s draw pile (shuffled).",
+      "'s draw pile."
+    ]
+  },
+  "もこけね:DiscardPilePanel": {
+    "TEXT": [
+      "'s Discard Pile Pile is #rempty.",
+      "'s Discard Pile",
+      "If the draw pile is empty, the discard pile is shuffled into the draw pile. NL NL Click to view the cards in ",
+      "'s discard pile."
+    ]
+  }
+}
