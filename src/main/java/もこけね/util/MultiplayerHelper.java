@@ -185,6 +185,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             currentPartner = sender;
             if (HandleMatchmaking.handler.isHost)
             {
+                chat.receiveMessage("Another player has joined the lobby.");
                 logger.info("Connection established.");
                 HandleMatchmaking.leave();
                 sendP2PString("leave");
@@ -205,9 +206,10 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
 
     @Override
     public void onP2PSessionConnectFail(SteamID steamID, SteamNetworking.P2PSessionError p2pSessionError) {
-            logger.error("Failed to connect to lobby partner.");
-            logger.error(p2pSessionError);
-            currentPartner = null;
+        logger.error("Failed to connect to lobby partner.");
+        logger.error(p2pSessionError);
+        //currentPartner = null;
+        sendP2PString(steamID, "connect");
     }
 
     @Override

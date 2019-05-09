@@ -182,9 +182,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 logger.info("    - " + i + ": accountID=" + member.getAccountID());
             }
 
-            sendMessage(CardCrawlGame.playerName + " joined the lobby.");
-
-            isMokou = matchmaking.getLobbyData(steamIDLobby, hostIsMokouKey).equals(metadataFalse);
+            isMokou = isHost ? isMokou : !matchmaking.getLobbyData(steamIDLobby, hostIsMokouKey).equals(metadataTrue);
 
             currentLobbyID = steamIDLobby;
             joinorcreate = false;
