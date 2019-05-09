@@ -133,6 +133,30 @@ public class MokouKeine extends CustomPlayer {
         this.dialogY = (this.drawY + 120.0F * Settings.scale);
     }
 
+    public void setMokou(boolean isMokou)
+    {
+        this.isMokou = isMokou;
+
+        if (isMokou)
+        {
+            this.name = characterStrings.NAMES[1];
+            this.cardColor = CharacterEnums.MOKOU;
+            this.energyFont = FontHelper.energyNumFontRed;
+            this.cardTrailColor = Color.RED.cpy();
+            this.cardRenderColor = MOKOU_COLOR.cpy();
+            this.slashAttackColor = MOKOU_COLOR.cpy();
+        }
+        else
+        {
+            this.name = characterStrings.NAMES[2];
+            this.cardColor = CharacterEnums.KEINE;
+            this.energyFont = FontHelper.energyNumFontBlue;
+            this.cardTrailColor = Color.BLUE.cpy();
+            this.cardRenderColor = KEINE_COLOR.cpy();
+            this.slashAttackColor = KEINE_COLOR.cpy();
+        }
+    }
+
     @Override
     public void preBattlePrep() {
         this.otherPlayerHand.clear();
@@ -140,6 +164,7 @@ public class MokouKeine extends CustomPlayer {
         this.mokouDraw = true;
         super.preBattlePrep();
     }
+
 
     @Override
     public void draw() {

@@ -196,7 +196,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 {
                     if (((MokouKeine) CardCrawlGame.characterManager.getAllCharacters().get(i)).isMokou ^ isMokou) //doesn't match
                     {
-                        CardCrawlGame.characterManager.getAllCharacters().set(i, new MokouKeine(isMokou));
+                        ((MokouKeine) CardCrawlGame.characterManager.getAllCharacters().get(i)).setMokou(isMokou);
                     }
                 }
             }
