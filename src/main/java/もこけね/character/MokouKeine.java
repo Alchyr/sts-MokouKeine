@@ -162,9 +162,9 @@ public class MokouKeine extends CustomPlayer {
         this.otherPlayerHand.clear();
         this.otherPlayerDiscard.clear();
         this.mokouDraw = true;
+
         super.preBattlePrep();
     }
-
 
     @Override
     public void draw() {

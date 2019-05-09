@@ -1,10 +1,9 @@
 package もこけね.patch.combat;
 
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
 
 @SpirePatch(
@@ -12,12 +11,21 @@ import もこけね.character.MokouKeine;
         method = "initializeDeck"
 )
 public class InitializeCombatDeck {
-    @SpirePostfixPatch
-    public static SpireReturn GetSplitDeck(CardGroup __instance, CardGroup masterDeck)
+    @SpirePrefixPatch
+    public static SpireReturn preOtherPlayer(CardGroup __instance, CardGroup masterDeck) //Keine's deck is always shuffled first, to ensure consistency in rng.
     {
-        if (AbstractDungeon.player instanceof MokouKeine && !__instance.equals(((MokouKeine) AbstractDungeon.player).otherPlayerDraw))
+        if (AbstractDungeon.player instanceof MokouKeine && ((MokouKeine) AbstractDungeon.player).isMokou && !__instance.equals(((MokouKeine) AbstractDungeon.player).otherPlayerDraw))
         {
-            //Add other player's cards to other deck.
+            ((MokouKeine) AbstractDungeon.player).otherPlayerDraw.initializeDeck(((MokouKeine) AbstractDungeon.player).otherPlayerMasterDeck);
+        }
+        return SpireReturn.Continue();
+    }
+
+    @SpirePostfixPatch
+    public static SpireReturn postOtherPlayer(CardGroup __instance, CardGroup masterDeck)
+    {
+        if (AbstractDungeon.player instanceof MokouKeine && !((MokouKeine) AbstractDungeon.player).isMokou && !__instance.equals(((MokouKeine) AbstractDungeon.player).otherPlayerDraw))
+        {
             ((MokouKeine) AbstractDungeon.player).otherPlayerDraw.initializeDeck(((MokouKeine) AbstractDungeon.player).otherPlayerMasterDeck);
         }
         return SpireReturn.Continue();
