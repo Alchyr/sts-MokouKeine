@@ -46,64 +46,39 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
 
     public static void sendP2PString(SteamID dest, String msg)
     {
+        if (communication != null && dest != null && dest.isValid())
+        {
         try
         {
-            if (communication != null && dest != null && dest.isValid())
-            {
-                packetSendBuffer.clear();
+            packetSendBuffer.clear();
 
-                packetSendBuffer.put(msg.getBytes(CHARSET));
+            packetSendBuffer.put(msg.getBytes(CHARSET));
 
-                logger.info("Sending P2P message: " + msg);
-                communication.sendP2PPacket(dest, packetSendBuffer, SteamNetworking.P2PSend.Reliable, defaultChannel);
-                currentPartner = dest;
-            }
+            packetSendBuffer.flip();
+
+            logger.info("Sending P2P message: " + msg);
+            communication.sendP2PPacket(dest, packetSendBuffer, SteamNetworking.P2PSend.Reliable, defaultChannel);
+            currentPartner = dest;
         }
         catch (Exception e)
         {
             logger.error(e.getMessage());
         }
+        }
     }
     public static void sendP2PString(String msg)
     {
-        if (currentPartner != null && currentPartner.isValid() && communication != null)
-        {
-            try
-            {
-                packetSendBuffer.clear();
-
-                packetSendBuffer.put(msg.getBytes(CHARSET));
-
-                communication.sendP2PPacket(currentPartner, packetSendBuffer, SteamNetworking.P2PSend.Reliable, defaultChannel);
-            }
-            catch (Exception e)
-            {
-                logger.error(e.getMessage());
-            }
-        }
+        sendP2PString(currentPartner, msg);
     }
     public static void sendP2PMessage(String msg)
     {
-        if (currentPartner != null && currentPartner.isValid() && communication != null)
+        if (chat != null)
         {
-            try
-            {
-                if (chat != null)
-                {
-                    chat.receiveMessage(msg);
-                }
-                String finalMessage = "chat_message" + msg;
-                packetSendBuffer.clear();
-
-                packetSendBuffer.put(finalMessage.getBytes(CHARSET));
-
-                communication.sendP2PPacket(currentPartner, packetSendBuffer, SteamNetworking.P2PSend.Unreliable, defaultChannel);
-            }
-            catch (Exception e)
-            {
-                logger.error(e.getMessage());
-            }
+            chat.receiveMessage(msg);
         }
+        String finalMessage = "chat_message" + msg;
+
+        sendP2PString(currentPartner, finalMessage);
     }
 
     public static void readPostUpdate()
