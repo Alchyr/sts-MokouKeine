@@ -141,13 +141,13 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         {
             tryPlayCard(msg.substring(17));
         }
-        else if (msg.startsWith("room_option"))
-        {
-            RoomEventVoting.receiveVote(Integer.valueOf(msg.substring(11)));
-        }
         else if (msg.startsWith("room_option_choose"))
         {
             RoomEventVoting.selectOption(Integer.valueOf(msg.substring(18)));
+        }
+        else if (msg.startsWith("room_option"))
+        {
+            RoomEventVoting.receiveVote(Integer.valueOf(msg.substring(11)));
         }
         else if (msg.equals("start_game"))
         {
