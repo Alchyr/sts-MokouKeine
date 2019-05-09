@@ -1,8 +1,12 @@
 package もこけね.util;
 
 import com.codedisaster.steamworks.*;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import もこけね.character.MokouKeine;
 import もこけね.patch.lobby.HandleMatchmaking;
 
 import java.nio.ByteBuffer;
@@ -119,6 +123,21 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             msg = msg.substring(12);
             chat.receiveMessage(msg);
         }
+        else if (msg.startsWith("other_play_card")) //Host played a card.
+        {
+            tryOtherPlayCard(msg.substring(15));
+        }
+        else if (msg.startsWith("try_play_card")) //Player that isn't host played a card.
+        {
+            String args = msg.substring(13);
+            tryOtherPlayCard(args);
+            //Send confirmation to play the card.
+            sendP2PString("confirm_play_card" + args);
+        }
+        else if (msg.startsWith("confirm_play_card"))
+        {
+            tryPlayCard(msg.substring(17));
+        }
         else if (msg.equals("start_game"))
         {
             //Host has send start game message, and both parties are properly connected.
@@ -199,6 +218,92 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             logger.info("Accepted session request.");
             currentPartner = steamID;
             communication.acceptP2PSessionWithUser(steamID);
+        }
+    }
+
+
+
+    private static void tryOtherPlayCard(String args)
+    {
+        if (AbstractDungeon.player instanceof MokouKeine)
+        {
+            MokouKeine p = (MokouKeine)AbstractDungeon.player;
+            String[] params = args.split(" ");
+
+            if (params.length == 4)
+            {
+                logger.info("Other player played a card.");
+                int cardIndex = Integer.valueOf(params[0]);
+                int targetIndex = Integer.valueOf(params[1]);
+                float x = Float.valueOf(params[2]);
+                float y = Float.valueOf(params[3]);
+
+                if (cardIndex >= 0 && cardIndex < p.otherPlayerHand.size())
+                {
+                    AbstractCard toPlay = p.otherPlayerHand.group.get(cardIndex);
+                    p.otherPlayerHand.removeCard(toPlay);
+
+                    AbstractMonster target = null;
+                    if (targetIndex >= 0 && targetIndex < AbstractDungeon.getMonsters().monsters.size()) {
+                        target = AbstractDungeon.getMonsters().monsters.get(targetIndex);
+                        if (target != null) {
+                            toPlay.calculateCardDamage(target);
+                        }
+                    }
+
+                    AbstractDungeon.player.limbo.addToBottom(toPlay);
+                    toPlay.target_x = toPlay.current_x = x;
+                    toPlay.target_y = toPlay.current_y = y;
+
+                    AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(toPlay, target));
+                }
+                else
+                {
+                    logger.error("ERROR: Attempted to play card with invalid index.");
+                }
+            }
+        }
+        else
+        {
+            logger.info("ERROR: Received invalid attempt to play a card.");
+        }
+    }
+
+    private static void tryPlayCard(String args)
+    {
+        String[] params = args.split(" ");
+
+        if (params.length == 4)
+        {
+            logger.info("Received confirmation to play a card.");
+            int cardIndex = Integer.valueOf(params[0]);
+            int targetIndex = Integer.valueOf(params[1]);
+            float x = Float.valueOf(params[2]);
+            float y = Float.valueOf(params[3]);
+
+            if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.hand.size())
+            {
+                AbstractCard toPlay = AbstractDungeon.player.hand.group.get(cardIndex);
+                AbstractDungeon.player.hand.removeCard(toPlay);
+
+                AbstractMonster target = null;
+                if (targetIndex >= 0 && targetIndex < AbstractDungeon.getMonsters().monsters.size()) {
+                    target = AbstractDungeon.getMonsters().monsters.get(targetIndex);
+                    if (target != null) {
+                        toPlay.calculateCardDamage(target);
+                    }
+                }
+
+                AbstractDungeon.player.limbo.addToBottom(toPlay);
+                toPlay.target_x = toPlay.current_x = x;
+                toPlay.target_y = toPlay.current_y = y;
+
+                AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(toPlay, target));
+            }
+            else
+            {
+                logger.error("ERROR: Attempted to play card with invalid index.");
+            }
         }
     }
 }

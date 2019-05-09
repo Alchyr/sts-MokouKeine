@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.EmptyDeckShuffleAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.cards.blue.Defend_Blue;
 import com.megacrit.cardcrawl.cards.blue.Strike_Blue;
 import com.megacrit.cardcrawl.cards.red.Defend_Red;
@@ -41,6 +42,7 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.vfx.cardManip.CardDisappearEffect;
 import もこけね.actions.character.OtherPlayerDeckShuffleAction;
 import もこけね.patch.enums.CharacterEnums;
+import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.ui.AstrologerOrb;
 import もこけね.util.AltHandCardgroup;
 
@@ -296,6 +298,7 @@ public class MokouKeine extends CustomPlayer {
             mokouDraw = !mokouDraw;
         }
     }
+
 
     @Override
     public void renderHand(SpriteBatch sb) {
@@ -563,7 +566,7 @@ public class MokouKeine extends CustomPlayer {
 
     @Override
     public AbstractPlayer newInstance() {
-        return new MokouKeine(this.isMokou);
+        return new MokouKeine(!HandleMatchmaking.handler.isHost);
     }
 
     @Override

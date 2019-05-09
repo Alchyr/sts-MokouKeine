@@ -16,9 +16,11 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.helpers.SeedHelper;
+import com.megacrit.cardcrawl.helpers.TipTracker;
 import com.megacrit.cardcrawl.helpers.TrialHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.random.Random;
+import com.megacrit.cardcrawl.screens.mainMenu.MainMenuScreen;
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.NotFoundException;
@@ -149,6 +151,8 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     {
         if (CardCrawlGame.mode == CardCrawlGame.GameMode.CHAR_SELECT)
         {
+            TipTracker.neverShowAgain("NEOW_SKIP");
+
             if (Settings.seed == null) {
                 long sourceTime = System.nanoTime();
                 Random rng = new Random(sourceTime);
@@ -189,13 +193,15 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                 AbstractDungeon.ascensionLevel = 0;
             }
             MultiplayerHelper.sendP2PString("ascension" + AbstractDungeon.ascensionLevel);
-            MultiplayerHelper.sendP2PString("");
+
             MultiplayerHelper.sendP2PString("start_game");
+
             MultiplayerHelper.sendP2PMessage("Starting game...");
         }
     }
     public static void startSetupGame() //start game where settings have already been set
     {
+        TipTracker.neverShowAgain("NEOW_SKIP");
         CardCrawlGame.mainMenuScreen.isFadingOut = true;
         CardCrawlGame.mainMenuScreen.fadeOutMusic();
         Settings.isDailyRun = false;
