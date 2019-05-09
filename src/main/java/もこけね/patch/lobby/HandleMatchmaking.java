@@ -237,9 +237,9 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         {
             if (activeMultiplayer && currentLobbyID != null && currentLobbyID.isValid())
             {
-                ByteBuffer bytes = CHARSET.encode(msg);
-                logger.info("Sending message: " + msg + " with byte length " + bytes.remaining());
-                if (matchmaking.sendLobbyChatMsg(currentLobbyID, bytes))
+                handler.chatMessage.put(CHARSET.encode(msg));
+                logger.info("Sending message: " + msg + " with byte length " + handler.chatMessage.remaining());
+                if (matchmaking.sendLobbyChatMsg(currentLobbyID, handler.chatMessage))
                 {
                     logger.info("Message sent successfully.");
                 }
@@ -247,6 +247,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 {
                     logger.error("Message failed to send.");
                 }
+                handler.chatMessage.clear();
             }
             else
             {
@@ -318,6 +319,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 else
                 {
                     logger.info("Joining...");
+                    matchmaking.joinLobby(lobbies.get(lastJoinAttempt));
                     searching = false;
                     joinorcreate = true;
                 }

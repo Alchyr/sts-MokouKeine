@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Queue;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import もこけね.patch.input.InputHelper;
 import もこけね.patch.lobby.HandleMatchmaking;
@@ -41,34 +43,13 @@ public class ChatBox {
         {
             if (!InputHelper.text.isEmpty())
             {
-                HandleMatchmaking.sendMessage(InputHelper.text);
+                HandleMatchmaking.sendMessage(CardCrawlGame.playerName + ": " + InputHelper.text);
                 fadeDelay = NORMAL_FADE_TIME;
             }
             active = false;
         }
     }
 
-    public void receiveMessage(boolean isSelf, String msg)
-    {
-        if (!msg.isEmpty())
-        {
-            fadeDelay = NORMAL_FADE_TIME;
-            String finalText = (isSelf ? "Me: " : "Partner: ") + msg;
-
-            messages.addLast(finalText);
-            if (messages.size > maxLines)
-            {
-                messages.removeFirst();
-            }
-
-            StringBuilder fullMessages = new StringBuilder();
-            for (String s : messages)
-            {
-                fullMessages.append(s).append('\n');
-            }
-            fullText = fullMessages.toString();
-        }
-    }
     public void receiveMessage(String msg)
     {
         if (!msg.isEmpty())
