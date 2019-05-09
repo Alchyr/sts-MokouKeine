@@ -184,8 +184,8 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         logger.info("Received session request from " + steamID.getAccountID());
         if (HandleMatchmaking.inLobby(steamID) || steamID.equals(currentPartner))
         {
-            sendP2PString("success");
             currentPartner = steamID;
+            sendP2PString("success");
             communication.acceptP2PSessionWithUser(steamID);
         }
     }
