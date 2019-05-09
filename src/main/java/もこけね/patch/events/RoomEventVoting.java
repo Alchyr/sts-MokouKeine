@@ -30,6 +30,8 @@ public class RoomEventVoting {
     public static boolean choseOption = false;
     private static LargeDialogOptionButton mySelected = null;
 
+    private static boolean voteComplete = false;
+
     public static void receiveVote(int index)
     {
         if (index >= 0 && index < RoomEventDialog.optionList.size())
@@ -54,6 +56,7 @@ public class RoomEventVoting {
         otherPlayerSelected = -1;
         otherSelected = null;
         mySelected = null;
+        voteComplete = false;
     }
 
     @SpirePatch(
@@ -117,7 +120,7 @@ public class RoomEventVoting {
         {
             if (AbstractDungeon.player instanceof MokouKeine && MultiplayerHelper.active)
             {
-                if (!RoomEventDialog.waitForInput) //this means an option has been chosen
+                if (!RoomEventDialog.waitForInput && !voteComplete) //this means an option has been chosen
                 {
                     MultiplayerHelper.sendP2PString("room_option" + RoomEventDialog.selectedOption);
                     HandleMatchmaking.sendMessage(CardCrawlGame.playerName + " chose " + SmartTextHelper.clearSmartText(RoomEventDialog.optionList.get(RoomEventDialog.selectedOption).msg));
@@ -129,6 +132,10 @@ public class RoomEventVoting {
                     {
                         handleSelection();
                     }
+                }
+                else if (voteComplete)
+                {
+                    reset();
                 }
             }
         }
@@ -216,7 +223,7 @@ public class RoomEventVoting {
             {
                 chat.receiveMessage("Option " + RoomEventDialog.selectedOption + ", " + SmartTextHelper.clearSmartText(RoomEventDialog.optionList.get(RoomEventDialog.selectedOption).msg) + " chosen!");
                 RoomEventDialog.waitForInput = false;
-                reset();
+                voteComplete = true;
                 MultiplayerHelper.sendP2PString("room_option_choose" + RoomEventDialog.selectedOption);
             }
         }
@@ -226,6 +233,6 @@ public class RoomEventVoting {
         RoomEventDialog.selectedOption = index;
         chat.receiveMessage("Option " + RoomEventDialog.selectedOption + ", " + SmartTextHelper.clearSmartText(RoomEventDialog.optionList.get(RoomEventDialog.selectedOption).msg) + " chosen!");
         RoomEventDialog.waitForInput = false;
-        reset();
+        voteComplete = true;
     }
 }
