@@ -54,7 +54,8 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
 
                 packetSendBuffer.put(msg.getBytes(CHARSET));
 
-                communication.sendP2PPacket(dest, packetSendBuffer, SteamNetworking.P2PSend.Unreliable, defaultChannel);
+                logger.info("Sending P2P message: " + msg);
+                communication.sendP2PPacket(dest, packetSendBuffer, SteamNetworking.P2PSend.Reliable, defaultChannel);
                 currentPartner = dest;
             }
         }
@@ -72,7 +73,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
 
             packetSendBuffer.put(msg.getBytes(CHARSET));
 
-            communication.sendP2PPacket(currentPartner, packetSendBuffer, SteamNetworking.P2PSend.Unreliable, defaultChannel);
+            communication.sendP2PPacket(currentPartner, packetSendBuffer, SteamNetworking.P2PSend.Reliable, defaultChannel);
         }
         catch (Exception e)
         {
@@ -141,13 +142,15 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             msg = msg.substring(12);
             chat.receiveMessage(msg);
         }
-        else if (msg.equals("start"))
-        {
-            beginGameStartTimer();
-        }
         else if (msg.equals("start_game"))
         {
+            //Host has send start game message, and both parties are properly connected.
+            sendP2PString("leave");
             startSetupGame();
+        }
+        else if (msg.equals("leave"))
+        {
+            HandleMatchmaking.leave();
         }
         else if (msg.startsWith("trial"))
         {
@@ -185,6 +188,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
 
     @Override
     public void onP2PSessionRequest(SteamID steamID) {
+        logger.info("Received session request from " + steamID.getAccountID());
         if (HandleMatchmaking.inLobby(steamID) || steamID.equals(currentPartner))
         {
             currentPartner = steamID;

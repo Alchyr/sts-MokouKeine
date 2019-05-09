@@ -5,15 +5,13 @@ import com.codedisaster.steamworks.*;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import もこけね.util.MultiplayerHelper;
 import もこけね.util.SteamUserCallbacks;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import static もこけね.util.MultiplayerHelper.CHARSET;
-import static もこけね.もこけねは神の国.chat;
-import static もこけね.もこけねは神の国.logger;
+import static もこけね.もこけねは神の国.*;
 
 public class HandleMatchmaking implements SteamMatchmakingCallback {
     private final ByteBuffer chatMessage = ByteBuffer.allocateDirect(4096);
@@ -168,12 +166,12 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             joinorcreate = false;
             activeMultiplayer = true;
 
+            hostID = matchmaking.getLobbyOwner(steamIDLobby);
 
             if (numMembers == 2)
             {
-                hostID = matchmaking.getLobbyOwner(steamIDLobby);
                 //start game
-                MultiplayerHelper.sendP2PString(hostID, "start");
+                //MultiplayerHelper.sendP2PString(hostID, "start");
                 BaseMod.setRichPresence("Playing as the Immortal and Guardian - Starting game...");
             }
             else
@@ -201,6 +199,24 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         logger.info("  - user changed: " + IDChanged.getAccountID());
         logger.info("  - made by user: " + IDSource.getAccountID());
         logger.info("  - state changed: " + chatMemberStateChange.name());
+
+        if (matchmaking.getNumLobbyMembers(lobbyID) == 2)
+        {
+            logger.info("Lobby is full!");
+            if (isHost)
+            {
+                logger.info("This is host: starting game.");
+                beginGameStartTimer();
+            }
+        }
+        else if (matchmaking.getNumLobbyMembers(lobbyID) != 2)
+        {
+            logger.info("Lobby does not have number of members needed to start.");
+            if (isHost)
+            {
+                stopGameStart();
+            }
+        }
     }
 
     @Override
@@ -211,7 +227,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         logger.info("  - chat id: #" + msgIndex);
         
         try {
-            int size = matchmaking.getLobbyChatEntry(lobbyID, msgIndex, new SteamMatchmaking.ChatEntry(), chatMessage);
+            matchmaking.getLobbyChatEntry(lobbyID, msgIndex, new SteamMatchmaking.ChatEntry(), chatMessage);
 
             /*byte[] bytes = new byte[size];//chatMessage.remaining()];
             chatMessage.get(bytes);
@@ -233,30 +249,21 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
 
     public static void sendMessage(String msg)
     {
-        try
+        if (activeMultiplayer && currentLobbyID != null && currentLobbyID.isValid())
         {
-            if (activeMultiplayer && currentLobbyID != null && currentLobbyID.isValid())
+            logger.info("Sending message: " + msg);
+            if (matchmaking.sendLobbyChatMsg(currentLobbyID, msg))
             {
-                handler.chatMessage.put(CHARSET.encode(msg));
-                logger.info("Sending message: " + msg + " with byte length " + handler.chatMessage.remaining());
-                if (matchmaking.sendLobbyChatMsg(currentLobbyID, handler.chatMessage))
-                {
-                    logger.info("Message sent successfully.");
-                }
-                else
-                {
-                    logger.error("Message failed to send.");
-                }
-                handler.chatMessage.clear();
+                logger.info("Message sent successfully.");
             }
             else
             {
-                logger.info("No current lobby to send message to!");
+                logger.error("Message failed to send.");
             }
         }
-        catch (SteamException e)
+        else
         {
-            logger.error(e.getMessage());
+            logger.info("No current lobby to send message to!");
         }
     }
 
@@ -348,6 +355,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 matchmaking.setLobbyData(steamIDLobby, lobbyModsKey, modList);
                 matchmaking.setLobbyData(steamIDLobby, lobbyCharacterKey, CardCrawlGame.chosenCharacter.name());
                 matchmaking.setLobbyData(steamIDLobby, lobbyPublicKey, metadataTrue);
+
                 this.isHost = true;
 
                 currentLobbyID = steamIDLobby;
