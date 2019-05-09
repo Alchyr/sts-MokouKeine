@@ -155,12 +155,19 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             msg = msg.substring(4);
             Settings.seed = Long.valueOf(msg);
         }
-        else if (msg.equals("success") && HandleMatchmaking.handler.isHost)
+        else if (msg.equals("success"))
         {
-            logger.info("Connection established.");
-            HandleMatchmaking.leave();
-            sendP2PString("leave");
-            beginGameStartTimer();
+            if (HandleMatchmaking.handler.isHost)
+            {
+                logger.info("Connection established.");
+                HandleMatchmaking.leave();
+                sendP2PString("leave");
+                beginGameStartTimer();
+            }
+            else
+            {
+                sendP2PString("success");
+            }
         }
     }
 
