@@ -25,6 +25,11 @@ public class AltOverlayMenu extends OverlayMenu {
         super(p);
         this.p = p;
         wasOpen = false;
+
+        this.energyPanel.show_y = Settings.HEIGHT / 2.0f;
+        this.energyPanel.hide_y = Settings.HEIGHT / 2.0f;
+        this.energyPanel.target_y = Settings.HEIGHT / 2.0f;
+        this.energyPanel.current_y = Settings.HEIGHT / 2.0f;
     }
 
     @Override

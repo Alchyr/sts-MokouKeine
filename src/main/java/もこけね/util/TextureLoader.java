@@ -48,18 +48,6 @@ public class TextureLoader
         return textures.get(textureString);
     }
 
-    public static String getAnimatedCardTextures(final String cardName, final AbstractCard.CardType cardType) throws FileNotFoundException
-    {
-        String fileName = getUncheckedTextureString("Animated/" + cardName, cardType);
-
-        if(!testTexture(fileName))
-        {
-            throw new FileNotFoundException(fileName + " was not found.");
-        }
-
-        return fileName;
-    }
-
     public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType)
     {
         String textureString;
@@ -67,16 +55,16 @@ public class TextureLoader
         switch (cardType)
         {
             case ATTACK:
-                textureString = assetPath("img/Cards/Attacks/" + cardName + ".png");
+                textureString = assetPath("img/cards/attacks/" + cardName + ".png");
                 break;
             case SKILL:
-                textureString = assetPath("img/Cards/Skills/" + cardName + ".png");
+                textureString = assetPath("img/cards/skills/" + cardName + ".png");
                 break;
             case POWER:
-                textureString = assetPath("img/Cards/Powers/" + cardName + ".png");
+                textureString = assetPath("img/cards/powers/" + cardName + ".png");
                 break;
             default:
-                textureString = assetPath("img/Cards/UnknownCard.png");
+                textureString = assetPath("img/cards/UnknownCard.png");
                 break;
         }
 
@@ -86,13 +74,13 @@ public class TextureLoader
             } catch (GdxRuntimeException e) {
                 switch (cardType) {
                     case ATTACK:
-                        textureString = assetPath("img/Cards/Attacks/default.png");
+                        textureString = assetPath("img/cards/attacks/default.png");
                         break;
                     case SKILL:
-                        textureString = assetPath("img/Cards/Skills/default.png");
+                        textureString = assetPath("img/cards/skills/default.png");
                         break;
                     case POWER:
-                        textureString = assetPath("img/Cards/Powers/default.png");
+                        textureString = assetPath("img/cards/powers/default.png");
                         break;
                     default:
                         textureString = assetPath("img/MissingImage.png");
@@ -110,16 +98,16 @@ public class TextureLoader
 
         switch (cardType) {
             case ATTACK:
-                textureString = assetPath("img/Cards/Attacks/" + cardName + ".png");
+                textureString = assetPath("img/cards/Attacks/" + cardName + ".png");
                 break;
             case SKILL:
-                textureString = assetPath("img/Cards/Skills/" + cardName + ".png");
+                textureString = assetPath("img/cards/skills/" + cardName + ".png");
                 break;
             case POWER:
-                textureString = assetPath("img/Cards/Powers/" + cardName + ".png");
+                textureString = assetPath("img/cards/powers/" + cardName + ".png");
                 break;
             default:
-                textureString = assetPath("img/Cards/UnknownCard.png");
+                textureString = assetPath("img/cards/UnknownCard.png");
                 break;
         }
 
@@ -136,13 +124,13 @@ public class TextureLoader
             } catch (GdxRuntimeException e) {
                 switch (cardType) {
                     case ATTACK:
-                        textureString = assetPath("img/Cards/Attacks/default.png");
+                        textureString = assetPath("img/cards/attacks/default.png");
                         break;
                     case SKILL:
-                        textureString = assetPath("img/Cards/Skills/default.png");
+                        textureString = assetPath("img/cards/skills/default.png");
                         break;
                     case POWER:
-                        textureString = assetPath("img/Cards/Powers/default.png");
+                        textureString = assetPath("img/cards/powers/default.png");
                         break;
                     default:
                         textureString = assetPath("img/MissingImage.png");
@@ -183,11 +171,11 @@ public class TextureLoader
     }
     public static String PowerPath(String powerName)
     {
-        return "img/Powers/" + powerName + ".png";
+        return "img/powers/" + powerName + ".png";
     }
     public static String HiDefPowerPath(String powerName)
     {
-        return "img/Powers/HiDef/" + powerName + ".png";
+        return "img/powers/hidef/" + powerName + ".png";
     }
 
     public static boolean testTexture(String filePath)

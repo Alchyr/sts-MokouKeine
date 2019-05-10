@@ -17,13 +17,8 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.EmptyDeckShuffleAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.blue.Defend_Blue;
-import com.megacrit.cardcrawl.cards.blue.Strike_Blue;
-import com.megacrit.cardcrawl.cards.red.Defend_Red;
-import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -44,6 +39,12 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.vfx.cardManip.CardDisappearEffect;
 import もこけね.actions.character.OtherPlayerDeckShuffleAction;
+import もこけね.cards.keine.Forget;
+import もこけね.cards.keine.KeineDefend;
+import もこけね.cards.keine.KeineStrike;
+import もこけね.cards.mokou.MokouDefend;
+import もこけね.cards.mokou.MokouStrike;
+import もこけね.cards.mokou.Scorch;
 import もこけね.patch.energy_division.SetEnergyGain;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.ui.AstrologerOrb;
@@ -683,35 +684,47 @@ public class MokouKeine extends CustomPlayer {
 
         if (isMokou)
         {
-            startDeck.add(Strike_Red.ID);
-            startDeck.add(Strike_Red.ID);
-            startDeck.add(Strike_Red.ID);
-            startDeck.add(Defend_Red.ID);
-            startDeck.add(Defend_Red.ID);
-            startDeck.add(Defend_Red.ID);
+            startDeck.add(MokouStrike.ID);
+            startDeck.add(MokouStrike.ID);
+            startDeck.add(MokouStrike.ID);
+            startDeck.add(MokouStrike.ID);
+            startDeck.add(MokouDefend.ID);
+            startDeck.add(MokouDefend.ID);
+            startDeck.add(MokouDefend.ID);
+            startDeck.add(MokouDefend.ID);
+            startDeck.add(Scorch.ID);
 
-            otherPlayerMasterDeck.group.add(new Strike_Blue());
-            otherPlayerMasterDeck.group.add(new Strike_Blue());
-            otherPlayerMasterDeck.group.add(new Strike_Blue());
-            otherPlayerMasterDeck.group.add(new Defend_Blue());
-            otherPlayerMasterDeck.group.add(new Defend_Blue());
-            otherPlayerMasterDeck.group.add(new Defend_Blue());
+            otherPlayerMasterDeck.group.add(new KeineStrike());
+            otherPlayerMasterDeck.group.add(new KeineStrike());
+            otherPlayerMasterDeck.group.add(new KeineStrike());
+            otherPlayerMasterDeck.group.add(new KeineStrike());
+            otherPlayerMasterDeck.group.add(new KeineDefend());
+            otherPlayerMasterDeck.group.add(new KeineDefend());
+            otherPlayerMasterDeck.group.add(new KeineDefend());
+            otherPlayerMasterDeck.group.add(new KeineDefend());
+            otherPlayerMasterDeck.group.add(new Forget());
         }
         else
         {
-            startDeck.add(Strike_Blue.ID);
-            startDeck.add(Strike_Blue.ID);
-            startDeck.add(Strike_Blue.ID);
-            startDeck.add(Defend_Blue.ID);
-            startDeck.add(Defend_Blue.ID);
-            startDeck.add(Defend_Blue.ID);
+            startDeck.add(KeineStrike.ID);
+            startDeck.add(KeineStrike.ID);
+            startDeck.add(KeineStrike.ID);
+            startDeck.add(KeineStrike.ID);
+            startDeck.add(KeineDefend.ID);
+            startDeck.add(KeineDefend.ID);
+            startDeck.add(KeineDefend.ID);
+            startDeck.add(KeineDefend.ID);
+            startDeck.add(Forget.ID);
 
-            otherPlayerMasterDeck.group.add(new Strike_Red());
-            otherPlayerMasterDeck.group.add(new Strike_Red());
-            otherPlayerMasterDeck.group.add(new Strike_Red());
-            otherPlayerMasterDeck.group.add(new Defend_Red());
-            otherPlayerMasterDeck.group.add(new Defend_Red());
-            otherPlayerMasterDeck.group.add(new Defend_Red());
+            otherPlayerMasterDeck.group.add(new MokouStrike());
+            otherPlayerMasterDeck.group.add(new MokouStrike());
+            otherPlayerMasterDeck.group.add(new MokouStrike());
+            otherPlayerMasterDeck.group.add(new MokouStrike());
+            otherPlayerMasterDeck.group.add(new MokouDefend());
+            otherPlayerMasterDeck.group.add(new MokouDefend());
+            otherPlayerMasterDeck.group.add(new MokouDefend());
+            otherPlayerMasterDeck.group.add(new MokouDefend());
+            otherPlayerMasterDeck.group.add(new Scorch());
         }
 
         return startDeck;

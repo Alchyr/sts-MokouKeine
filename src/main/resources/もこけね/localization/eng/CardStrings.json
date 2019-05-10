@@ -1,6 +1,26 @@
 {
-  "もこけね:Strike": {
+  "もこけね:K_Strike": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! damage."
+  },
+  "もこけね:K_Defend": {
+    "NAME": "Defend",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "もこけね:M_Strike": {
+    "NAME": "Strike",
+    "DESCRIPTION": "Deal !D! damage."
+  },
+  "もこけね:M_Defend": {
+    "NAME": "Defend",
+    "DESCRIPTION": "Gain !B! Block."
+  },,
+  "もこけね:Scorch": {
+    "NAME": "Scorch",
+    "DESCRIPTION": "Deal !D! damage !M! times."
+  },
+  "もこけね:Forget": {
+    "NAME": "Forget",
+    "DESCRIPTION": "Apply 1 Weak to the enemy whenever it loses HP this turn."
   }
 }

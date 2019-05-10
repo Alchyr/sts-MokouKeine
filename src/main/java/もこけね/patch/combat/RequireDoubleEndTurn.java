@@ -3,6 +3,7 @@ package もこけね.patch.combat;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -13,6 +14,7 @@ import com.megacrit.cardcrawl.ui.buttons.EndTurnButton;
 import もこけね.character.MokouKeine;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
+import もこけね.util.OtherPlayerCardQueueItem;
 
 import static もこけね.patch.lobby.HandleMatchmaking.isHost;
 import static もこけね.もこけねは神の国.logger;
@@ -108,6 +110,10 @@ public class RequireDoubleEndTurn {
         @SpirePrefixPatch
         public static SpireReturn<Boolean> noPlayAfterEnd(AbstractCard __instance, AbstractPlayer p, AbstractMonster m)
         {
+            if (!AbstractDungeon.actionManager.cardQueue.isEmpty() && __instance.equals(AbstractDungeon.actionManager.cardQueue.get(0).card) && AbstractDungeon.actionManager.cardQueue.get(0) instanceof OtherPlayerCardQueueItem)
+            {
+                return SpireReturn.Return(true);
+            }
             if (ended && HandleMatchmaking.activeMultiplayer && p instanceof MokouKeine)
             {
                 __instance.cantUseMessage = endTurnStrings.TEXT[0];
