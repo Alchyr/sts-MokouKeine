@@ -14,7 +14,7 @@
   "もこけね:M_Defend": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
-  },,
+  },
   "もこけね:Scorch": {
     "NAME": "Scorch",
     "DESCRIPTION": "Deal !D! damage !M! times."
