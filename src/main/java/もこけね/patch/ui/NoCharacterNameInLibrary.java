@@ -23,6 +23,7 @@ public class NoCharacterNameInLibrary {
         {
             playerClass[0] = null;
         }
+        //Later, move insert patch to next line, and if tab name is Mokou or Keine, get localized name
     }
 
     private static class Locator extends SpireInsertLocator
