@@ -1,14 +1,20 @@
 package もこけね.ui;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.OverlayMenu;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import もこけね.character.MokouKeine;
+
+import java.util.Iterator;
 
 public class AltOverlayMenu extends OverlayMenu {
     public AbstractPlayer p;
 
+    public OtherEnergyPanel otherPlayerEnergy = new OtherEnergyPanel();
     public OtherDrawPilePanel otherPlayerDrawPile = new OtherDrawPilePanel();
     public OtherDiscardPilePanel otherDiscardPilePanel = new OtherDiscardPilePanel();
 
@@ -31,6 +37,7 @@ public class AltOverlayMenu extends OverlayMenu {
     public void showCombatPanels() {
         otherPlayerDrawPile.show();
         otherDiscardPilePanel.show();
+        otherPlayerEnergy.show();
         super.showCombatPanels();
     }
 
@@ -38,7 +45,16 @@ public class AltOverlayMenu extends OverlayMenu {
     public void hideCombatPanels() {
         otherPlayerDrawPile.hide();
         otherDiscardPilePanel.hide();
+        otherPlayerEnergy.hide();
         super.hideCombatPanels();
+
+        if (p instanceof MokouKeine)
+        {
+            for (AbstractCard c : ((MokouKeine) p).otherPlayerHand.group)
+            {
+                c.target_y = -AbstractCard.IMG_HEIGHT;
+            }
+        }
     }
 
     @Override
@@ -48,6 +64,7 @@ public class AltOverlayMenu extends OverlayMenu {
         this.cancelButton.render(sb);
         if (!Settings.hideLowerElements) {
             this.energyPanel.render(sb);
+            this.otherPlayerEnergy.render(sb);
             this.combatDeckPanel.render(sb);
             this.otherPlayerDrawPile.render(sb);
             this.discardPilePanel.render(sb);

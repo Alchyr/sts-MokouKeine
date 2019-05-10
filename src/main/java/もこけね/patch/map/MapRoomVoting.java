@@ -259,8 +259,8 @@ public class MapRoomVoting {
                 chat.receiveMessage("Destination chosen!");
             }
             else {
-                MultiplayerHelper.sendP2PMessage("Players disagree. Conflict will be automatically resolved in " + 5 + " seconds.");
-                startMapChooseTimer(5.0f);
+                MultiplayerHelper.sendP2PMessage("Players disagree. Conflict will be automatically resolved in " + 15 + " seconds.");
+                startMapChooseTimer(15);
             }
         }
     }

@@ -14,10 +14,12 @@ public class UpdateAltOverlayMenu {
     @SpireInsertPatch(
             locator = Locator.class
     )
-    public static void changeGroup(OverlayMenu __instance)
+    public static void update(OverlayMenu __instance)
     {
         if (__instance instanceof AltOverlayMenu)
         {
+            ((AltOverlayMenu) __instance).otherPlayerEnergy.updatePositions();
+            ((AltOverlayMenu) __instance).otherPlayerEnergy.update();
             ((AltOverlayMenu) __instance).otherPlayerDrawPile.updatePositions(((AltOverlayMenu) __instance).wasOpen);
             ((AltOverlayMenu) __instance).otherDiscardPilePanel.updatePositions();
         }

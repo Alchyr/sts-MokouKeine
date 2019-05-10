@@ -3,6 +3,7 @@ package もこけね.patch.combat;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -11,7 +12,10 @@ import com.megacrit.cardcrawl.ui.buttons.EndTurnButton;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import もこけね.character.MokouKeine;
 import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.MultiplayerHelper;
 
+import static もこけね.patch.lobby.HandleMatchmaking.isHost;
+import static もこけね.もこけねは神の国.logger;
 import static もこけね.もこけねは神の国.makeID;
 
 public class RequireDoubleEndTurn {
@@ -20,13 +24,13 @@ public class RequireDoubleEndTurn {
     public static boolean ended = false;
     public static boolean otherPlayerEnded = false;
 
-    public static void otherPlayerEndTurn()
+    private static boolean allowDisable = false;
+
+    public static void reset()
     {
-        otherPlayerEnded = true;
-        if (ended)
-        {
-            AbstractDungeon.overlayMenu.endTurnButton.disable(true);
-        }
+        ended = false;
+        otherPlayerEnded = false;
+        allowDisable = false;
     }
 
     @SpirePatch(
@@ -37,23 +41,60 @@ public class RequireDoubleEndTurn {
     public static class onDisable
     {
         @SpirePrefixPatch
-        public static void preventInstantEnd(EndTurnButton __instance, @ByRef boolean[] isEnemyTurn)
+        public static SpireReturn preventInstantEnd(EndTurnButton __instance, boolean isEnemyTurn)
         {
-            if (/*otherPlayerEnded && */isEnemyTurn[0])
+            if (allowDisable)
             {
-                ended = false;
-                otherPlayerEnded = false;
-                return;
+                reset();
+                return SpireReturn.Continue();
             }
-            if (isEnemyTurn[0] && HandleMatchmaking.activeMultiplayer && AbstractDungeon.player instanceof MokouKeine)
-            {
-                isEnemyTurn[0] = false;
 
-                AbstractDungeon.player.releaseCard();
-                ended = true;
-                //Send turn end to other player
+            if (AbstractDungeon.player instanceof MokouKeine && MultiplayerHelper.active)
+            {
+                if (!ended)
+                {
+                    endTurn();
+                }
+                return SpireReturn.Return(null);
             }
+            return SpireReturn.Continue();
         }
+    }
+
+    private static void endTurn()
+    {
+        AbstractDungeon.player.releaseCard();
+        ended = true;
+        MultiplayerHelper.sendP2PMessage(CardCrawlGame.playerName + endTurnStrings.TEXT[1]);
+        logger.info("Ended turn.");
+
+        if (isHost && otherPlayerEnded)
+        {
+            allowDisable = true;
+            MultiplayerHelper.sendP2PString("full_end_turn");
+            AbstractDungeon.overlayMenu.endTurnButton.disable(true);
+        }
+        else
+        {
+            MultiplayerHelper.sendP2PString("end_turn");
+        }
+    }
+
+    public static void otherPlayerEndTurn()
+    {
+        otherPlayerEnded = true;
+        if (ended && isHost)
+        {
+            allowDisable = true;
+            MultiplayerHelper.sendP2PString("full_end_turn");
+            AbstractDungeon.overlayMenu.endTurnButton.disable(true);
+        }
+    }
+
+    public static void fullEndTurn()
+    {
+        allowDisable = true;
+        AbstractDungeon.overlayMenu.endTurnButton.disable(true);
     }
 
     @SpirePatch(

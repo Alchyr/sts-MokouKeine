@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.character.MokouKeine;
+import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.patch.map.MapRoomVoting;
@@ -141,6 +142,14 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("confirm_play_card"))
         {
             tryPlayCard(msg.substring(17));
+        }
+        else if (msg.equals("end_turn"))
+        {
+            RequireDoubleEndTurn.otherPlayerEndTurn();
+        }
+        else if (msg.equals("full_end_turn"))
+        {
+            RequireDoubleEndTurn.fullEndTurn();
         }
         else if (msg.startsWith("room_option_choose"))
         {

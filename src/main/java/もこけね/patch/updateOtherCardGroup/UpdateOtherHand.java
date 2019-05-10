@@ -33,6 +33,7 @@ public class UpdateOtherHand
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(CardGroup.class, "update");
+
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }

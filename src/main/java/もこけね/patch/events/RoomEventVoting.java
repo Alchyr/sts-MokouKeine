@@ -216,8 +216,8 @@ public class RoomEventVoting {
         {
             if (RoomEventDialog.selectedOption != otherPlayerSelected)
             {
-                MultiplayerHelper.sendP2PMessage("Players disagree. Conflict will be automatically resolved in " + 5 + " seconds.");
-                startEventChooseTimer(5.0f);
+                MultiplayerHelper.sendP2PMessage("Players disagree. Conflict will be automatically resolved in " + 10 + " seconds.");
+                startEventChooseTimer(10.0f);
             }
             else
             {

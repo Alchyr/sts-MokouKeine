@@ -6,6 +6,7 @@ import basemod.abstracts.CustomPlayer;
 import basemod.animations.SpriterAnimation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Bezier;
@@ -40,11 +41,15 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.BurningBlood;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.vfx.cardManip.CardDisappearEffect;
 import もこけね.actions.character.OtherPlayerDeckShuffleAction;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.ui.AstrologerOrb;
+import もこけね.ui.MokouOrb;
+import もこけね.ui.OtherEnergyPanel;
 import もこけね.util.AltHandCardgroup;
+import もこけね.util.TextureLoader;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -79,6 +84,8 @@ public class MokouKeine extends CustomPlayer {
 
     private boolean mokouDraw;
 
+    protected EnergyOrbInterface otherPlayerOrb;
+
     public CardGroup otherPlayerMasterDeck;
     public CardGroup otherPlayerHand;
     public CardGroup otherPlayerDraw;
@@ -88,10 +95,12 @@ public class MokouKeine extends CustomPlayer {
     private Vector2[] points;
 
     public MokouKeine(boolean mokou) {
-        super(mokou ? characterStrings.NAMES[1] : characterStrings.NAMES[2], CharacterEnums.MOKOUKEINE, new AstrologerOrb(),
+        super(mokou ? characterStrings.NAMES[1] : characterStrings.NAMES[2], CharacterEnums.MOKOUKEINE, mokou ? new MokouOrb() : new AstrologerOrb(),
                 new SpriterAnimation(SpritePath));
 
         this.points = (Vector2[])ReflectionHacks.getPrivate(this, AbstractPlayer.class, "points");
+
+        otherPlayerOrb = mokou ? new AstrologerOrb() : new MokouOrb();
 
         this.hand = new AltHandCardgroup(true);
         otherPlayerHand = new AltHandCardgroup(false);
@@ -145,6 +154,8 @@ public class MokouKeine extends CustomPlayer {
         if (isMokou)
         {
             this.name = characterStrings.NAMES[1];
+            this.energyOrb = new MokouOrb();
+            this.otherPlayerOrb = new AstrologerOrb();
             this.cardColor = CharacterEnums.MOKOU;
             this.energyFont = FontHelper.energyNumFontRed;
             this.cardTrailColor = Color.RED.cpy();
@@ -154,6 +165,8 @@ public class MokouKeine extends CustomPlayer {
         else
         {
             this.name = characterStrings.NAMES[2];
+            this.energyOrb = new AstrologerOrb();
+            this.otherPlayerOrb = new MokouOrb();
             this.cardColor = CharacterEnums.KEINE;
             this.energyFont = FontHelper.energyNumFontBlue;
             this.cardTrailColor = Color.BLUE.cpy();
@@ -182,6 +195,16 @@ public class MokouKeine extends CustomPlayer {
             CardCrawlGame.sound.playAV("CARD_DRAW_8", -0.12F, 0.25F);
             this.draw(1);
             this.onCardDrawOrDiscard();
+        }
+    }
+
+    @Override
+    public Texture getEnergyImage() {
+        if (isMokou) {
+            return TextureLoader.getTexture(assetPath("img/Blank.png"));
+        }
+        else {
+            return super.getEnergyImage();
         }
     }
 
@@ -446,6 +469,18 @@ public class MokouKeine extends CustomPlayer {
         if (!isMokou)
         {
 
+        }
+    }
+
+    @Override
+    public void renderOrb(SpriteBatch sb, boolean enabled, float current_x, float current_y) {
+        if (current_x < Settings.WIDTH / 2.0f)
+        {
+            super.renderOrb(sb, enabled, current_x, current_y);
+        }
+        else
+        {
+            this.otherPlayerOrb.renderOrb(sb, enabled, current_x, current_y);
         }
     }
 

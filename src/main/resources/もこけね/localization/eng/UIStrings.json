@@ -1,7 +1,8 @@
 {
   "もこけね:EndTurn": {
     "TEXT": [
-      "I've already ended my turn!"
+      "I've already ended my turn!",
+      " ended their turn."
     ]
   },
   "もこけね:DrawPilePanel": {
