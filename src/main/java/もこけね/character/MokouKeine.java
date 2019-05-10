@@ -207,6 +207,14 @@ public class MokouKeine extends CustomPlayer {
             return super.getEnergyImage();
         }
     }
+    public Texture getOtherEnergyImage() {
+        if (!isMokou) {
+            return TextureLoader.getTexture(assetPath("img/Blank.png"));
+        }
+        else {
+            return super.getEnergyImage();
+        }
+    }
 
     public boolean tryDraw()
     {
@@ -361,6 +369,11 @@ public class MokouKeine extends CustomPlayer {
         }
     }
 
+    public void updateOtherOrb(int amt)
+    {
+        otherPlayerOrb.updateOrb(amt);
+    }
+
 
     public void updateCardsOnDiscard() {
         if (isMokou) //keine is always updated first.
@@ -472,16 +485,12 @@ public class MokouKeine extends CustomPlayer {
         }
     }
 
-    @Override
-    public void renderOrb(SpriteBatch sb, boolean enabled, float current_x, float current_y) {
-        if (current_x < Settings.WIDTH / 2.0f)
-        {
-            super.renderOrb(sb, enabled, current_x, current_y);
-        }
-        else
-        {
-            this.otherPlayerOrb.renderOrb(sb, enabled, current_x, current_y);
-        }
+    public void renderOtherOrb(SpriteBatch sb, boolean enabled, float current_x, float current_y) {
+        this.otherPlayerOrb.renderOrb(sb, enabled, current_x, current_y);
+    }
+
+    public BitmapFont getOtherEnergyNumFont() {
+        return isMokou ? FontHelper.energyNumFontBlue : FontHelper.energyNumFontRed;
     }
 
     @Override

@@ -12,14 +12,15 @@ import もこけね.patch.enums.CharacterEnums;
         method = SpirePatch.CONSTRUCTOR
 )
 public class EnergyPanelPos {
-    public static final float ENERGY_PANEL_ADJUST = 230.0F * Settings.scale;
+    public static final float ENERGY_PANEL_ADJUST = 190.0F * Settings.scale;
 
     @SpirePostfixPatch
     public static void adjustPos(EnergyPanel __instance)
     {
         if (CardCrawlGame.chosenCharacter == CharacterEnums.MOKOUKEINE)
         {
-            __instance.show_y += ENERGY_PANEL_ADJUST;
+            __instance.show_y = Settings.WIDTH / 2.0f;
+            __instance.hide_y = Settings.WIDTH / 2.0f;
         }
     }
 }

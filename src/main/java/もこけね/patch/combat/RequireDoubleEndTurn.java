@@ -1,15 +1,15 @@
 package もこけね.patch.combat;
 
-import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.buttons.EndTurnButton;
-import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import もこけね.character.MokouKeine;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
@@ -68,6 +68,8 @@ public class RequireDoubleEndTurn {
         MultiplayerHelper.sendP2PMessage(CardCrawlGame.playerName + endTurnStrings.TEXT[1]);
         logger.info("Ended turn.");
 
+        AbstractDungeon.player.hand.glowCheck();
+
         if (isHost && otherPlayerEnded)
         {
             allowDisable = true;
@@ -98,19 +100,20 @@ public class RequireDoubleEndTurn {
     }
 
     @SpirePatch(
-            clz = AbstractPlayer.class,
-            method = "playCard"
+            clz = AbstractCard.class,
+            method = "canUse"
     )
     public static class noPlay
     {
         @SpirePrefixPatch
-        public static void noPlayAfterEnd(AbstractPlayer __instance)
+        public static SpireReturn<Boolean> noPlayAfterEnd(AbstractCard __instance, AbstractPlayer p, AbstractMonster m)
         {
-            if (ended && HandleMatchmaking.activeMultiplayer && __instance instanceof MokouKeine)
+            if (ended && HandleMatchmaking.activeMultiplayer && p instanceof MokouKeine)
             {
-                AbstractDungeon.effectList.add(new ThoughtBubble(__instance.dialogX, __instance.dialogY, 3.0F, endTurnStrings.TEXT[0], true));
-                __instance.releaseCard();
+                __instance.cantUseMessage = endTurnStrings.TEXT[0];
+                return SpireReturn.Return(false);
             }
+            return SpireReturn.Continue();
         }
     }
 }

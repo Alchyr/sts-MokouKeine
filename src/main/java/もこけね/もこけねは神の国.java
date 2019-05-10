@@ -30,6 +30,7 @@ import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.DiscardToCorrectPile;
+import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
@@ -221,6 +222,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
         DiscardToCorrectPile.reset();
+        RequireDoubleEndTurn.reset();
     }
 
     public void startGame()

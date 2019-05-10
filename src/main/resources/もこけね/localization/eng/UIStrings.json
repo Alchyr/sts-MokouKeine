@@ -22,5 +22,10 @@
       "If the draw pile is empty, the discard pile is shuffled into the draw pile. NL NL Click to view the cards in ",
       "'s discard pile."
     ]
+  },
+  "もこけね:EnergyPanel": {
+    "TEXT": [
+      "'s current energy count. Cards require energy to play."
+    ]
   }
 }
