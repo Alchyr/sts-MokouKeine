@@ -20,6 +20,13 @@ public class ForgetPower extends BasePower {
     }
 
     @Override
+    public void updateDescription() {
+        this.description = descriptions()[0] + this.amount + descriptions()[1];
+
+
+    }
+
+    @Override
     public int onAttacked(DamageInfo info, int damageAmount) {
         if (damageAmount > 0 && info.type == DamageInfo.DamageType.NORMAL) {
             AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this.owner, this.owner, new WeakPower(this.owner, this.amount, false), this.amount, false));

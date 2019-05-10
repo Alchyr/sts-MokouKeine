@@ -50,7 +50,7 @@ public class MokouOrb implements EnergyOrbInterface {
         if (calmFireCooldown < 0)
         {
             calmFireCooldown += CD;
-            baseEffects.add(new CalmFireEffect(current_x, current_y - CALM_FIRE_OFFSET));
+            baseEffects.add(new CalmFireEffect(current_x, current_y + CALM_FIRE_OFFSET));
         }
     }
 
