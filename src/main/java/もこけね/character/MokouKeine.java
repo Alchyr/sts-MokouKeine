@@ -44,10 +44,12 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.vfx.cardManip.CardDisappearEffect;
 import もこけね.actions.character.OtherPlayerDeckShuffleAction;
+import もこけね.patch.energy_division.SetEnergyGain;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.ui.AstrologerOrb;
 import もこけね.ui.MokouOrb;
 import もこけね.ui.OtherEnergyPanel;
+import もこけね.util.AltEnergyManager;
 import もこけね.util.AltHandCardgroup;
 import もこけね.util.TextureLoader;
 
@@ -64,7 +66,7 @@ public class MokouKeine extends CustomPlayer {
     private static final Color ARROW_COLOR = new Color(1.0F, 0.2F, 0.3F, 1.0F);
 
     // Base stats
-    private static final int ENERGY_PER_TURN = 3;//2; //Total of 4 energy and 6 cards base. As such, strikes and defends are nerfed to 5 damage/4 block.
+    private static final int ENERGY_PER_TURN = 2;//2; //Total of 4 energy and 6 cards base. As such, strikes and defends are nerfed to 5 damage/4 block.
     private static final int STARTING_HP = 77;
     private static final int MAX_HP = 77;
     private static final int STARTING_GOLD = 100;
@@ -134,7 +136,7 @@ public class MokouKeine extends CustomPlayer {
                 assetPath("img/Character/shoulder.png"), // campfire pose
                 assetPath("img/Character/shoulder2.png"), // another campfire pose
                 assetPath("img/Character/corpse.png"), // dead corpse
-                getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
+                getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new AltEnergyManager(ENERGY_PER_TURN)); // energy manager
 
         // =============== TEXT BUBBLE LOCATION =================
 
@@ -204,7 +206,7 @@ public class MokouKeine extends CustomPlayer {
             return TextureLoader.getTexture(assetPath("img/Blank.png"));
         }
         else {
-            return super.getEnergyImage();
+            return TextureLoader.getTexture(assetPath("img/Character/orb/vfx.png"));
         }
     }
     public Texture getOtherEnergyImage() {
@@ -212,7 +214,23 @@ public class MokouKeine extends CustomPlayer {
             return TextureLoader.getTexture(assetPath("img/Blank.png"));
         }
         else {
-            return super.getEnergyImage();
+            return TextureLoader.getTexture(assetPath("img/Character/orb/vfx.png"));
+        }
+    }
+
+    @Override
+    public void gainEnergy(int e) {
+        if (SetEnergyGain.myGain == SetEnergyGain.otherPlayerGain)
+        {
+            super.gainEnergy(e);
+            OtherEnergyPanel.addEnergy(e);
+        }
+        else if (SetEnergyGain.myGain)
+        {
+            super.gainEnergy(e);
+        }
+        else {
+            OtherEnergyPanel.addEnergy(e);
         }
     }
 

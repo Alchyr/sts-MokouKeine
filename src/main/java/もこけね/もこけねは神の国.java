@@ -19,7 +19,6 @@ import com.megacrit.cardcrawl.helpers.SeedHelper;
 import com.megacrit.cardcrawl.helpers.TipTracker;
 import com.megacrit.cardcrawl.helpers.TrialHelper;
 import com.megacrit.cardcrawl.localization.*;
-import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import javassist.CannotCompileException;
@@ -31,6 +30,7 @@ import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.combat.RequireDoubleEndTurn;
+import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
@@ -52,7 +52,7 @@ import java.util.Collection;
 @SpireInitializer
 public class もこけねは神の国 implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber,
         EditCharactersSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber, PreStartGameSubscriber,
-        RenderSubscriber, PostUpdateSubscriber, OnStartBattleSubscriber, StartGameSubscriber
+        RenderSubscriber, PostUpdateSubscriber, OnStartBattleSubscriber, StartGameSubscriber, PostBattleSubscriber
 {
     public static final String modID = "もこけね";
 
@@ -164,6 +164,12 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     }
 
     @Override
+    public void receivePostBattle(AbstractRoom abstractRoom) {
+        TrackCardSource.useOtherEnergy = false;
+        TrackCardSource.useMyEnergy = false;
+    }
+
+    @Override
     public void receivePostUpdate() {
         if (chat != null)
         {
@@ -223,6 +229,8 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
         DiscardToCorrectPile.reset();
         RequireDoubleEndTurn.reset();
+        TrackCardSource.useOtherEnergy = false;
+        TrackCardSource.useMyEnergy = false;
     }
 
     public void startGame()
