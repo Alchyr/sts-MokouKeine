@@ -351,6 +351,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
             BaseMod.loadCustomStringsFile(CharacterStrings.class, assetPath("localization/" + lang + "/CharacterStrings.json"));
             BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath("localization/" + lang + "/PowerStrings.json"));
             BaseMod.loadCustomStringsFile(UIStrings.class, assetPath("localization/" + lang + "/UIStrings.json"));
+            BaseMod.loadCustomStringsFile(MonsterStrings.class, assetPath("localization/" + lang + "/EnemyStrings.json"));
         }
         catch (Exception e)
         {
@@ -360,6 +361,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
             BaseMod.loadCustomStringsFile(CharacterStrings.class, assetPath("localization/" + lang + "/CharacterStrings.json"));
             BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath("localization/" + lang + "/PowerStrings.json"));
             BaseMod.loadCustomStringsFile(UIStrings.class, assetPath("localization/" + lang + "/UIStrings.json"));
+            BaseMod.loadCustomStringsFile(MonsterStrings.class, assetPath("localization/" + lang + "/EnemyStrings.json"));
         }
     }
 
