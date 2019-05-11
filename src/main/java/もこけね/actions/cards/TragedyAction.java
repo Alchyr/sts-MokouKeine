@@ -17,6 +17,11 @@ public class TragedyAction extends AbstractGameAction {
 
     @Override
     public void update() {
+        if (target == null)
+        {
+            this.isDone = true;
+            return;
+        }
         int finalDamage = 0;
         if (target.hasPower(WeakPower.POWER_ID))
         {
@@ -28,5 +33,7 @@ public class TragedyAction extends AbstractGameAction {
         }
 
         AbstractDungeon.actionManager.addToTop(new DamageAction(target, new DamageInfo(source, finalDamage, DamageInfo.DamageType.NORMAL), AttackEffect.POISON));
+
+        this.isDone = true;
     }
 }

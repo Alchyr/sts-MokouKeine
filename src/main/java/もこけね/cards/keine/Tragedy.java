@@ -45,20 +45,23 @@ public class Tragedy extends KeineCard {
         super.calculateCardDamage(mo);
         this.baseMagicNumber = 0;
         this.magicNumber = 0;
-        if (mo.hasPower(WeakPower.POWER_ID))
+        if (mo != null)
         {
-            this.baseMagicNumber += mo.getPower(WeakPower.POWER_ID).amount * this.baseDamage;
-            this.magicNumber += mo.getPower(WeakPower.POWER_ID).amount * this.damage;
-        }
-        if (mo.hasPower(VulnerablePower.POWER_ID))
-        {
-            this.baseMagicNumber += mo.getPower(VulnerablePower.POWER_ID).amount * this.baseDamage;
-            this.magicNumber += mo.getPower(VulnerablePower.POWER_ID).amount * this.damage;
-        }
-        this.isMagicNumberModified = this.isDamageModified;
+            if (mo.hasPower(WeakPower.POWER_ID))
+            {
+                this.baseMagicNumber += mo.getPower(WeakPower.POWER_ID).amount * this.baseDamage;
+                this.magicNumber += mo.getPower(WeakPower.POWER_ID).amount * this.damage;
+            }
+            if (mo.hasPower(VulnerablePower.POWER_ID))
+            {
+                this.baseMagicNumber += mo.getPower(VulnerablePower.POWER_ID).amount * this.baseDamage;
+                this.magicNumber += mo.getPower(VulnerablePower.POWER_ID).amount * this.damage;
+            }
+            this.isMagicNumberModified = this.isDamageModified;
 
-        this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
-        this.initializeDescription();
+            this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
+            this.initializeDescription();
+        }
     }
 
     @Override

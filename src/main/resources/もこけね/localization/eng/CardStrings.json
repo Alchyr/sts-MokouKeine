@@ -35,6 +35,10 @@
     "NAME": "Memoir",
     "DESCRIPTION": "Apply !M! Weak. NL もこけね:Draw 2 cards."
   },
+  "もこけね:Reminisce": {
+    "NAME": "Reminisce",
+    "DESCRIPTION": "Remove all of the enemy's debuffs. NL Deal !D! damage for each debuff removed."
+  },
   "もこけね:Detonate": {
     "NAME": "Detonate",
     "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, deal !M! damage to ALL enemies."
