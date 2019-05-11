@@ -19,8 +19,55 @@
     "NAME": "Scorch",
     "DESCRIPTION": "Deal !D! damage !M! times."
   },
+  "もこけね:Restraint": {
+    "NAME": "Restraint",
+    "DESCRIPTION": "Gain !B! Block. NL Prevent the next time you would lose HP by spending it."
+  },
   "もこけね:Forget": {
     "NAME": "Forget",
     "DESCRIPTION": "Apply 1 Weak to the enemy whenever it loses HP this turn."
+  },
+  "もこけね:Feint": {
+    "NAME": "Feint",
+    "DESCRIPTION": "Apply !M! Vulnerable. NL Deal !D! damage to a random enemy other than the target."
+  },
+  "もこけね:Memoir": {
+    "NAME": "Memoir",
+    "DESCRIPTION": "Apply !M! Weak. NL もこけね:Draw 2 cards."
+  },
+  "もこけね:Detonate": {
+    "NAME": "Detonate",
+    "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, deal !M! damage to ALL enemies."
+  },
+  "もこけね:Smokescreen": {
+    "NAME": "Smokescreen",
+    "DESCRIPTION": "Gain !B! Block. NL Summon a もこけね:Spark."
+  },
+  "もこけね:Refute": {
+    "NAME": "Refute",
+    "DESCRIPTION": "Deal !D! damage. NL Exhaust a card in a discard pile."
+  },
+  "もこけね:Tragedy": {
+    "NAME": "Tragedy",
+    "DESCRIPTION": "Deal !D! damage for each stack of Weak and Vulnerable the enemy has.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Deals !M! damage.)"
+    ]
+  },
+  "もこけね:Warmup": {
+    "NAME": "Warmup",
+    "DESCRIPTION": "Summon a もこけね:Spark."
+  },
+  "もこけね:Indomitable": {
+    "NAME": "Indomitable",
+    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak to ALL enemies."
+  },
+  "もこけね:Blitz": {
+    "NAME": "Blitz",
+    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage twice."
+  },
+  "もこけね:Kindle": {
+    "NAME": "Kindle",
+    "DESCRIPTION": "Your partner gains [E] [E]."
   }
 }

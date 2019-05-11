@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.abstracts.MokouCard;
 import もこけね.util.CardInfo;
 
+import static basemod.helpers.BaseModCardTags.BASIC_STRIKE;
 import static もこけね.もこけねは神の国.makeID;
 
 public class MokouStrike extends MokouCard {
@@ -32,6 +33,9 @@ public class MokouStrike extends MokouCard {
         super(cardInfo, false);
 
         setDamage(DAMAGE, UPG_DAMAGE);
+
+        tags.add(BASIC_STRIKE);
+        tags.add(CardTags.STRIKE);
     }
 
     @Override

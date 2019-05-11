@@ -27,5 +27,12 @@
     "TEXT": [
       "'s current energy count. Cards require energy to play."
     ]
+  },
+  "もこけね:Refute": {
+    "TEXT": [
+      "Select a Card to Exhaust.",
+      "Waiting for ",
+      " to choose a card."
+    ]
   }
 }

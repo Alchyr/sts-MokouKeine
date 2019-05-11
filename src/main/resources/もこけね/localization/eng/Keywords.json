@@ -1,10 +1,17 @@
 [
   {
-    "PROPER_NAME": "Star",
+    "PROPER_NAME": "Spark",
     "NAMES": [
-      "star",
-      "stars"
+      "spark",
+      "sparks"
     ],
-    "DESCRIPTION": "When this card is played or #yExhausted, increment the #yStellar #yPhase and change the #yStellar #yAlignment."
+    "DESCRIPTION": "An enemy that doesn't attack, and damages ALL enemies upon death."
+  },
+  {
+    "PROPER_NAME": "Draw",
+    "NAMES": [
+      "draw"
+    ],
+    "DESCRIPTION": "Unless otherwise stated, all card draw is evenly divided between both players."
   }
 ]

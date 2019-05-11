@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.abstracts.KeineCard;
 import もこけね.util.CardInfo;
 
+import static basemod.helpers.BaseModCardTags.BASIC_DEFEND;
 import static もこけね.もこけねは神の国.makeID;
 
 public class KeineDefend extends KeineCard {
@@ -29,6 +30,8 @@ public class KeineDefend extends KeineCard {
         super(cardInfo, false);
 
         setBlock(BLOCK, UPG_BLOCK);
+
+        tags.add(BASIC_DEFEND);
     }
 
     @Override

@@ -1,11 +1,13 @@
 package もこけね.util;
 
 import com.codedisaster.steamworks.*;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
 import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.events.RoomEventVoting;
@@ -143,6 +145,11 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         {
             tryPlayCard(msg.substring(17));
         }
+        else if (msg.startsWith("signal"))
+        {
+            WaitForSignalAction.signal += 1;
+            processMessage(sender, msg.substring(6));
+        }
         else if (msg.equals("end_turn"))
         {
             RequireDoubleEndTurn.otherPlayerEndTurn();
@@ -150,6 +157,34 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.equals("full_end_turn"))
         {
             RequireDoubleEndTurn.fullEndTurn();
+        }
+        else if (msg.startsWith("exhaust"))
+        {
+            String[] args = msg.substring(7).split(" ");
+            if (args.length == 2)
+            {
+                int index = Integer.valueOf(args[1]);
+                if (index >= 0)
+                {
+                    switch (args[0])
+                    {
+                        case "discard":
+                            if (index <= AbstractDungeon.player.discardPile.group.size())
+                            {
+                                AbstractCard toExhaust = AbstractDungeon.player.discardPile.group.get(index);
+                                AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(toExhaust, AbstractDungeon.player.discardPile, true));
+                            }
+                            break;
+                        case "other_discard":
+                            if (AbstractDungeon.player instanceof MokouKeine && index <= ((MokouKeine) AbstractDungeon.player).otherPlayerDiscard.group.size())
+                            {
+                                AbstractCard toExhaust = ((MokouKeine) AbstractDungeon.player).otherPlayerDiscard.group.get(index);
+                                AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(toExhaust, ((MokouKeine) AbstractDungeon.player).otherPlayerDiscard, true));
+                            }
+                            break;
+                    }
+                }
+            }
         }
         else if (msg.startsWith("room_option_choose"))
         {

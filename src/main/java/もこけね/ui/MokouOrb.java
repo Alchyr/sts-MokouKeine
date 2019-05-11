@@ -42,7 +42,7 @@ public class MokouOrb implements EnergyOrbInterface {
         for (int i = 0; i < max; i++) {
 
             float distance = MathUtils.random(maxOffset);
-            float direction = MathUtils.random(-180.0f, 180.0f);
+            float direction = MathUtils.random(MathUtils.PI2);
             float xOffset = MathUtils.cos(direction) * distance;
             float yOffset = MathUtils.sin(direction) * distance;
             flameEffects.add(new CasualFlameParticleEffect(current_x + xOffset, current_y + yOffset));

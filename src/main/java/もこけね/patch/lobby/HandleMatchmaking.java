@@ -80,6 +80,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         {
             logger.info("Lobby filter: Only lobbies with this exact mod list: " + generateModList());
             logger.info("Only lobbies with this character: " + CardCrawlGame.chosenCharacter.name());
+            MultiplayerHelper.active = false;
             handler.startNormalSearch();
             searchAmt = 0;
             searching = true;

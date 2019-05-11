@@ -5,5 +5,19 @@
       "Upon losing HP, apply #b",
       " #yWeak."
     ]
+  },
+  "もこけね:Volatile": {
+    "NAME": "Volatile",
+    "DESCRIPTIONS": [
+      "On death, deal damage equal to its Max HP to ALL enemies."
+    ]
+  },
+  "もこけね:Seal": {
+    "NAME": "Seal",
+    "DESCRIPTIONS": [
+      "Prevents the next time you would lose HP by spending it.",
+      "Prevents the next #b",
+      " times you would lose HP by spending it."
+    ]
   }
 }

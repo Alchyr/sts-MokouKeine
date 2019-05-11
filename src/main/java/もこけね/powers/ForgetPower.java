@@ -11,7 +11,7 @@ import もこけね.abstracts.BasePower;
 public class ForgetPower extends BasePower {
     public static final String NAME = "Forget";
     public static final PowerType TYPE = PowerType.DEBUFF;
-    public static final boolean TURN_BASED = false;
+    public static final boolean TURN_BASED = true;
 
     public ForgetPower(final AbstractCreature owner, int amt)
     {
