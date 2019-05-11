@@ -4,9 +4,13 @@ import basemod.BaseMod;
 import com.codedisaster.steamworks.*;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ModInfo;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
 import もこけね.character.MokouKeine;
 import もこけね.util.MultiplayerHelper;
@@ -25,6 +29,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     private static final int SEARCH_CAP = 7;
 
     private static final String lobbyModsKey = "mod_list";
+    private static final String lobbyUnlocksKey = "unlocks";
     private static final String lobbyCharacterKey = "character";
     private static final String lobbyPublicKey = "is_public";
     private static final String lobbyKeysUnlockedKey = "final_act";
@@ -65,6 +70,8 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
 
     private void startNormalSearch()
     {
+        //guarantee equivalent unlock state, assuming same mod list.
+
         matchmaking.addRequestLobbyListDistanceFilter(SteamMatchmaking.LobbyDistanceFilter.Far);
         matchmaking.addRequestLobbyListStringFilter(lobbyModsKey, generateModList(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyCharacterKey, CardCrawlGame.chosenCharacter.name(), SteamMatchmaking.LobbyComparison.Equal);

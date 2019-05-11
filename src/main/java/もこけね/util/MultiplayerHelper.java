@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
 import もこけね.patch.combat.RequireDoubleEndTurn;
+import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.patch.map.MapRoomVoting;
@@ -68,7 +69,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             packetSendBuffer.flip();
 
             logger.info("Sending P2P message: " + msg);
-            communication.sendP2PPacket(dest, packetSendBuffer, SteamNetworking.P2PSend.Unreliable, defaultChannel);
+            communication.sendP2PPacket(dest, packetSendBuffer, SteamNetworking.P2PSend.Reliable, defaultChannel);
             currentPartner = dest;
         }
         catch (Exception e)
@@ -193,6 +194,14 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("room_option"))
         {
             RoomEventVoting.receiveVote(Integer.valueOf(msg.substring(11)));
+        }
+        else if (msg.startsWith("generic_option_choose"))
+        {
+            GenericEventVoting.selectOption(Integer.valueOf(msg.substring(21)));
+        }
+        else if (msg.startsWith("generic_option"))
+        {
+            GenericEventVoting.receiveVote(Integer.valueOf(msg.substring(14)));
         }
         else if (msg.startsWith("vote_node"))
         {

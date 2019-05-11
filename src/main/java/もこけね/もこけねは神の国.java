@@ -32,6 +32,7 @@ import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CharacterEnums;
+import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.patch.map.MapRoomVoting;
@@ -199,7 +200,10 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                 eventChooseTimer -= Gdx.graphics.getDeltaTime();
                 if (eventChooseTimer <= 0.0f)
                 {
-                    RoomEventVoting.resolveConflict();
+                    if (RoomEventVoting.choseOption)
+                        RoomEventVoting.resolveConflict();
+                    if (GenericEventVoting.choseOption)
+                        GenericEventVoting.resolveConflict();
                 }
                 else if (lastMilestone > eventChooseTimer)
                 {

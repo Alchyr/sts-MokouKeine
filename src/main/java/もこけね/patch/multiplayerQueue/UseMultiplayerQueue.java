@@ -6,6 +6,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.characters.CharacterManager;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
 import com.megacrit.cardcrawl.screens.charSelect.CharacterSelectScreen;
@@ -17,6 +19,7 @@ import もこけね.patch.lobby.HandleMatchmaking;
 import java.util.ArrayList;
 
 import static もこけね.もこけねは神の国.chat;
+import static もこけね.もこけねは神の国.logger;
 
 @SpirePatch(
         clz = CharacterSelectScreen.class,
@@ -36,6 +39,11 @@ public class UseMultiplayerQueue {
             inQueue = true;
             __instance.confirmButton.hide();
             __instance.cancelButton.show("Exit Queue");
+
+            logger.info("Unlocking everything, for consistency.");
+
+            RelicLibrary.unlockAndSeeAllRelics();
+            CardLibrary.unlockAndSeeAllCards();
 
             BaseMod.setRichPresence("Playing as the Immortal and Guardian - In Queue");
 

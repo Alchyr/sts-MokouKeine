@@ -1,5 +1,6 @@
 package もこけね.patch.events;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -31,6 +32,8 @@ public class RoomEventVoting {
     private static LargeDialogOptionButton mySelected = null;
 
     private static boolean voteComplete = false;
+
+    //TODO - Patch GenericEventDialog
 
     public static void receiveVote(int index)
     {
@@ -123,7 +126,8 @@ public class RoomEventVoting {
                 if (!RoomEventDialog.waitForInput && !voteComplete) //this means an option has been chosen
                 {
                     MultiplayerHelper.sendP2PString("room_option" + RoomEventDialog.selectedOption);
-                    HandleMatchmaking.sendMessage(CardCrawlGame.playerName + " chose " + SmartTextHelper.clearSmartText(RoomEventDialog.optionList.get(RoomEventDialog.selectedOption).msg));
+                    if (!choseOption || (mySelected != null && !mySelected.equals(RoomEventDialog.optionList.get(RoomEventDialog.selectedOption))))
+                        HandleMatchmaking.sendMessage(CardCrawlGame.playerName + " chose " + SmartTextHelper.clearSmartText(RoomEventDialog.optionList.get(RoomEventDialog.selectedOption).msg));
                     choseOption = true;
                     mySelected = RoomEventDialog.optionList.get(RoomEventDialog.selectedOption);
                     RoomEventDialog.waitForInput = true; //prevent option input
@@ -159,20 +163,24 @@ public class RoomEventVoting {
                 if (__instance.equals(mySelected)) {
                     if (((MokouKeine) AbstractDungeon.player).isMokou)
                     {
+                        sb.setColor(Color.WHITE.cpy());
                         sb.draw(mokouSelect, x - 445.0F, y - 38.5F, 445.0F, 38.5F, 890.0F, 77.0F, scale, scale, 0.0F, 0, 0, 890, 77, false, false);
                     }
                     else
                     {
+                        sb.setColor(Color.WHITE.cpy());
                         sb.draw(keineSelect, x - 445.0F, y - 38.5F, 445.0F, 38.5F, 890.0F, 77.0F, scale, scale, 0.0F, 0, 0, 890, 77, false, false);
                     }
                 }
                 if (__instance.equals(otherSelected)) {
                     if (((MokouKeine) AbstractDungeon.player).isMokou)
                     {
+                        sb.setColor(Color.WHITE.cpy());
                         sb.draw(keineSelect, x - 445.0F, y - 38.5F, 445.0F, 38.5F, 890.0F, 77.0F, scale, scale, 0.0F, 0, 0, 890, 77, false, false);
                     }
                     else
                     {
+                        sb.setColor(Color.WHITE.cpy());
                         sb.draw(mokouSelect, x - 445.0F, y - 38.5F, 445.0F, 38.5F, 890.0F, 77.0F, scale, scale, 0.0F, 0, 0, 890, 77, false, false);
                     }
                 }
