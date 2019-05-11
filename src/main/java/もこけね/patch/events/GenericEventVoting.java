@@ -74,11 +74,6 @@ public class GenericEventVoting {
     )
     @SpirePatch(
             clz = GenericEventDialog.class,
-            method = "show",
-            paramtypez = {}
-    )
-    @SpirePatch(
-            clz = GenericEventDialog.class,
             method = "clearRemainingOptions"
     )
     @SpirePatch(
@@ -138,6 +133,20 @@ public class GenericEventVoting {
     {
         @SpirePrefixPatch
         public static void onChange(GenericEventDialog __instance)
+        {
+            reset();
+        }
+    }
+
+    @SpirePatch(
+            clz = GenericEventDialog.class,
+            method = "show",
+            paramtypez = {}
+    )
+    public static class ResetOnShow
+    {
+        @SpirePrefixPatch
+        public static void onShow()
         {
             reset();
         }
