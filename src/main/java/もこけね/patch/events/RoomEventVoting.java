@@ -33,8 +33,6 @@ public class RoomEventVoting {
 
     private static boolean voteComplete = false;
 
-    //TODO - Patch GenericEventDialog
-
     public static void receiveVote(int index)
     {
         if (index >= 0 && index < RoomEventDialog.optionList.size())

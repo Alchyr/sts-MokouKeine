@@ -89,29 +89,11 @@ public class GenericEventVoting {
             clz = GenericEventDialog.class,
             method = "removeDialogOption"
     )
-    public static class ResetOnModify
-    {
-        @SpirePrefixPatch
-        public static void onChange(GenericEventDialog __instance)
-        {
-            reset();
-        }
-    }
-
     @SpirePatch(
             clz = GenericEventDialog.class,
             method = "setDialogOption",
             paramtypez = { String.class }
     )
-    public static class ResetOnModifySingleParam
-    {
-        @SpirePrefixPatch
-        public static void onChange(GenericEventDialog __instance, String a)
-        {
-            reset();
-        }
-    }
-
     @SpirePatch(
             clz = GenericEventDialog.class,
             method = "show",
@@ -137,15 +119,6 @@ public class GenericEventVoting {
             method = "updateDialogOption",
             paramtypez = { int.class, String.class, boolean.class }
     )
-    public static class ResetOnModifyTwoParam
-    {
-        @SpirePrefixPatch
-        public static void onChange(GenericEventDialog __instance, Object a, Object b)
-        {
-            reset();
-        }
-    }
-
     @SpirePatch(
             clz = GenericEventDialog.class,
             method = "updateDialogOption",
@@ -161,10 +134,10 @@ public class GenericEventVoting {
             method = "setDialogOption",
             paramtypez = { String.class, boolean.class, AbstractCard.class}
     )
-    public static class ResetOnModifyThreeParam
+    public static class ResetOnModify
     {
         @SpirePrefixPatch
-        public static void onChange(GenericEventDialog __instance, Object a, Object b, Object c)
+        public static void onChange(GenericEventDialog __instance)
         {
             reset();
         }
