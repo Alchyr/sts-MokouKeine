@@ -19,6 +19,7 @@ import もこけね.patch.map.MapRoomVoting;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
+import static もこけね.patch.combat.PotionUse.*;
 import static もこけね.patch.rewards.ObtainPotions.*;
 import static もこけね.もこけねは神の国.*;
 
@@ -128,6 +129,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
 
     private static void processMessage(SteamID sender, String msg)
     {
+        //Note to future self: Use 3 character code as first three characters of message so that you can just use a switch.
         if (msg.startsWith("chat_message"))
         {
             msg = msg.substring(12);
@@ -147,6 +149,27 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("confirm_play_card"))
         {
             tryPlayCard(msg.substring(17));
+        }
+        else if (msg.startsWith("use_potion")) //Host used a potion.
+        {
+            usePotion(msg.substring(10));
+        }
+        else if (msg.startsWith("try_use_potion"))
+        {
+            String info = msg.substring(14);
+            if (otherCanUsePotion(info))
+            {
+                usePotion(info);
+                sendP2PString("confirm_use_potion" + info);
+            }
+        }
+        else if (msg.startsWith("confirm_use_potion"))
+        {
+            confirmUsePotion(msg.substring(18));
+        }
+        else if (msg.startsWith("update_potions"))
+        {
+            receivePotionUpdate(msg.substring(14));
         }
         else if (msg.startsWith("signal"))
         {

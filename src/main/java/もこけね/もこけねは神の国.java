@@ -30,6 +30,7 @@ import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.combat.MixEnemyTempCards;
+import もこけね.patch.combat.PotionUse;
 import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CharacterEnums;
@@ -170,6 +171,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         TrackCardSource.useOtherEnergy = false;
         TrackCardSource.useMyEnergy = false;
         MixEnemyTempCards.toMokou = true;
+        PotionUse.queuedPotionUse.clear();
     }
 
     @Override
@@ -238,6 +240,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         TrackCardSource.useOtherEnergy = false;
         TrackCardSource.useMyEnergy = false;
         MixEnemyTempCards.toMokou = true;
+        PotionUse.queuedPotionUse.clear();
     }
 
     public void startGame()

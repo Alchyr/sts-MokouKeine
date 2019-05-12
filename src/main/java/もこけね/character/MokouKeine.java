@@ -29,6 +29,7 @@ import com.megacrit.cardcrawl.helpers.input.InputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.ConfusionPower;
 import com.megacrit.cardcrawl.powers.CorruptionPower;
@@ -95,6 +96,10 @@ public class MokouKeine extends CustomPlayer {
     public CardGroup otherPlayerDraw;
     public CardGroup otherPlayerDiscard;
     public CardGroup fakeLimbo;
+
+    public ArrayList<String> otherPlayerPotions = new ArrayList<>();
+    //Just to track what potions they have, for ensuring potions aren't played more than they should be.
+    //Other player should send a list of potions ids whenever they obtain or use a potion.
 
     private Vector2[] points;
 
@@ -504,7 +509,21 @@ public class MokouKeine extends CustomPlayer {
         super.applyStartOfTurnCards();
         if (!isMokou)
         {
-
+            for (AbstractCard c : otherPlayerDraw.group)
+            {
+                if (c != null)
+                    c.atTurnStart();
+            }
+            for (AbstractCard c : otherPlayerHand.group)
+            {
+                if (c != null)
+                    c.atTurnStart();
+            }
+            for (AbstractCard c : otherPlayerDiscard.group)
+            {
+                if (c != null)
+                    c.atTurnStart();
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package もこけね.patch.combat;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.GameActionManager;
@@ -10,6 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.ui.buttons.EndTurnButton;
 import もこけね.character.MokouKeine;
 import もこけね.patch.lobby.HandleMatchmaking;
@@ -105,7 +107,7 @@ public class RequireDoubleEndTurn {
             clz = AbstractCard.class,
             method = "canUse"
     )
-    public static class noPlay
+    public static class NoPlay
     {
         @SpirePrefixPatch
         public static SpireReturn<Boolean> noPlayAfterEnd(AbstractCard __instance, AbstractPlayer p, AbstractMonster m)
@@ -120,6 +122,23 @@ public class RequireDoubleEndTurn {
                 return SpireReturn.Return(false);
             }
             return SpireReturn.Continue();
+        }
+    }
+
+    @SpirePatch(
+            clz = AbstractPotion.class,
+            method = "canUse"
+    )
+    public static class NoPotion
+    {
+        @SpirePostfixPatch
+        public static boolean NoPotionAfterEnd(boolean result, AbstractPotion __instance)
+        {
+            if (ended)
+            {
+                return false;
+            }
+            return result;
         }
     }
 }

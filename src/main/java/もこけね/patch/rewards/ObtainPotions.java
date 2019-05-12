@@ -7,9 +7,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
-import javassist.CtBehavior;
-import もこけね.cards.keine.Reflection;
 import もこけね.character.MokouKeine;
+import もこけね.patch.combat.PotionUse;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
 
@@ -20,6 +19,35 @@ import static もこけね.もこけねは神の国.logger;
 
 public class ObtainPotions {
     private static ArrayList<AbstractPotion> canLose = new ArrayList<>();
+
+    @SpirePatch(
+            clz = AbstractPlayer.class,
+            method = "obtainPotion",
+            paramtypez = { int.class, AbstractPotion.class }
+    )
+    public static class OnObtainPotionSimple
+    {
+        @SpirePostfixPatch
+        public static void postObtain(AbstractPlayer __instance, int slot, AbstractPotion p)
+        {
+            if (__instance instanceof MokouKeine && MultiplayerHelper.active)
+                PotionUse.updatePotionInfo();
+        }
+    }
+    @SpirePatch(
+            clz = AbstractPlayer.class,
+            method = "obtainPotion",
+            paramtypez = { AbstractPotion.class }
+    )
+    public static class OnObtainPotion
+    {
+        @SpirePostfixPatch
+        public static void postObtain(AbstractPlayer __instance, AbstractPotion p)
+        {
+            if (__instance instanceof MokouKeine && MultiplayerHelper.active)
+                PotionUse.updatePotionInfo();
+        }
+    }
 
     @SpirePatch(
             clz = RewardItem.class,
