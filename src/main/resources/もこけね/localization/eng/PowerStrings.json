@@ -12,12 +12,27 @@
       "On death, deal damage equal to its Max HP to ALL enemies."
     ]
   },
+  "もこけね:Execration": {
+    "NAME": "Execration",
+    "DESCRIPTIONS": [
+      "Whenever you apply a debuff to an enemy, gain #b",
+      " #yStrength."
+    ]
+  },
   "もこけね:Seal": {
     "NAME": "Seal",
     "DESCRIPTIONS": [
       "Prevents the next time you would lose HP by spending it.",
       "Prevents the next #b",
       " times you would lose HP by spending it."
+    ]
+  },
+  "もこけね:Ignition": {
+    "NAME": "Ignition",
+    "DESCRIPTIONS": [
+      "Whenever you would gain #yStrength, summon a #yもこけね:Spark instead.",
+      "Whenever you would gain #yStrength, summon #b",
+      " #ySparks instead."
     ]
   }
 }

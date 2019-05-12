@@ -35,6 +35,10 @@
     "NAME": "Memoir",
     "DESCRIPTION": "Apply !M! Weak. NL もこけね:Draw 2 cards."
   },
+  "もこけね:Execration": {
+    "NAME": "Execration",
+    "DESCRIPTION": "Whenever you apply a debuff to an enemy, gain !M! Strength."
+  },
   "もこけね:Protector": {
     "NAME": "Protector",
     "DESCRIPTION": "Gain !B! Block for each card in your partner's hand."
@@ -49,6 +53,10 @@
   "もこけね:Detonate": {
     "NAME": "Detonate",
     "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, deal !M! damage to ALL enemies."
+  },
+  "もこけね:Ignition": {
+    "NAME": "Ignition",
+    "DESCRIPTION": "Whenever you would gain Strength, summon a もこけね:Spark instead."
   },
   "もこけね:Smokescreen": {
     "NAME": "Smokescreen",
