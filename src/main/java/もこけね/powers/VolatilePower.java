@@ -14,7 +14,7 @@ public class VolatilePower extends BasePower {
 
     public VolatilePower(final AbstractCreature owner)
     {
-        super(NAME, TYPE, TURN_BASED, owner, null, -1);
+        super(NAME, TYPE, TURN_BASED, owner, null, -1, false);
         this.loadRegion("explosive");
     }
 

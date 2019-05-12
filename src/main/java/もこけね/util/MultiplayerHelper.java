@@ -19,6 +19,7 @@ import もこけね.patch.map.MapRoomVoting;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
+import static もこけね.patch.rewards.ObtainPotions.*;
 import static もこけね.もこけねは神の国.*;
 
 //Handles all multiplayer post-game start. For setting up multiplayer, see HandleMatchmaking.java as well as UseMultiplayerQueue.java
@@ -233,6 +234,30 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             {
                 logger.error("ERROR: Invalid map node vote.");
             }
+        }
+        else if (msg.startsWith("claim_potion"))
+        {
+            removePotionReward(msg.substring(12));
+        }
+        else if (msg.startsWith("try_claim_potion"))
+        {
+            String id = msg.substring(16);
+            if (removePotionReward(id))
+            {
+                sendP2PString("confirm_claim_potion" + id);
+            }
+            else
+            {
+                sendP2PString("confirm_lose_potion" + id);
+            }
+        }
+        else if (msg.startsWith("confirm_claim_potion"))
+        {
+            confirmClaimPotion(msg.substring(20));
+        }
+        else if (msg.startsWith("confirm_lose_potion"))
+        {
+            confirmLosePotion(msg.substring(19));
         }
         else if (msg.equals("start_game"))
         {

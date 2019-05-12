@@ -41,7 +41,10 @@
   },
   "もこけね:Reminisce": {
     "NAME": "Reminisce",
-    "DESCRIPTION": "Remove all of the enemy's debuffs. NL Deal !D! damage for each debuff removed."
+    "DESCRIPTION": "Remove all of the enemy's debuffs. NL Deal !D! damage for each debuff removed.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Deals !M! damage.)"
+    ]
   },
   "もこけね:Detonate": {
     "NAME": "Detonate",

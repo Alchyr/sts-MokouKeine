@@ -115,6 +115,9 @@ public class MokouKeine extends CustomPlayer {
 
         this.isMokou = mokou;
         this.mokouDraw = true;
+
+        this.title = getTitle(this.chosenClass);
+
         if (mokou)
         {
             this.cardColor = CharacterEnums.MOKOU;
@@ -688,8 +691,6 @@ public class MokouKeine extends CustomPlayer {
             startDeck.add(MokouStrike.ID);
             startDeck.add(MokouStrike.ID);
             startDeck.add(MokouStrike.ID);
-            startDeck.add(MokouStrike.ID);
-            startDeck.add(MokouDefend.ID);
             startDeck.add(MokouDefend.ID);
             startDeck.add(MokouDefend.ID);
             startDeck.add(MokouDefend.ID);
@@ -698,8 +699,6 @@ public class MokouKeine extends CustomPlayer {
             otherPlayerMasterDeck.group.add(new KeineStrike());
             otherPlayerMasterDeck.group.add(new KeineStrike());
             otherPlayerMasterDeck.group.add(new KeineStrike());
-            otherPlayerMasterDeck.group.add(new KeineStrike());
-            otherPlayerMasterDeck.group.add(new KeineDefend());
             otherPlayerMasterDeck.group.add(new KeineDefend());
             otherPlayerMasterDeck.group.add(new KeineDefend());
             otherPlayerMasterDeck.group.add(new KeineDefend());
@@ -710,8 +709,6 @@ public class MokouKeine extends CustomPlayer {
             startDeck.add(KeineStrike.ID);
             startDeck.add(KeineStrike.ID);
             startDeck.add(KeineStrike.ID);
-            startDeck.add(KeineStrike.ID);
-            startDeck.add(KeineDefend.ID);
             startDeck.add(KeineDefend.ID);
             startDeck.add(KeineDefend.ID);
             startDeck.add(KeineDefend.ID);
@@ -720,8 +717,6 @@ public class MokouKeine extends CustomPlayer {
             otherPlayerMasterDeck.group.add(new MokouStrike());
             otherPlayerMasterDeck.group.add(new MokouStrike());
             otherPlayerMasterDeck.group.add(new MokouStrike());
-            otherPlayerMasterDeck.group.add(new MokouStrike());
-            otherPlayerMasterDeck.group.add(new MokouDefend());
             otherPlayerMasterDeck.group.add(new MokouDefend());
             otherPlayerMasterDeck.group.add(new MokouDefend());
             otherPlayerMasterDeck.group.add(new MokouDefend());

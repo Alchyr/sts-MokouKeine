@@ -69,7 +69,7 @@ public class MapRoomVoting {
                     mySelected = __instance;
                     MultiplayerHelper.sendP2PString("vote_node" + indexInfo);
 
-                    chat.receiveMessage("Voted for " + indexInfo);
+                    //chat.receiveMessage("Voted for " + indexInfo);
 
                     if (isHost && otherSelected != null)
                     {
@@ -103,7 +103,7 @@ public class MapRoomVoting {
                         mySelected = __instance;
                         MultiplayerHelper.sendP2PString("vote_node" + indexInfo);
 
-                        chat.receiveMessage("Voted for " + indexInfo);
+                        //chat.receiveMessage("Voted for " + indexInfo);
                     }
                     if (isHost && otherSelected != null)
                     {
@@ -215,7 +215,7 @@ public class MapRoomVoting {
 
             otherSelected = AbstractDungeon.map.get(a).get(b);
 
-            chat.receiveMessage("Other player voted for " + a + " " + b);
+            //chat.receiveMessage("Other player voted for " + a + " " + b);
 
             if (isHost && mySelected != null)
             {
@@ -290,6 +290,6 @@ public class MapRoomVoting {
         IMG_WIDTH = (int) (Settings.scale * 64.0F);
         OFFSET_X = 560.0F * Settings.scale;
         OFFSET_Y = 180.0F * Settings.scale;
-        SPACING_X = (float) IMG_WIDTH * 2.0F;
+        SPACING_X = IMG_WIDTH * 2.0F;
     }
 }

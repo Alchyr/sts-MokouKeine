@@ -23,11 +23,20 @@ public class AltEnergyManager extends EnergyManager {
     public void recharge() {
         int oldEnergy = EnergyPanel.totalCount;
         super.recharge();
-        if (EnergyPanel.totalCount == oldEnergy + this.energy || AbstractDungeon.player.hasRelic(IceCream.ID) || AbstractDungeon.player.hasPower(ConservePower.POWER_ID)) //had some form of energy conservation
+
+        if (AbstractDungeon.player.hasRelic(IceCream.ID) || AbstractDungeon.player.hasPower(ConservePower.POWER_ID)) //had some form of energy conservation
         {
             OtherEnergyPanel.addEnergy(this.energy);
         }
-        else if (EnergyPanel.totalCount != energy)
+        else if (EnergyPanel.totalCount == energy)
+        {
+            OtherEnergyPanel.setEnergy(this.energy);
+        }
+        else if (EnergyPanel.totalCount == oldEnergy + this.energy) //it's not the same, must have been conserved in some way.
+        {
+            OtherEnergyPanel.addEnergy(this.energy);
+        }
+        else
         {
             int bonus = EnergyPanel.totalCount - energy;
             if (oldEnergy >= bonus) //bonus is probably based on last turn energy, though possibly limited
@@ -35,9 +44,6 @@ public class AltEnergyManager extends EnergyManager {
                 bonus = Math.min(OtherEnergyPanel.totalCount, bonus);
             }
             OtherEnergyPanel.setEnergy(this.energy + bonus);
-        }
-        else { //it's normal.
-            OtherEnergyPanel.setEnergy(this.energy);
         }
     }
 

@@ -161,7 +161,6 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     public void receiveStartGame() {
         if (AbstractDungeon.player instanceof MokouKeine)
         {
-            AbstractDungeon.topPanel.setPlayerName();
             MapRoomVoting.reset();
         }
     }
