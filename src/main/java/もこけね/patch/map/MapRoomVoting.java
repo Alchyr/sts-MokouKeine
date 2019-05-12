@@ -55,6 +55,8 @@ public class MapRoomVoting {
             if (AbstractDungeon.player instanceof MokouKeine && MultiplayerHelper.active && !__instance.equals(chosenNode))
             {
                 __instance.highlighted = true;
+                AbstractDungeon.dungeonMapScreen.clickTimer = 0.0F;
+
                 if (chosenNode != null)
                 {
                     return SpireReturn.Return(null); //no voting once destination is chosen.
@@ -96,11 +98,13 @@ public class MapRoomVoting {
 
                 if (!indexInfo.equals(""))
                 {
-                    mySelected = __instance;
-                    MultiplayerHelper.sendP2PString("vote_node" + indexInfo);
+                    if (__instance != mySelected)
+                    {
+                        mySelected = __instance;
+                        MultiplayerHelper.sendP2PString("vote_node" + indexInfo);
 
-                    chat.receiveMessage("Voted for " + indexInfo);
-
+                        chat.receiveMessage("Voted for " + indexInfo);
+                    }
                     if (isHost && otherSelected != null)
                     {
                         handleSelection();
@@ -140,7 +144,7 @@ public class MapRoomVoting {
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractPlayer.class, "hasRelic");
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(DungeonMapScreen.class, "clickTimer");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
@@ -261,7 +265,6 @@ public class MapRoomVoting {
                 chat.receiveMessage("Destination chosen!");
             }
             else {
-                MultiplayerHelper.sendP2PMessage("Players disagree. Conflict will be automatically resolved in " + 15 + " seconds.");
                 startMapChooseTimer(15);
             }
         }

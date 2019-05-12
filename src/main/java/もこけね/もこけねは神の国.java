@@ -29,6 +29,7 @@ import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.DiscardToCorrectPile;
+import もこけね.patch.combat.MixEnemyTempCards;
 import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CharacterEnums;
@@ -145,6 +146,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     {
         if (mapChooseTimer <= 0.0f)
         {
+            MultiplayerHelper.sendP2PMessage("Players disagree. Conflict will be automatically resolved in " + 15 + " seconds.");
             mapChooseTimer = startTime;
             lastMilestone = MathUtils.floor(startTime - 0.5f);
         }
@@ -168,6 +170,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     public void receivePostBattle(AbstractRoom abstractRoom) {
         TrackCardSource.useOtherEnergy = false;
         TrackCardSource.useMyEnergy = false;
+        MixEnemyTempCards.toMokou = true;
     }
 
     @Override
@@ -235,6 +238,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         RequireDoubleEndTurn.reset();
         TrackCardSource.useOtherEnergy = false;
         TrackCardSource.useMyEnergy = false;
+        MixEnemyTempCards.toMokou = true;
     }
 
     public void startGame()

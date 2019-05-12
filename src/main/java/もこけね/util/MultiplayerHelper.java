@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
 import もこけね.patch.combat.RequireDoubleEndTurn;
+import もこけね.patch.deck_changes.ReportObtainCard;
 import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
@@ -186,6 +187,10 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                     }
                 }
             }
+        }
+        else if (msg.startsWith("other_obtain_card"))
+        {
+            ReportObtainCard.receiveOtherObtainCard(msg.substring(17));
         }
         else if (msg.startsWith("room_option_choose"))
         {
