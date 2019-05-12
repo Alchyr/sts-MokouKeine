@@ -35,6 +35,10 @@
     "NAME": "Memoir",
     "DESCRIPTION": "Apply !M! Weak. NL もこけね:Draw 2 cards."
   },
+  "もこけね:Protector": {
+    "NAME": "Protector",
+    "DESCRIPTION": "Gain !B! Block for each card in your partner's hand."
+  },
   "もこけね:Reminisce": {
     "NAME": "Reminisce",
     "DESCRIPTION": "Remove all of the enemy's debuffs. NL Deal !D! damage for each debuff removed."
