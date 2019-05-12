@@ -28,7 +28,7 @@ public class Feint extends KeineCard {
     public final static String ID = makeID(cardInfo.cardName);
 
     private static final int DAMAGE = 8;
-    private static final int UPG_DAMAGE = 1;
+    private static final int UPG_DAMAGE = 2;
 
     private static final int DEBUFF = 1;
     private static final int UPG_DEBUFF = 1;

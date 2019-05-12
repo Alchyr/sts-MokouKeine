@@ -34,13 +34,13 @@ public class PotionUse {
         boolean first = true;
         for (AbstractPotion p : AbstractDungeon.player.potions)
         {
-            if (!first)
-            {
-                sb.append("!!!");
-            }
-            first = false;
             if (!(p instanceof PotionSlot))
             {
+                if (!first)
+                {
+                    sb.append("!!!");
+                }
+                first = false;
                 sb.append(p.ID);
             }
         }
@@ -72,7 +72,7 @@ public class PotionUse {
 
     public static boolean otherCanUsePotion(String info)
     {
-        String[] args = info.split(" ");
+        String[] args = info.split("!!!");
         if (args.length == 3 && AbstractDungeon.player instanceof MokouKeine)
         {
             return ((MokouKeine) AbstractDungeon.player).otherPlayerPotions.remove(args[0]);
@@ -82,7 +82,7 @@ public class PotionUse {
 
     public static void usePotion(String info)
     {
-        String[] args = info.split(" ");
+        String[] args = info.split("!!!");
         if (args.length == 2 && AbstractDungeon.player instanceof MokouKeine)
         {
             AbstractPotion toUse = PotionHelper.getPotion(args[0]);
@@ -108,7 +108,7 @@ public class PotionUse {
 
     public static void confirmUsePotion(String info)
     {
-        String[] args = info.split(" ");
+        String[] args = info.split("!!!");
         if (args.length == 3)
         {
             if (!(AbstractDungeon.player.potions.get(Integer.valueOf(args[1])) instanceof PotionSlot)) //it has mysteriously vanished.
@@ -185,7 +185,7 @@ public class PotionUse {
             if (AbstractDungeon.player instanceof MokouKeine && MultiplayerHelper.active) {
                 if (HandleMatchmaking.isHost)
                 {
-                    MultiplayerHelper.sendP2PString("use_potion" + potion.ID + " -1");
+                    MultiplayerHelper.sendP2PString("use_potion" + potion.ID + "!!!-1");
                 }
                 else
                 {
@@ -195,7 +195,7 @@ public class PotionUse {
                             return SpireReturn.Continue();
                         }
                     }
-                    MultiplayerHelper.sendP2PString("try_use_potion" + potion.ID + " " + slot + " -1");
+                    MultiplayerHelper.sendP2PString("try_use_potion" + potion.ID + "!!!" + slot + "!!!-1");
                     return SpireReturn.Return(null);
                 }
             }
@@ -219,7 +219,7 @@ public class PotionUse {
                 int index = AbstractDungeon.getMonsters().monsters.indexOf(hovered);
                 if (HandleMatchmaking.isHost)
                 {
-                    MultiplayerHelper.sendP2PString("use_potion" + potion.ID + " " + index);
+                    MultiplayerHelper.sendP2PString("use_potion" + potion.ID + "!!!" + index);
                 }
                 else
                 {
@@ -229,7 +229,7 @@ public class PotionUse {
                             return SpireReturn.Continue();
                         }
                     }
-                    MultiplayerHelper.sendP2PString("try_use_potion" + potion.ID + " " + slot + " " + index); //to ensure if player has two of same potion, correct one is used on confirmation
+                    MultiplayerHelper.sendP2PString("try_use_potion" + potion.ID + "!!!" + slot + "!!!" + index); //to ensure if player has two of same potion, correct one is used on confirmation
                     return SpireReturn.Return(null);
                 }
             }
