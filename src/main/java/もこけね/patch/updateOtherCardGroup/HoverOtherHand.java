@@ -54,6 +54,7 @@ public class HoverOtherHand {
         {
             ArrayList<Matcher> requiredMatches = new ArrayList<>();
             requiredMatches.add(new Matcher.MethodCallMatcher(CardGroup.class, "getHoveredCard"));
+            requiredMatches.add(new Matcher.FieldAccessMatcher(AbstractPlayer.class, "hoveredCard"));
 
             Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractPlayer.class, "hoveredCard");
 
