@@ -24,5 +24,7 @@ public class SetEnergyGainAction extends AbstractGameAction {
             SetEnergyGain.otherPlayerGain = true;
             SetEnergyGain.myGain = false;
         }
+
+        this.isDone = true;
     }
 }

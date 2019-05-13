@@ -35,7 +35,7 @@ public class Forget extends KeineCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new ForgetPower(m, this.magicNumber), this.magicNumber));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new ForgetPower(m, p, this.magicNumber), this.magicNumber));
     }
 
     @Override

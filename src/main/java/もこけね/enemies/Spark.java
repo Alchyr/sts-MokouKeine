@@ -21,8 +21,8 @@ public class Spark extends CustomMonster {
 
     private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
 
-    private static final float HB_WIDTH = 80.0F; //scale is all multiplied in abstract monster class
-    private static final float HB_HEIGHT = 80.0F;
+    private static final float HB_WIDTH = 140.0F; //scale is all multiplied in abstract monster class
+    private static final float HB_HEIGHT = 140.0F;
 
     private static final float MAX_OFFSET = 20.0F * Settings.scale;
     private static final float SPARK_CHANCE = 0.3f;

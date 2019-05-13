@@ -67,11 +67,11 @@ public class MokouKeine extends CustomPlayer {
     private static final Color ARROW_COLOR = new Color(1.0F, 0.2F, 0.3F, 1.0F);
 
     // Base stats
-    private static final int ENERGY_PER_TURN = 2;//2; //Total of 4 energy and 6 cards base. As such, strikes and defends are nerfed to 5 damage/4 block.
-    private static final int STARTING_HP = 77;
-    private static final int MAX_HP = 77;
-    private static final int STARTING_GOLD = 100;
-    private static final int CARD_DRAW = 6; //automatically split between two groups
+    private static final int ENERGY_PER_TURN = 2;//2; //Total of 4 energy and 8 cards base. As such, cards are relatively weaker.
+    private static final int STARTING_HP = 66;
+    private static final int MAX_HP = 66;
+    private static final int STARTING_GOLD = 50; //Both players have individual gold.
+    private static final int CARD_DRAW = 8; //automatically split between two groups
     private static final int ORB_SLOTS = 0;
 
     private static final String SpritePath = assetPath("img/Character/spriter/Character.scml");
@@ -774,7 +774,7 @@ public class MokouKeine extends CustomPlayer {
 
     @Override
     public int getAscensionMaxHPLoss() {
-        return 11;
+        return 6;
     }
 
     @Override

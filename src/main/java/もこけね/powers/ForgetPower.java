@@ -13,9 +13,9 @@ public class ForgetPower extends BasePower {
     public static final PowerType TYPE = PowerType.DEBUFF;
     public static final boolean TURN_BASED = true;
 
-    public ForgetPower(final AbstractCreature owner, int amt)
+    public ForgetPower(final AbstractCreature owner, final AbstractCreature source, int amt)
     {
-        super(NAME, TYPE, TURN_BASED, owner, null, amt);
+        super(NAME, TYPE, TURN_BASED, owner, source, amt);
         this.priority = 999999;
     }
 
@@ -29,7 +29,7 @@ public class ForgetPower extends BasePower {
     @Override
     public int onAttacked(DamageInfo info, int damageAmount) {
         if (damageAmount > 0 && info.type == DamageInfo.DamageType.NORMAL) {
-            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this.owner, this.owner, new WeakPower(this.owner, this.amount, false), this.amount, false));
+            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this.owner, this.source, new WeakPower(this.owner, this.amount, false), this.amount, false));
             this.flash();
         }
         return damageAmount;

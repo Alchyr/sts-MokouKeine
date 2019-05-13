@@ -27,6 +27,10 @@
     "NAME": "Forget",
     "DESCRIPTION": "Apply 1 Weak to the enemy whenever it loses HP this turn."
   },
+  "もこけね:Purify": {
+    "NAME": "Purify",
+    "DESCRIPTION": "Lose !M! HP. NL Remove all of your debuffs. NL Exhaust."
+  },
   "もこけね:Feint": {
     "NAME": "Feint",
     "DESCRIPTION": "Apply !M! Vulnerable. NL Deal !D! damage to a random enemy other than the target."
@@ -81,12 +85,16 @@
     "NAME": "Indomitable",
     "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak to ALL enemies."
   },
+  "もこけね:Sinister": {
+    "NAME": "Sinister",
+    "DESCRIPTION": "Deal !D! damage. NL もこけね:Echo Attack: Deal !M! damage."
+  },
   "もこけね:Blitz": {
     "NAME": "Blitz",
     "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage twice."
   },
   "もこけね:Kindle": {
     "NAME": "Kindle",
-    "DESCRIPTION": "Your partner gains [E] [E]."
+    "DESCRIPTION": "Your partner gains NL [E] [E]."
   }
 }

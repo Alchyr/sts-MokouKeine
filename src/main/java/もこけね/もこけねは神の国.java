@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.stslib.patches.relicInterfaces.OnAfterUseCardPatch;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
@@ -29,6 +30,7 @@ import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.DiscardToCorrectPile;
+import もこけね.patch.card_use.LastCardType;
 import もこけね.patch.combat.MixEnemyTempCards;
 import もこけね.patch.combat.PotionUse;
 import もこけね.patch.combat.RequireDoubleEndTurn;
@@ -167,14 +169,6 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     }
 
     @Override
-    public void receivePostBattle(AbstractRoom abstractRoom) {
-        TrackCardSource.useOtherEnergy = false;
-        TrackCardSource.useMyEnergy = false;
-        MixEnemyTempCards.toMokou = true;
-        PotionUse.queuedPotionUse.clear();
-    }
-
-    @Override
     public void receivePostUpdate() {
         if (chat != null)
         {
@@ -240,6 +234,15 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         TrackCardSource.useOtherEnergy = false;
         TrackCardSource.useMyEnergy = false;
         MixEnemyTempCards.toMokou = true;
+        LastCardType.type = AbstractCard.CardType.CURSE; //to avoid any null issues. Nothing will trigger off of playing curses.
+        PotionUse.queuedPotionUse.clear();
+    }
+    @Override
+    public void receivePostBattle(AbstractRoom abstractRoom) {
+        TrackCardSource.useOtherEnergy = false;
+        TrackCardSource.useMyEnergy = false;
+        MixEnemyTempCards.toMokou = true;
+        LastCardType.type = AbstractCard.CardType.CURSE;
         PotionUse.queuedPotionUse.clear();
     }
 
@@ -410,7 +413,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     public void receivePreStartGame() {
         //Max hand size is set to 10 immediately before this is called.
         if (CardCrawlGame.chosenCharacter == CharacterEnums.MOKOUKEINE)
-            BaseMod.MAX_HAND_SIZE = MathUtils.ceil(5);
+            BaseMod.MAX_HAND_SIZE = 6;
     }
 
     @Override

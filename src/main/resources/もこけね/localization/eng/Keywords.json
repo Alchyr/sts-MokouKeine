@@ -13,5 +13,12 @@
       "draw"
     ],
     "DESCRIPTION": "Unless otherwise stated, all card draw is evenly divided between both players."
+  },
+  {
+    "PROPER_NAME": "Echo",
+    "NAMES": [
+      "echo"
+    ],
+    "DESCRIPTION": "This effect triggers if the last card played is of the specified type."
   }
 ]
