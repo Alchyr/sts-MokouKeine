@@ -286,9 +286,8 @@ public class GenericEventVoting {
     }
 
 
-
     private static boolean eventTest()
     {
-        return (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.EVENT && AbstractDungeon.getCurrRoom().event != null);
+        return (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().event != null);
     }
 }
