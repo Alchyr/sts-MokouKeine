@@ -2,6 +2,7 @@ package もこけね.patch.ui;
 
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.ui.buttons.EndTurnButton;
@@ -13,6 +14,8 @@ import もこけね.patch.enums.CharacterEnums;
 )
 public class EndTurnButtonPosition {
     private static final float ALT_Y = 250.0F * Settings.scale;
+
+    @SpirePostfixPatch
     public static void adjustPos(EndTurnButton __instance)
     {
         if (AbstractDungeon.player != null && AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE)
