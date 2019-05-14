@@ -20,5 +20,13 @@
       "echo"
     ],
     "DESCRIPTION": "This effect triggers if the last card played is of the specified type."
+  },
+  {
+    "PROPER_NAME": "Seal",
+    "NAMES": [
+      "seal",
+      "seals"
+    ],
+    "DESCRIPTION": "Negates the next hp cost."
   }
 ]

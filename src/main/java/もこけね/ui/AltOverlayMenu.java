@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.core.OverlayMenu;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.ui.panels.ExhaustPanel;
 import もこけね.character.MokouKeine;
 
 import java.util.Iterator;
@@ -30,6 +31,8 @@ public class AltOverlayMenu extends OverlayMenu {
         this.energyPanel.hide_y = Settings.HEIGHT / 2.0f;
         this.energyPanel.target_y = Settings.HEIGHT / 2.0f;
         this.energyPanel.current_y = Settings.HEIGHT / 2.0f;
+
+        this.exhaustPanel.show_y += OtherDrawPilePanel.OTHER_DRAW_OFFSET * Settings.scale;
     }
 
     @Override

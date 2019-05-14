@@ -21,7 +21,7 @@
   },
   "もこけね:Restraint": {
     "NAME": "Restraint",
-    "DESCRIPTION": "Gain !B! Block. NL Prevent the next time you would lose HP by spending it."
+    "DESCRIPTION": "Gain !B! Block. NL Gain 1 もこけね:Seal."
   },
   "もこけね:Forget": {
     "NAME": "Forget",
@@ -89,12 +89,20 @@
     "NAME": "Sinister",
     "DESCRIPTION": "Deal !D! damage. NL もこけね:Echo Attack: Deal !M! damage."
   },
+  "もこけね:Stabilize": {
+    "NAME": "Stabilize",
+    "DESCRIPTION": "Gain !B! Block. NL もこけね:Echo Skill: Gain !M! Block."
+  },
+  "もこけね:SealingRite": {
+    "NAME": "Sealing Rite",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Gain 1 もこけね:Seal for each enemy in combat. NL Exhaust."
+  },
   "もこけね:Blitz": {
     "NAME": "Blitz",
     "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage twice."
   },
   "もこけね:Kindle": {
     "NAME": "Kindle",
-    "DESCRIPTION": "Your partner gains NL [E] [E]."
+    "DESCRIPTION": "Your partner gains NL [E] [E]. NL Exhaust."
   }
 }

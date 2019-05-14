@@ -32,6 +32,7 @@ public class Kindle extends MokouCard {
         super(cardInfo, false);
 
         setCostUpgrade(UPG_COST);
+        setExhaust(true);
     }
 
     @Override

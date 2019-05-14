@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.powers.SurroundedPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -27,7 +28,7 @@ public class AltHandCardgroup extends CardGroup {
     @Override
     public void refreshHandLayout() {
         if (AbstractDungeon.getCurrRoom().monsters == null || !AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
-            if (AbstractDungeon.player.hasPower("Surrounded")) {
+            if (AbstractDungeon.player.hasPower(SurroundedPower.POWER_ID)) {
                 for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
                     if (AbstractDungeon.player.flipHorizontal) {
                         if (AbstractDungeon.player.drawX < m.drawX) {
