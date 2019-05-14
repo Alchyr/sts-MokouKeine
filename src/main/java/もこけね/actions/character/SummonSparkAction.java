@@ -69,9 +69,9 @@ public class SummonSparkAction extends AbstractGameAction {
             }
         }
 
-        m.hb_x = m.hb.x - xOffset;
-        m.hb_y = m.hb.y - yOffset;
-        m.hb.move(m.hb.x + m.hb.width / 2.0f, m.hb.y + m.hb.height /2.0f);
+        m.hb.move(m.hb.x + m.hb.width / 2.0f, m.hb.y + m.hb.height / 2.0f);
+        m.hb_x = m.hb.cX - (m.drawX + m.animX);
+        m.hb_y = m.hb.cY - (m.drawY + m.animY);
         m.healthHb.move(m.hb.cX, m.hb.cY - m.hb_h / 2.0F - m.healthHb.height / 2.0F);
 
         AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(m, m, new VolatilePower(m)));

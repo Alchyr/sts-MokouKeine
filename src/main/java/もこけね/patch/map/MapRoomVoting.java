@@ -39,8 +39,6 @@ public class MapRoomVoting {
         resetOnPost = false;
     }
 
-    //TODO - Fix not working on any nodes past the first.
-
     @SpirePatch(
             clz = MapRoomNode.class,
             method = "update"

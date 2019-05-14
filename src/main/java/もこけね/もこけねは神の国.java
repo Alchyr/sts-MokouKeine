@@ -39,6 +39,7 @@ import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.patch.map.BossRoomVoting;
 import もこけね.patch.map.MapRoomVoting;
 import もこけね.ui.ChatBox;
 import もこけね.util.CardFilter;
@@ -165,6 +166,8 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         if (AbstractDungeon.player instanceof MokouKeine)
         {
             MapRoomVoting.reset();
+            BossRoomVoting.waitingForBoss = false;
+            BossRoomVoting.otherWaitingForBoss = false;
         }
     }
 

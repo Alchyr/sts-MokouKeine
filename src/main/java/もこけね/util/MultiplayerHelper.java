@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
+import もこけね.patch.buying_relics.ReportPurchase;
 import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.deck_changes.ReportObtainCard;
 import もこけね.patch.deck_changes.ReportRemoveCard;
@@ -16,6 +17,7 @@ import もこけね.patch.deck_changes.ReportUpgradeCard;
 import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.patch.map.BossRoomVoting;
 import もこけね.patch.map.MapRoomVoting;
 import もこけね.patch.rewards.ObtainRewards;
 
@@ -269,9 +271,24 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                 logger.error("ERROR: Invalid map node vote.");
             }
         }
+        else if (msg.equals("waiting_boss"))
+        {
+            BossRoomVoting.otherWaitingForBoss = true;
+        }
+        else if (msg.equals("enter_boss"))
+        {
+            BossRoomVoting.waitingForBoss = false;
+            BossRoomVoting.otherWaitingForBoss = false;
+
+            BossRoomVoting.enterBoss();
+        }
         else if (msg.startsWith("claim_reward"))
         {
             ObtainRewards.claimReward(msg.substring(12));
+        }
+        else if (msg.startsWith("purchase_relic"))
+        {
+            ReportPurchase.forcePurchase(msg.substring(14));
         }
         else if (msg.startsWith("claim_potion"))
         {
