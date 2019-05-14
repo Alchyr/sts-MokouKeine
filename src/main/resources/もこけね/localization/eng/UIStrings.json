@@ -1,4 +1,12 @@
 {
+  "もこけね:ClaimReward": {
+    "TEXT": [
+      " chose to pick up ",
+      " chose to pick up the Sapphire Key.",
+      " chose to pick up the Emerald Key.",
+      "."
+    ]
+  },
   "もこけね:EndTurn": {
     "TEXT": [
       "I've already ended my turn!",

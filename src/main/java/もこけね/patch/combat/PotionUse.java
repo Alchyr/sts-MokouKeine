@@ -105,6 +105,31 @@ public class PotionUse {
             }
         }
     }
+    public static void otherUsePotion(String info)
+    {
+        String[] args = info.split("!!!");
+        if (args.length == 3 && AbstractDungeon.player instanceof MokouKeine)
+        {
+            AbstractPotion toUse = PotionHelper.getPotion(args[0]);
+            if (((MokouKeine) AbstractDungeon.player).otherPlayerPotions.contains(toUse.ID))
+            {
+                int index = Integer.valueOf(args[2]);
+
+                if (index >= 0)
+                {
+                    AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);
+                    toUse.use(target);
+                }
+                else if (!toUse.targetRequired)
+                {
+                    toUse.use(null);
+                }
+            }
+            else {
+                logger.error("Other player used a potion they don't even have???");
+            }
+        }
+    }
 
     public static void confirmUsePotion(String info)
     {

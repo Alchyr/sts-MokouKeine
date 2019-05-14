@@ -23,7 +23,7 @@ public class Tragedy extends KeineCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int DAMAGE = 2;
+    private static final int DAMAGE = 4;
     private static final int UPG_DAMAGE = 1;
 
     public Tragedy()
@@ -59,7 +59,7 @@ public class Tragedy extends KeineCard {
             }
             this.isMagicNumberModified = this.isDamageModified;
 
-            this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
+            this.rawDescription = cardStrings.DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[0];
             this.initializeDescription();
         }
     }

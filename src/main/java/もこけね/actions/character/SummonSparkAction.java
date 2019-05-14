@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.SpawnMonsterAction;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -68,9 +69,9 @@ public class SummonSparkAction extends AbstractGameAction {
             }
         }
 
-        m.hb_x = x + xOffset;
-        m.hb_y = y + yOffset;
-        m.hb.move(m.drawX + m.hb_x + m.animX, m.drawY + m.hb_y + m.hb_h / 2.0F);
+        m.hb_x = m.hb.x - xOffset;
+        m.hb_y = m.hb.y - yOffset;
+        m.hb.move(m.hb.x + m.hb.width / 2.0f, m.hb.y + m.hb.height /2.0f);
         m.healthHb.move(m.hb.cX, m.hb.cY - m.hb_h / 2.0F - m.healthHb.height / 2.0F);
 
         AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(m, m, new VolatilePower(m)));
@@ -79,11 +80,13 @@ public class SummonSparkAction extends AbstractGameAction {
         this.isDone = true;
     }
 
+    private static final float BORDER = 20.0F * Settings.scale;
+
     private static boolean overlap(Hitbox a, Hitbox b)
     {
-        if (a.x > b.x + b.width || a.x + a.width > b.x)
+        if (a.x > b.x + (b.width + BORDER) || a.x + (a.width + BORDER) > b.x)
             return false;
 
-        return !(a.y < b.y + b.height || a.y + a.height < b.y);
+        return !(a.y < b.y + (b.height + BORDER) || a.y + (a.height + BORDER) < b.y);
     }
 }

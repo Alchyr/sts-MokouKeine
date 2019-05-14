@@ -17,6 +17,7 @@ import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.patch.map.MapRoomVoting;
+import もこけね.patch.rewards.ObtainRewards;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -156,12 +157,12 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         {
             usePotion(msg.substring(10));
         }
-        else if (msg.startsWith("try_use_potion"))
+        else if (msg.startsWith("try_use_potion")) //Not Host used a potion
         {
             String info = msg.substring(14);
             if (otherCanUsePotion(info))
             {
-                usePotion(info);
+                otherUsePotion(info);
                 sendP2PString("confirm_use_potion" + info);
             }
         }
@@ -267,6 +268,10 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             {
                 logger.error("ERROR: Invalid map node vote.");
             }
+        }
+        else if (msg.startsWith("claim_reward"))
+        {
+            ObtainRewards.claimReward(msg.substring(12));
         }
         else if (msg.startsWith("claim_potion"))
         {
