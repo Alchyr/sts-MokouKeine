@@ -25,7 +25,7 @@ public class ReportPurchase {
         @SpireInsertPatch(
                 locator = ForcePurchaseLocator.class
         )
-        public static void forcePurchase(StoreRelic __instance)
+        public static void forcePurchase(StoreRelic __instance, float pos)
         {
             if (__instance.equals(forcePurchase))
             {
@@ -36,7 +36,7 @@ public class ReportPurchase {
         @SpireInsertPatch(
                 locator = Locator.class
         )
-        public static void onPurchase(StoreRelic __instance)
+        public static void onPurchase(StoreRelic __instance, float pos)
         {
             if (AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE && MultiplayerHelper.active)
             {
