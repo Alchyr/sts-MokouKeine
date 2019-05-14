@@ -15,6 +15,13 @@
       "'s draw pile."
     ]
   },
+  "もこけね:MasterDeckView": {
+    "TEXT": [
+      " starts each combat with all the cards in here.",
+      "View all of the cards in your deck. NL NL Right click to view ",
+      "'s deck."
+    ]
+  },
   "もこけね:DiscardPilePanel": {
     "TEXT": [
       "'s Discard Pile Pile is #rempty.",
