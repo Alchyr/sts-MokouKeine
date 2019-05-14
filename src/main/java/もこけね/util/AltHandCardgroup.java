@@ -57,10 +57,10 @@ public class AltHandCardgroup extends CardGroup {
                 r.onRefreshHand();
             }
 
-            float angleRange = 50.0F - (float) (5 - this.group.size()) * 10.0F;
+            float angleRange = 50.0F - (float) (8 - this.group.size()) * 6.0F;
             float incrementAngle = angleRange / (float) this.group.size();
-            float sinkStart = 40.0F * Settings.scale;
-            float sinkRange = 150.0F * Settings.scale;
+            float sinkStart = 80.0F * Settings.scale;
+            float sinkRange = 300.0F * Settings.scale;
             float incrementSink = sinkRange / (float) this.group.size() / 2.0F;
             int middle = this.group.size() / 2;
 
@@ -111,10 +111,8 @@ public class AltHandCardgroup extends CardGroup {
                     this.group.get(1).target_x = (float) Settings.WIDTH * posMultiplier - AbstractCard.IMG_WIDTH_S * 0.35F;
                     this.group.get(2).target_x = (float) Settings.WIDTH * posMultiplier + AbstractCard.IMG_WIDTH_S * 0.35F;
                     this.group.get(3).target_x = (float) Settings.WIDTH * posMultiplier + AbstractCard.IMG_WIDTH_S * 1.0F;
-                    c = this.group.get(1);
-                    c.target_y -= 10.0F * Settings.scale;
-                    c = this.group.get(2);
-                    c.target_y -= 10.0F * Settings.scale;
+                    this.group.get(1).target_y -= 20.0F * Settings.scale;
+                    this.group.get(2).target_y -= 20.0F * Settings.scale;
 
                     for (AbstractCard card : this.group)
                     {
@@ -130,7 +128,7 @@ public class AltHandCardgroup extends CardGroup {
                     c = this.group.get(0);
                     c.target_y += 30.0F * Settings.scale;
                     c = this.group.get(2);
-                    c.target_y -= 15.0F * Settings.scale;
+                    c.target_y -= 20.0F * Settings.scale;
                     c = this.group.get(4);
                     c.target_y += 30.0F * Settings.scale;
 
