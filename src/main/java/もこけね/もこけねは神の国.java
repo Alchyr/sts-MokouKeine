@@ -104,7 +104,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     public static ChatBox chat;
 
     private static boolean startingGame = false;
-    private static boolean gameStarted = false;
+    public static boolean gameStarted = false;
     private static float gameStartTimer = 0.0f;
     private static float eventChooseTimer = 0.0f;
     private static float mapChooseTimer = 0.0f;
