@@ -29,7 +29,6 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     private static final int SEARCH_CAP = 7;
 
     private static final String lobbyModsKey = "mod_list";
-    private static final String lobbyUnlocksKey = "unlocks";
     private static final String lobbyCharacterKey = "character";
     private static final String lobbyPublicKey = "is_public";
     private static final String lobbyKeysUnlockedKey = "final_act";

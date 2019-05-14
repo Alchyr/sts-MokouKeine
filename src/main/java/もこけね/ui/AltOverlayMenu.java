@@ -32,7 +32,7 @@ public class AltOverlayMenu extends OverlayMenu {
         this.energyPanel.target_y = Settings.HEIGHT / 2.0f;
         this.energyPanel.current_y = Settings.HEIGHT / 2.0f;
 
-        this.exhaustPanel.show_y += OtherDrawPilePanel.OTHER_DRAW_OFFSET * Settings.scale;
+        this.exhaustPanel.show_y += OtherDrawPilePanel.OTHER_DRAW_OFFSET;
     }
 
     @Override

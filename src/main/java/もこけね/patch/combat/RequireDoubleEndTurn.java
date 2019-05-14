@@ -69,6 +69,7 @@ public class RequireDoubleEndTurn {
     {
         AbstractDungeon.player.releaseCard();
         ended = true;
+        AbstractDungeon.overlayMenu.endTurnButton.disable();
         MultiplayerHelper.sendP2PMessage(CardCrawlGame.playerName + endTurnStrings.TEXT[1]);
         logger.info("Ended turn.");
 
