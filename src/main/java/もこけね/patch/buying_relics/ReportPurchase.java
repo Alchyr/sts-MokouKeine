@@ -4,6 +4,7 @@ import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.controller.CInputAction;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import com.megacrit.cardcrawl.shop.StoreRelic;
@@ -57,7 +58,7 @@ public class ReportPurchase {
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(CInputAction.class, "isJustPressed");
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(Hitbox.class, "clicked");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
