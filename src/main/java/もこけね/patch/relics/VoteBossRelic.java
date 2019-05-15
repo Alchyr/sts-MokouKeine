@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.TreasureRoomBoss;
 import com.megacrit.cardcrawl.screens.select.BossRelicSelectScreen;
 import javassist.CtBehavior;
+import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
@@ -83,19 +84,19 @@ public class VoteBossRelic {
         private static float rotation = 0;
         @SpireInsertPatch(
                 locator = Locator.class,
-                localvars = { "r", "offsetX" }
+                localvars = { "r" }
         )
-        public static void renderAura(BossRelicSelectScreen __instance, SpriteBatch sb, AbstractRelic r, float offsetX)
+        public static void renderAura(BossRelicSelectScreen __instance, SpriteBatch sb, AbstractRelic r)
         {
             sb.setColor(Color.WHITE);
             rotation += Gdx.graphics.getDeltaTime() * 0.5f;
             if (r.relicId.equals(votedRelic))
             {
-                sb.draw(ImageMaster.EXHAUST_L, r.currentX - ImageMaster.EXHAUST_L.packedWidth / 2.0f + offsetX, r.currentY - ImageMaster.EXHAUST_L.packedHeight / 2.0f, ImageMaster.EXHAUST_L.packedWidth / 2.0f, ImageMaster.EXHAUST_L.packedHeight / 2.0f, ImageMaster.EXHAUST_L.packedWidth, ImageMaster.EXHAUST_L.packedHeight, r.scale, r.scale, rotation);
+                sb.draw(ImageMaster.EXHAUST_L, r.currentX - ImageMaster.EXHAUST_L.packedWidth / 2.0f, r.currentY - ImageMaster.EXHAUST_L.packedHeight / 2.0f, ImageMaster.EXHAUST_L.packedWidth / 2.0f, ImageMaster.EXHAUST_L.packedHeight / 2.0f, ImageMaster.EXHAUST_L.packedWidth, ImageMaster.EXHAUST_L.packedHeight, r.scale, r.scale, rotation);
             }
             if (r.relicId.equals(otherVotedRelic))
             {
-                sb.draw(ImageMaster.EXHAUST_L, r.currentX - ImageMaster.EXHAUST_L.packedWidth / 2.0f + offsetX, r.currentY - ImageMaster.EXHAUST_L.packedHeight / 2.0f, ImageMaster.EXHAUST_L.packedWidth / 2.0f, ImageMaster.EXHAUST_L.packedHeight / 2.0f, ImageMaster.EXHAUST_L.packedWidth, ImageMaster.EXHAUST_L.packedHeight, r.scale, r.scale, rotation + MathUtils.PI);
+                sb.draw(ImageMaster.EXHAUST_L, r.currentX - ImageMaster.EXHAUST_L.packedWidth / 2.0f, r.currentY - ImageMaster.EXHAUST_L.packedHeight / 2.0f, ImageMaster.EXHAUST_L.packedWidth / 2.0f, ImageMaster.EXHAUST_L.packedHeight / 2.0f, ImageMaster.EXHAUST_L.packedWidth, ImageMaster.EXHAUST_L.packedHeight, r.scale, r.scale, rotation + MathUtils.PI);
             }
         }
 
@@ -121,7 +122,7 @@ public class VoteBossRelic {
         )
         public static SpireReturn voteNotTake(AbstractRelic __instance)
         {
-            if (AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE && MultiplayerHelper.active)
+            if (AbstractDungeon.player instanceof MokouKeine && MultiplayerHelper.active)
             {
                 if (__instance.equals(chosenRelic))
                 {
@@ -132,7 +133,11 @@ public class VoteBossRelic {
                 }
                 if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.BOSS_REWARD)
                 {
-                    votedRelic = __instance.relicId;
+                    if (!__instance.relicId.equals(votedRelic))
+                    {
+                        votedRelic = __instance.relicId;
+                        MultiplayerHelper.sendP2PMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[2] + __instance.name + TEXT[3]);
+                    }
                     MultiplayerHelper.sendP2PString("boss_relic_vote" + votedRelic);
                     if (HandleMatchmaking.isHost && otherVotedRelic != null)
                     {

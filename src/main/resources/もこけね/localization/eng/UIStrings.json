@@ -17,7 +17,9 @@
   "もこけね:BossRelic": {
     "TEXT": [
       "Boss relic chosen!",
-      "Players disagree. Conflict will be automatically resolved in 60 seconds."
+      "Players disagree. Conflict will be automatically resolved in 60 seconds.",
+      " voted for ",
+      "."
     ]
   },
   "もこけね:Bottling": {
