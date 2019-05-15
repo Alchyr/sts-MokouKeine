@@ -1,12 +1,17 @@
 package もこけね.util;
 
 import com.codedisaster.steamworks.*;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepEffect;
+import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepScreenCoverEffect;
+import もこけね.actions.character.OtherPlayerDiscardAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
 import もこけね.patch.buying_relics.ReportPurchase;
@@ -14,11 +19,14 @@ import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.deck_changes.ReportObtainCard;
 import もこけね.patch.deck_changes.ReportRemoveCard;
 import もこけね.patch.deck_changes.ReportUpgradeCard;
+import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.patch.map.BossRoomVoting;
 import もこけね.patch.map.MapRoomVoting;
+import もこけね.patch.resting.SyncResting;
+import もこけね.patch.resting.TakeRedKey;
 import もこけね.patch.rewards.ObtainRewards;
 
 import java.nio.ByteBuffer;
@@ -179,7 +187,10 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("signal"))
         {
             WaitForSignalAction.signal += 1;
-            processMessage(sender, msg.substring(6));
+            if (msg.length() > 6)
+            {
+                processMessage(sender, msg.substring(6));
+            }
         }
         else if (msg.equals("end_turn"))
         {
@@ -215,6 +226,27 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                             break;
                     }
                 }
+            }
+        }
+        else if (msg.startsWith("other_discard"))
+        {
+            if (AbstractDungeon.player instanceof MokouKeine)
+            {
+                int index = Integer.valueOf(msg.substring(13));
+                if (index >= 0 && index < ((MokouKeine) AbstractDungeon.player).otherPlayerHand.group.size())
+                {
+                    AbstractCard toDiscard = ((MokouKeine) AbstractDungeon.player).otherPlayerHand.group.get(index);
+                    AbstractDungeon.actionManager.addToTop(new OtherPlayerDiscardAction((MokouKeine)AbstractDungeon.player, toDiscard));
+                }
+            }
+        }
+        else if (msg.startsWith("draw"))
+        {
+            int amt = Integer.valueOf(msg.substring(4));
+
+            if (amt >= 1)
+            {
+                AbstractDungeon.actionManager.addToTop(new DrawCardAction(AbstractDungeon.player, amt));
             }
         }
         else if (msg.startsWith("other_obtain_card"))
@@ -313,6 +345,29 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("confirm_lose_potion"))
         {
             confirmLosePotion(msg.substring(19));
+        }
+        else if (msg.equals("rest"))
+        {
+            if (AbstractDungeon.player != null)
+            {
+                SyncResting.otherPlayerRest = true;
+                CardCrawlGame.sound.play("SLEEP_BLANKET");
+                AbstractDungeon.effectList.add(new CampfireSleepEffect());
+                for(int i = 0; i < 20; ++i) {
+                    AbstractDungeon.topLevelEffects.add(new CampfireSleepScreenCoverEffect());
+                }
+            }
+        }
+        else if (msg.equals("recall"))
+        {
+            TakeRedKey.obtainKey();
+        }
+        else if (msg.startsWith("lose_max_hp"))
+        {
+            if (AbstractDungeon.player != null)
+            {
+                AbstractDungeon.player.decreaseMaxHealth(Integer.valueOf(msg.substring(11)));
+            }
         }
         else if (msg.equals("start_game"))
         {

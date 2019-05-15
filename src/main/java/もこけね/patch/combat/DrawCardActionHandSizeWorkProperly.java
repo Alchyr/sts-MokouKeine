@@ -57,8 +57,8 @@ public class DrawCardActionHandSizeWorkProperly {
                             duration = Settings.ACTION_DUR_FASTER;
                         }
 
-                        if (player.drawPileValid()) {
-                            if (player.tryDraw())
+                        if (player.drawPileValid() && !player.isHandFull()) { //can draw from preferred draw pile?
+                            if (player.tryDraw()) //try draw from preferred draw pile
                             {
                                 --__instance.amount;
                                 AbstractDungeon.player.hand.refreshHandLayout();
@@ -67,7 +67,7 @@ public class DrawCardActionHandSizeWorkProperly {
                                 if (__instance.amount == 0) {
                                     __instance.isDone = true;
                                 }
-                            }
+                            } //These failures should never occur, but just in case.
                             else if (failure) //neither player can draw. Since drawPileValid passed, that means their hands are full. This shouldn't occur, since this is checked for earlier, but safety.
                             {
                                 __instance.isDone = true;
@@ -77,13 +77,38 @@ public class DrawCardActionHandSizeWorkProperly {
                                 failure = true;
                             }
                         }
-                        else { //There are still cards to draw, but this player's draw pile is empty.
+                        else if (!player.discardPileEmpty()) { //There are still cards to draw, but this player's draw pile is empty. But, there are cards in preferred discard.
                             __instance.isDone = true;
-                            if (!player.discardPileEmpty()) //There are cards in the correct discard pile
+                            AbstractDungeon.actionManager.addToTop(new DrawCardAction(__instance.source, __instance.amount));
+                            AbstractDungeon.actionManager.addToTop(player.getShuffleAction());
+                        }
+                        else if (player.otherDrawPileValid() && !player.isOtherHandFull()) //The preferred player's hand is full, draw pile is empty and no cards in discard, or something similar.
+                        {
+                            //Try other player's draw pile.
+                            if (player.tryOtherDraw()) //try draw from other draw pile
                             {
-                                AbstractDungeon.actionManager.addToTop(new DrawCardAction(AbstractDungeon.player, __instance.amount));
-                                AbstractDungeon.actionManager.addToTop(player.getShuffleAction());
+                                --__instance.amount;
+                                AbstractDungeon.player.hand.refreshHandLayout();
+                                failure = false;
+
+                                if (__instance.amount == 0) {
+                                    __instance.isDone = true;
+                                }
+                            } //These failures should never occur, but just in case.
+                            else if (failure) //neither player can draw. Since drawPileValid passed, that means their hands are full. This shouldn't occur, since this is checked for earlier, but safety.
+                            {
+                                __instance.isDone = true;
                             }
+                            else //tried to draw, but failed. Will attempt draw from other player next.
+                            {
+                                failure = true;
+                            }
+                        }
+                        else if (!player.otherDiscardPileEmpty())
+                        {
+                            __instance.isDone = true;
+                            AbstractDungeon.actionManager.addToTop(new DrawCardAction(__instance.source, __instance.amount));
+                            AbstractDungeon.actionManager.addToTop(player.getOtherShuffleAction());
                         }
                     }
                 }

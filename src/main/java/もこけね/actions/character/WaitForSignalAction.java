@@ -1,6 +1,9 @@
 package もこけね.actions.character;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+import もこけね.effects.ScreenFadeEffect;
 
 import static もこけね.もこけねは神の国.chat;
 
@@ -9,6 +12,7 @@ public class WaitForSignalAction extends AbstractGameAction {
 
     private String msg;
     private boolean sent;
+    private ScreenFadeEffect waitEffect;
 
     public WaitForSignalAction(String waitMessage)
     {
@@ -22,11 +26,14 @@ public class WaitForSignalAction extends AbstractGameAction {
         if (!sent) {
             sent = true;
             if (!msg.isEmpty()) {
-                chat.receiveMessage(msg);
+                waitEffect = new ScreenFadeEffect(msg);
+                AbstractDungeon.effectList.add(waitEffect);
             }
         }
         if (signal > 0) {
             --signal;
+            if (waitEffect != null)
+                waitEffect.finishing = true;
             this.isDone = true;
         }
     }

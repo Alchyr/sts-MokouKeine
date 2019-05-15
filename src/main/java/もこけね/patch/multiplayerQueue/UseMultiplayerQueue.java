@@ -15,11 +15,11 @@ import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.MultiplayerHelper;
 
 import java.util.ArrayList;
 
-import static もこけね.もこけねは神の国.chat;
-import static もこけね.もこけねは神の国.logger;
+import static もこけね.もこけねは神の国.*;
 
 @SpirePatch(
         clz = CharacterSelectScreen.class,
@@ -33,6 +33,8 @@ public class UseMultiplayerQueue {
     )
     public static SpireReturn useQueue(CharacterSelectScreen __instance)
     {
+        MultiplayerHelper.active = false; //ensure set to false upon embarking with other character
+        gameStarted = false;
         if (CardCrawlGame.chosenCharacter != null && CardCrawlGame.chosenCharacter == CharacterEnums.MOKOUKEINE)
         {
             __instance.confirmButton.hb.clicked = false;

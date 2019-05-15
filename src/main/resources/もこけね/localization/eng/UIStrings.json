@@ -7,6 +7,28 @@
       "."
     ]
   },
+  "もこけね:PotionUse": {
+    "TEXT": [
+      " used their ",
+      " on ",
+      "."
+    ]
+  },
+  "もこけね:DiscardWait": {
+    "TEXT": [
+      "Waiting for ",
+      " to choose cards to discard."
+    ]
+  },
+  "もこけね:Resting": {
+    "TEXT": [
+      "Heal for 50% of your Max HP (",
+      " HP from ",
+      "Heal for 15% of your Max HP (",
+      " rested.",
+      " recalled the Ruby Key."
+    ]
+  },
   "もこけね:EndTurn": {
     "TEXT": [
       "I've already ended my turn!",

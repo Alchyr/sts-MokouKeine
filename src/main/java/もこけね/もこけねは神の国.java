@@ -55,6 +55,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/*TODO LIST:
+Boss relic voting
+GamblingChipAction
+
+ */
+
 @SpireInitializer
 public class もこけねは神の国 implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber,
         EditCharactersSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber, PreStartGameSubscriber,

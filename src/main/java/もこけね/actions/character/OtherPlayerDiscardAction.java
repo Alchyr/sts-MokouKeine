@@ -17,6 +17,7 @@ public class OtherPlayerDiscardAction extends AbstractGameAction {
     public static final String[] TEXT;
     private MokouKeine p;
     private boolean endTurn;
+    private AbstractCard toDiscard = null;
     private static final float DURATION;
 
     public OtherPlayerDiscardAction(MokouKeine target, AbstractCreature source, int amount, boolean endTurn) {
@@ -25,6 +26,14 @@ public class OtherPlayerDiscardAction extends AbstractGameAction {
         this.actionType = ActionType.DISCARD;
         this.endTurn = endTurn;
         this.duration = DURATION;
+    }
+
+    public OtherPlayerDiscardAction(MokouKeine target, AbstractCard toDiscard) {
+        this.p = target;
+        this.actionType = ActionType.DISCARD;
+        this.endTurn = false;
+        this.duration = DURATION;
+        this.toDiscard = toDiscard;
     }
 
     private void moveToAltDiscard(CardGroup source, CardGroup discardPile, AbstractCard c)
@@ -53,6 +62,19 @@ public class OtherPlayerDiscardAction extends AbstractGameAction {
                 return;
             }
 
+            if (this.toDiscard != null)
+            {
+                moveToAltDiscard(p.otherPlayerHand, p.otherPlayerDiscard, toDiscard);
+                toDiscard.triggerOnManualDiscard();
+                GameActionManager.incrementDiscard(false);
+
+                p.otherPlayerHand.applyPowers();
+                p.hand.applyPowers();
+
+                this.tickDuration();
+                return;
+            }
+
             int i;
             if (this.p.otherPlayerHand.size() <= this.amount) {
                 this.amount = this.p.otherPlayerHand.size();
@@ -69,6 +91,7 @@ public class OtherPlayerDiscardAction extends AbstractGameAction {
                 }
 
                 p.otherPlayerHand.applyPowers();
+                p.hand.applyPowers();
                 this.tickDuration();
                 return;
             }

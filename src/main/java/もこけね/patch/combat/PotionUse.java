@@ -4,17 +4,22 @@ import basemod.ReflectionHacks;
 import com.badlogic.gdx.utils.Queue;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.PotionHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.potions.PotionSlot;
 import com.megacrit.cardcrawl.ui.panels.PotionPopUp;
 import com.megacrit.cardcrawl.ui.panels.TopPanel;
 import javassist.CtBehavior;
+import もこけね.actions.character.DontUseSpecificEnergyAction;
+import もこけね.actions.character.SetEnergyGainAction;
+import もこけね.actions.character.UseSpecificEnergyAction;
 import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.lobby.HandleMatchmaking;
@@ -23,10 +28,14 @@ import もこけね.util.PotionQueueItem;
 
 import java.util.ArrayList;
 
-import static もこけね.もこけねは神の国.logger;
+import static もこけね.もこけねは神の国.*;
 
 public class PotionUse {
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("PotionUse"));
+    private static final String[] TEXT = uiStrings.TEXT;
+
     public static Queue<PotionQueueItem> queuedPotionUse = new Queue<>();
+    private static boolean addReset = false;
 
     public static void updatePotionInfo()
     {
@@ -90,15 +99,20 @@ public class PotionUse {
             {
                 int index = Integer.valueOf(args[1]);
 
+                AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(true));
+                AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(true));
                 if (index >= 0)
                 {
                     AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);
                     toUse.use(target);
+                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
                 }
                 else if (!toUse.targetRequired)
                 {
                     toUse.use(null);
+                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[2]);
                 }
+                AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
             }
             else {
                 logger.error("Host used a potion they don't even have???");
@@ -115,15 +129,20 @@ public class PotionUse {
             {
                 int index = Integer.valueOf(args[2]);
 
+                AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(true));
+                AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(true));
                 if (index >= 0)
                 {
                     AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);
                     toUse.use(target);
+                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
                 }
                 else if (!toUse.targetRequired)
                 {
                     toUse.use(null);
+                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[2]);
                 }
+                AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
             }
             else {
                 logger.error("Other player used a potion they don't even have???");
@@ -210,6 +229,9 @@ public class PotionUse {
             if (AbstractDungeon.player instanceof MokouKeine && MultiplayerHelper.active) {
                 if (HandleMatchmaking.isHost)
                 {
+                    AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(false));
+                    AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(false));
+                    addReset = true;
                     MultiplayerHelper.sendP2PString("use_potion" + potion.ID + "!!!-1");
                 }
                 else
@@ -217,6 +239,9 @@ public class PotionUse {
                     if (queuedPotionUse.size > 0) {
                         if (queuedPotionUse.first().slot == slot) {
                             queuedPotionUse.removeFirst();
+                            AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(false));
+                            AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(false));
+                            addReset = true;
                             return SpireReturn.Continue();
                         }
                     }
@@ -225,6 +250,15 @@ public class PotionUse {
                 }
             }
             return SpireReturn.Continue();
+        }
+
+        @SpirePostfixPatch
+        public static void reset(PotionPopUp __instance)
+        {
+            if (addReset)
+            {
+                AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
+            }
         }
     }
 
@@ -244,6 +278,9 @@ public class PotionUse {
                 int index = AbstractDungeon.getMonsters().monsters.indexOf(hovered);
                 if (HandleMatchmaking.isHost)
                 {
+                    AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(false));
+                    AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(false));
+                    addReset = true;
                     MultiplayerHelper.sendP2PString("use_potion" + potion.ID + "!!!" + index);
                 }
                 else
@@ -251,6 +288,9 @@ public class PotionUse {
                     if (queuedPotionUse.size > 0) {
                         if (queuedPotionUse.first().slot == slot) {
                             queuedPotionUse.removeFirst();
+                            AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(false));
+                            AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(false));
+                            addReset = true;
                             return SpireReturn.Continue();
                         }
                     }
@@ -259,6 +299,15 @@ public class PotionUse {
                 }
             }
             return SpireReturn.Continue();
+        }
+
+        @SpirePostfixPatch
+        public static void reset(PotionPopUp __instance)
+        {
+            if (addReset)
+            {
+                AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
+            }
         }
     }
 

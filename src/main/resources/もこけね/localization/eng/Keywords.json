@@ -8,13 +8,6 @@
     "DESCRIPTION": "An enemy that doesn't attack, and damages ALL enemies upon death."
   },
   {
-    "PROPER_NAME": "Draw",
-    "NAMES": [
-      "draw"
-    ],
-    "DESCRIPTION": "Unless otherwise stated, all card draw is evenly divided between both players."
-  },
-  {
     "PROPER_NAME": "Echo",
     "NAMES": [
       "echo"

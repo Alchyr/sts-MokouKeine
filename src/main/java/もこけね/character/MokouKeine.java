@@ -46,6 +46,7 @@ import もこけね.cards.mokou.basic.MokouDefend;
 import もこけね.cards.mokou.basic.MokouStrike;
 import もこけね.cards.mokou.basic.Scorch;
 import もこけね.patch.energy_division.SetEnergyGain;
+import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.ui.AstrologerOrb;
 import もこけね.ui.MokouOrb;
@@ -104,6 +105,8 @@ public class MokouKeine extends CustomPlayer {
     public MokouKeine(boolean mokou) {
         super(mokou ? characterStrings.NAMES[1] : characterStrings.NAMES[2], CharacterEnums.MOKOUKEINE, mokou ? new MokouOrb() : new AstrologerOrb(),
                 new SpriterAnimation(SpritePath));
+
+
 
         this.points = (Vector2[])ReflectionHacks.getPrivate(this, AbstractPlayer.class, "points");
 
@@ -253,7 +256,8 @@ public class MokouKeine extends CustomPlayer {
         {
             if (!drawPileValid() || isHandFull())
             {
-                mokouDraw = !mokouDraw;
+                if (!TrackCardSource.useOtherEnergy && !TrackCardSource.useMyEnergy)
+                    mokouDraw = !mokouDraw;
                 return false;
             }
             CardCrawlGame.sound.playAV("CARD_DRAW_8", -0.12F, 0.25F);
@@ -262,9 +266,37 @@ public class MokouKeine extends CustomPlayer {
             return true;
         }
     }
+    public boolean tryOtherDraw()
+    {
+        if (otherPlayerHand.size() >= BaseMod.MAX_HAND_SIZE && this.hand.size() >= BaseMod.MAX_HAND_SIZE)
+        {
+            this.createHandIsFullDialog();
+            return false;
+        }
+        else
+        {
+            if (!otherDrawPileValid() || isOtherHandFull())
+            {
+                if (!TrackCardSource.useOtherEnergy && !TrackCardSource.useMyEnergy)
+                    mokouDraw = !mokouDraw;
+                return false;
+            }
+            CardCrawlGame.sound.playAV("CARD_DRAW_8", -0.12F, 0.25F);
+            this.drawOther(1);
+            this.onCardDrawOrDiscard();
+            return true;
+        }
+    }
 
     public boolean drawPileValid()
     {
+        if (TrackCardSource.useOtherEnergy) {
+            return !otherPlayerDraw.isEmpty();
+        }
+        else if (TrackCardSource.useMyEnergy) {
+            return !drawPile.isEmpty();
+        }
+
         if (mokouDraw ^ isMokou)
         {
             return !otherPlayerDraw.isEmpty();
@@ -274,8 +306,32 @@ public class MokouKeine extends CustomPlayer {
             return !drawPile.isEmpty();
         }
     }
+    public boolean otherDrawPileValid()
+    {
+        if (TrackCardSource.useOtherEnergy) {
+            return !drawPile.isEmpty();
+        }
+        else if (TrackCardSource.useMyEnergy) {
+            return !otherPlayerDraw.isEmpty();
+        }
+
+        if (mokouDraw ^ isMokou)
+        {
+            return !drawPile.isEmpty();
+        }
+        else
+        {
+            return !otherPlayerDraw.isEmpty();
+        }
+    }
     public boolean isHandFull()
     {
+        if (TrackCardSource.useOtherEnergy)
+            return otherPlayerHand.size() >= BaseMod.MAX_HAND_SIZE;
+
+        if (TrackCardSource.useMyEnergy)
+            return hand.size() >= BaseMod.MAX_HAND_SIZE;
+
         if (mokouDraw ^ isMokou)
         {
             return otherPlayerHand.size() >= BaseMod.MAX_HAND_SIZE;
@@ -285,8 +341,31 @@ public class MokouKeine extends CustomPlayer {
             return hand.size() >= BaseMod.MAX_HAND_SIZE;
         }
     }
+    public boolean isOtherHandFull()
+    {
+        if (TrackCardSource.useOtherEnergy)
+            return hand.size() >= BaseMod.MAX_HAND_SIZE;
+
+        if (TrackCardSource.useMyEnergy)
+            return otherPlayerHand.size() >= BaseMod.MAX_HAND_SIZE;
+
+        if (mokouDraw ^ isMokou)
+        {
+            return hand.size() >= BaseMod.MAX_HAND_SIZE;
+        }
+        else
+        {
+            return otherPlayerHand.size() >= BaseMod.MAX_HAND_SIZE;
+        }
+    }
     public boolean discardPileEmpty()
     {
+        if (TrackCardSource.useOtherEnergy)
+            return otherPlayerDiscard.isEmpty();
+
+        if (TrackCardSource.useMyEnergy)
+            return discardPile.isEmpty();
+
         if (mokouDraw ^ isMokou)
         {
             return otherPlayerDiscard.isEmpty();
@@ -296,15 +375,49 @@ public class MokouKeine extends CustomPlayer {
             return discardPile.isEmpty();
         }
     }
+    public boolean otherDiscardPileEmpty()
+    {
+        if (TrackCardSource.useOtherEnergy)
+            return discardPile.isEmpty();
+
+        if (TrackCardSource.useMyEnergy)
+            return otherPlayerDiscard.isEmpty();
+
+        if (mokouDraw ^ isMokou)
+        {
+            return discardPile.isEmpty();
+        }
+        else
+        {
+            return otherPlayerDiscard.isEmpty();
+        }
+    }
     public AbstractGameAction getShuffleAction()
     {
-        if (mokouDraw ^ isMokou)
+        if (TrackCardSource.useMyEnergy)
+            return new EmptyDeckShuffleAction();
+
+        if (mokouDraw ^ isMokou || TrackCardSource.useOtherEnergy)
         {
             return new OtherPlayerDeckShuffleAction();
         }
         else
         {
             return new EmptyDeckShuffleAction();
+        }
+    }
+    public AbstractGameAction getOtherShuffleAction()
+    {
+        if (TrackCardSource.useMyEnergy)
+            return new OtherPlayerDeckShuffleAction();
+
+        if (mokouDraw ^ isMokou || TrackCardSource.useOtherEnergy)
+        {
+            return new EmptyDeckShuffleAction();
+        }
+        else
+        {
+            return new OtherPlayerDeckShuffleAction();
         }
     }
     public String getOtherPlayerName()
@@ -319,12 +432,80 @@ public class MokouKeine extends CustomPlayer {
             if (isHandFull() || !drawPileValid())
             {
                 i--; //this draw does nothing, decrement counter.
-                if (failedDraw) //If draw is failed twice in a row (Both characters hands are full) break draw loop
+                //If draw is failed twice in a row (Both characters hands are full) or drawing from specific pile break draw loop
+                if (failedDraw || TrackCardSource.useMyEnergy || TrackCardSource.useOtherEnergy)
                     break;
                 failedDraw = true;
             }
-
-            if (mokouDraw ^ isMokou) //One is true, one is false. So, either mokou is drawing and this isn't mokou, or this is mokou and it's keine's draw.
+            else if (TrackCardSource.useOtherEnergy)
+            {
+                if (!this.otherPlayerDraw.isEmpty()) {
+                    AbstractCard c = this.otherPlayerDraw.getTopCard();
+                    c.current_x = CardGroup.DRAW_PILE_X;
+                    c.current_y = CardGroup.DRAW_PILE_Y + OTHER_DRAW_OFFSET;
+                    c.setAngle(0.0F, true);
+                    c.lighten(false);
+                    c.drawScale = 0.12F;
+                    c.targetDrawScale = 0.75F;
+                    if (this.hasPower(ConfusionPower.POWER_ID) && c.cost >= 0) {
+                        int newCost = AbstractDungeon.cardRandomRng.random(3);
+                        if (c.cost != newCost) {
+                            c.cost = newCost;
+                            c.costForTurn = c.cost;
+                            c.isCostModified = true;
+                        }
+                    }
+                    c.triggerWhenDrawn();
+                    this.otherPlayerHand.addToHand(c);
+                    this.otherPlayerDraw.removeTopCard();
+                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
+                        c.setCostForTurn(-99);
+                    }
+                    for (AbstractRelic r : this.relics)
+                    {
+                        r.onCardDraw(c);
+                    }
+                    this.otherPlayerHand.refreshHandLayout();
+                    failedDraw = false;
+                } else {
+                    logger.info("ERROR: How did this happen? No cards in other player's draw pile?? Player.java");
+                }
+            }
+            else if (TrackCardSource.useMyEnergy)
+            {
+                if (!this.drawPile.isEmpty()) {
+                    AbstractCard c = this.drawPile.getTopCard();
+                    c.current_x = CardGroup.DRAW_PILE_X;
+                    c.current_y = CardGroup.DRAW_PILE_Y;
+                    c.setAngle(0.0F, true);
+                    c.lighten(false);
+                    c.drawScale = 0.12F;
+                    c.targetDrawScale = 0.75F;
+                    if (this.hasPower("Confusion") && c.cost >= 0) {
+                        int newCost = AbstractDungeon.cardRandomRng.random(3);
+                        if (c.cost != newCost) {
+                            c.cost = newCost;
+                            c.costForTurn = c.cost;
+                            c.isCostModified = true;
+                        }
+                    }
+                    c.triggerWhenDrawn();
+                    this.hand.addToHand(c);
+                    this.drawPile.removeTopCard();
+                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
+                        c.setCostForTurn(-99);
+                    }
+                    for (AbstractRelic r : this.relics)
+                    {
+                        r.onCardDraw(c);
+                    }
+                    failedDraw = false;
+                }
+                else {
+                    logger.info("ERROR: How did this happen? No cards in draw pile?? Player.java");
+                }
+            }
+            else if (mokouDraw ^ isMokou) //One is true, one is false. So, either mokou is drawing and this isn't mokou, or this is mokou and it's keine's draw.
             {
                 if (!this.otherPlayerDraw.isEmpty()) {
                     AbstractCard c = this.otherPlayerDraw.getTopCard();
@@ -386,6 +567,156 @@ public class MokouKeine extends CustomPlayer {
                     {
                         r.onCardDraw(c);
                     }
+                    failedDraw = false;
+                } else {
+                    logger.info("ERROR: How did this happen? No cards in draw pile?? Player.java");
+                }
+            }
+            mokouDraw = !mokouDraw;
+        }
+    }
+
+    public void drawOther(int numCards) {
+        boolean failedDraw = false;
+        for(int i = 0; i < numCards; ++i) {
+            if (isOtherHandFull() || !otherDrawPileValid())
+            {
+                i--; //this draw does nothing, decrement counter.
+                //If draw is failed twice in a row (Both characters hands are full) or drawing from specific pile break draw loop
+                if (failedDraw || TrackCardSource.useMyEnergy || TrackCardSource.useOtherEnergy)
+                    break;
+                failedDraw = true;
+            }
+            else if (TrackCardSource.useMyEnergy)
+            {
+                if (!this.otherPlayerDraw.isEmpty()) {
+                    AbstractCard c = this.otherPlayerDraw.getTopCard();
+                    c.current_x = CardGroup.DRAW_PILE_X;
+                    c.current_y = CardGroup.DRAW_PILE_Y + OTHER_DRAW_OFFSET;
+                    c.setAngle(0.0F, true);
+                    c.lighten(false);
+                    c.drawScale = 0.12F;
+                    c.targetDrawScale = 0.75F;
+                    if (this.hasPower(ConfusionPower.POWER_ID) && c.cost >= 0) {
+                        int newCost = AbstractDungeon.cardRandomRng.random(3);
+                        if (c.cost != newCost) {
+                            c.cost = newCost;
+                            c.costForTurn = c.cost;
+                            c.isCostModified = true;
+                        }
+                    }
+                    c.triggerWhenDrawn();
+                    this.otherPlayerHand.addToHand(c);
+                    this.otherPlayerDraw.removeTopCard();
+                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
+                        c.setCostForTurn(-99);
+                    }
+                    for (AbstractRelic r : this.relics)
+                    {
+                        r.onCardDraw(c);
+                    }
+                    this.otherPlayerHand.refreshHandLayout();
+                    failedDraw = false;
+                } else {
+                    logger.info("ERROR: How did this happen? No cards in other player's draw pile?? Player.java");
+                }
+            }
+            else if (TrackCardSource.useOtherEnergy)
+            {
+                if (!this.drawPile.isEmpty()) {
+                    AbstractCard c = this.drawPile.getTopCard();
+                    c.current_x = CardGroup.DRAW_PILE_X;
+                    c.current_y = CardGroup.DRAW_PILE_Y;
+                    c.setAngle(0.0F, true);
+                    c.lighten(false);
+                    c.drawScale = 0.12F;
+                    c.targetDrawScale = 0.75F;
+                    if (this.hasPower("Confusion") && c.cost >= 0) {
+                        int newCost = AbstractDungeon.cardRandomRng.random(3);
+                        if (c.cost != newCost) {
+                            c.cost = newCost;
+                            c.costForTurn = c.cost;
+                            c.isCostModified = true;
+                        }
+                    }
+                    c.triggerWhenDrawn();
+                    this.hand.addToHand(c);
+                    this.drawPile.removeTopCard();
+                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
+                        c.setCostForTurn(-99);
+                    }
+                    for (AbstractRelic r : this.relics)
+                    {
+                        r.onCardDraw(c);
+                    }
+                    failedDraw = false;
+                }
+                else {
+                    logger.info("ERROR: How did this happen? No cards in draw pile?? Player.java");
+                }
+            }
+            else if (mokouDraw ^ isMokou) //One is true, one is false. So, either mokou is drawing and this isn't mokou, or this is mokou and it's keine's draw.
+            {
+                if (!this.drawPile.isEmpty()) {
+                    AbstractCard c = this.drawPile.getTopCard();
+                    c.current_x = CardGroup.DRAW_PILE_X;
+                    c.current_y = CardGroup.DRAW_PILE_Y;
+                    c.setAngle(0.0F, true);
+                    c.lighten(false);
+                    c.drawScale = 0.12F;
+                    c.targetDrawScale = 0.75F;
+                    if (this.hasPower("Confusion") && c.cost >= 0) {
+                        int newCost = AbstractDungeon.cardRandomRng.random(3);
+                        if (c.cost != newCost) {
+                            c.cost = newCost;
+                            c.costForTurn = c.cost;
+                            c.isCostModified = true;
+                        }
+                    }
+                    c.triggerWhenDrawn();
+                    this.hand.addToHand(c);
+                    this.drawPile.removeTopCard();
+                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
+                        c.setCostForTurn(-99);
+                    }
+                    for (AbstractRelic r : this.relics)
+                    {
+                        r.onCardDraw(c);
+                    }
+                    failedDraw = false;
+                } else {
+                    logger.info("ERROR: How did this happen? No cards in draw pile?? Player.java");
+                }
+            }
+            else //Both are true or both are false.
+            {
+                if (!this.otherPlayerDraw.isEmpty()) {
+                    AbstractCard c = this.otherPlayerDraw.getTopCard();
+                    c.current_x = CardGroup.DRAW_PILE_X;
+                    c.current_y = CardGroup.DRAW_PILE_Y + OTHER_DRAW_OFFSET;
+                    c.setAngle(0.0F, true);
+                    c.lighten(false);
+                    c.drawScale = 0.12F;
+                    c.targetDrawScale = 0.75F;
+                    if (this.hasPower(ConfusionPower.POWER_ID) && c.cost >= 0) {
+                        int newCost = AbstractDungeon.cardRandomRng.random(3);
+                        if (c.cost != newCost) {
+                            c.cost = newCost;
+                            c.costForTurn = c.cost;
+                            c.isCostModified = true;
+                        }
+                    }
+                    c.triggerWhenDrawn();
+                    this.otherPlayerHand.addToHand(c);
+                    this.otherPlayerDraw.removeTopCard();
+                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
+                        c.setCostForTurn(-99);
+                    }
+                    for (AbstractRelic r : this.relics)
+                    {
+                        r.onCardDraw(c);
+                    }
+                    this.otherPlayerHand.refreshHandLayout();
                     failedDraw = false;
                 } else {
                     logger.info("ERROR: How did this happen? No cards in draw pile?? Player.java");
