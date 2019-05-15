@@ -1,9 +1,29 @@
 {
+  "もこけね:AutoResolve": {
+    "TEXT": [
+      "Resolving...",
+      "Players disagree. Conflict will be automatically resolved in ",
+      " seconds."
+    ]
+  },
   "もこけね:ClaimReward": {
     "TEXT": [
       " chose to pick up ",
       " chose to pick up the Sapphire Key.",
       " chose to pick up the Emerald Key.",
+      "."
+    ]
+  },
+  "もこけね:BossRelic": {
+    "TEXT": [
+      "Boss relic chosen!",
+      "Players disagree. Conflict will be automatically resolved in 60 seconds."
+    ]
+  },
+  "もこけね:Bottling": {
+    "TEXT": [
+      " put ",
+      " in ",
       "."
     ]
   },

@@ -184,12 +184,12 @@ public class MapRoomVoting {
             if (__instance.equals(otherSelected))
             {
                 sb.setColor(isMokou ? KEINE_COLOR : MOKOU_COLOR);
-                sb.draw(ImageMaster.MAP_CIRCLE_1, (float)__instance.x * SPACING_X + OFFSET_X - 96.0F + __instance.offsetX, (float)__instance.y * Settings.MAP_DST_Y + OFFSET_Y + DungeonMapScreen.offsetY - 96.0F + __instance.offsetY, 96.0F, 96.0F, 192.0F, 192.0F, (scale * 0.95F + 0.2F) * Settings.scale, (scale * 0.95F + 0.2F) * Settings.scale, angle, 0, 0, 192, 192, false, false);
+                sb.draw(ImageMaster.MAP_CIRCLE_5, (float)__instance.x * SPACING_X + OFFSET_X - 96.0F + __instance.offsetX, (float)__instance.y * Settings.MAP_DST_Y + OFFSET_Y + DungeonMapScreen.offsetY - 96.0F + __instance.offsetY, 96.0F, 96.0F, 192.0F, 192.0F, (scale * 0.95F + 0.2F) * Settings.scale, (scale * 0.95F + 0.2F) * Settings.scale, angle, 0, 0, 192, 192, false, false);
             }
             else if (__instance.equals(mySelected))
             {
                 sb.setColor(isMokou ? MOKOU_COLOR : KEINE_COLOR);
-                sb.draw(ImageMaster.MAP_CIRCLE_1, (float)__instance.x * SPACING_X + OFFSET_X - 96.0F + __instance.offsetX, (float)__instance.y * Settings.MAP_DST_Y + OFFSET_Y + DungeonMapScreen.offsetY - 96.0F + __instance.offsetY, 96.0F, 96.0F, 192.0F, 192.0F, (scale * 0.95F + 0.2F) * Settings.scale, (scale * 0.95F + 0.2F) * Settings.scale, angle, 0, 0, 192, 192, false, false);
+                sb.draw(ImageMaster.MAP_CIRCLE_5, (float)__instance.x * SPACING_X + OFFSET_X - 96.0F + __instance.offsetX, (float)__instance.y * Settings.MAP_DST_Y + OFFSET_Y + DungeonMapScreen.offsetY - 96.0F + __instance.offsetY, 96.0F, 96.0F, 192.0F, 192.0F, (scale * 0.95F + 0.2F) * Settings.scale, (scale * 0.95F + 0.2F) * Settings.scale, angle, 0, 0, 192, 192, false, false);
             }
         }
 

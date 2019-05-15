@@ -14,17 +14,18 @@ import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepScreenCoverEffect;
 import もこけね.actions.character.OtherPlayerDiscardAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
-import もこけね.patch.buying_relics.ReportPurchase;
+import もこけね.patch.relics.ReportPurchase;
 import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.deck_changes.ReportObtainCard;
 import もこけね.patch.deck_changes.ReportRemoveCard;
 import もこけね.patch.deck_changes.ReportUpgradeCard;
-import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.patch.map.BossRoomVoting;
 import もこけね.patch.map.MapRoomVoting;
+import もこけね.patch.relics.ReportBottling;
+import もこけね.patch.relics.VoteBossRelic;
 import もこけね.patch.resting.SyncResting;
 import もこけね.patch.resting.TakeRedKey;
 import もこけね.patch.rewards.ObtainRewards;
@@ -321,6 +322,23 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("purchase_relic"))
         {
             ReportPurchase.forcePurchase(msg.substring(14));
+        }
+        else if (msg.startsWith("boss_relic_vote"))
+        {
+            VoteBossRelic.receiveVote(msg.substring(15));
+        }
+        else if (msg.startsWith("boss_relic_choose"))
+        {
+            VoteBossRelic.chooseRelic(msg.substring(17));
+        }
+        else if (msg.startsWith("bottle"))
+        {
+            char bottleChar = msg.charAt(6);
+            int index = Integer.valueOf(msg.substring(7));
+            if (index >= 0)
+            {
+                ReportBottling.receiveBottling(bottleChar, index);
+            }
         }
         else if (msg.startsWith("claim_potion"))
         {

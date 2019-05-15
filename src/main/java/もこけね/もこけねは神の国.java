@@ -41,6 +41,7 @@ import もこけね.patch.events.RoomEventVoting;
 import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.patch.map.BossRoomVoting;
 import もこけね.patch.map.MapRoomVoting;
+import もこけね.patch.relics.VoteBossRelic;
 import もこけね.ui.ChatBox;
 import もこけね.util.CardFilter;
 import もこけね.util.KeywordWithProper;
@@ -114,6 +115,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     private static float gameStartTimer = 0.0f;
     private static float eventChooseTimer = 0.0f;
     private static float mapChooseTimer = 0.0f;
+    private static float bossRelicChooseTimer = 0.0f;
 
     private static int lastMilestone = 0;
 
@@ -151,6 +153,19 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         eventChooseTimer = 0.0f;
         lastMilestone = 0;
     }
+    public static void startBossRelicChooseTimer(float startTime)
+    {
+        if (bossRelicChooseTimer <= 0.0f)
+        {
+            bossRelicChooseTimer = startTime;
+            lastMilestone = MathUtils.floor(startTime - 0.5f);
+        }
+    }
+    public static void stopBossRelicChooseTimer()
+    {
+        bossRelicChooseTimer = 0.0f;
+        lastMilestone = 0;
+    }
     public static void startMapChooseTimer(float startTime)
     {
         if (mapChooseTimer <= 0.0f)
@@ -173,6 +188,9 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
             MapRoomVoting.reset();
             BossRoomVoting.waitingForBoss = false;
             BossRoomVoting.otherWaitingForBoss = false;
+            VoteBossRelic.votedRelic = null;
+            VoteBossRelic.otherVotedRelic = null;
+            VoteBossRelic.chosenRelic = null;
         }
     }
 
@@ -189,7 +207,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                     if (lastMilestone > gameStartTimer)
                     {
                         HandleMatchmaking.sendMessage(String.valueOf(lastMilestone));
-                        --lastMilestone;
+                        updateMilestone();
                     }
                 }
                 else
@@ -214,7 +232,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                 else if (lastMilestone > eventChooseTimer)
                 {
                     HandleMatchmaking.sendMessage(String.valueOf(lastMilestone));
-                    --lastMilestone;
+                    updateMilestone();
                 }
             }
 
@@ -228,11 +246,41 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                 else if (lastMilestone > mapChooseTimer)
                 {
                     HandleMatchmaking.sendMessage(String.valueOf(lastMilestone));
-                    --lastMilestone;
+                    updateMilestone();
+                }
+            }
+
+            if (bossRelicChooseTimer > 0.0f)
+            {
+                bossRelicChooseTimer -= Gdx.graphics.getDeltaTime();
+                if (bossRelicChooseTimer <= 0.0f)
+                {
+                    VoteBossRelic.resolveConflict();
+                }
+                else if (lastMilestone > bossRelicChooseTimer)
+                {
+                    HandleMatchmaking.sendMessage(String.valueOf(lastMilestone));
+                    updateMilestone();
                 }
             }
         }
         MultiplayerHelper.readPostUpdate();
+    }
+
+    private static void updateMilestone()
+    {
+        if (lastMilestone > 30)
+        {
+            lastMilestone = (lastMilestone / 10 - 1) * 10;
+        }
+        else if (lastMilestone > 5)
+        {
+            lastMilestone = (lastMilestone / 5 - 1) * 5;
+        }
+        else
+        {
+            --lastMilestone;
+        }
     }
 
     @Override
