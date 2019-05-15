@@ -32,8 +32,8 @@ public class AlwaysWhale {
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
         {
-            Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractEvent.class, "body");
-            return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+            Matcher finalMatcher = new Matcher.FieldAccessMatcher(Settings.class, "isEndless");
+            return new int[] { LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher)[2] };
         }
     }
 }
