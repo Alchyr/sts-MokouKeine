@@ -29,28 +29,42 @@ import static もこけね.もこけねは神の国.makeID;
 public class GamblingChip {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("DiscardWait"));
 
+    private static GamblingChipAction currentAction = null;
     private static HashMap<AbstractCard, Integer> cardIndexes = new HashMap<>();
     private static ArrayList<String> discardMessages = new ArrayList<>();
 
     @SpirePrefixPatch
     public static SpireReturn waitForPlayer(GamblingChipAction __instance)
     {
-        if (TrackCardSource.useOtherEnergy && MultiplayerHelper.active && AbstractDungeon.player instanceof MokouKeine) //played by other player.
+        if (currentAction != __instance)
         {
-            MokouKeine p = (MokouKeine)AbstractDungeon.player;
-            AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + p.getOtherPlayerName() + uiStrings.TEXT[1]));
-            __instance.isDone = true;
-            return SpireReturn.Return(null);
-        }
-        else if (MultiplayerHelper.active && AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE)
-        {
-            //Track card indexes in hand for later use
-            cardIndexes.clear();
-            discardMessages.clear();
-
-            for (int i = 0; i < AbstractDungeon.player.hand.group.size(); ++i)
+            if (AbstractDungeon.player instanceof MokouKeine && MultiplayerHelper.active)
             {
-                cardIndexes.put(AbstractDungeon.player.hand.group.get(i), i);
+                MokouKeine p = (MokouKeine)AbstractDungeon.player;
+                if (TrackCardSource.useOtherEnergy) //played by other player.
+                {
+                    AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + p.getOtherPlayerName() + uiStrings.TEXT[1]));
+                    __instance.isDone = true;
+                    return SpireReturn.Return(null);
+                }
+                else
+                {
+                    //Track card indexes in hand for later use
+                    cardIndexes.clear();
+                    discardMessages.clear();
+
+                    for (int i = 0; i < AbstractDungeon.player.hand.group.size(); ++i)
+                    {
+                        cardIndexes.put(AbstractDungeon.player.hand.group.get(i), i);
+                    }
+
+                    if (!TrackCardSource.useMyEnergy) //this came from a neutral source. Both players have this action. Have to wait.
+                    {
+                        AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + p.getOtherPlayerName() + uiStrings.TEXT[1]));
+                        //Don't cancel this action, though.
+                    }
+                }
+                currentAction = __instance;
             }
         }
         return SpireReturn.Continue();

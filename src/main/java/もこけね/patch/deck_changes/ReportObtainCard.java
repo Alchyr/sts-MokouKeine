@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import もこけね.character.MokouKeine;
+import もこけね.util.MessageHelper;
 import もこけね.util.MultiplayerHelper;
 
 import java.io.Serializable;
@@ -43,28 +44,7 @@ public class ReportObtainCard implements Serializable {
         {
             try
             {
-                String[] args = cardInfo.split("\\|\\|\\|");
-                AbstractCard c = CardLibrary.getCopy(args[0]);
-
-                if (args[1].equals("1"))
-                {
-                    for (int i = 0; i < Integer.valueOf(args[2]); ++i)
-                    {
-                        c.upgrade();
-                    }
-                }
-
-                String name = c.originalName;
-                if (!args[3].equals("!!!"))
-                    name = args[3] + name;
-                if (!args[4].equals("!!!"))
-                    name += args[4];
-
-                c.name = name;
-                c.costForTurn = c.cost = Integer.valueOf(args[5]);
-                c.damage = c.baseDamage = Integer.valueOf(args[6]);
-                c.block = c.baseBlock = Integer.valueOf(args[7]);
-                c.magicNumber = c.baseMagicNumber = Integer.valueOf(args[8]);
+                AbstractCard c = MessageHelper.cardFromInfo(cardInfo);
 
                 ((MokouKeine) AbstractDungeon.player).otherPlayerMasterDeck.addToTop(c);
                 chat.receiveMessage("Other player obtained " + c.name);

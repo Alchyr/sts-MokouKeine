@@ -84,9 +84,9 @@ public class SummonSparkAction extends AbstractGameAction {
 
     private static boolean overlap(Hitbox a, Hitbox b)
     {
-        if (a.x > b.x + (b.width + BORDER) || a.x + (a.width + BORDER) > b.x)
+        if (a.x > b.x + (b.width + BORDER) || b.x > a.x + (a.width + BORDER))
             return false;
 
-        return !(a.y < b.y + (b.height + BORDER) || a.y + (a.height + BORDER) < b.y);
+        return !(a.y > b.y + (b.height + BORDER) || b.y > a.y + (a.height + BORDER));
     }
 }

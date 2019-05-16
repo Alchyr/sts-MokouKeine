@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.rewards.RewardItem;
+import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.util.MultiplayerHelper;
@@ -55,6 +56,11 @@ public class ObtainRewards {
     {
         if (AbstractDungeon.player instanceof MokouKeine)
         {
+            if (AbstractDungeon.getCurrRoom() instanceof TreasureRoom && !((TreasureRoom) AbstractDungeon.getCurrRoom()).chest.isOpen) //The chest might not be open.
+            {
+                ((TreasureRoom) AbstractDungeon.getCurrRoom()).chest.open(false);
+            }
+
             char type = args.charAt(0);
             switch (type)
             {

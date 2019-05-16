@@ -29,6 +29,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
+import もこけね.patch.actions.GamblingChip;
 import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.card_use.LastCardType;
 import もこけね.patch.combat.MixEnemyTempCards;

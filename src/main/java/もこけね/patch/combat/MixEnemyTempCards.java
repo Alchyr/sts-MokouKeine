@@ -30,7 +30,7 @@ public class MixEnemyTempCards {
             {
                 //This action occurred during enemy turn
                 toMokou = !toMokou; //swap target
-                if (toMokou != ((MokouKeine) AbstractDungeon.player).isMokou) //The target is other player
+                if (toMokou ^ ((MokouKeine) AbstractDungeon.player).isMokou) //The target is other player
                 {
                     float d = (float)ReflectionHacks.getPrivate(__instance, AbstractGameAction.class, "duration");
                     if (d == Settings.ACTION_DUR_FAST)

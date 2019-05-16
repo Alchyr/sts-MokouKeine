@@ -42,6 +42,12 @@
       " to choose cards to discard."
     ]
   },
+  "もこけね:Discovery": {
+    "TEXT": [
+      "Waiting for ",
+      " to choose a card."
+    ]
+  },
   "もこけね:Resting": {
     "TEXT": [
       "Heal for 50% of your Max HP (",

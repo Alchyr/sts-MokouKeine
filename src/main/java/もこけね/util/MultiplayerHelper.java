@@ -3,6 +3,7 @@ package もこけね.util;
 import com.codedisaster.steamworks.*;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -249,6 +250,10 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             {
                 AbstractDungeon.actionManager.addToTop(new DrawCardAction(AbstractDungeon.player, amt));
             }
+        }
+        else if (msg.startsWith("discover_card"))
+        {
+            AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(MessageHelper.cardFromInfo(msg.substring(13))));
         }
         else if (msg.startsWith("other_obtain_card"))
         {
