@@ -6,6 +6,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.SaveHelper;
+import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
@@ -29,7 +30,7 @@ public class NoSave {
     }
 
     @SpirePatch(
-            clz = SaveHelper.class,
+            clz = SaveAndContinue.class,
             method = "save"
     )
     public static class ISaidDoNotDidYouNotHearMeStupidGameReeeeeeeeeeeeeeeeeeeeeeeeee
