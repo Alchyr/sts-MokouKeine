@@ -58,8 +58,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /*TODO LIST:
-Boss relic voting
-
+apply powers when powers are applied
+refresh other hand when own hand is empty
 
 
 extra features:
@@ -277,11 +277,11 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     {
         if (lastMilestone > 30)
         {
-            lastMilestone = (lastMilestone / 10 - 1) * 10;
+            lastMilestone = (MathUtils.ceil(lastMilestone / 10.0f) - 1) * 10;
         }
         else if (lastMilestone > 5)
         {
-            lastMilestone = (lastMilestone / 5 - 1) * 5;
+            lastMilestone = (MathUtils.ceil(lastMilestone / 5.0f) - 1) * 5;
         }
         else
         {

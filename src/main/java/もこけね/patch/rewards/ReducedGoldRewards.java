@@ -19,7 +19,7 @@ public class ReducedGoldRewards {
     {
         if (AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE)
         {
-            goldAmt[0] = MathUtils.ceil(goldAmt[0] * 0.5f);
+            goldAmt[0] = MathUtils.ceil(goldAmt[0] * 0.7f); //Not fully halved; too hard to get anything at all if it is.
         }
     }
     //Theft reward is fine, since both players lose stolen gold, and get back stolen amount.

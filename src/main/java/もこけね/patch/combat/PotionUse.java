@@ -124,29 +124,25 @@ public class PotionUse {
         String[] args = info.split("!!!");
         if (args.length == 3 && AbstractDungeon.player instanceof MokouKeine)
         {
+            //can use is checked before this is called
             AbstractPotion toUse = PotionHelper.getPotion(args[0]);
-            if (((MokouKeine) AbstractDungeon.player).otherPlayerPotions.contains(toUse.ID))
-            {
-                int index = Integer.valueOf(args[2]);
 
-                AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(true));
-                AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(true));
-                if (index >= 0)
-                {
-                    AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);
-                    toUse.use(target);
-                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
-                }
-                else if (!toUse.targetRequired)
-                {
-                    toUse.use(null);
-                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[2]);
-                }
-                AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
+            int index = Integer.valueOf(args[2]);
+
+            AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(true));
+            AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(true));
+            if (index >= 0)
+            {
+                AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);
+                toUse.use(target);
+                chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
             }
-            else {
-                logger.error("Other player used a potion they don't even have???");
+            else if (!toUse.targetRequired)
+            {
+                toUse.use(null);
+                chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[2]);
             }
+            AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
         }
     }
 

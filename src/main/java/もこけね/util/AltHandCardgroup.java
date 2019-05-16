@@ -153,6 +153,11 @@ public class AltHandCardgroup extends CardGroup {
                     c.target_y += 15.0F * Settings.scale;
                     c = this.group.get(5);
                     c.target_y += 25.0F * Settings.scale;
+
+                    for (AbstractCard card : this.group)
+                    {
+                        card.targetDrawScale = 0.5F;
+                    }
                     break;
                 case 7:
                     this.group.get(0).target_x = (float) Settings.WIDTH * posMultiplier - AbstractCard.IMG_WIDTH_S * 2.4F;
@@ -172,6 +177,11 @@ public class AltHandCardgroup extends CardGroup {
                     c.target_y += 18.0F * Settings.scale;
                     c = this.group.get(6);
                     c.target_y += 25.0F * Settings.scale;
+
+                    for (AbstractCard card : this.group)
+                    {
+                        card.targetDrawScale = 0.45F;
+                    }
                     break;
                 case 8:
                     this.group.get(0).target_x = (float) Settings.WIDTH * posMultiplier - AbstractCard.IMG_WIDTH_S * 2.5F;
@@ -186,6 +196,11 @@ public class AltHandCardgroup extends CardGroup {
                     c.target_y += 10.0F * Settings.scale;
                     c = this.group.get(6);
                     c.target_y += 10.0F * Settings.scale;
+
+                    for (AbstractCard card : this.group)
+                    {
+                        card.targetDrawScale = 0.4F;
+                    }
                 case 9:
                     this.group.get(0).target_x = (float) Settings.WIDTH * posMultiplier - AbstractCard.IMG_WIDTH_S * 2.8F;
                     this.group.get(1).target_x = (float) Settings.WIDTH * posMultiplier - AbstractCard.IMG_WIDTH_S * 2.2F;
@@ -270,6 +285,16 @@ public class AltHandCardgroup extends CardGroup {
         if (this.equals(AbstractDungeon.player.hand) && AbstractDungeon.player instanceof MokouKeine)
         {
             ((MokouKeine) AbstractDungeon.player).otherPlayerHand.refreshHandLayout();
+        }
+    }
+
+    @Override
+    public void applyPowers() {
+        super.applyPowers();
+
+        if (this.equals(AbstractDungeon.player.hand) && AbstractDungeon.player instanceof MokouKeine)
+        {
+            ((MokouKeine) AbstractDungeon.player).otherPlayerHand.applyPowers();
         }
     }
 }

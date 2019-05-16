@@ -23,7 +23,7 @@ public class Singe extends MokouCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int DAMAGE = 11;
+    private static final int DAMAGE = 10;
     private static final int UPG_DAMAGE = 3;
 
     public Singe()

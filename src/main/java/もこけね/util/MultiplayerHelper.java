@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepEffect;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepScreenCoverEffect;
+import もこけね.actions.character.MakeTempCardInOtherHandAction;
 import もこけね.actions.character.OtherPlayerDiscardAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
@@ -253,7 +254,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
         else if (msg.startsWith("discover_card"))
         {
-            AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(MessageHelper.cardFromInfo(msg.substring(13))));
+            AbstractDungeon.actionManager.addToTop(new MakeTempCardInOtherHandAction(MessageHelper.cardFromInfo(msg.substring(13))));
         }
         else if (msg.startsWith("other_obtain_card"))
         {

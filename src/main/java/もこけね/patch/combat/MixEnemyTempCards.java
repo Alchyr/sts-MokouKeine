@@ -16,6 +16,8 @@ import もこけね.effects.ShowCardAndAddToOtherDiscardEffect;
 public class MixEnemyTempCards {
     public static boolean toMokou = true;
 
+    private static AbstractGameAction lastAction = null;
+
     //Check if isPlayerTurn
     @SpirePatch(
             clz = MakeTempCardInDiscardAction.class,
@@ -26,10 +28,11 @@ public class MixEnemyTempCards {
         @SpirePrefixPatch
         public static SpireReturn adjust(MakeTempCardInDiscardAction __instance)
         {
-            if (AbstractDungeon.player instanceof MokouKeine && AbstractDungeon.actionManager.turnHasEnded)
+            if (AbstractDungeon.player instanceof MokouKeine && AbstractDungeon.actionManager.turnHasEnded && __instance != lastAction)
             {
                 //This action occurred during enemy turn
                 toMokou = !toMokou; //swap target
+                lastAction = __instance; //don't check more than once
                 if (toMokou ^ ((MokouKeine) AbstractDungeon.player).isMokou) //The target is other player
                 {
                     float d = (float)ReflectionHacks.getPrivate(__instance, AbstractGameAction.class, "duration");

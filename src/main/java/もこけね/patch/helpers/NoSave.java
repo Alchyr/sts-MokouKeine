@@ -6,21 +6,43 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.SaveHelper;
+import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
 
-@SpirePatch(
-        clz = SaveHelper.class,
-        method = "shouldSave"
-)
 public class NoSave {
-    @SpirePrefixPatch
-    public static SpireReturn<Boolean> noYouShouldNotSave()
+    @SpirePatch(
+            clz = SaveHelper.class,
+            method = "shouldSave"
+    )
+    public static class DoNot
     {
-        if (CardCrawlGame.chosenCharacter == CharacterEnums.MOKOUKEINE)
+        @SpirePrefixPatch
+        public static SpireReturn<Boolean> noYouShouldNotSave()
         {
-            return SpireReturn.Return(false);
+            if (CardCrawlGame.chosenCharacter == CharacterEnums.MOKOUKEINE)
+            {
+                return SpireReturn.Return(false);
+            }
+            return SpireReturn.Continue();
         }
-        return SpireReturn.Continue();
+    }
+
+    @SpirePatch(
+            clz = SaveHelper.class,
+            method = "save"
+    )
+    public static class ISaidDoNotDidYouNotHearMeStupidGameReeeeeeeeeeeeeeeeeeeeeeeeee
+    {
+        @SpirePrefixPatch
+        public static SpireReturn ree(SaveFile ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff)
+        {
+            if (CardCrawlGame.chosenCharacter == CharacterEnums.MOKOUKEINE)
+            {
+                CardCrawlGame.loadingSave = false;
+                return SpireReturn.Return(null);
+            }
+            return SpireReturn.Continue();
+        }
     }
 }

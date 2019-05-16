@@ -71,7 +71,7 @@ public class MokouKeine extends CustomPlayer {
     private static final int ENERGY_PER_TURN = 2;//2; //Total of 4 energy and 8 cards base. As such, cards are relatively weaker.
     private static final int STARTING_HP = 66;
     private static final int MAX_HP = 66;
-    private static final int STARTING_GOLD = 50; //Both players have individual gold.
+    private static final int STARTING_GOLD = 77; //Both players have individual gold, so this is actually 77x2.
     private static final int CARD_DRAW = 8; //automatically split between two groups
     private static final int ORB_SLOTS = 0;
 
