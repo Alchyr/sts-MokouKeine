@@ -59,6 +59,11 @@ import java.util.Collection;
 /*TODO LIST:
 Boss relic voting
 
+
+
+extra features:
+Resync command - when sent by host, resyncs other player forcefully
+
  */
 
 @SpireInitializer

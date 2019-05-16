@@ -31,7 +31,7 @@ public class Shatter extends KeineCard {
     {
         super(cardInfo, false);
 
-        setDamage(DEBUFF, UPG_DEBUFF);
+        setMagic(DEBUFF, UPG_DEBUFF);
     }
 
     @Override

@@ -24,12 +24,15 @@ public class ChatBox {
     private String fullText;
 
     public boolean active;
+    public boolean skipNextInput;
     public float fadeDelay;
 
     public ChatBox()
     {
         maxLines = 7;
         fullText = "";
+        active = false;
+        skipNextInput = false;
     }
 
     public void onPushEnter()
@@ -46,6 +49,7 @@ public class ChatBox {
                 fadeDelay = NORMAL_FADE_TIME;
             }
             active = false;
+            skipNextInput = true;
         }
     }
 
@@ -72,6 +76,7 @@ public class ChatBox {
 
     public void update()
     {
+        skipNextInput = false;
         if (fadeDelay > 0)
             fadeDelay -= Gdx.graphics.getDeltaTime();
     }

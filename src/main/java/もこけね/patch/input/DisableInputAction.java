@@ -17,7 +17,7 @@ public class DisableInputAction {
         @SpirePrefixPatch
         public static SpireReturn<Boolean> preventInitialPress(InputAction __instance)
         {
-            if (chat != null && chat.active)
+            if (chat != null && (chat.active || chat.skipNextInput))
             {
                 return SpireReturn.Return(false);
             }
@@ -33,7 +33,7 @@ public class DisableInputAction {
         @SpirePrefixPatch
         public static SpireReturn<Boolean> preventPress(InputAction __instance)
         {
-            if (chat != null && chat.active)
+            if (chat != null && (chat.active || chat.skipNextInput))
             {
                 return SpireReturn.Return(false);
             }
