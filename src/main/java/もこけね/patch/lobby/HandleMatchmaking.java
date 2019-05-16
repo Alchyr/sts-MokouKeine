@@ -47,6 +47,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     private static int searchAmt;
 
     public static boolean activeMultiplayer;
+    private static boolean triedFar;
     private static SteamID currentLobbyID;
 
     public static boolean isMokou;
@@ -69,8 +70,6 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
 
     private void startNormalSearch()
     {
-        //guarantee equivalent unlock state, assuming same mod list.
-
         matchmaking.addRequestLobbyListDistanceFilter(SteamMatchmaking.LobbyDistanceFilter.Far);
         matchmaking.addRequestLobbyListStringFilter(lobbyModsKey, generateModList(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyCharacterKey, CardCrawlGame.chosenCharacter.name(), SteamMatchmaking.LobbyComparison.Equal);
@@ -78,6 +77,19 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         Settings.setFinalActAvailability(); //ensure it's updated.
         matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
         SteamAPICall lobbySearch = matchmaking.requestLobbyList();
+        triedFar = false;
+    }
+
+    private void startFarSearch()
+    {
+        matchmaking.addRequestLobbyListDistanceFilter(SteamMatchmaking.LobbyDistanceFilter.Worldwide);
+        matchmaking.addRequestLobbyListStringFilter(lobbyModsKey, generateModList(), SteamMatchmaking.LobbyComparison.Equal);
+        matchmaking.addRequestLobbyListStringFilter(lobbyCharacterKey, CardCrawlGame.chosenCharacter.name(), SteamMatchmaking.LobbyComparison.Equal);
+        matchmaking.addRequestLobbyListStringFilter(lobbyPublicKey, metadataTrue, SteamMatchmaking.LobbyComparison.Equal);
+        Settings.setFinalActAvailability(); //ensure it's updated.
+        matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
+        SteamAPICall lobbySearch = matchmaking.requestLobbyList();
+        triedFar = true;
     }
 
     public static void startFindLobby()
@@ -310,7 +322,11 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             logger.info("Found " + resultCount + " matching lobbies.");
             chat.receiveMessage("Found " + resultCount + " valid lobbies.");
 
-            if (resultCount == 0)
+            if (resultCount == 0 && !triedFar) {
+                logger.info("Trying farther distances.");
+                startFarSearch();
+            }
+            else if (resultCount == 0)
             {
                 searching = false;
                 joinorcreate = true;
