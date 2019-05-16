@@ -9,7 +9,7 @@
   "もこけね:Volatile": {
     "NAME": "Volatile",
     "DESCRIPTIONS": [
-      "On death, deal damage equal to its Max HP to ALL enemies."
+      "On death, deals damage equal to half of its Max HP to ALL enemies."
     ]
   },
   "もこけね:Execration": {

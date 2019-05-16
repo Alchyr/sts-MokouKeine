@@ -291,6 +291,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         TrackCardSource.useMyEnergy = false;
         MixEnemyTempCards.toMokou = true;
         LastCardType.type = AbstractCard.CardType.CURSE; //to avoid any null issues. Nothing will trigger off of playing curses.
+        LastCardType.lastCardCopy = null;
         PotionUse.queuedPotionUse.clear();
     }
     @Override
@@ -299,6 +300,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         TrackCardSource.useMyEnergy = false;
         MixEnemyTempCards.toMokou = true;
         LastCardType.type = AbstractCard.CardType.CURSE;
+        LastCardType.lastCardCopy = null;
         PotionUse.queuedPotionUse.clear();
     }
 

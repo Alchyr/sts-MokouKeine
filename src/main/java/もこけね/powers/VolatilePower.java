@@ -1,5 +1,6 @@
 package もこけね.powers;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -20,7 +21,7 @@ public class VolatilePower extends BasePower {
 
     public void onDeath() {
         if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead() && this.owner.currentHealth <= 0) {
-            AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(null, DamageInfo.createDamageMatrix(this.owner.maxHealth, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.FIRE));
+            AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(null, DamageInfo.createDamageMatrix(MathUtils.ceil(this.owner.maxHealth / 2.0f), true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.FIRE));
         }
     }
 

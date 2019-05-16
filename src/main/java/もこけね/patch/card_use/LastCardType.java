@@ -1,6 +1,5 @@
 package もこけね.patch.card_use;
 
-import com.evacipated.cardcrawl.mod.stslib.relics.OnAfterUseCardRelic;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,6 +13,7 @@ import javassist.CtBehavior;
 )
 public class LastCardType {
     public static AbstractCard.CardType type = AbstractCard.CardType.CURSE;
+    public static AbstractCard lastCardCopy = null;
 
     @SpireInsertPatch(
             locator = Locator.class,
@@ -21,6 +21,7 @@ public class LastCardType {
     )
     public static void TrackLastUsed(UseCardAction __instance, AbstractCard targetCard) {
         type = targetCard.type;
+        lastCardCopy = targetCard.makeCopy();
     }
 
     private static class Locator extends SpireInsertLocator {
