@@ -71,11 +71,15 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     private void startNormalSearch()
     {
         matchmaking.addRequestLobbyListDistanceFilter(SteamMatchmaking.LobbyDistanceFilter.Far);
+        logger.info("distance: far");
         matchmaking.addRequestLobbyListStringFilter(lobbyModsKey, generateModList(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyCharacterKey, CardCrawlGame.chosenCharacter.name(), SteamMatchmaking.LobbyComparison.Equal);
+        logger.info("chosen character: " + CardCrawlGame.chosenCharacter.name());
         matchmaking.addRequestLobbyListStringFilter(lobbyPublicKey, metadataTrue, SteamMatchmaking.LobbyComparison.Equal);
+        logger.info("public: true");
         Settings.setFinalActAvailability(); //ensure it's updated.
         matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
+        logger.info("4th act unlocked: " + (Settings.isFinalActAvailable ? metadataTrue : metadataFalse));
         SteamAPICall lobbySearch = matchmaking.requestLobbyList();
         triedFar = false;
     }
@@ -83,11 +87,15 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     private void startFarSearch()
     {
         matchmaking.addRequestLobbyListDistanceFilter(SteamMatchmaking.LobbyDistanceFilter.Worldwide);
+        logger.info("distance: worldwide");
         matchmaking.addRequestLobbyListStringFilter(lobbyModsKey, generateModList(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyCharacterKey, CardCrawlGame.chosenCharacter.name(), SteamMatchmaking.LobbyComparison.Equal);
+        logger.info("chosen character: " + CardCrawlGame.chosenCharacter.name());
         matchmaking.addRequestLobbyListStringFilter(lobbyPublicKey, metadataTrue, SteamMatchmaking.LobbyComparison.Equal);
+        logger.info("public: true");
         Settings.setFinalActAvailability(); //ensure it's updated.
         matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
+        logger.info("4th act unlocked: " + (Settings.isFinalActAvailable ? metadataTrue : metadataFalse));
         SteamAPICall lobbySearch = matchmaking.requestLobbyList();
         triedFar = true;
     }
@@ -324,6 +332,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
 
             if (resultCount == 0 && !triedFar) {
                 logger.info("Trying farther distances.");
+                chat.receiveMessage("Trying farther distances.");
                 startFarSearch();
             }
             else if (resultCount == 0)
