@@ -7,8 +7,11 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import もこけね.abstracts.BasePower;
 
+import static もこけね.もこけねは神の国.makeID;
+
 public class SealPower extends BasePower {
     public static final String NAME = "Seal";
+    public static final String POWER_ID = makeID(NAME);
     public static final PowerType TYPE = PowerType.BUFF;
     public static final boolean TURN_BASED = false;
 
@@ -37,7 +40,7 @@ public class SealPower extends BasePower {
         }
         else
         {
-            this.description = descriptions()[1] + descriptions()[2];
+            this.description = descriptions()[1] + amount + descriptions()[2];
         }
     }
 }

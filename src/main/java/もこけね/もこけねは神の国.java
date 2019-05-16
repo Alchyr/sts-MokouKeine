@@ -62,6 +62,13 @@ apply powers when powers are applied
 refresh other hand when own hand is empty
 
 
+EVENTS:
+Ranwid - Gold option: If other player cannot afford it, cannot take
+Potion option: Also can take a potion in list used to track other player potions
+Card option: Fine as is
+
+
+
 extra features:
 Resync command - when sent by host, resyncs other player forcefully
 

@@ -12,6 +12,20 @@
       "On death, deals damage equal to half of its Max HP to ALL enemies."
     ]
   },
+  "もこけね:Ruthless": {
+    "NAME": "Ruthless",
+    "DESCRIPTIONS": [
+      "Whenever an enemy dies, gain #b",
+      " #yStrength."
+    ]
+  },
+  "もこけね:Inhibition": {
+    "NAME": "Inhibition",
+    "DESCRIPTIONS": [
+      "At the start of your turn, gain #b",
+      " #yもこけね:Seal."
+    ]
+  },
   "もこけね:Execration": {
     "NAME": "Execration",
     "DESCRIPTIONS": [

@@ -21,7 +21,7 @@ public class Prosperity extends KeineCard {
     private final static CardInfo cardInfo = new CardInfo(
             "Prosperity",
             2,
-            CardType.POWER,
+            CardType.SKILL,
             CardTarget.NONE,
             CardRarity.RARE
     );

@@ -22,8 +22,8 @@ public class Scorch extends MokouCard {
     );
 
     public final static String ID = makeID(cardInfo.cardName);
-    //2 cost: Deal 7 [9] damage 2 times.
-    private static final int DAMAGE = 7;
+    //2 cost: Deal 8 [10] damage 2 times.
+    private static final int DAMAGE = 8;
     private static final int UPG_DAMAGE = 2;
     private static final int HIT_COUNT = 2;
 

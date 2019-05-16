@@ -55,6 +55,19 @@
     "NAME": "Shatter",
     "DESCRIPTION": "Apply !M! Vulnerable for each enemy in combat."
   },
+  "もこけね:Inhibition": {
+    "NAME": "Inhibition",
+    "DESCRIPTION": "Ethereal. NL At the start of your turn, gain !M! もこけね:Seal.",
+    "UPGRADE_DESCRIPTION": "At the start of your turn, gain !M! もこけね:Seal."
+  },
+  "もこけね:HeatUp": {
+    "NAME": "Heat Up",
+    "DESCRIPTION": "Lose 3 HP. NL Gain !M! Strength."
+  },
+  "もこけね:Release": {
+    "NAME": "Release",
+    "DESCRIPTION": "Lose all もこけね:Seals. NL Summon a もこけね:Spark for each もこけね:Seal lost."
+  },
   "もこけね:Reflection": {
     "NAME": "Reflection",
     "DESCRIPTION": "Discard your hand. NL Your partner gains [E] for each card discarded. NL Exhaust."
@@ -127,7 +140,8 @@
   },
   "もこけね:Ruthless": {
     "NAME": "Ruthless",
-    "DESCRIPTION": "Whenever an enemy dies, gain !M! Strength."
+    "DESCRIPTION": "Whenever an enemy dies, gain !M! Strength.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever an enemy dies, gain !M! Strength."
   },
   "もこけね:Kindle": {
     "NAME": "Kindle",
