@@ -100,7 +100,7 @@ public class PotionUse {
                 int index = Integer.valueOf(args[1]);
 
                 AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(true));
-                AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(true));
+                AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(false));
                 if (index >= 0)
                 {
                     AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);
@@ -130,7 +130,7 @@ public class PotionUse {
             int index = Integer.valueOf(args[2]);
 
             AbstractDungeon.actionManager.addToBottom(new UseSpecificEnergyAction(true));
-            AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(true));
+            AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(false));
             if (index >= 0)
             {
                 AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);

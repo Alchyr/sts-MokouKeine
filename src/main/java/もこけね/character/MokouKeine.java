@@ -1120,7 +1120,7 @@ public class MokouKeine extends CustomPlayer {
 
     @Override
     public AbstractCard getStartCardForEvent() {
-        return null;//return new NorthStar();
+        return isMokou ? new Scorch() : new Forget();
     }
     @Override
     public String getLocalizedCharacterName() {

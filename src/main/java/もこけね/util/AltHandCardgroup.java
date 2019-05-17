@@ -92,6 +92,10 @@ public class AltHandCardgroup extends CardGroup {
             AbstractCard c;
             switch (this.group.size()) {
                 case 0:
+                    if (this.equals(AbstractDungeon.player.hand) && AbstractDungeon.player instanceof MokouKeine)
+                    {
+                        ((MokouKeine) AbstractDungeon.player).otherPlayerHand.refreshHandLayout();
+                    }
                     return;
                 case 1:
                     this.group.get(0).target_x = (float) Settings.WIDTH * posMultiplier;

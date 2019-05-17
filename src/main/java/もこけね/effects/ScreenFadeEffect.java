@@ -15,6 +15,9 @@ public class ScreenFadeEffect extends AbstractGameEffect {
     private float progress;
     private Color textColor;
 
+    private static final float TEXT_X = Settings.WIDTH * 0.5f;
+    private static final float TEXT_Y = Settings.HEIGHT * 0.75f;
+
     public ScreenFadeEffect(String msg)
     {
         this.message = msg;
@@ -47,8 +50,8 @@ public class ScreenFadeEffect extends AbstractGameEffect {
                 }
             }
         }
-        color.a = MathUtils.lerp(0, 1, progress);
-        textColor.a = color.a;
+        color.a = MathUtils.lerp(0, 0.5f, progress);
+        textColor.a = color.a * 2.0f;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class ScreenFadeEffect extends AbstractGameEffect {
         sb.setColor(this.color);
         sb.draw(ImageMaster.WHITE_SQUARE_IMG, 0.0F, 0.0F, (float) Settings.WIDTH, (float)Settings.HEIGHT);
 
-        FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, this.message, (float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2), textColor);
+        FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, this.message, TEXT_X, TEXT_Y, textColor);
     }
 
     @Override

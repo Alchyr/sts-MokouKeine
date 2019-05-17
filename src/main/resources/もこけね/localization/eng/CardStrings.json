@@ -19,6 +19,18 @@
     "NAME": "Scorch",
     "DESCRIPTION": "Deal !D! damage !M! times."
   },
+  "もこけね:Record": {
+    "NAME": "Record",
+    "DESCRIPTION": "Add a copy of the next !M! cards played this turn to your draw pile. NL They cost 1 less this combat. NL Exhaust."
+  },
+  "もこけね:SuppressingStrike": {
+    "NAME": "Suppressing Strike",
+    "DESCRIPTION": "Deal !D! damage. NL Gain 1 もこけね:Seal."
+  },
+  "もこけね:Repose": {
+    "NAME": "Repose",
+    "DESCRIPTION": "Draw !M! cards. NL Gain 2 もこけね:Seals. NL Exhaust."
+  },
   "もこけね:Restraint": {
     "NAME": "Restraint",
     "DESCRIPTION": "Gain !B! Block. NL Gain 1 もこけね:Seal."
@@ -79,13 +91,21 @@
       " NL (Deals !M! damage.)"
     ]
   },
+  "もこけね:Huddle": {
+    "NAME": "Huddle",
+    "DESCRIPTION": "Gain !B! Block. NL Draw 1 card each."
+  },
+  "もこけね:Blazing": {
+    "NAME": "Blazing",
+    "DESCRIPTION": "Lose 4 HP. NL Draw !M! cards."
+  },
   "もこけね:Detonate": {
     "NAME": "Detonate",
     "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, deal !M! damage to ALL enemies."
   },
   "もこけね:Singe": {
     "NAME": "Singe",
-    "DESCRIPTION": "Deal !D! damage."
+    "DESCRIPTION": "Deal !D! damage. NL Add a Burn to your hand."
   },
   "もこけね:Backfire": {
     "NAME": "Backfire",
@@ -151,5 +171,9 @@
     "NAME": "Phoenix's Call",
     "DESCRIPTION": "Exhaust your hand. NL Apply 1 Vulnerable for each card Exhausted.",
     "UPGRADE_DESCRIPTION": "Exhaust your hand. NL Apply 1 Vulnerable to ALL enemies for each card Exhausted."
+  },
+  "もこけね:Sacrifice": {
+    "NAME": "Sacrifice",
+    "DESCRIPTION": "Deal !D! damage. NL Apply 1 Stun. NL Skip your next turn. NL Exhaust."
   }
 }

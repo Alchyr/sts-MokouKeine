@@ -12,6 +12,17 @@
       "On death, deals damage equal to half of its Max HP to ALL enemies."
     ]
   },
+  "もこけね:Record": {
+    "NAME": "Record",
+    "DESCRIPTIONS": [
+      "Add a copy of the next card played to ",
+      "Add a copy of the next #b",
+      " cards played to ",
+      " draw pile.",
+      "your",
+      "'s"
+    ]
+  },
   "もこけね:Ruthless": {
     "NAME": "Ruthless",
     "DESCRIPTIONS": [

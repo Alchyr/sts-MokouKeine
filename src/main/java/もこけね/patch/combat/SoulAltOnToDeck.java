@@ -15,7 +15,7 @@ import もこけね.ui.OtherDrawPilePanel;
 )
 public class SoulAltOnToDeck {
     public static CardGroup altGroup = null;
-    private static boolean reposition = false;
+    public static boolean reposition = false;
 
     @SpireInsertPatch(
             locator = Locator.class,

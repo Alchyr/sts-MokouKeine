@@ -58,9 +58,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /*TODO LIST:
-apply powers when powers are applied
-refresh other hand when own hand is empty
-
 
 EVENTS:
 Ranwid - Gold option: If other player cannot afford it, cannot take

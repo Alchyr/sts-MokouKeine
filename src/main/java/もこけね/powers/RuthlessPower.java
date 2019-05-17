@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import もこけね.OnEnemyDeathPower;
+import もこけね.interfaces.OnEnemyDeathPower;
 import もこけね.abstracts.BasePower;
 
 public class RuthlessPower extends BasePower implements OnEnemyDeathPower {

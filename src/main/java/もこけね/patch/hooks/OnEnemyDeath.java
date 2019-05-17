@@ -1,13 +1,12 @@
 package もこけね.patch.hooks;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import javassist.CtBehavior;
-import もこけね.OnEnemyDeathPower;
+import もこけね.interfaces.OnEnemyDeathPower;
 
 @SpirePatch(
         clz = AbstractMonster.class,
