@@ -1,12 +1,13 @@
 package もこけね.actions.cards;
 
+import basemod.BaseMod;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect;
 import もこけね.abstracts.ReceiveSignalCardsAction;
 import もこけね.effects.AltShowCardAndAddToHandEffect;
 
-import java.util.Map;
 
 public class ReceiveRevisionCardsAction extends ReceiveSignalCardsAction {
     public ReceiveRevisionCardsAction()
@@ -16,14 +17,27 @@ public class ReceiveRevisionCardsAction extends ReceiveSignalCardsAction {
 
     @Override
     public void update() {
-        if (!signaledCards.isEmpty())
+        if (signaledCards.size > 0)
         {
-            for (Map.Entry<AbstractCard, CardGroup> e : signaledCards.entrySet())
+            int amt = signaledCards.size;
+            int otherHandSpace = BaseMod.MAX_HAND_SIZE - AbstractDungeon.player.hand.size();
+
+            for (int i = 0; i < amt; ++i)
             {
-                e.getValue().removeCard(e.getKey());
-                AbstractDungeon.effectList.add(new AltShowCardAndAddToHandEffect(e.getKey(), false));
+                CardGroup source = signaledGroups.removeFirst();
+                AbstractCard c = signaledCards.removeFirst();
+
+                source.removeCard(c);
+                if (otherHandSpace > 0)
+                {
+                    AbstractDungeon.effectList.add(new AltShowCardAndAddToHandEffect(c, false));
+                    --otherHandSpace;
+                }
+                else
+                {
+                    AbstractDungeon.effectList.add(new ShowCardAndAddToDiscardEffect(c));
+                }
             }
-            signaledCards.clear();
         }
         this.isDone = true;
     }

@@ -1,5 +1,6 @@
 package もこけね.actions.cards;
 
+import basemod.BaseMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -9,6 +10,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import もこけね.abstracts.ReceiveSignalCardsAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
+import もこけね.effects.ShowCardAndAddToOtherDiscardEffect;
 import もこけね.effects.ShowCardAndAddToOtherHandEffect;
 import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.util.MultiplayerHelper;
@@ -57,9 +59,18 @@ public class RevisionAction extends AbstractGameAction {
             }
 
             if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
+                int otherHandSpace = BaseMod.MAX_HAND_SIZE - ((MokouKeine) AbstractDungeon.player).otherPlayerHand.size();
                 for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group)
                 {
-                    AbstractDungeon.effectList.add(new ShowCardAndAddToOtherHandEffect(c, false));
+                    if (otherHandSpace > 0)
+                    {
+                        AbstractDungeon.effectList.add(new ShowCardAndAddToOtherHandEffect(c, false));
+                        --otherHandSpace;
+                    }
+                    else
+                    {
+                        AbstractDungeon.effectList.add(new ShowCardAndAddToOtherDiscardEffect(c));
+                    }
                     MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalCardString(indexes.get(c), AbstractDungeon.player.hand, true));
 
                 }

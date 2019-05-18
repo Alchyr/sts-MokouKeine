@@ -1,17 +1,17 @@
 package もこけね.abstracts;
 
+import com.badlogic.gdx.utils.Queue;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import もこけね.character.MokouKeine;
 
-import java.util.HashMap;
-
 import static もこけね.もこけねは神の国.logger;
 
 public abstract class ReceiveSignalCardsAction extends AbstractGameAction {
-    public static HashMap<AbstractCard, CardGroup> signaledCards = new HashMap<>();
+    public static Queue<AbstractCard> signaledCards = new Queue<>();
+    public static Queue<CardGroup> signaledGroups = new Queue<>();
 
     public static String signalCardString(AbstractCard c, CardGroup source, boolean otherGroups)
     {
@@ -107,7 +107,8 @@ public abstract class ReceiveSignalCardsAction extends AbstractGameAction {
             if (source != null && index >= 0 && index < source.group.size())
             {
                 AbstractCard c = source.group.get(index);
-                signaledCards.put(c, source);
+                signaledCards.addLast(c);
+                signaledGroups.addLast(source);
             }
         }
     }
