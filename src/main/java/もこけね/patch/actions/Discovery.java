@@ -15,6 +15,7 @@ import もこけね.patch.enums.CharacterEnums;
 import もこけね.util.MessageHelper;
 import もこけね.util.MultiplayerHelper;
 
+import static もこけね.util.MultiplayerHelper.partnerName;
 import static もこけね.もこけねは神の国.makeID;
 
 @SpirePatch(
@@ -32,13 +33,13 @@ public class Discovery {
             MokouKeine p = (MokouKeine)AbstractDungeon.player;
             if (TrackCardSource.useOtherEnergy) //played by other player.
             {
-                AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + p.getOtherPlayerName() + uiStrings.TEXT[1]));
+                AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + partnerName + uiStrings.TEXT[1]));
                 __instance.isDone = true;
                 return SpireReturn.Return(null);
             }
             else if (!TrackCardSource.useMyEnergy) //This is neutral source.
             {
-                AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + p.getOtherPlayerName() + uiStrings.TEXT[1]));
+                AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + partnerName + uiStrings.TEXT[1]));
             }
         }
         return SpireReturn.Continue();

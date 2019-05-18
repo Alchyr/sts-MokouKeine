@@ -10,6 +10,7 @@ import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.util.MultiplayerHelper;
 
+import static もこけね.util.MultiplayerHelper.partnerName;
 import static もこけね.もこけねは神の国.chat;
 import static もこけね.もこけねは神の国.makeID;
 
@@ -71,7 +72,7 @@ public class ObtainRewards {
                         if (i.type == RewardItem.RewardType.RELIC && i.relic.relicId.equals(id))
                         {
                             i.isDone = true;
-                            MultiplayerHelper.sendP2PMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + uiStrings.TEXT[0] + i.relic.name + uiStrings.TEXT[3]);
+                            MultiplayerHelper.sendP2PMessage(partnerName + uiStrings.TEXT[0] + i.relic.name + uiStrings.TEXT[3]);
                         }
                     }
                     break;
@@ -81,7 +82,7 @@ public class ObtainRewards {
                         if (i.type == RewardItem.RewardType.SAPPHIRE_KEY)
                         {
                             i.isDone = true;
-                            MultiplayerHelper.sendP2PMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + uiStrings.TEXT[1]);
+                            MultiplayerHelper.sendP2PMessage(partnerName + uiStrings.TEXT[1]);
                         }
                     }
                 case 'e':

@@ -28,6 +28,8 @@ import もこけね.util.PotionQueueItem;
 
 import java.util.ArrayList;
 
+import static もこけね.util.MultiplayerHelper.partnerName;
+import static もこけね.util.MultiplayerHelper.sendP2PMessage;
 import static もこけね.もこけねは神の国.*;
 
 public class PotionUse {
@@ -105,12 +107,12 @@ public class PotionUse {
                 {
                     AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);
                     toUse.use(target);
-                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
+                    sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
                 }
                 else if (!toUse.targetRequired)
                 {
                     toUse.use(null);
-                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[2]);
+                    sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[2]);
                 }
                 AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
             }
@@ -135,12 +137,12 @@ public class PotionUse {
             {
                 AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);
                 toUse.use(target);
-                chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
+                sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
             }
             else if (!toUse.targetRequired)
             {
                 toUse.use(null);
-                chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + toUse.name + TEXT[2]);
+                sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[2]);
             }
             AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
         }

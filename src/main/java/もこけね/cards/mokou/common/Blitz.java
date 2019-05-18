@@ -2,6 +2,7 @@ package もこけね.cards.mokou.common;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -24,23 +25,25 @@ public class Blitz extends MokouCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int DAMAGE = 4;
-    private static final int UPG_DAMAGE = 2;
+    private static final int DAMAGE = 3;
+    private static final int UPG_DAMAGE = 1;
     private static final int HP_LOSS = 3;
 
     public Blitz()
     {
-        super(cardInfo, false);
+        super(cardInfo, true);
 
         setDamage(DAMAGE, UPG_DAMAGE);
-        setMagic(HP_LOSS);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new LoseHPAction(p, p, this.magicNumber));
+        AbstractDungeon.actionManager.addToBottom(new LoseHPAction(p, p, HP_LOSS));
         AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
         AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+
+        if (upgraded)
+            AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, 1));
     }
 
     @Override

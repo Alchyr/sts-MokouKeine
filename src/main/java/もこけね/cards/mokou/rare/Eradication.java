@@ -26,7 +26,7 @@ public class Eradication extends MokouCard {
 
     public final static String ID = makeID(cardInfo.cardName);
     //4 cost: Deal 3 [4] damage 12 times.
-    private static final int DAMAGE = 3;
+    private static final int DAMAGE = 2;
     private static final int UPG_DAMAGE = 1;
     private static final int HIT_COUNT = 12;
 

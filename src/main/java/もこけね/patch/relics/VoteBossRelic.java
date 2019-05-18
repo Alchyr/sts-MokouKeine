@@ -23,6 +23,7 @@ import もこけね.util.MultiplayerHelper;
 import java.util.ArrayList;
 
 import static もこけね.patch.lobby.HandleMatchmaking.isHost;
+import static もこけね.util.MultiplayerHelper.partnerName;
 import static もこけね.もこけねは神の国.*;
 
 public class VoteBossRelic {
@@ -136,7 +137,7 @@ public class VoteBossRelic {
                     if (!__instance.relicId.equals(votedRelic))
                     {
                         votedRelic = __instance.relicId;
-                        MultiplayerHelper.sendP2PMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[2] + __instance.name + TEXT[3]);
+                        MultiplayerHelper.sendP2PMessage(partnerName + TEXT[2] + __instance.name + TEXT[3]);
                     }
                     MultiplayerHelper.sendP2PString("boss_relic_vote" + votedRelic);
                     if (HandleMatchmaking.isHost && otherVotedRelic != null)

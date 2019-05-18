@@ -266,7 +266,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             {
                 logger.info("This is host:");
                 logger.info("  - Establishing P2P connection with " + IDChanged.getAccountID());
-                MultiplayerHelper.sendP2PString(IDChanged, "connect");
+                MultiplayerHelper.sendP2PString(IDChanged, "connect" + CardCrawlGame.playerName);
             }
         }
     }

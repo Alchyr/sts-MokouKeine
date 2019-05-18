@@ -6,6 +6,14 @@
       " #yWeak."
     ]
   },
+  "もこけね:Weight": {
+    "NAME": "Weight",
+    "DESCRIPTIONS": [
+      "This enemy's #yVulnerable stacks additively until the end of the turn.",
+      "This enemy's #yVulnerable stacks additively for #b",
+      " turns."
+    ]
+  },
   "もこけね:Volatile": {
     "NAME": "Volatile",
     "DESCRIPTIONS": [

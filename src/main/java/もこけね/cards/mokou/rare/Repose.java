@@ -23,21 +23,21 @@ public class Repose extends MokouCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int DRAW = 2;
-    private static final int UPG_DRAW = 2;
+    private static final int EFFECT = 2;
+    private static final int UPG_EFFECT = 1;
 
     public Repose()
     {
         super(cardInfo, false);
 
-        setMagic(DRAW, UPG_DRAW);
+        setMagic(EFFECT, UPG_EFFECT);
         setExhaust(true);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new SealPower(p, 2), 2));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new SealPower(p, this.magicNumber), this.magicNumber));
     }
 
     @Override

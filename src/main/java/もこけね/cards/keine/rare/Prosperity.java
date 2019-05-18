@@ -1,16 +1,12 @@
 package もこけね.cards.keine.rare;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.abstracts.KeineCard;
 import もこけね.actions.general.PlayCardAction;
-import もこけね.cards.keine.common.Sinister;
 import もこけね.patch.card_use.LastCardType;
 import もこけね.patch.enums.CustomCardTags;
 import もこけね.util.CardInfo;

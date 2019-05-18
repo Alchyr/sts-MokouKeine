@@ -34,13 +34,15 @@ public class RecordPower extends BasePower implements NonStackablePower {
             this.amount--;
             this.updateDescription();
 
+            AbstractCard cpy = card.makeStatEquivalentCopy();
+            cpy.modifyCostForCombat(-1);
             if (other)
             {
-                AbstractDungeon.actionManager.addToBottom(new MakeTempCardInOtherDrawAction(card, 1, true, true));
+                AbstractDungeon.actionManager.addToBottom(new MakeTempCardInOtherDrawAction(cpy, 1, true, true));
             }
             else
             {
-                AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(card, 1, true, true));
+                AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(cpy, 1, true, true));
             }
         }
 

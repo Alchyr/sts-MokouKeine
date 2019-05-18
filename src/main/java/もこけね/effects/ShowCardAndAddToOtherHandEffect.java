@@ -35,8 +35,15 @@ public class ShowCardAndAddToOtherHandEffect extends AbstractGameEffect {
         card.targetTransparency = 1.0F;// 31
         card.fadingOut = false;// 32
         this.playCardObtainSfx();// 33
-        AbstractDungeon.player.hand.addToHand(card);// 35
-        card.triggerWhenCopied();// 36
+        if (AbstractDungeon.player instanceof MokouKeine)
+        {
+            ((MokouKeine) AbstractDungeon.player).otherPlayerHand.addToHand(card);
+        }
+        else
+        {
+            AbstractDungeon.player.hand.addToHand(card);
+        }
+        card.triggerWhenCopied();
         AbstractDungeon.player.hand.refreshHandLayout();// 37
         AbstractDungeon.player.hand.applyPowers();// 38
         AbstractDungeon.player.onCardDrawOrDiscard();// 39
@@ -44,7 +51,36 @@ public class ShowCardAndAddToOtherHandEffect extends AbstractGameEffect {
             card.setCostForTurn(0);// 42
         }
 
-    }// 44
+    }
+
+    public ShowCardAndAddToOtherHandEffect(AbstractCard card, boolean isCopy) {
+        this.card = card;// 47
+        this.identifySpawnLocation();// 48
+        this.duration = EFFECT_DUR;// 49
+        card.drawScale = 0.75F;// 50
+        card.targetDrawScale = 0.75F;// 51
+        card.transparency = 0.01F;// 52
+        card.targetTransparency = 1.0F;// 53
+        card.fadingOut = false;// 54
+        if (AbstractDungeon.player instanceof MokouKeine)
+        {
+            ((MokouKeine) AbstractDungeon.player).otherPlayerHand.addToHand(card);
+        }
+        else
+        {
+            AbstractDungeon.player.hand.addToHand(card);
+        }
+
+        if (isCopy)
+            card.triggerWhenCopied();
+
+        AbstractDungeon.player.hand.refreshHandLayout();
+        AbstractDungeon.player.hand.applyPowers();
+        AbstractDungeon.player.onCardDrawOrDiscard();
+        if (AbstractDungeon.player.hasPower(CorruptionPower.POWER_ID) && card.type == AbstractCard.CardType.SKILL) {
+            card.setCostForTurn(0);
+        }
+    }
 
     public ShowCardAndAddToOtherHandEffect(AbstractCard card) {
         this.card = card;// 47
@@ -57,20 +93,20 @@ public class ShowCardAndAddToOtherHandEffect extends AbstractGameEffect {
         card.fadingOut = false;// 54
         if (AbstractDungeon.player instanceof MokouKeine)
         {
-
+            ((MokouKeine) AbstractDungeon.player).otherPlayerHand.addToHand(card);
         }
         else
         {
-            AbstractDungeon.player.hand.addToHand(card);// 56
-            card.triggerWhenCopied();// 57
+            AbstractDungeon.player.hand.addToHand(card);
         }
+        card.triggerWhenCopied();
         AbstractDungeon.player.hand.refreshHandLayout();
         AbstractDungeon.player.hand.applyPowers();
         AbstractDungeon.player.onCardDrawOrDiscard();
         if (AbstractDungeon.player.hasPower(CorruptionPower.POWER_ID) && card.type == AbstractCard.CardType.SKILL) {
             card.setCostForTurn(0);
         }
-    }// 65
+    }
 
     private void playCardObtainSfx() {
         int effectCount = 0;// 68

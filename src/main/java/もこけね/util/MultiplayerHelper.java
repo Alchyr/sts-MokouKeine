@@ -12,10 +12,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepEffect;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepScreenCoverEffect;
+import もこけね.abstracts.ReceiveSignalCardsAction;
 import もこけね.actions.character.MakeTempCardInOtherHandAction;
 import もこけね.actions.character.OtherPlayerDiscardAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
+import もこけね.patch.card_use.PlayCardCheck;
 import もこけね.patch.relics.ReportPurchase;
 import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.deck_changes.ReportObtainCard;
@@ -48,6 +50,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
     public static SteamNetworking communication;
     public static MultiplayerHelper callback;
     public static SteamID currentPartner;
+    public static String partnerName;
 
     public static boolean active;
     //When second player joins, send signal to start game start timer
@@ -153,14 +156,25 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
         else if (msg.startsWith("other_play_card")) //Host played a card.
         {
-            tryOtherPlayCard(msg.substring(15));
+            if (!tryOtherPlayCard(msg.substring(15)))
+            {
+                logger.error("Host's card play attempt failed. Storing in card attempt queue to be attempted at next card play.");
+                PlayCardCheck.failedAttempts.addLast(msg.substring(15));
+            }
         }
         else if (msg.startsWith("try_play_card")) //Player that isn't host played a card.
         {
             String args = msg.substring(13);
-            tryOtherPlayCard(args);
-            //Send confirmation to play the card.
-            sendP2PString("confirm_play_card" + args);
+            if (tryOtherPlayCard(args))
+            {
+                //Send confirmation to play the card.
+                sendP2PString("confirm_play_card" + args);
+            }
+            else
+            {
+                logger.error("Card play attempt failed. Storing in card attempt queue to be attempted at next card play.");
+                PlayCardCheck.failedAttempts.addLast(args);
+            }
         }
         else if (msg.startsWith("confirm_play_card"))
         {
@@ -186,6 +200,10 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("update_potions"))
         {
             receivePotionUpdate(msg.substring(14));
+        }
+        else if (msg.startsWith("signalcard"))
+        {
+            ReceiveSignalCardsAction.receiveCardString(msg.substring(10));
         }
         else if (msg.startsWith("signal"))
         {
@@ -437,10 +455,11 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             msg = msg.substring(4);
             Settings.seed = Long.valueOf(msg);
         }
-        else if (msg.equals("success"))
+        else if (msg.startsWith("success"))
         {
             active = true;
             currentPartner = sender;
+            partnerName = msg.substring(7);
             if (HandleMatchmaking.isHost)
             {
                 chat.receiveMessage("Another player has joined the lobby.");
@@ -451,14 +470,15 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             }
             else
             {
-                sendP2PString("success");
+                sendP2PString("success" + CardCrawlGame.playerName);
             }
         }
-        else if (msg.equals("connect"))
+        else if (msg.startsWith("connect"))
         {
             active = true;
             currentPartner = sender;
-            sendP2PString("success");
+            partnerName = msg.substring(7);
+            sendP2PString("success" + CardCrawlGame.playerName);
         }
     }
 
@@ -468,7 +488,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         logger.error("Failed to connect to lobby partner.");
         logger.error(p2pSessionError);
         //currentPartner = null;
-        sendP2PString(steamID, "connect");
+        sendP2PString(steamID, "connect" + CardCrawlGame.playerName);
     }
 
     @Override
@@ -484,39 +504,49 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
 
 
 
-    private static void tryOtherPlayCard(String args)
+    public static boolean tryOtherPlayCard(String args)
     {
         if (AbstractDungeon.player instanceof MokouKeine)
         {
             MokouKeine p = (MokouKeine)AbstractDungeon.player;
             String[] params = args.split(" ");
 
-            if (params.length == 4)
+            if (params.length == 5)
             {
                 logger.info("Other player played a card.");
                 int cardIndex = Integer.valueOf(params[0]);
-                int targetIndex = Integer.valueOf(params[1]);
-                float x = Float.valueOf(params[2]);
-                float y = Float.valueOf(params[3]);
+                String cardID = params[1];
+                int targetIndex = Integer.valueOf(params[2]);
+                float x = Float.valueOf(params[3]);
+                float y = Float.valueOf(params[4]);
 
                 if (cardIndex >= 0 && cardIndex < p.otherPlayerHand.size())
                 {
                     AbstractCard toPlay = p.otherPlayerHand.group.get(cardIndex);
-                    p.otherPlayerHand.removeCard(toPlay);
 
-                    AbstractMonster target = null;
-                    if (targetIndex >= 0 && targetIndex < AbstractDungeon.getMonsters().monsters.size()) {
-                        target = AbstractDungeon.getMonsters().monsters.get(targetIndex);
-                        if (target != null) {
-                            toPlay.calculateCardDamage(target);
+                    if (toPlay.cardID.equals(cardID))
+                    {
+                        p.otherPlayerHand.removeCard(toPlay);
+
+                        AbstractMonster target = null;
+                        if (targetIndex >= 0 && targetIndex < AbstractDungeon.getMonsters().monsters.size()) {
+                            target = AbstractDungeon.getMonsters().monsters.get(targetIndex);
+                            if (target != null) {
+                                toPlay.calculateCardDamage(target);
+                            }
                         }
+
+                        //AbstractDungeon.player.limbo.addToBottom(toPlay);
+                        toPlay.target_x = toPlay.current_x = x;
+                        toPlay.target_y = toPlay.current_y = y;
+
+                        AbstractDungeon.actionManager.cardQueue.add(new OtherPlayerCardQueueItem(toPlay, target));
+                        return true;
                     }
-
-                    //AbstractDungeon.player.limbo.addToBottom(toPlay);
-                    toPlay.target_x = toPlay.current_x = x;
-                    toPlay.target_y = toPlay.current_y = y;
-
-                    AbstractDungeon.actionManager.cardQueue.add(new OtherPlayerCardQueueItem(toPlay, target));
+                    else
+                    {
+                        logger.error("ERROR: Specified index does not have correct ID. " + cardID + " != " + toPlay.cardID);
+                    }
                 }
                 else
                 {
@@ -528,19 +558,20 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         {
             logger.info("ERROR: Received invalid attempt to play a card.");
         }
+        return false;
     }
 
     private static void tryPlayCard(String args)
     {
         String[] params = args.split(" ");
 
-        if (params.length == 4)
+        if (params.length == 5)
         {
             logger.info("Received confirmation to play a card.");
             int cardIndex = Integer.valueOf(params[0]);
-            int targetIndex = Integer.valueOf(params[1]);
-            float x = Float.valueOf(params[2]);
-            float y = Float.valueOf(params[3]);
+            int targetIndex = Integer.valueOf(params[2]);
+            float x = Float.valueOf(params[3]);
+            float y = Float.valueOf(params[4]);
 
             if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.hand.size())
             {

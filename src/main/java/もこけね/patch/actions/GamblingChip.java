@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static もこけね.util.MultiplayerHelper.partnerName;
 import static もこけね.もこけねは神の国.makeID;
 
 @SpirePatch(
@@ -43,7 +44,7 @@ public class GamblingChip {
                 MokouKeine p = (MokouKeine)AbstractDungeon.player;
                 if (TrackCardSource.useOtherEnergy) //played by other player.
                 {
-                    AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + p.getOtherPlayerName() + uiStrings.TEXT[1]));
+                    AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + partnerName + uiStrings.TEXT[1]));
                     __instance.isDone = true;
                     return SpireReturn.Return(null);
                 }
@@ -60,7 +61,7 @@ public class GamblingChip {
 
                     if (!TrackCardSource.useMyEnergy) //this came from a neutral source. Both players have this action. Have to wait.
                     {
-                        AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + p.getOtherPlayerName() + uiStrings.TEXT[1]));
+                        AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + partnerName + uiStrings.TEXT[1]));
                         //Don't cancel this action, though.
                     }
                 }

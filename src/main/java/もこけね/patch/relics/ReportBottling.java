@@ -14,6 +14,7 @@ import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.util.MultiplayerHelper;
 
+import static もこけね.util.MultiplayerHelper.partnerName;
 import static もこけね.もこけねは神の国.chat;
 import static もこけね.もこけねは神の国.makeID;
 
@@ -113,15 +114,15 @@ public class ReportBottling {
             switch (bottle)
             {
                 case 'f':
-                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + c.name + TEXT[1] + RelicLibrary.getRelic(BottledFlame.ID).name + TEXT[2]);
+                    chat.receiveMessage(partnerName + TEXT[0] + c.name + TEXT[1] + RelicLibrary.getRelic(BottledFlame.ID).name + TEXT[2]);
                     c.inBottleFlame = true;
                     break;
                 case 'l':
-                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + c.name + TEXT[1] + RelicLibrary.getRelic(BottledLightning.ID).name + TEXT[2]);
+                    chat.receiveMessage(partnerName + TEXT[0] + c.name + TEXT[1] + RelicLibrary.getRelic(BottledLightning.ID).name + TEXT[2]);
                     c.inBottleLightning = true;
                     break;
                 case 't':
-                    chat.receiveMessage(((MokouKeine) AbstractDungeon.player).getOtherPlayerName() + TEXT[0] + c.name + TEXT[1] + RelicLibrary.getRelic(BottledTornado.ID).name + TEXT[2]);
+                    chat.receiveMessage(partnerName + TEXT[0] + c.name + TEXT[1] + RelicLibrary.getRelic(BottledTornado.ID).name + TEXT[2]);
                     c.inBottleTornado = true;
                     break;
             }

@@ -14,6 +14,7 @@ import もこけね.util.MultiplayerHelper;
 
 import java.util.HashMap;
 
+import static もこけね.util.MultiplayerHelper.partnerName;
 import static もこけね.もこけねは神の国.makeID;
 
 public class RefuteAction extends AbstractGameAction {
@@ -33,7 +34,7 @@ public class RefuteAction extends AbstractGameAction {
         if (TrackCardSource.useOtherEnergy && AbstractDungeon.player instanceof MokouKeine) //played by other player.
         {
             MokouKeine p = (MokouKeine)AbstractDungeon.player;
-            AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(TEXT[1] + p.getOtherPlayerName() + TEXT[2]));
+            AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(TEXT[1] + partnerName + TEXT[2]));
             this.isDone = true;
         }
         else if (AbstractDungeon.player instanceof MokouKeine)

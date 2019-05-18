@@ -29,7 +29,11 @@
   },
   "もこけね:Repose": {
     "NAME": "Repose",
-    "DESCRIPTION": "Draw !M! cards. NL Gain 2 もこけね:Seals. NL Exhaust."
+    "DESCRIPTION": "Draw !M! cards. NL Gain !M! もこけね:Seals. NL Exhaust."
+  },
+  "もこけね:AntiquityBurden": {
+    "NAME": "Antiquity's Burden",
+    "DESCRIPTION": "Enemy's Vulnerable stacks additively until the end of the turn. NL Exhaust."
   },
   "もこけね:Restraint": {
     "NAME": "Restraint",
@@ -63,6 +67,25 @@
     "NAME": "Prosperity",
     "DESCRIPTION": "Gain !B! Block. NL もこけね:Echo Power: Play a copy of the Power."
   },
+  "もこけね:Replicate": {
+    "NAME": "Replicate",
+    "DESCRIPTION": "Exhaust a card in your hand. NL Add !M! new copies of it to your hand."
+  },
+  "もこけね:Revision": {
+    "NAME": "Revision",
+    "DESCRIPTION": "Move any number of cards from your hand to your partner's hand."
+  },
+  "もこけね:Disparity": {
+    "NAME": "Disparity",
+    "DESCRIPTION": "Gain !M! Block for ALL your cards that did not start in your deck.",
+    "EXTENDED_DESCRIPTION": [
+      "NL (Gain !B! Block.)"
+    ]
+  },
+  "もこけね:Hardcover": {
+    "NAME": "Hardcover",
+    "DESCRIPTION": "Deal !D! damage. NL もこけね:Echo Power: Gain !M! Artifact."
+  },
   "もこけね:Shatter": {
     "NAME": "Shatter",
     "DESCRIPTION": "Apply !M! Vulnerable for each enemy in combat."
@@ -78,7 +101,7 @@
   },
   "もこけね:Release": {
     "NAME": "Release",
-    "DESCRIPTION": "Lose all もこけね:Seals. NL Summon a もこけね:Spark for each もこけね:Seal lost."
+    "DESCRIPTION": "Lose all もこけね:Seals. NL Summon a もこけね:Spark for each もこけね:Seal lost. NL Exhaust."
   },
   "もこけね:Reflection": {
     "NAME": "Reflection",
@@ -154,9 +177,14 @@
     "NAME": "Sealing Rite",
     "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Gain 1 もこけね:Seal for each enemy in combat. NL Exhaust."
   },
+  "もこけね:FujiyamaVolcano": {
+    "NAME": "Fujiyama Volcano",
+    "DESCRIPTION": "Exhaust your hand. NL Summon a もこけね:Spark for each card Exhausted."
+  },
   "もこけね:Blitz": {
     "NAME": "Blitz",
-    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage twice."
+    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage twice.",
+    "UPGRADE_DESCRIPTION": "Lose !M! HP. NL Deal !D! damage twice. NL Draw a card."
   },
   "もこけね:Ruthless": {
     "NAME": "Ruthless",
@@ -169,8 +197,7 @@
   },
   "もこけね:PhoenixCall": {
     "NAME": "Phoenix's Call",
-    "DESCRIPTION": "Exhaust your hand. NL Apply 1 Vulnerable for each card Exhausted.",
-    "UPGRADE_DESCRIPTION": "Exhaust your hand. NL Apply 1 Vulnerable to ALL enemies for each card Exhausted."
+    "DESCRIPTION": "Exhaust a card. NL Apply !M! Vulnerable."
   },
   "もこけね:Sacrifice": {
     "NAME": "Sacrifice",
