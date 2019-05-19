@@ -24,7 +24,7 @@ public class HeatUp extends MokouCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int COST = 4;
+    private static final int COST = 3;
 
     private static final int BUFF = 2;
     private static final int UPG_BUFF = 1;

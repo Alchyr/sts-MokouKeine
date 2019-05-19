@@ -183,8 +183,8 @@
   },
   "もこけね:Blitz": {
     "NAME": "Blitz",
-    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage twice.",
-    "UPGRADE_DESCRIPTION": "Lose !M! HP. NL Deal !D! damage twice. NL Draw a card."
+    "DESCRIPTION": "Lose 3 HP. NL Deal !D! damage twice.",
+    "UPGRADE_DESCRIPTION": "Lose 3 HP. NL Deal !D! damage twice. NL Draw a card."
   },
   "もこけね:Ruthless": {
     "NAME": "Ruthless",

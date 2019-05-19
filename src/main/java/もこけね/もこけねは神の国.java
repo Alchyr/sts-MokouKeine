@@ -58,11 +58,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /*TODO LIST:
+Upon entering next act and generating map, if other player has already voted, re-check voted node so that it is rendered/works properly.
 
 EVENTS:
 Ranwid - Gold option: If other player cannot afford it, cannot take
 Potion option: Also can take a potion in list used to track other player potions
 Card option: Fine as is
+
 
 
 

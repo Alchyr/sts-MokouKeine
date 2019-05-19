@@ -1039,11 +1039,13 @@ public class MokouKeine extends CustomPlayer {
             startDeck.add(MokouStrike.ID);
             startDeck.add(MokouStrike.ID);
             startDeck.add(MokouStrike.ID);
+            startDeck.add(MokouStrike.ID);
             startDeck.add(MokouDefend.ID);
             startDeck.add(MokouDefend.ID);
             startDeck.add(MokouDefend.ID);
             startDeck.add(Scorch.ID);
 
+            otherPlayerMasterDeck.group.add(new KeineStrike());
             otherPlayerMasterDeck.group.add(new KeineStrike());
             otherPlayerMasterDeck.group.add(new KeineStrike());
             otherPlayerMasterDeck.group.add(new KeineStrike());
@@ -1057,11 +1059,13 @@ public class MokouKeine extends CustomPlayer {
             startDeck.add(KeineStrike.ID);
             startDeck.add(KeineStrike.ID);
             startDeck.add(KeineStrike.ID);
+            startDeck.add(KeineStrike.ID);
             startDeck.add(KeineDefend.ID);
             startDeck.add(KeineDefend.ID);
             startDeck.add(KeineDefend.ID);
             startDeck.add(Forget.ID);
 
+            otherPlayerMasterDeck.group.add(new MokouStrike());
             otherPlayerMasterDeck.group.add(new MokouStrike());
             otherPlayerMasterDeck.group.add(new MokouStrike());
             otherPlayerMasterDeck.group.add(new MokouStrike());
