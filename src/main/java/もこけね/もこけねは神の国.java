@@ -61,11 +61,51 @@ import java.util.Collection;
 Upon entering next act and generating map, if other player has already voted, re-check voted node so that it is rendered/works properly.
 
 EVENTS:
-Ranwid - Gold option: If other player cannot afford it, cannot take
-Potion option: Also can take a potion in list used to track other player potions
-Card option: Fine as is
+Living Wall - Augumenter - Transmogrifier - Does transform work correctly?
+Ancient Writing - Upgrading does not upgrade other deck
+Council of Ghosts - Doubled apparitions is kind of op... Maybe remove from pool
+Removal of bottles - Unbottle other player's bottled card?
+Vampires - Probably strike removal won't work, since pandora's doesn't.
+Falling - Should be fine, but check.
+Mind bloom -
+    I Am Awake - Upgrades do not sync
+    Other options should be fine.
+A Note For Yourself - Remove from pool
+Bonfire Spirits - report hp changes
+Designer In-Spire - ensure transform/upgrades are reported properly
+The Divine Fountain - Make sure it works
+We Meet Again/Ranwid - Gold option: If other player cannot afford it, cannot take
+                        Potion option: Also can take a potion in list used to track other player potions
+                        Card option: Fine as is
+
+Relics:
+Pandora's Box - Card additions are synced, but card removals are not
+Bottled Tornado - canSpawn will desync if one player has a power and other does not
+Ninja Scroll? Silent only, so it should be fine, but... I don't trust things.
+Mummified hand
+Test how sundial interacts
+Dead Branch - Ensure card goes to the correct hand
+Du-vu doll - Count curses in both decks
+Gambling Chip - test
+Girya - Patch campsite option
+Shovel - Test
+Unceasing Top - If one player's hand is empty, they draw? This one will be a pain.
+Astrolabe - Make sure transformation works properly
+Calling Bell - Ensure both players obtain the relics if one of them chooses to take one. This should work.
+Eternal Feather - Count both decks
+Bloody Idol - Heal for 2, triggers on both players' gold gain?
+Necronomicon - Test if it works on cards played by ally
+Nilry's - Test
+Warped Tongs - Upgrade a random card in each player's hand?
+Strange Spoon - Should work fine, but test
+Toolbox - 1 colorless for each player? Or just 1 colorless in one player's hand?
+Toy Ornithopter/onPotionUse ensure it works when other player uses potion
 
 
+Fairy Potion - If one player has fairy potion, should work for both players (check tracked other player potions on death)
+
+Combat:
+Hex (from chosen) - Dazed are not synced properly.
 
 
 extra features:
