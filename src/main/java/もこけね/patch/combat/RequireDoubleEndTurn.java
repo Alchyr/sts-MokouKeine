@@ -4,7 +4,6 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
-import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,11 +13,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.ui.buttons.EndTurnButton;
 import もこけね.character.MokouKeine;
-import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
 import もこけね.util.OtherPlayerCardQueueItem;
 
-import static もこけね.patch.lobby.HandleMatchmaking.isHost;
+import static もこけね.util.HandleMatchmaking.isHost;
 import static もこけね.もこけねは神の国.logger;
 import static もこけね.もこけねは神の国.makeID;
 

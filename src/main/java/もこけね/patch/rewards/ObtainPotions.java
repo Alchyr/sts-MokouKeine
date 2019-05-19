@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import もこけね.character.MokouKeine;
 import もこけね.patch.combat.PotionUse;
-import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
 
 import java.lang.reflect.Method;

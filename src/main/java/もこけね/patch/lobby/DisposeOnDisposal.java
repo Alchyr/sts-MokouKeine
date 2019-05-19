@@ -3,6 +3,7 @@ package もこけね.patch.lobby;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import もこけね.util.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
 
 @SpirePatch(

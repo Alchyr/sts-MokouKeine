@@ -42,9 +42,9 @@ public class Vulnerable {
         {
             if (__instance.owner.hasPower(WeightPower.POWER_ID))
             {
-                float mult = __instance.atDamageReceive(1.0f, DamageInfo.DamageType.NORMAL);
+                float mult = __instance.atDamageReceive(1.0f, DamageInfo.DamageType.NORMAL); //will use altered calculation
                 mult -= 1;
-                mult *= __instance.amount * 100;
+                mult *= 100;
                 int out = MathUtils.floor(mult);
 
                 if (__instance.amount == 1)

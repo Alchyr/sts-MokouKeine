@@ -3,10 +3,8 @@ package もこけね.patch.map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -15,8 +13,8 @@ import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
 import もこけね.util.MultiplayerHelper;
 
-import static もこけね.patch.lobby.HandleMatchmaking.isHost;
-import static もこけね.patch.lobby.HandleMatchmaking.isMokou;
+import static もこけね.util.HandleMatchmaking.isHost;
+import static もこけね.util.HandleMatchmaking.isMokou;
 import static もこけね.もこけねは神の国.*;
 
 public class MapRoomVoting {

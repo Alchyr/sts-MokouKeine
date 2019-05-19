@@ -64,7 +64,8 @@ public class Discovery {
     {
         if (AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE && MultiplayerHelper.active && __instance.isDone)
         {
-            MultiplayerHelper.sendP2PString("signal");
+            int rngStatus = AbstractDungeon.cardRandomRng.counter;
+            MultiplayerHelper.sendP2PString("signalcrrng" + rngStatus);
         }
     }
 

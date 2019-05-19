@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import もこけね.patch.input.InputHelper;
-import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.HandleMatchmaking;
 
 import static もこけね.もこけねは神の国.KEINE_COLOR;
 

@@ -22,7 +22,7 @@ import もこけね.actions.character.SetEnergyGainAction;
 import もこけね.actions.character.UseSpecificEnergyAction;
 import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
-import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
 import もこけね.util.PotionQueueItem;
 
@@ -109,6 +109,11 @@ public class PotionUse {
                     toUse.use(target);
                     sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
                 }
+                else if (index == -2) //target self
+                {
+                    toUse.use(AbstractDungeon.player);
+                    sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[2]);
+                }
                 else if (!toUse.targetRequired)
                 {
                     toUse.use(null);
@@ -138,6 +143,11 @@ public class PotionUse {
                 AbstractMonster target = AbstractDungeon.getMonsters().monsters.get(index);
                 toUse.use(target);
                 sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[1] + target.name + TEXT[2]);
+            }
+            else if (index == -2) //target self
+            {
+                toUse.use(AbstractDungeon.player);
+                sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[2]);
             }
             else if (!toUse.targetRequired)
             {

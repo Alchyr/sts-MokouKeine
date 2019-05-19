@@ -7,19 +7,18 @@ import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.RoomEventDialog;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.ui.buttons.LargeDialogOptionButton;
 import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
-import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
 import もこけね.util.SmartTextHelper;
 import もこけね.util.TextureLoader;
 
-import static もこけね.patch.lobby.HandleMatchmaking.isHost;
+import static もこけね.util.HandleMatchmaking.isHost;
 import static もこけね.もこけねは神の国.*;
 
 public class RoomEventVoting {

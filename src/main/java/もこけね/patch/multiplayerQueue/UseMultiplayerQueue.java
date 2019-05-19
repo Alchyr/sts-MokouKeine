@@ -2,22 +2,17 @@ package もこけね.patch.multiplayerQueue;
 
 import basemod.BaseMod;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.characters.CharacterManager;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
-import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
 import com.megacrit.cardcrawl.screens.charSelect.CharacterSelectScreen;
 import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
 import もこけね.patch.enums.CharacterEnums;
-import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
-
-import java.util.ArrayList;
 
 import static もこけね.もこけねは神の国.*;
 

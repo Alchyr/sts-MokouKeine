@@ -8,11 +8,13 @@ import com.megacrit.cardcrawl.daily.mods.Hoarder;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.ModHelper;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import もこけね.character.MokouKeine;
 import もこけね.util.MessageHelper;
 import もこけね.util.MultiplayerHelper;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 import static もこけね.util.MessageHelper.cardInfoString;
 import static もこけね.もこけねは神の国.chat;
@@ -47,7 +49,12 @@ public class ReportObtainCard implements Serializable {
                 AbstractCard c = MessageHelper.cardFromInfo(cardInfo);
 
                 ((MokouKeine) AbstractDungeon.player).otherPlayerMasterDeck.addToTop(c);
-                chat.receiveMessage("Other player obtained " + c.name);
+                chat.receiveMessage(MultiplayerHelper.partnerName + " obtained " + c.name);
+
+                for (AbstractRelic r : AbstractDungeon.player.relics)
+                {
+                    r.onMasterDeckChange();
+                }
             }
             catch (Exception e)
             {

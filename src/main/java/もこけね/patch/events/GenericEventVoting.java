@@ -10,18 +10,17 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.GenericEventDialog;
 import com.megacrit.cardcrawl.helpers.Hitbox;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.buttons.LargeDialogOptionButton;
 import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
-import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
 import もこけね.util.SmartTextHelper;
 import もこけね.util.TextureLoader;
 
 import java.util.ArrayList;
 
-import static もこけね.patch.lobby.HandleMatchmaking.isHost;
+import static もこけね.util.HandleMatchmaking.isHost;
 import static もこけね.もこけねは神の国.*;
 import static もこけね.もこけねは神の国.chat;
 

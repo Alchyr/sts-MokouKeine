@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.evacipated.cardcrawl.mod.stslib.patches.relicInterfaces.OnAfterUseCardPatch;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
@@ -29,7 +28,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
-import もこけね.patch.actions.GamblingChip;
 import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.card_use.LastCardType;
 import もこけね.patch.combat.MixEnemyTempCards;
@@ -39,7 +37,7 @@ import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
-import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.HandleMatchmaking;
 import もこけね.patch.map.BossRoomVoting;
 import もこけね.patch.map.MapRoomVoting;
 import もこけね.patch.relics.VoteBossRelic;
@@ -64,7 +62,7 @@ EVENTS:
 Living Wall - Augumenter - Transmogrifier - Does transform work correctly?
 Ancient Writing - Upgrading does not upgrade other deck
 Council of Ghosts - Doubled apparitions is kind of op... Maybe remove from pool
-Removal of bottles - Unbottle other player's bottled card?
++Removal of bottles - Unbottle other player's bottled card?
 Vampires - Probably strike removal won't work, since pandora's doesn't.
 Falling - Should be fine, but check.
 Mind bloom -
@@ -80,33 +78,28 @@ We Meet Again/Ranwid - Gold option: If other player cannot afford it, cannot tak
 
 Relics:
 Pandora's Box - Card additions are synced, but card removals are not
-Bottled Tornado - canSpawn will desync if one player has a power and other does not
++Bottle Relics - canSpawn will desync if one player can bottle but other cannot
 Ninja Scroll? Silent only, so it should be fine, but... I don't trust things.
-Mummified hand
++Mummified hand
 Test how sundial interacts
 Dead Branch - Ensure card goes to the correct hand
-Du-vu doll - Count curses in both decks
++Du-vu doll - Count curses in both decks
 Gambling Chip - test
-Girya - Patch campsite option
-Shovel - Test
++Girya - Patch campsite option
+Shovel - Test. It probably will need adjustment.
 Unceasing Top - If one player's hand is empty, they draw? This one will be a pain.
 Astrolabe - Make sure transformation works properly
-Calling Bell - Ensure both players obtain the relics if one of them chooses to take one. This should work.
+Calling Bell - Ensure both players obtain the relics if one of them chooses to take one. This should work, since it's a combat reward screen, but not 100% sure.
 Eternal Feather - Count both decks
 Bloody Idol - Heal for 2, triggers on both players' gold gain?
-Necronomicon - Test if it works on cards played by ally
+Necronomicon - Test if it works on cards played by ally. Should be fine?
 Nilry's - Test
 Warped Tongs - Upgrade a random card in each player's hand?
 Strange Spoon - Should work fine, but test
 Toolbox - 1 colorless for each player? Or just 1 colorless in one player's hand?
 Toy Ornithopter/onPotionUse ensure it works when other player uses potion
 
-
-Fairy Potion - If one player has fairy potion, should work for both players (check tracked other player potions on death)
-
-Combat:
-Hex (from chosen) - Dazed are not synced properly.
-
++Fairy Potion - If one player has fairy potion, should work for both players (check tracked other player potions on death)
 
 extra features:
 Resync command - when sent by host, resyncs other player forcefully

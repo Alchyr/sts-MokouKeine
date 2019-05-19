@@ -3,7 +3,6 @@ package もこけね.util;
 import com.codedisaster.steamworks.*;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -18,6 +17,7 @@ import もこけね.actions.character.OtherPlayerDiscardAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.PlayCardCheck;
+import もこけね.patch.relics.Girya;
 import もこけね.patch.relics.ReportPurchase;
 import もこけね.patch.combat.RequireDoubleEndTurn;
 import もこけね.patch.deck_changes.ReportObtainCard;
@@ -25,7 +25,6 @@ import もこけね.patch.deck_changes.ReportRemoveCard;
 import もこけね.patch.deck_changes.ReportUpgradeCard;
 import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
-import もこけね.patch.lobby.HandleMatchmaking;
 import もこけね.patch.map.BossRoomVoting;
 import もこけね.patch.map.MapRoomVoting;
 import もこけね.patch.relics.ReportBottling;
@@ -398,6 +397,24 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                 for(int i = 0; i < 20; ++i) {
                     AbstractDungeon.topLevelEffects.add(new CampfireSleepScreenCoverEffect());
                 }
+            }
+        }
+        else if (msg.startsWith("crrng")) //card random rng
+        {
+            int amt = Integer.parseInt(msg.substring(5));
+            if (amt >= 0)
+            {
+                while (AbstractDungeon.cardRandomRng.counter < amt)
+                {
+                    AbstractDungeon.cardRandomRng.random();
+                }
+            }
+        }
+        else if (msg.equals("LIFT"))
+        {
+            if (AbstractDungeon.player != null)
+            {
+                Girya.doLift();
             }
         }
         else if (msg.equals("recall"))

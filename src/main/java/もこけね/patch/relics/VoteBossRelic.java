@@ -16,13 +16,12 @@ import com.megacrit.cardcrawl.rooms.TreasureRoomBoss;
 import com.megacrit.cardcrawl.screens.select.BossRelicSelectScreen;
 import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
-import もこけね.patch.enums.CharacterEnums;
-import もこけね.patch.lobby.HandleMatchmaking;
+import もこけね.util.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
 
 import java.util.ArrayList;
 
-import static もこけね.patch.lobby.HandleMatchmaking.isHost;
+import static もこけね.util.HandleMatchmaking.isHost;
 import static もこけね.util.MultiplayerHelper.partnerName;
 import static もこけね.もこけねは神の国.*;
 
