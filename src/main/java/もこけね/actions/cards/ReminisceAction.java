@@ -28,8 +28,11 @@ public class ReminisceAction extends AbstractGameAction {
             if (p.type == AbstractPower.PowerType.DEBUFF)
                 finalDamage += this.amount;
         }
-        AbstractDungeon.actionManager.addToTop(new DamageAction(target, new DamageInfo(source, finalDamage, DamageInfo.DamageType.NORMAL), AttackEffect.SMASH));
-        AbstractDungeon.actionManager.addToTop(new RemoveDebuffsAction(target));
+        if (finalDamage > 0)
+        {
+            AbstractDungeon.actionManager.addToTop(new DamageAction(target, new DamageInfo(source, finalDamage, DamageInfo.DamageType.NORMAL), finalDamage > 10 ? AttackEffect.SMASH : AttackEffect.BLUNT_LIGHT));
+        }
+        //AbstractDungeon.actionManager.addToTop(new RemoveDebuffsAction(target));
 
         this.isDone = true;
     }

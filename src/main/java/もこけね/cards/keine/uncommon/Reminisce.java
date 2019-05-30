@@ -1,4 +1,4 @@
-package もこけね.cards.keine.uncommon;
+/*package もこけね.cards.keine.uncommon;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -22,7 +22,7 @@ public class Reminisce extends KeineCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int DAMAGE = 8;
+    private static final int DAMAGE = 6;
     private static final int UPG_DAMAGE = 2;
 
     public Reminisce()
@@ -71,4 +71,4 @@ public class Reminisce extends KeineCard {
     public AbstractCard makeCopy() {
         return new Reminisce();
     }
-}
+}*/

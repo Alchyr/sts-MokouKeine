@@ -42,7 +42,7 @@
     "NAME": "Inhibition",
     "DESCRIPTIONS": [
       "At the start of your turn, gain #b",
-      " #yもこけね:Seal."
+      " #yもこけねSeal."
     ]
   },
   "もこけね:Execration": {
@@ -63,9 +63,9 @@
   "もこけね:Ignition": {
     "NAME": "Ignition",
     "DESCRIPTIONS": [
-      "Whenever you would gain #yStrength, summon a #yもこけね:Spark instead.",
+      "Whenever you would gain #yStrength, summon a #yもこけねFlame instead.",
       "Whenever you would gain #yStrength, summon #b",
-      " #ySparks instead."
+      " #yもこけねFlames instead."
     ]
   }
 }

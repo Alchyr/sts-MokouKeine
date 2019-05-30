@@ -37,6 +37,7 @@ import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
+import もこけね.ui.LobbyMenu;
 import もこけね.util.HandleMatchmaking;
 import もこけね.patch.map.BossRoomVoting;
 import もこけね.patch.map.MapRoomVoting;
@@ -76,6 +77,10 @@ We Meet Again/Ranwid - Gold option: If other player cannot afford it, cannot tak
                         Potion option: Also can take a potion in list used to track other player potions
                         Card option: Fine as is
 
+Powers:
++Hex - Sync generation based on who played card
+Automaton orbs - Steal from both decks? Return to appropriate deck when death?
+
 Relics:
 Pandora's Box - Card additions are synced, but card removals are not
 +Bottle Relics - canSpawn will desync if one player can bottle but other cannot
@@ -90,7 +95,7 @@ Shovel - Test. It probably will need adjustment.
 Unceasing Top - If one player's hand is empty, they draw? This one will be a pain.
 Astrolabe - Make sure transformation works properly
 Calling Bell - Ensure both players obtain the relics if one of them chooses to take one. This should work, since it's a combat reward screen, but not 100% sure.
-Eternal Feather - Count both decks
++Eternal Feather - Count both decks
 Bloody Idol - Heal for 2, triggers on both players' gold gain?
 Necronomicon - Test if it works on cards played by ally. Should be fine?
 Nilry's - Test
@@ -100,6 +105,11 @@ Toolbox - 1 colorless for each player? Or just 1 colorless in one player's hand?
 Toy Ornithopter/onPotionUse ensure it works when other player uses potion
 
 +Fairy Potion - If one player has fairy potion, should work for both players (check tracked other player potions on death)
+
+Colorless cards:
+Mind Blast
+Secret Weapon/Tool thing
+Jack Of All Trades/Transmutation
 
 extra features:
 Resync command - when sent by host, resyncs other player forcefully
@@ -152,7 +162,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         return modID + "/" + partialPath;
     }
 
-
+    public static LobbyMenu lobbyMenu;
     public static ChatBox chat;
 
     private static boolean startingGame = false;
@@ -309,6 +319,11 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
                 }
             }
         }
+
+        if (lobbyMenu != null)
+        {
+            lobbyMenu.update();
+        }
         MultiplayerHelper.readPostUpdate();
     }
 
@@ -416,6 +431,9 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     public void receiveRender(SpriteBatch sb) {
         if (chat != null)
             chat.render(sb);
+
+        if (lobbyMenu != null)
+            lobbyMenu.render(sb);
     }
 
     public もこけねは神の国()
@@ -534,8 +552,10 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         //Initialize multiplayer stuff
         HandleMatchmaking.init();
         MultiplayerHelper.init();
-        //Initialize chat UI
+
+        //Initialize UI
         chat = new ChatBox();
+        lobbyMenu = new LobbyMenu();
     }
 
 

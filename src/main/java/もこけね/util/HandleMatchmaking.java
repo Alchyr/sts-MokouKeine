@@ -18,15 +18,14 @@ import static もこけね.もこけねは神の国.*;
 public class HandleMatchmaking implements SteamMatchmakingCallback {
     private final ByteBuffer chatMessage = ByteBuffer.allocateDirect(4096);
 
-    private static final int SEARCH_CAP = 7;
-
+    public static final String lobbyNameKey = "name";
+    public static final String hostIsMokouKey = "host_is_mokou";
+    public static final String lobbyPublicKey = "is_public";
     private static final String lobbyModsKey = "mod_list";
     private static final String lobbyCharacterKey = "character";
-    private static final String lobbyPublicKey = "is_public";
     private static final String lobbyKeysUnlockedKey = "final_act";
-    private static final String hostIsMokouKey = "host_is_mokou";
-    private static final String metadataTrue = "true";
-    private static final String metadataFalse = "false";
+    public static final String metadataTrue = "true";
+    public static final String metadataFalse = "false";
 
     public static SteamMatchmaking matchmaking;
     public static HandleMatchmaking handler;
@@ -35,8 +34,6 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
 
     private static boolean searching;
     private static boolean joinorcreate;
-
-    private static int searchAmt;
 
     public static boolean activeMultiplayer;
     private static boolean triedFar;
@@ -72,7 +69,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         Settings.setFinalActAvailability(); //ensure it's updated.
         matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
         logger.info("4th act unlocked: " + (Settings.isFinalActAvailable ? metadataTrue : metadataFalse));
-        SteamAPICall lobbySearch = matchmaking.requestLobbyList();
+        matchmaking.requestLobbyList();
         triedFar = false;
     }
 
@@ -88,7 +85,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         Settings.setFinalActAvailability(); //ensure it's updated.
         matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
         logger.info("4th act unlocked: " + (Settings.isFinalActAvailable ? metadataTrue : metadataFalse));
-        SteamAPICall lobbySearch = matchmaking.requestLobbyList();
+        matchmaking.requestLobbyList();
         triedFar = true;
     }
 
@@ -99,7 +96,6 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             logger.info("Lobby filter: Only lobbies with this exact mod list: " + generateModList());
             logger.info("Only lobbies with this character: " + CardCrawlGame.chosenCharacter.name());
             handler.startNormalSearch();
-            searchAmt = 0;
             searching = true;
             joinorcreate = false;
         }
@@ -345,7 +341,9 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 }
                 listLobbies(lobbies);
 
+                lobbyMenu.setLobbies(lobbies);
 
+                /*
                 int lastJoinAttempt = 0;
 
                 logger.info("Joining the first lobby.");
@@ -356,25 +354,11 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
 
                 if (lastJoinAttempt >= lobbies.size())
                 {
-                    if (searchAmt < SEARCH_CAP)
-                    {
-                        logger.info("All lobbies are invalid. Searching again.");
-
-                        handler.startNormalSearch();
-                        searchAmt++;
-                        searching = true;
-                    }
-                    else
-                    {
-                        logger.info("Failed to join too many times. Creating new lobby.");
-
-                        searchAmt = 0;
-                        searching = false;
-                        logger.info("Attempting to create a new lobby.");
-                        logger.info("Creating public lobby for 2 players.");
-                        matchmaking.createLobby(SteamMatchmaking.LobbyType.Public,2);
-                        joinorcreate = true;
-                    }
+                    searching = false;
+                    logger.info("Attempting to create a new lobby.");
+                    logger.info("Creating public lobby for 2 players.");
+                    matchmaking.createLobby(SteamMatchmaking.LobbyType.Public,2);
+                    joinorcreate = true;
                 }
                 else
                 {
@@ -383,7 +367,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                     searching = false;
                     isHost = false;
                     joinorcreate = true;
-                }
+                }*/
             }
         }
     }

@@ -37,7 +37,7 @@ public class Discovery {
                 __instance.isDone = true;
                 return SpireReturn.Return(null);
             }
-            else if (!TrackCardSource.useMyEnergy) //This is neutral source.
+            else if (!TrackCardSource.useMyEnergy) //This is neutral source. Each player will have to choose, and then wait for other player to choose.
             {
                 AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + partnerName + uiStrings.TEXT[1]));
             }

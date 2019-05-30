@@ -8,6 +8,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.input.ScrollInputProcessor;
+import もこけね.ui.ChatBox;
 import もこけね.util.HandleMatchmaking;
 
 import static もこけね.もこけねは神の国.chat;
@@ -50,13 +51,8 @@ public class InputHelper {
             if (UIUtils.isMac && Gdx.input.isKeyPressed(Input.Keys.SYM)) return;
 
             boolean backspace = character == BACKSPACE;
-            boolean enter = character == ENTER_DESKTOP || character == ENTER_ANDROID;
             boolean add = (FontHelper.tipHeaderFont.getData().hasGlyph(character));
-            if (enter)
-            {
-                lastTyped = '\n';
-                text = "";
-            }
+
             if (backspace && text.length() > 1) {
                 lastTyped = BACKSPACE;
                 text = text.substring(0, text.length() - 1);
@@ -70,8 +66,11 @@ public class InputHelper {
                 return;
             }
             if (add) {
-                lastTyped = character;
-                text = text.concat(String.valueOf(character));
+                if (FontHelper.getWidth(FontHelper.tipBodyFont, text + character, 1.0f) < ChatBox.WIDTH)
+                {
+                    lastTyped = character;
+                    text = text.concat(String.valueOf(character));
+                }
                 //scheduleKeyRepeatTask()
             }
         }

@@ -23,7 +23,7 @@ public class Memoir extends KeineCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int DEBUFF = 2;
+    private static final int DEBUFF = 1;
     private static final int UPG_DEBUFF = 1;
 
     private static final int DRAW = 2;

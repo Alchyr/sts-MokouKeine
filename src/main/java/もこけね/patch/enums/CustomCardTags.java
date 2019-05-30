@@ -10,4 +10,6 @@ public class CustomCardTags {
     public static AbstractCard.CardTags ECHO_SKILL;
     @SpireEnum
     public static AbstractCard.CardTags ECHO_POWER;
+    @SpireEnum
+    public static AbstractCard.CardTags MEMENTO;
 }

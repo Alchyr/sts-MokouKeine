@@ -32,8 +32,8 @@
     "DESCRIPTION": "Draw !M! cards. NL Gain !M! もこけね:Seals. NL Exhaust."
   },
   "もこけね:AntiquityBurden": {
-    "NAME": "Antiquity's Burden",
-    "DESCRIPTION": "Enemy's Vulnerable stacks additively until the end of the turn. NL Exhaust."
+      "NAME": "Antiquity's Burden",
+      "DESCRIPTION": "Enemy's Vulnerable stacks additively until the end of the turn. NL Exhaust."
   },
   "もこけね:Restraint": {
     "NAME": "Restraint",
@@ -52,12 +52,12 @@
     "DESCRIPTION": "Apply !M! Vulnerable. NL Deal !D! damage to a random enemy other than the target."
   },
   "もこけね:Memoir": {
-    "NAME": "Memoir",
+    "NAME": "Epitaph",
     "DESCRIPTION": "Apply !M! Weak. NL Draw 2 cards."
   },
-  "もこけね:Execration": {
-    "NAME": "Execration",
-    "DESCRIPTION": "Whenever you apply a debuff to an enemy, gain !M! Strength."
+  "もこけね:Chronicle": {
+    "NAME": "Chronicle",
+    "DESCRIPTION": "Whenever you draw a card that did not start in your deck, gain !M! Strength."
   },
   "もこけね:Protector": {
     "NAME": "Protector",
@@ -67,9 +67,13 @@
     "NAME": "Prosperity",
     "DESCRIPTION": "Gain !B! Block. NL もこけね:Echo Power: Play a copy of the Power."
   },
-  "もこけね:Replicate": {
-    "NAME": "Replicate",
-    "DESCRIPTION": "Exhaust a card in your hand. NL Add !M! new copies of it to your hand."
+  "もこけね:Addendum": {
+    "NAME": "Addendum",
+    "DESCRIPTION": "Deal !D! damage. NL もこけね:Echo Attack: Gain [E] [E] and draw !M! card."
+  },
+  "もこけね:Counterfeit": {
+    "NAME": "Counterfeit",
+    "DESCRIPTION": "Exhaust a card in your hand. NL Add !M! new copies of it to your hand. NL Exhaust."
   },
   "もこけね:Revision": {
     "NAME": "Revision",
@@ -82,6 +86,14 @@
       "NL (Gain !B! Block.)"
     ]
   },
+  "もこけね:Unearth": {
+    "NAME": "Unearth",
+    "DESCRIPTION": "Draw a card. NL If it did not start in your deck, gain",
+    "EXTENDED_DESCRIPTION": [
+      " [E]",
+      "."
+    ]
+  },
   "もこけね:Hardcover": {
     "NAME": "Hardcover",
     "DESCRIPTION": "Deal !D! damage. NL もこけね:Echo Power: Gain !M! Artifact."
@@ -92,8 +104,7 @@
   },
   "もこけね:Inhibition": {
     "NAME": "Inhibition",
-    "DESCRIPTION": "Ethereal. NL At the start of your turn, gain !M! もこけね:Seal.",
-    "UPGRADE_DESCRIPTION": "At the start of your turn, gain !M! もこけね:Seal."
+    "DESCRIPTION": "At the start of your turn, gain !M! もこけね:Seal."
   },
   "もこけね:HeatUp": {
     "NAME": "Heat Up",
@@ -101,7 +112,7 @@
   },
   "もこけね:Release": {
     "NAME": "Release",
-    "DESCRIPTION": "Lose all もこけね:Seals. NL Summon a もこけね:Spark for each もこけね:Seal lost. NL Exhaust."
+    "DESCRIPTION": "Lose all もこけね:Seals. NL Summon a もこけね:Flame for each もこけね:Seal lost. NL Exhaust."
   },
   "もこけね:Reflection": {
     "NAME": "Reflection",
@@ -109,7 +120,7 @@
   },
   "もこけね:Reminisce": {
     "NAME": "Reminisce",
-    "DESCRIPTION": "Remove all of the enemy's debuffs. NL Deal !D! damage for each debuff removed.",
+    "DESCRIPTION": "Deal !D! damage for each debuff the enemy has.",
     "EXTENDED_DESCRIPTION": [
       " NL (Deals !M! damage.)"
     ]
@@ -130,6 +141,10 @@
     "NAME": "Singe",
     "DESCRIPTION": "Deal !D! damage. NL Add a Burn to your hand."
   },
+  "もこけね:Tampering": {
+    "NAME": "Tampering",
+    "DESCRIPTION": "Add a random card to your discard pile. NL It costs 0 this combat. NL Exhaust."
+  },
   "もこけね:Backfire": {
     "NAME": "Backfire",
     "DESCRIPTION": "Lose hp deal damage"
@@ -140,11 +155,11 @@
   },
   "もこけね:Ignition": {
     "NAME": "Ignition",
-    "DESCRIPTION": "Whenever you would gain Strength, summon a もこけね:Spark instead."
+    "DESCRIPTION": "Whenever you would gain Strength, summon a もこけね:Flame instead."
   },
   "もこけね:Smokescreen": {
     "NAME": "Smokescreen",
-    "DESCRIPTION": "Gain !B! Block. NL Summon a もこけね:Spark."
+    "DESCRIPTION": "Gain !B! Block. NL Summon a もこけね:Flame."
   },
   "もこけね:Refute": {
     "NAME": "Refute",
@@ -152,14 +167,14 @@
   },
   "もこけね:Tragedy": {
     "NAME": "Tragedy",
-    "DESCRIPTION": "Deal !D! damage for each stack of Weak and Vulnerable the enemy has.",
+    "DESCRIPTION": "Deal !D! damage for each stack of Weak and Vulnerable the enemy has. NL The enemy loses all Weak and Vulnerable.",
     "EXTENDED_DESCRIPTION": [
       " NL (Deals !M! damage.)"
     ]
   },
   "もこけね:Warmup": {
     "NAME": "Warmup",
-    "DESCRIPTION": "Summon a もこけね:Spark."
+    "DESCRIPTION": "Summon a もこけね:Flame."
   },
   "もこけね:Indomitable": {
     "NAME": "Indomitable",
@@ -179,7 +194,7 @@
   },
   "もこけね:FujiyamaVolcano": {
     "NAME": "Fujiyama Volcano",
-    "DESCRIPTION": "Exhaust your hand. NL Summon a もこけね:Spark for each card Exhausted."
+    "DESCRIPTION": "Exhaust your hand. NL Summon a もこけね:Flame for each card Exhausted."
   },
   "もこけね:Blitz": {
     "NAME": "Blitz",
@@ -195,6 +210,14 @@
     "NAME": "Kindle",
     "DESCRIPTION": "Your partner gains NL [E] [E]. NL Exhaust."
   },
+  "もこけね:Familiarity": {
+    "NAME": "Familiarity",
+    "DESCRIPTION": "All cards in your hand that you have already played this combat cost 0 until played."
+  },
+  "もこけね:Contemplation": {
+    "NAME": "Contemplation",
+    "DESCRIPTION": "Whenever you play a card that did not start in your deck, gain !M! Block."
+  },
   "もこけね:PhoenixCall": {
     "NAME": "Phoenix's Call",
     "DESCRIPTION": "Exhaust a card. NL Apply !M! Vulnerable."
@@ -202,5 +225,28 @@
   "もこけね:Sacrifice": {
     "NAME": "Sacrifice",
     "DESCRIPTION": "Deal !D! damage. NL Apply 1 Stun. NL Skip your next turn. NL Exhaust."
+  },
+  "もこけね:HakutakuForm": {
+    "NAME": "Hakutaku Form",
+    "DESCRIPTION": "Add a copy of your deck to your draw pile. NL The copies cost 1 less."
+  },
+  "もこけね:Memento": {
+    "NAME": "Memento",
+    "DESCRIPTION": "Deal !D! damage for ALL of your Memento cards.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Deals !M! damage.)"
+    ]
+  },
+  "もこけね:a": {
+    "NAME": "",
+    "DESCRIPTION": "Summon X もこけね:Flames."
+  },
+  "もこけね:Hotheaded": {
+    "NAME": "Hotheaded",
+    "DESCRIPTION": "Whenever a discard pile is shuffled, lose !M! HP. NL At the start of your turn, gain [E]."
+  },
+  "もこけね:c": {
+    "NAME": "",
+    "DESCRIPTION": "Choose !M! of X + !M! cards to add to your hand. NL It costs 0 this combat. NL Exhaust."
   }
 }

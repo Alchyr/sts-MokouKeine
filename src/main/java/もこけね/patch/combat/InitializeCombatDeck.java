@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
+import もこけね.util.CombatDeckHelper;
 
 @SpirePatch(
         clz = CardGroup.class,
@@ -28,6 +29,16 @@ public class InitializeCombatDeck {
         {
             ((MokouKeine) AbstractDungeon.player).otherPlayerDraw.initializeDeck(((MokouKeine) AbstractDungeon.player).otherPlayerMasterDeck);
         }
+
+        if (AbstractDungeon.player instanceof MokouKeine && __instance.equals(((MokouKeine) AbstractDungeon.player).otherPlayerDraw))
+        {
+            CombatDeckHelper.setOtherInitialCards(__instance);
+        }
+        else
+        {
+            CombatDeckHelper.setInitialCards(__instance);
+        }
+
         return SpireReturn.Continue();
     }
 }

@@ -1,9 +1,9 @@
 [
   {
-    "PROPER_NAME": "Spark",
+    "PROPER_NAME": "Flame",
     "NAMES": [
-      "spark",
-      "sparks"
+      "flame",
+      "flames"
     ],
     "DESCRIPTION": "An enemy that doesn't attack, and damages ALL enemies upon death."
   },

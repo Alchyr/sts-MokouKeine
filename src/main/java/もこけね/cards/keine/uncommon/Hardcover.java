@@ -21,7 +21,7 @@ public class Hardcover extends KeineCard {
             "Hardcover",
             1,
             CardType.ATTACK,
-            CardTarget.NONE,
+            CardTarget.ENEMY,
             CardRarity.UNCOMMON
     );
 

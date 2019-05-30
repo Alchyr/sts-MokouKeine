@@ -1,0 +1,35 @@
+package もこけね.patch.relics;
+
+import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import javassist.CtBehavior;
+import もこけね.character.MokouKeine;
+
+@SpirePatch(
+        clz = com.megacrit.cardcrawl.relics.EternalFeather.class,
+        method = "onEnterRoom"
+)
+public class EternalFeather {
+    @SpireInsertPatch(
+            locator = Locator.class,
+            localvars = { "amountToGain" }
+    )
+    public static void countAlt(EternalFeather __instance, @ByRef int[] amountToGain)
+    {
+        if (AbstractDungeon.player instanceof MokouKeine)
+        {
+            amountToGain[0] += ((MokouKeine) AbstractDungeon.player).otherPlayerMasterDeck.size() / 5 * 3;
+        }
+    }
+
+    private static class Locator extends SpireInsertLocator
+    {
+        @Override
+        public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
+        {
+            Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractPlayer.class, "heal");
+            return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+        }
+    }
+}

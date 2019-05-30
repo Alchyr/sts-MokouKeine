@@ -20,7 +20,7 @@ public class ReceiveRevisionCardsAction extends ReceiveSignalCardsAction {
         if (signaledCards.size > 0)
         {
             int amt = signaledCards.size;
-            int otherHandSpace = BaseMod.MAX_HAND_SIZE - AbstractDungeon.player.hand.size();
+            int handSpace = BaseMod.MAX_HAND_SIZE - AbstractDungeon.player.hand.size();
 
             for (int i = 0; i < amt; ++i)
             {
@@ -28,10 +28,10 @@ public class ReceiveRevisionCardsAction extends ReceiveSignalCardsAction {
                 AbstractCard c = signaledCards.removeFirst();
 
                 source.removeCard(c);
-                if (otherHandSpace > 0)
+                if (handSpace > 0)
                 {
                     AbstractDungeon.effectList.add(new AltShowCardAndAddToHandEffect(c, false));
-                    --otherHandSpace;
+                    --handSpace;
                 }
                 else
                 {

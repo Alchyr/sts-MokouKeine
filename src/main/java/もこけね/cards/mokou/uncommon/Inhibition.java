@@ -16,7 +16,7 @@ import static もこけね.もこけねは神の国.makeID;
 public class Inhibition extends MokouCard {
     private final static CardInfo cardInfo = new CardInfo(
             "Inhibition",
-            1,
+            2,
             CardType.POWER,
             CardTarget.NONE,
             CardRarity.UNCOMMON
@@ -26,18 +26,14 @@ public class Inhibition extends MokouCard {
 
     private static final int BUFF = 1;
 
+    private static final int UPG_COST = 1;
+
     public Inhibition()
     {
-        super(cardInfo, true);
+        super(cardInfo, false);
 
         setMagic(BUFF);
-        isEthereal = true;
-    }
-
-    @Override
-    public void upgrade() {
-        super.upgrade();
-        isEthereal = false;
+        setCostUpgrade(UPG_COST);
     }
 
     @Override

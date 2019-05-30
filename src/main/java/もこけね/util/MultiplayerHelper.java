@@ -244,6 +244,20 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                                 AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(toExhaust, ((MokouKeine) AbstractDungeon.player).otherPlayerDiscard, true));
                             }
                             break;
+                        case "hand":
+                            if (index <= AbstractDungeon.player.hand.group.size())
+                            {
+                                AbstractCard toExhaust = AbstractDungeon.player.hand.group.get(index);
+                                AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(toExhaust, AbstractDungeon.player.hand, true));
+                            }
+                            break;
+                        case "other_hand":
+                            if (AbstractDungeon.player instanceof MokouKeine && index <= ((MokouKeine) AbstractDungeon.player).otherPlayerHand.group.size())
+                            {
+                                AbstractCard toExhaust = ((MokouKeine) AbstractDungeon.player).otherPlayerHand.group.get(index);
+                                AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(toExhaust, ((MokouKeine) AbstractDungeon.player).otherPlayerHand, true));
+                            }
+                            break;
                     }
                 }
             }
