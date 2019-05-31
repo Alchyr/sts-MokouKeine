@@ -7,7 +7,17 @@
       "No Lobbies Found.",
       "Yes",
       "No",
-      "Searching..."
+      "Searching...",
+      "Lobby is no longer valid.",
+      "Joining...",
+      "Key",
+      "'s Lobby",
+      "Public",
+      "Random",
+      "Create",
+      "Enter the password.",
+      "Waiting for password...",
+      "Incorrect password."
     ]
   },
   "もこけね:LobbySearch": {

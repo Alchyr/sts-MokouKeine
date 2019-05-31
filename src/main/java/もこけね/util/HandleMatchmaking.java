@@ -7,6 +7,7 @@ import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import もこけね.character.MokouKeine;
+import もこけね.ui.LobbyMenu;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     public static final String lobbyNameKey = "name";
     public static final String hostIsMokouKey = "host_is_mokou";
     public static final String lobbyPublicKey = "is_public";
+    public static final String lobbyPasswordKey = "password";
     private static final String lobbyModsKey = "mod_list";
     private static final String lobbyCharacterKey = "character";
     private static final String lobbyKeysUnlockedKey = "final_act";
@@ -33,7 +35,7 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     public static SteamID hostID;
 
     private static boolean searching;
-    private static boolean joinorcreate;
+    public static boolean joinorcreate;
 
     public static boolean activeMultiplayer;
     private static boolean triedFar;
@@ -64,12 +66,13 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         matchmaking.addRequestLobbyListStringFilter(lobbyModsKey, generateModList(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyCharacterKey, CardCrawlGame.chosenCharacter.name(), SteamMatchmaking.LobbyComparison.Equal);
         logger.info("chosen character: " + CardCrawlGame.chosenCharacter.name());
-        matchmaking.addRequestLobbyListStringFilter(lobbyPublicKey, metadataTrue, SteamMatchmaking.LobbyComparison.Equal);
-        logger.info("public: true");
+        /*matchmaking.addRequestLobbyListStringFilter(lobbyPublicKey, metadataTrue, SteamMatchmaking.LobbyComparison.Equal);
+        logger.info("public: true");*/
         Settings.setFinalActAvailability(); //ensure it's updated.
         matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
         logger.info("4th act unlocked: " + (Settings.isFinalActAvailable ? metadataTrue : metadataFalse));
         matchmaking.requestLobbyList();
+        searching = true;
         triedFar = false;
     }
 
@@ -80,12 +83,13 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         matchmaking.addRequestLobbyListStringFilter(lobbyModsKey, generateModList(), SteamMatchmaking.LobbyComparison.Equal);
         matchmaking.addRequestLobbyListStringFilter(lobbyCharacterKey, CardCrawlGame.chosenCharacter.name(), SteamMatchmaking.LobbyComparison.Equal);
         logger.info("chosen character: " + CardCrawlGame.chosenCharacter.name());
-        matchmaking.addRequestLobbyListStringFilter(lobbyPublicKey, metadataTrue, SteamMatchmaking.LobbyComparison.Equal);
-        logger.info("public: true");
+        /*matchmaking.addRequestLobbyListStringFilter(lobbyPublicKey, metadataTrue, SteamMatchmaking.LobbyComparison.Equal);
+        logger.info("public: true");*/
         Settings.setFinalActAvailability(); //ensure it's updated.
         matchmaking.addRequestLobbyListStringFilter(lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse, SteamMatchmaking.LobbyComparison.Equal);
         logger.info("4th act unlocked: " + (Settings.isFinalActAvailable ? metadataTrue : metadataFalse));
         matchmaking.requestLobbyList();
+        searching = true;
         triedFar = true;
     }
 
@@ -96,7 +100,6 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
             logger.info("Lobby filter: Only lobbies with this exact mod list: " + generateModList());
             logger.info("Only lobbies with this character: " + CardCrawlGame.chosenCharacter.name());
             handler.startNormalSearch();
-            searching = true;
             joinorcreate = false;
         }
         else
@@ -155,6 +158,10 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
         }
     }
 
+    public static boolean inLobby()
+    {
+        return currentLobbyID != null && currentLobbyID.isValid();
+    }
     public static boolean inLobby(SteamID member)
     {
         if (currentLobbyID != null && currentLobbyID.isValid())
@@ -185,9 +192,12 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     public void onLobbyEnter(SteamID steamIDLobby, int chatPermissions, boolean blocked, SteamMatchmaking.ChatRoomEnterResponse response) {
         if (joinorcreate)
         {
-            chat.receiveMessage("Entered lobby: " + steamIDLobby);
+            chat.receiveMessage("Entered game.");
+
             logger.info("Lobby entered: " + steamIDLobby);
             logger.info("  - response: " + response);
+
+            lobbyMenu.hide();
 
             int numMembers = matchmaking.getNumLobbyMembers(steamIDLobby);
             logger.info("  - " + numMembers + " members in lobby");
@@ -315,22 +325,24 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
     public void onLobbyMatchList(int resultCount) {
         if (searching)
         {
+            searching = false;
+
             logger.info("Found " + resultCount + " matching lobbies.");
-            chat.receiveMessage("Found " + resultCount + " valid lobbies.");
+            //chat.receiveMessage("Found " + resultCount + " valid lobbies.");
 
             if (resultCount == 0 && !triedFar) {
                 logger.info("Trying farther distances.");
-                chat.receiveMessage("Trying farther distances.");
+                //chat.receiveMessage("Trying farther distances.");
                 startFarSearch();
             }
             else if (resultCount == 0)
             {
-                searching = false;
-                joinorcreate = true;
+                /*joinorcreate = true;
                 logger.info("Attempting to create a new lobby.");
                 logger.info("Creating public lobby for 2 players.");
                 chat.receiveMessage("Creating new lobby.");
-                matchmaking.createLobby(SteamMatchmaking.LobbyType.Public,2);
+                matchmaking.createLobby(SteamMatchmaking.LobbyType.Public,2);*/
+                lobbyMenu.setLobbies(new ArrayList<>());
             }
             else if (resultCount > 0)
             {
@@ -392,9 +404,14 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 logger.info("  - lobby modlist: " + modList);
                 matchmaking.setLobbyData(steamIDLobby, lobbyModsKey, modList);
                 matchmaking.setLobbyData(steamIDLobby, lobbyCharacterKey, CardCrawlGame.chosenCharacter.name());
-                matchmaking.setLobbyData(steamIDLobby, lobbyPublicKey, metadataTrue);
+                matchmaking.setLobbyData(steamIDLobby, lobbyPublicKey, lobbyMenu.publicRoom.enabled ? metadataTrue : metadataFalse);
                 matchmaking.setLobbyData(steamIDLobby, lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse);
                 matchmaking.setLobbyData(steamIDLobby, hostIsMokouKey, isMokou ? metadataTrue : metadataFalse);
+
+                if (!lobbyMenu.publicRoom.enabled)
+                {
+                    matchmaking.setLobbyData(steamIDLobby, lobbyPasswordKey, lobbyMenu.passwordInput.getText());
+                }
 
                 isHost = true;
 

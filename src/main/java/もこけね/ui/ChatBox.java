@@ -10,10 +10,10 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import もこけね.patch.input.InputHelper;
 import もこけね.util.HandleMatchmaking;
+import もこけね.util.MultiplayerHelper;
 import もこけね.util.TextureLoader;
 
-import static もこけね.もこけねは神の国.KEINE_COLOR;
-import static もこけね.もこけねは神の国.assetPath;
+import static もこけね.もこけねは神の国.*;
 
 public class ChatBox {
     public Queue<String> messages = new Queue<>();
@@ -24,15 +24,15 @@ public class ChatBox {
     private static final float TYPE_Y = Settings.HEIGHT / 2.0f;
 
     private static final float MARKER_Y = TYPE_Y + 2.0f * Settings.scale;
-    private static final float MARKER_WIDTH = FontHelper.getWidth(FontHelper.tipBodyFont, "_", 1);
+    private static final float MARKER_WIDTH = FontHelper.getWidth(FontHelper.tipBodyFont, "-", 1);
 
     public static final float WIDTH = 600.0f * Settings.scale;
-    public static final float HEIGHT = FontHelper.getHeight(FontHelper.tipBodyFont, " \n \n \n \n \n \n \n", 1);
+    public static final float HEIGHT = FontHelper.getHeight(FontHelper.tipBodyFont, " \n \n \n \n \n \n \n ", 1);
 
-    private static final float SEPARATOR_Y = TYPE_Y + FontHelper.getHeight(FontHelper.tipBodyFont, "X D", 1);
-    private static final float SEPARATOR_HEIGHT = 3.0f * Settings.scale;
+    private static final float SEPARATOR_HEIGHT = 2.0f * Settings.scale;
+    private static final float SEPARATOR_Y = TYPE_Y + FontHelper.getHeight(FontHelper.tipBodyFont, "X D", 1) + SEPARATOR_HEIGHT;
 
-    private static final Color bgColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+    private static final Color bgColor = new Color(0.2f, 0.2f, 0.2f, 0.7f);
     private static final Texture white = TextureLoader.getTexture(assetPath("img/white.png"));
 
     private int maxLines;
@@ -52,19 +52,33 @@ public class ChatBox {
 
     public void onPushEnter()
     {
-        if (!active)
+        if (active || MultiplayerHelper.active || HandleMatchmaking.inLobby())
         {
-            active = true;
-        }
-        else
-        {
-            if (!InputHelper.text.isEmpty())
+            if (!active)
             {
-                HandleMatchmaking.sendMessage(CardCrawlGame.playerName + ": " + InputHelper.text);
-                fadeDelay = NORMAL_FADE_TIME;
+                active = true;
+                InputHelper.reset();
             }
-            active = false;
-            skipNextInput = true;
+            else
+            {
+                if (lobbyMenu.receivePassword)
+                {
+
+                    active = false;
+                    skipNextInput = true;
+                    InputHelper.reset();
+                    return;
+                }
+
+                if (!InputHelper.text.isEmpty())
+                {
+                    HandleMatchmaking.sendMessage(CardCrawlGame.playerName + ": " + InputHelper.text);
+                    fadeDelay = NORMAL_FADE_TIME;
+                }
+                active = false;
+                skipNextInput = true;
+                InputHelper.reset();
+            }
         }
     }
 

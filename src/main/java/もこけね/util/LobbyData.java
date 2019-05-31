@@ -9,6 +9,15 @@ public class LobbyData {
     public String name;
     public boolean isPublic;
     public boolean hostIsMokou;
+    public boolean isValid = true;
+
+    public void invalidate(String newName)
+    {
+        id = null;
+        this.name = newName;
+        isPublic = false;
+        isValid = false;
+    }
 
     public static class LobbyDataComparer implements Comparator<LobbyData>
     {
@@ -16,7 +25,7 @@ public class LobbyData {
         public int compare(LobbyData o1, LobbyData o2) {
             if (o1.isPublic ^ o2.isPublic)
             {
-                return o1.isPublic ? 1 : -1;
+                return o1.isPublic ? -1 : 1;
             }
             else
             {

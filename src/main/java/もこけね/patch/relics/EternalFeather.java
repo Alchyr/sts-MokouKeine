@@ -3,6 +3,7 @@ package もこけね.patch.relics;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
 
@@ -15,7 +16,7 @@ public class EternalFeather {
             locator = Locator.class,
             localvars = { "amountToGain" }
     )
-    public static void countAlt(EternalFeather __instance, @ByRef int[] amountToGain)
+    public static void countAlt(com.megacrit.cardcrawl.relics.EternalFeather __instance, AbstractRoom r, @ByRef int[] amountToGain)
     {
         if (AbstractDungeon.player instanceof MokouKeine)
         {

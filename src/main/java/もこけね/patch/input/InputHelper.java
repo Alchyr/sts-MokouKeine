@@ -40,7 +40,6 @@ public class InputHelper {
                 case ENTER_ANDROID:
                 case ENTER_DESKTOP:
                     onPushEnter();
-                    reset();
                     return;
                 case BACKSPACE:
                     break;

@@ -105,9 +105,10 @@ public class UseMultiplayerQueue {
         inQueue = false;
         HandleMatchmaking.stop();
         CardCrawlGame.publisherIntegration.setRichPresenceDisplayInMenu();
-        if (chat != null)
+        /*if (chat != null)
         {
             chat.receiveMessage("Left queue.");
-        }
+        }*/
+        lobbyMenu.hide();
     }
 }
