@@ -147,7 +147,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     private static final String MOKOU_ENERGY_ORB = "img/cards/mokou/card_orb.png";
 
         //keine
-    private static final String KEINE_ATTACK_BACK = "img/cards/mokou/attack_normal.png";
+    private static final String KEINE_ATTACK_BACK = "img/cards/keine/attack_normal.png";
     private static final String KEINE_POWER_BACK = "img/cards/keine/power_normal.png";
     private static final String KEINE_SKILL_BACK = "img/cards/keine/skill_normal.png";
     private static final String KEINE_CARD_ENERGY_ORB = "img/cards/keine/card_small_orb.png";

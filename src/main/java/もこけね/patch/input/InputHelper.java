@@ -23,7 +23,7 @@ public class InputHelper {
     static private final char DELETE = 127;
     static private final char BULLET = 149;
 
-    private static final int TEXT_CAP = 50;
+    private static final int TEXT_CAP = 45;
 
     private static char lastTyped = '\n';
 

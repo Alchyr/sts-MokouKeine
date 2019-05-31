@@ -21,8 +21,8 @@ public class LobbyTextInput {
 
     private static final int TEXT_CAP = 18;
 
-    private static final float TEXT_OFFSET_X = 30 * Settings.scale;
-    private static final int TEXT_OFFSET_Y = HEIGHT / 2;
+    private static final float TEXT_OFFSET_X = 30.0f * Settings.scale;
+    private static final float TEXT_OFFSET_Y = HEIGHT / 2.0f * Settings.scale;
 
     private static final float MARKER_OFFSET = 18.0f * Settings.scale;
     private static final float MARKER_WIDTH = FontHelper.getWidth(FontHelper.tipBodyFont, "-", 1);
@@ -74,7 +74,7 @@ public class LobbyTextInput {
             active = true;
             もこけね.patch.input.InputHelper.text = this.text;
         }
-        else if (InputHelper.justReleasedClickLeft)
+        else if (InputHelper.justReleasedClickLeft || InputHelper.isMouseDown)
         {
             もこけね.patch.input.InputHelper.reset();
             active = false;

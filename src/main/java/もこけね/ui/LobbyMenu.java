@@ -127,12 +127,12 @@ public class LobbyMenu {
     private ArrayList<Hitbox> lobbyHitboxes = new ArrayList<>();
 
     public LobbyTextInput nameInput = new LobbyTextInput(INPUT_X, LOBBY_START_Y);
-    public ToggleButton publicRoom = new ToggleButton(PUBLIC_TOGGLE_X, PUBLIC_TOGGLE_Y, 0, ToggleType.PUBLIC_LOBBY, false);
+    public ToggleButton publicRoom = new ToggleButton(PUBLIC_TOGGLE_X, 0, PUBLIC_TOGGLE_Y, ToggleType.PUBLIC_LOBBY, false);
     public LobbyTextInput passwordInput = new LobbyTextInput(INPUT_X, PASSWORD_INPUT_Y);
 
-    private ToggleButton mokouToggle = new ToggleButton(MOKOU_TOGGLE_X, CHARACTER_TOGGLE_Y, 0, ToggleType.PUBLIC_LOBBY, false);
-    private ToggleButton keineToggle = new ToggleButton(KEINE_TOGGLE_X, CHARACTER_TOGGLE_Y, 0, ToggleType.PUBLIC_LOBBY, false);
-    private ToggleButton randomToggle = new ToggleButton(RANDOM_TOGGLE_X, CHARACTER_TOGGLE_Y, 0, ToggleType.PUBLIC_LOBBY, false);
+    private ToggleButton mokouToggle = new ToggleButton(MOKOU_TOGGLE_X, 0, CHARACTER_TOGGLE_Y, ToggleType.PUBLIC_LOBBY, false);
+    private ToggleButton keineToggle = new ToggleButton(KEINE_TOGGLE_X, 0, CHARACTER_TOGGLE_Y, ToggleType.PUBLIC_LOBBY, false);
+    private ToggleButton randomToggle = new ToggleButton(RANDOM_TOGGLE_X, 0, CHARACTER_TOGGLE_Y, ToggleType.PUBLIC_LOBBY, false);
 
     public boolean searching = false;
     public boolean receivePassword = false;
