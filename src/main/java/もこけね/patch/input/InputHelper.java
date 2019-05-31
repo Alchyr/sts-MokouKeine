@@ -23,6 +23,8 @@ public class InputHelper {
     static private final char DELETE = 127;
     static private final char BULLET = 149;
 
+    private static final int TEXT_CAP = 50;
+
     private static char lastTyped = '\n';
 
     @SpirePatch(
@@ -65,7 +67,7 @@ public class InputHelper {
                 return;
             }
             if (add) {
-                if (FontHelper.getWidth(FontHelper.tipBodyFont, text + character, 1.0f) < ChatBox.WIDTH)
+                if (text.length() < TEXT_CAP)
                 {
                     lastTyped = character;
                     text = text.concat(String.valueOf(character));
@@ -82,10 +84,7 @@ public class InputHelper {
 
     public static void onPushEnter()
     {
-        if (HandleMatchmaking.activeMultiplayer)
-        {
-            chat.onPushEnter();
-        }
+        chat.onPushEnter();
     }
 
 

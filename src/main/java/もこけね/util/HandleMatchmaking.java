@@ -408,6 +408,8 @@ public class HandleMatchmaking implements SteamMatchmakingCallback {
                 matchmaking.setLobbyData(steamIDLobby, lobbyKeysUnlockedKey, Settings.isFinalActAvailable ? metadataTrue : metadataFalse);
                 matchmaking.setLobbyData(steamIDLobby, hostIsMokouKey, isMokou ? metadataTrue : metadataFalse);
 
+                matchmaking.setLobbyData(steamIDLobby, lobbyNameKey, lobbyMenu.nameInput.getText());
+
                 if (!lobbyMenu.publicRoom.enabled)
                 {
                     matchmaking.setLobbyData(steamIDLobby, lobbyPasswordKey, lobbyMenu.passwordInput.getText());

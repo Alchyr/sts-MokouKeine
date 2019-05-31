@@ -4,7 +4,7 @@
 <groupId>MokouKeine</groupId>
 <artifactId>mokoukeine</artifactId>
 <name>もこけね</name>
-<version>0.0.1</version>
+<version>0.0.4</version>
 <description>A mod featuring Mokou and Keine from Touhou. Two players play together online.</description>
 
 <properties>

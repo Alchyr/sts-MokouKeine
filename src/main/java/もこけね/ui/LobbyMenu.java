@@ -66,14 +66,15 @@ public class LobbyMenu {
     private static final float PUBLIC_LABEL_X = PANEL_X + 450.0f * Settings.scale;
     private static final float CHARACTER_LABEL_X = PANEL_X + 660.0f * Settings.scale;
 
-    private static final float CHARACTER_LABEL_Y = PANEL_Y + 315.0f * Settings.scale; //for lobby creation
-    private static final float KEINE_LABEL_X = NAME_LABEL_X + 200.0f * Settings.scale;
+    private static final float CHARACTER_LABEL_Y = PANEL_Y + 312.0f * Settings.scale; //for lobby creation
+    private static final float MOKOU_LABEL_X = NAME_LABEL_X + 80.0f * Settings.scale;
+    private static final float KEINE_LABEL_X = MOKOU_LABEL_X + 200.0f * Settings.scale;
     private static final float RANDOM_LABEL_X = KEINE_LABEL_X + 200.0f * Settings.scale;
 
     private static final float CREATE_TEXT_Y = PANEL_Y + 100.0f * Settings.scale;
     private static final float CREATE_TEXT_WIDTH = FontHelper.getWidth(FontHelper.buttonLabelFont, TEXT[13], 1);
 
-    private static final float PUBLIC_TOGGLE_X = PANEL_X + 215.0f * Settings.scale;
+    private static final float PUBLIC_TOGGLE_X = PANEL_X + 130.0f * Settings.scale;
     private static final float PUBLIC_TOGGLE_Y = PANEL_Y + 450.0f * Settings.scale;
 
     private static final float MOKOU_TOGGLE_X = PUBLIC_TOGGLE_X;
@@ -81,9 +82,9 @@ public class LobbyMenu {
     private static final float RANDOM_TOGGLE_X = KEINE_TOGGLE_X + 200.0f * Settings.scale;
     private static final float CHARACTER_TOGGLE_Y = PANEL_Y + 300.0f * Settings.scale;
 
-    private static final float PUBLIC_INPUT_TEXT_Y = PANEL_Y + 465.0f * Settings.scale;
+    private static final float PUBLIC_INPUT_TEXT_Y = PANEL_Y + 462.0f * Settings.scale;
 
-    private static final float PASSWORD_LABEL_Y = PANEL_Y + 440.0f * Settings.scale;
+    private static final float PASSWORD_LABEL_Y = PANEL_Y + 390.0f * Settings.scale;
     private static final float PASSWORD_INPUT_Y = PASSWORD_LABEL_Y - LobbyTextInput.HEIGHT / 2.0f * Settings.scale - 12.0f * Settings.scale;
 
     private static final float INPUT_X = PANEL_X + 200.0f * Settings.scale;
@@ -125,7 +126,7 @@ public class LobbyMenu {
 
     private ArrayList<Hitbox> lobbyHitboxes = new ArrayList<>();
 
-    private LobbyTextInput nameInput = new LobbyTextInput(INPUT_X, LOBBY_START_Y);
+    public LobbyTextInput nameInput = new LobbyTextInput(INPUT_X, LOBBY_START_Y);
     public ToggleButton publicRoom = new ToggleButton(PUBLIC_TOGGLE_X, PUBLIC_TOGGLE_Y, 0, ToggleType.PUBLIC_LOBBY, false);
     public LobbyTextInput passwordInput = new LobbyTextInput(INPUT_X, PASSWORD_INPUT_Y);
 
@@ -570,20 +571,23 @@ public class LobbyMenu {
             }
             else if (mode == 2) //creating
             {
+                //name
                 FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[0], NAME_LABEL_X, LABEL_Y, Color.WHITE);
-                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[11], NAME_LABEL_X, PUBLIC_INPUT_TEXT_Y, Color.WHITE);
                 nameInput.render(sb);
 
+                //public
+                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[11], MOKOU_LABEL_X, PUBLIC_INPUT_TEXT_Y, Color.WHITE);
                 publicRoom.render(sb);
 
                 if (!publicRoom.enabled)
                 {
+                    //password
                     FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[9], NAME_LABEL_X, PASSWORD_LABEL_Y, Color.WHITE);
                     passwordInput.render(sb);
                 }
 
-
-                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, characterStrings.NAMES[1], NAME_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
+                //character
+                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, characterStrings.NAMES[1], MOKOU_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
                 FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, characterStrings.NAMES[2], KEINE_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
                 FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[12], RANDOM_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
                 mokouToggle.render(sb);
