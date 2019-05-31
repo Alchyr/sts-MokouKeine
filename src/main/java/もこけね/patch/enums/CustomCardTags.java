@@ -11,5 +11,5 @@ public class CustomCardTags {
     @SpireEnum
     public static AbstractCard.CardTags ECHO_POWER;
     @SpireEnum
-    public static AbstractCard.CardTags MEMENTO;
+    public static AbstractCard.CardTags FRAGMENT;
 }

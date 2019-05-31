@@ -57,7 +57,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /*TODO LIST:
-Upon entering next act and generating map, if other player has already voted, re-check voted node so that it is rendered/works properly.
++Upon entering next act and generating map, if other player has already voted, re-check voted node so that it is rendered/works properly.
 
 EVENTS:
 Living Wall - Augumenter - Transmogrifier - Does transform work correctly?
@@ -89,7 +89,7 @@ Ninja Scroll? Silent only, so it should be fine, but... I don't trust things.
 Test how sundial interacts
 Dead Branch - Ensure card goes to the correct hand
 +Du-vu doll - Count curses in both decks
-Gambling Chip - test
+Gambling Chip - test - should be functional.
 +Girya - Patch campsite option
 Shovel - Test. It probably will need adjustment.
 Unceasing Top - If one player's hand is empty, they draw? This one will be a pain.
@@ -103,6 +103,7 @@ Warped Tongs - Upgrade a random card in each player's hand?
 Strange Spoon - Should work fine, but test
 Toolbox - 1 colorless for each player? Or just 1 colorless in one player's hand?
 Toy Ornithopter/onPotionUse ensure it works when other player uses potion
+Choker - Increase limit to 8?
 
 +Fairy Potion - If one player has fairy potion, should work for both players (check tracked other player potions on death)
 
@@ -132,16 +133,31 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     private static final String DESCRIPTION = " . . . ";
 
     // Card backgrounds/basic images
-    private static final String ATTACK_BACK = "img/Character/CardGeneric/bg_attack.png";
-    private static final String POWER_BACK = "img/Character/CardGeneric/bg_power.png";
-    private static final String SKILL_BACK = "img/Character/CardGeneric/bg_skill.png";
-    private static final String ENERGY_ORB = "img/Character/CardGeneric/card_orb.png";
-    private static final String CARD_ENERGY_ORB = "img/Character/CardGeneric/card_small_orb.png";
+        //mokou
+    private static final String MOKOU_ATTACK_BACK = "img/cards/mokou/attack_normal.png";
+    private static final String MOKOU_POWER_BACK = "img/cards/mokou/power_normal.png";
+    private static final String MOKOU_SKILL_BACK = "img/cards/mokou/skill_normal.png";
+    private static final String MOKOU_CARD_ENERGY_ORB = "img/cards/mokou/card_small_orb.png";
 
-    private static final String ATTACK_PORTRAIT = "img/Character/CardGeneric/portrait_attack.png";
-    private static final String POWER_PORTRAIT = "img/Character/CardGeneric/portrait_power.png";
-    private static final String SKILL_PORTRAIT = "img/Character/CardGeneric/portrait_skill.png";
-    private static final String CARD_ENERGY_ORB_PORTRAIT = "img/Character/CardGeneric/card_large_orb.png";
+    private static final String MOKOU_ATTACK_PORTRAIT = "img/cards/mokou/attack_portrait.png";
+    private static final String MOKOU_POWER_PORTRAIT = "img/cards/mokou/power_portrait.png";
+    private static final String MOKOU_SKILL_PORTRAIT = "img/cards/mokou/skill_portrait.png";
+    private static final String MOKOU_CARD_ENERGY_ORB_PORTRAIT = "img/cards/mokou/card_large_orb.png";
+
+    private static final String MOKOU_ENERGY_ORB = "img/cards/mokou/card_orb.png";
+
+        //keine
+    private static final String KEINE_ATTACK_BACK = "img/cards/mokou/attack_normal.png";
+    private static final String KEINE_POWER_BACK = "img/cards/keine/power_normal.png";
+    private static final String KEINE_SKILL_BACK = "img/cards/keine/skill_normal.png";
+    private static final String KEINE_CARD_ENERGY_ORB = "img/cards/keine/card_small_orb.png";
+
+    private static final String KEINE_ATTACK_PORTRAIT = "img/cards/keine/attack_portrait.png";
+    private static final String KEINE_POWER_PORTRAIT = "img/cards/keine/power_portrait.png";
+    private static final String KEINE_SKILL_PORTRAIT = "img/cards/keine/skill_portrait.png";
+    private static final String KEINE_CARD_ENERGY_ORB_PORTRAIT = "img/cards/keine/card_large_orb.png";
+
+    private static final String KEINE_ENERGY_ORB = "img/cards/keine/card_orb.png";
 
     // Character images
     private static final String BUTTON = "img/Character/CharacterButton.png";
@@ -441,16 +457,16 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         BaseMod.subscribe(this);
 
         BaseMod.addColor(CharacterEnums.MOKOU, MOKOU_COLOR,
-                assetPath(ATTACK_BACK), assetPath(SKILL_BACK), assetPath(POWER_BACK),
-                assetPath(ENERGY_ORB),
-                assetPath(ATTACK_PORTRAIT), assetPath(SKILL_PORTRAIT), assetPath(POWER_PORTRAIT),
-                assetPath(CARD_ENERGY_ORB_PORTRAIT), assetPath(CARD_ENERGY_ORB));
+                assetPath(MOKOU_ATTACK_BACK), assetPath(MOKOU_SKILL_BACK), assetPath(MOKOU_POWER_BACK),
+                assetPath(MOKOU_ENERGY_ORB),
+                assetPath(MOKOU_ATTACK_PORTRAIT), assetPath(MOKOU_SKILL_PORTRAIT), assetPath(MOKOU_POWER_PORTRAIT),
+                assetPath(MOKOU_CARD_ENERGY_ORB_PORTRAIT), assetPath(MOKOU_CARD_ENERGY_ORB));
 
         BaseMod.addColor(CharacterEnums.KEINE, KEINE_COLOR,
-                assetPath(ATTACK_BACK), assetPath(SKILL_BACK), assetPath(POWER_BACK),
-                assetPath(ENERGY_ORB),
-                assetPath(ATTACK_PORTRAIT), assetPath(SKILL_PORTRAIT), assetPath(POWER_PORTRAIT),
-                assetPath(CARD_ENERGY_ORB_PORTRAIT), assetPath(CARD_ENERGY_ORB));
+                assetPath(KEINE_ATTACK_BACK), assetPath(KEINE_SKILL_BACK), assetPath(KEINE_POWER_BACK),
+                assetPath(KEINE_ENERGY_ORB),
+                assetPath(KEINE_ATTACK_PORTRAIT), assetPath(KEINE_SKILL_PORTRAIT), assetPath(KEINE_POWER_PORTRAIT),
+                assetPath(KEINE_CARD_ENERGY_ORB_PORTRAIT), assetPath(KEINE_CARD_ENERGY_ORB));
     }
 
     @Override

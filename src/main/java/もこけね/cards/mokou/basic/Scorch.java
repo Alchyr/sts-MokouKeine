@@ -23,8 +23,8 @@ public class Scorch extends MokouCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int DAMAGE = 7;
-    private static final int HIT_COUNT = 2;
+    private static final int DAMAGE = 4;
+    private static final int HIT_COUNT = 3;
     private static final int COST_UPG = 1;
 
     public Scorch()

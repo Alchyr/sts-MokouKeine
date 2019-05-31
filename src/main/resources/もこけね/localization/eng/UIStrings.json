@@ -26,6 +26,11 @@
       "Immortal and Guardian - Looking at lobbies"
     ]
   },
+  "もこけね:MapVote": {
+    "TEXT": [
+      "Destination chosen!"
+    ]
+  },
   "もこけね:AutoResolve": {
     "TEXT": [
       "Resolving...",
@@ -123,6 +128,13 @@
   "もこけね:Refute": {
     "TEXT": [
       "Select a Card to Exhaust.",
+      "Waiting for ",
+      " to choose a card."
+    ]
+  },
+  "もこけね:Originate": {
+    "TEXT": [
+      "to Copy",
       "Waiting for ",
       " to choose a card."
     ]

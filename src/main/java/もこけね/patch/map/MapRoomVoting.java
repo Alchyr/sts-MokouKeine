@@ -3,9 +3,11 @@ package もこけね.patch.map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
@@ -18,6 +20,9 @@ import static もこけね.util.HandleMatchmaking.isMokou;
 import static もこけね.もこけねは神の国.*;
 
 public class MapRoomVoting {
+    private static UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("MapVote"));
+    private static String[] TEXT = uiStrings.TEXT;
+
     private static final float IMG_WIDTH;
     private static final float OFFSET_X;
     private static final float OFFSET_Y;
@@ -26,6 +31,10 @@ public class MapRoomVoting {
     private static boolean resetOnPost = false;
 
     private static MapRoomNode otherSelected = null;
+
+    private static int otherSelectedIndexA;
+    private static int otherSelectedIndexB;
+
     private static MapRoomNode mySelected = null;
     private static MapRoomNode chosenNode = null;
 
@@ -210,6 +219,8 @@ public class MapRoomVoting {
             int b = Integer.valueOf(params[1]);
 
             otherSelected = AbstractDungeon.map.get(a).get(b);
+            otherSelectedIndexA = a;
+            otherSelectedIndexB = b;
 
             //chat.receiveMessage("Other player voted for " + a + " " + b);
 
@@ -227,7 +238,7 @@ public class MapRoomVoting {
             int b = Integer.valueOf(params[1]);
 
             chosenNode = AbstractDungeon.map.get(a).get(b);
-            chat.receiveMessage("Destination chosen!");
+            chat.receiveMessage(TEXT[0]);
         }
     }
 
@@ -246,7 +257,7 @@ public class MapRoomVoting {
                 chosenNode = mySelected;
             }
             MultiplayerHelper.sendP2PString("choose_node" + getNodeIndex(chosenNode));
-            chat.receiveMessage("Destination chosen!");
+            chat.receiveMessage(TEXT[0]);
         }
     }
 
@@ -254,11 +265,16 @@ public class MapRoomVoting {
     {
         if (otherSelected != null && mySelected != null)
         {
+            if (!otherSelected.equals(AbstractDungeon.map.get(otherSelectedIndexA).get(otherSelectedIndexB)))
+            {
+                otherSelected = AbstractDungeon.map.get(otherSelectedIndexA).get(otherSelectedIndexB);
+            }
+
             if (otherSelected.equals(mySelected)) {
                 stopMapChooseTimer();
                 chosenNode = mySelected;
                 MultiplayerHelper.sendP2PString("choose_node" + getNodeIndex(chosenNode));
-                chat.receiveMessage("Destination chosen!");
+                chat.receiveMessage(TEXT[0]);
             }
             else {
                 startMapChooseTimer(15);

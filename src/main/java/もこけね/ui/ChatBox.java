@@ -30,7 +30,7 @@ public class ChatBox {
     public static final float HEIGHT = FontHelper.getHeight(FontHelper.tipBodyFont, " \n \n \n \n \n \n \n ", 1);
 
     private static final float SEPARATOR_HEIGHT = 2.0f * Settings.scale;
-    private static final float SEPARATOR_Y = TYPE_Y + FontHelper.getHeight(FontHelper.tipBodyFont, "X D", 1) + 4.0f * Settings.scale;
+    private static final float SEPARATOR_Y = TYPE_Y + FontHelper.getHeight(FontHelper.tipBodyFont, "X D", 1) + 5.0f * Settings.scale;
 
     private static final Color bgColor = new Color(0.2f, 0.2f, 0.2f, 0.7f);
     private static final Texture white = TextureLoader.getTexture(assetPath("img/white.png"));
@@ -117,9 +117,10 @@ public class ChatBox {
             sb.setColor(bgColor);
             sb.draw(white, TYPE_X, TYPE_Y, 0, 0, WIDTH, HEIGHT, 1.0f, 1.0f, 0, 0, 0, 1, 1, false, false);
 
-            sb.setColor(Color.WHITE);
-            //sb.draw(white, TYPE_X, SEPARATOR_Y, 0, 0, WIDTH, SEPARATOR_HEIGHT, 1.0f, 1.0f, 0, 0, 0, 1, 1, false, false);
+            sb.setColor(Color.LIGHT_GRAY);
+            sb.draw(white, TYPE_X, SEPARATOR_Y, 0, 0, WIDTH, SEPARATOR_HEIGHT, 1.0f, 1.0f, 0, 0, 0, 1, 1, false, false);
 
+            sb.setColor(Color.WHITE);
             if (active)
             {
                 sb.draw(white, TYPE_X + FontHelper.getWidth(FontHelper.tipBodyFont, InputHelper.text, 1), MARKER_Y, 0, 0, MARKER_WIDTH, SEPARATOR_HEIGHT, 1.0f, 1.0f, 0, 0, 0, 1, 1, false, false);

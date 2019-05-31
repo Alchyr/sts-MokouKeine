@@ -15,6 +15,11 @@
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
   },
+  "もこけね:Originate": {
+    "NAME": "Originate",
+    "DESCRIPTION": "Add a copy of a random card in your hand to your hand. NL It costs 1 less this combat.",
+    "UPGRADE_DESCRIPTION": "Add a copy of a card in your hand to your hand. NL It costs 1 less this combat."
+  },
   "もこけね:Scorch": {
     "NAME": "Scorch",
     "DESCRIPTION": "Deal !D! damage !M! times."
@@ -30,6 +35,18 @@
   "もこけね:Repose": {
     "NAME": "Repose",
     "DESCRIPTION": "Draw !M! cards. NL Gain !M! もこけね:Seals. NL Exhaust."
+  },
+  "もこけね:Perusal": {
+    "NAME": "Perusal",
+    "DESCRIPTION": "Add !M! もこけね:Fragment to your hand.",
+    "UPGRADE_DESCRIPTION": "Add !M! もこけね:Fragments to your hand."
+  },
+  "もこけね:Fragment": {
+    "NAME": "Fragment",
+    "DESCRIPTION": "Deal !M! damage for ALL もこけね:Fragment cards.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Deals !D! damage.)"
+    ]
   },
   "もこけね:AntiquityBurden": {
       "NAME": "Antiquity's Burden",
@@ -79,8 +96,8 @@
     "NAME": "Revision",
     "DESCRIPTION": "Move any number of cards from your hand to your partner's hand."
   },
-  "もこけね:Disparity": {
-    "NAME": "Disparity",
+  "もこけね:Divergence": {
+    "NAME": "Divergence",
     "DESCRIPTION": "Gain !M! Block for ALL your cards that did not start in your deck.",
     "EXTENDED_DESCRIPTION": [
       "NL (Gain !B! Block.)"
@@ -99,7 +116,7 @@
     "DESCRIPTION": "Deal !D! damage. NL もこけね:Echo Power: Gain !M! Artifact."
   },
   "もこけね:Shatter": {
-    "NAME": "Shatter",
+    "NAME": "Disparity",
     "DESCRIPTION": "Apply !M! Vulnerable for each enemy in combat."
   },
   "もこけね:Inhibition": {
@@ -212,7 +229,7 @@
   },
   "もこけね:Familiarity": {
     "NAME": "Familiarity",
-    "DESCRIPTION": "All cards in your hand that you have already played this combat cost 0 until played."
+    "DESCRIPTION": "ALL your cards that you have played this combat cost 0 until played."
   },
   "もこけね:Contemplation": {
     "NAME": "Contemplation",
@@ -232,10 +249,7 @@
   },
   "もこけね:Memento": {
     "NAME": "Memento",
-    "DESCRIPTION": "Deal !D! damage for ALL of your Memento cards.",
-    "EXTENDED_DESCRIPTION": [
-      " NL (Deals !M! damage.)"
-    ]
+    "DESCRIPTION": ""
   },
   "もこけね:a": {
     "NAME": "",

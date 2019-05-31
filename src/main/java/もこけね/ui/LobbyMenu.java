@@ -42,7 +42,7 @@ public class LobbyMenu {
     private static final float PANEL_X = Settings.WIDTH / 2.0f + 75.0f * Settings.scale;
     private static final float PANEL_Y = Settings.HEIGHT / 2.0f - 200.0f * Settings.scale;
 
-    private static final float BUTTON_Y = PANEL_Y + PANEL_HEIGHT + 10.0f * Settings.scale;
+    private static final float BUTTON_Y = PANEL_Y + PANEL_HEIGHT * Settings.scale + 10.0f * Settings.scale;
     private static final int BUTTON_SIZE = 56;
 
     private static final float BUTTON_OFFSET = BUTTON_SIZE / 2.0f;

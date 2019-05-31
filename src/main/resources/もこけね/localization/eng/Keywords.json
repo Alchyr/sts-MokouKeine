@@ -21,5 +21,13 @@
       "seals"
     ],
     "DESCRIPTION": "Negates the next HP cost."
+  },
+  {
+    "PROPER_NAME": "Fragment",
+    "NAMES": [
+      "fragment",
+      "fragments"
+    ],
+    "DESCRIPTION": "Fragments are #b0 cost Attacks that deal damage based on the total number of Fragments in combat."
   }
 ]
