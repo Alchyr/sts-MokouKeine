@@ -30,8 +30,10 @@ public class Fragment extends BaseCard {
 
     public Fragment()
     {
-        super(CardColor.COLORLESS, cardInfo, true);
+        super(CardColor.COLORLESS, cardInfo, false);
         setMagic(DAMAGE, UPG_DAMAGE);
+
+        this.tags.add(CustomCardTags.FRAGMENT);
     }
 
 

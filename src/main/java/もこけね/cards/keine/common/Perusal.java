@@ -30,7 +30,7 @@ public class Perusal extends KeineCard {
 
     public Perusal()
     {
-        super(cardInfo, false);
+        super(cardInfo, true);
         setMagic(GENERATE, UPG_GENERATE);
     }
 

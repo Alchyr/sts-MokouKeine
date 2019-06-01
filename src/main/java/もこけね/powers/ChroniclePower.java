@@ -10,7 +10,7 @@ import もこけね.abstracts.BasePower;
 import もこけね.util.CombatDeckHelper;
 
 public class ChroniclePower extends BasePower implements OnCardDrawPower {
-    public static final String NAME = "Execration";
+    public static final String NAME = "Chronicle";
     public static final PowerType TYPE = PowerType.BUFF;
     public static final boolean TURN_BASED = false;
 

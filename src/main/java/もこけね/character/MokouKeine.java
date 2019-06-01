@@ -39,6 +39,7 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.vfx.cardManip.CardDisappearEffect;
 import もこけね.actions.character.OtherPlayerDeckShuffleAction;
+import もこけね.cards.keine.basic.Originate;
 import もこけね.cards.keine.uncommon.Forget;
 import もこけね.cards.keine.basic.KeineDefend;
 import もこけね.cards.keine.basic.KeineStrike;
@@ -1052,7 +1053,7 @@ public class MokouKeine extends CustomPlayer {
             otherPlayerMasterDeck.group.add(new KeineDefend());
             otherPlayerMasterDeck.group.add(new KeineDefend());
             otherPlayerMasterDeck.group.add(new KeineDefend());
-            otherPlayerMasterDeck.group.add(new Forget());
+            otherPlayerMasterDeck.group.add(new Originate());
         }
         else
         {
@@ -1063,7 +1064,7 @@ public class MokouKeine extends CustomPlayer {
             startDeck.add(KeineDefend.ID);
             startDeck.add(KeineDefend.ID);
             startDeck.add(KeineDefend.ID);
-            startDeck.add(Forget.ID);
+            startDeck.add(Originate.ID);
 
             otherPlayerMasterDeck.group.add(new MokouStrike());
             otherPlayerMasterDeck.group.add(new MokouStrike());

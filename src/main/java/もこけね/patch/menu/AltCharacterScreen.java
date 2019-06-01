@@ -1,4 +1,4 @@
-package もこけね.patch;
+package もこけね.patch.menu;
 
 import basemod.BaseMod;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
