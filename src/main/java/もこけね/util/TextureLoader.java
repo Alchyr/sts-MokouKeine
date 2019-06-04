@@ -15,6 +15,16 @@ public class TextureLoader
 {
     private static HashMap<String, Texture> textures = new HashMap<>();
 
+    public static boolean hasTexture(String key)
+    {
+        return textures.containsKey(key);
+    }
+
+    public static void addTexture(String key, Texture t)
+    {
+        textures.put(key, t);
+    }
+
     /**
      * @param textureString - String path to the texture you want to load relative to resources,
      * Example: "assetPath(img/MissingImage.png)"

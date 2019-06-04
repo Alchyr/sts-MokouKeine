@@ -1,5 +1,5 @@
 {
-  "もこけね:LobbyPanel": {
+  "MokouKeine:LobbyPanel": {
     "TEXT": [
       "Name",
       "Public?",
@@ -20,25 +20,25 @@
       "Incorrect password."
     ]
   },
-  "もこけね:LobbySearch": {
+  "MokouKeine:LobbySearch": {
     "TEXT": [
       "Cancel",
       "Immortal and Guardian - Looking at lobbies"
     ]
   },
-  "もこけね:MapVote": {
+  "MokouKeine:MapVote": {
     "TEXT": [
       "Destination chosen!"
     ]
   },
-  "もこけね:AutoResolve": {
+  "MokouKeine:AutoResolve": {
     "TEXT": [
       "Resolving...",
       "Players disagree. Conflict will be automatically resolved in ",
       " seconds."
     ]
   },
-  "もこけね:ClaimReward": {
+  "MokouKeine:ClaimReward": {
     "TEXT": [
       " chose to pick up ",
       " chose to pick up the Sapphire Key.",
@@ -46,7 +46,7 @@
       "."
     ]
   },
-  "もこけね:BossRelic": {
+  "MokouKeine:BossRelic": {
     "TEXT": [
       "Boss relic chosen!",
       "Players disagree. Conflict will be automatically resolved in 60 seconds.",
@@ -54,33 +54,33 @@
       "."
     ]
   },
-  "もこけね:Bottling": {
+  "MokouKeine:Bottling": {
     "TEXT": [
       " put ",
       " in ",
       "."
     ]
   },
-  "もこけね:PotionUse": {
+  "MokouKeine:PotionUse": {
     "TEXT": [
       " used their ",
       " on ",
       "."
     ]
   },
-  "もこけね:DiscardWait": {
+  "MokouKeine:DiscardWait": {
     "TEXT": [
       "Waiting for ",
       " to choose cards to discard."
     ]
   },
-  "もこけね:Discovery": {
+  "MokouKeine:Discovery": {
     "TEXT": [
       "Waiting for ",
       " to choose a card."
     ]
   },
-  "もこけね:Resting": {
+  "MokouKeine:Resting": {
     "TEXT": [
       "Heal for 50% of your Max HP (",
       " HP from ",
@@ -89,13 +89,13 @@
       " recalled the Ruby Key."
     ]
   },
-  "もこけね:EndTurn": {
+  "MokouKeine:EndTurn": {
     "TEXT": [
       "I've already ended my turn!",
       " ended their turn."
     ]
   },
-  "もこけね:DrawPilePanel": {
+  "MokouKeine:DrawPilePanel": {
     "TEXT": [
       "'s Draw Pile is #rempty.",
       "'s Draw Pile",
@@ -105,14 +105,14 @@
       "'s draw pile."
     ]
   },
-  "もこけね:MasterDeckView": {
+  "MokouKeine:MasterDeckView": {
     "TEXT": [
       " starts each combat with all the cards in here.",
       "View all of the cards in your deck. NL NL Right click to view ",
       "'s deck."
     ]
   },
-  "もこけね:DiscardPilePanel": {
+  "MokouKeine:DiscardPilePanel": {
     "TEXT": [
       "'s Discard Pile Pile is #rempty.",
       "'s Discard Pile",
@@ -120,37 +120,48 @@
       "'s discard pile."
     ]
   },
-  "もこけね:EnergyPanel": {
+  "MokouKeine:EnergyPanel": {
     "TEXT": [
       "'s current energy count. Cards require energy to play."
     ]
   },
-  "もこけね:Refute": {
+  "MokouKeine:Refute": {
     "TEXT": [
       "Select a Card to Exhaust.",
       "Waiting for ",
       " to choose a card."
     ]
   },
-  "もこけね:Originate": {
+  "MokouKeine:Originate": {
     "TEXT": [
       "to Copy",
       "Waiting for ",
       " to choose a card."
     ]
   },
-  "もこけね:Counterfeit": {
+  "MokouKeine:Counterfeit": {
     "TEXT": [
       "to Counterfeit",
       "Waiting for ",
       " to choose a card."
     ]
   },
-  "もこけね:Revision": {
+  "MokouKeine:Revision": {
     "TEXT": [
       "to Move",
       "Waiting for ",
       " to choose cards."
+    ]
+  },
+  "MokouKeine:Fantasy": {
+    "TEXT": [
+      "Waiting for ",
+      " to create a card."
+    ]
+  },
+  "MokouKeine:CardChoice": {
+    "TEXT": [
+      "Choose an Option"
     ]
   }
 }

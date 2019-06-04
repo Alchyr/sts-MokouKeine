@@ -70,25 +70,25 @@ public abstract class BaseCard extends CustomCard {
     }
 
     //Methods meant for constructor use
-    protected void setDamage(int damage)
+    public void setDamage(int damage)
     {
         this.setDamage(damage, 0);
     }
-    protected void setBlock(int block)
+    public void setBlock(int block)
     {
         this.setBlock(block, 0);
     }
-    protected void setMagic(int magic)
+    public void setMagic(int magic)
     {
         this.setMagic(magic, 0);
     }
-    protected void setCostUpgrade(int costUpgrade)
+    public void setCostUpgrade(int costUpgrade)
     {
         this.costUpgrade = costUpgrade;
         this.upgradeCost = true;
     }
-    protected void setExhaust(boolean exhaust) { this.setExhaust(exhaust, exhaust); }
-    protected void setDamage(int damage, int damageUpgrade)
+    public void setExhaust(boolean exhaust) { this.setExhaust(exhaust, exhaust); }
+    public void setDamage(int damage, int damageUpgrade)
     {
         this.baseDamage = this.damage = damage;
         if (damageUpgrade != 0)
@@ -97,7 +97,7 @@ public abstract class BaseCard extends CustomCard {
             this.damageUpgrade = damageUpgrade;
         }
     }
-    protected void setBlock(int block, int blockUpgrade)
+    public void setBlock(int block, int blockUpgrade)
     {
         this.baseBlock = this.block = block;
         if (blockUpgrade != 0)
@@ -106,7 +106,7 @@ public abstract class BaseCard extends CustomCard {
             this.blockUpgrade = blockUpgrade;
         }
     }
-    protected void setMagic(int magic, int magicUpgrade)
+    public void setMagic(int magic, int magicUpgrade)
     {
         this.baseMagicNumber = this.magicNumber = magic;
         if (magicUpgrade != 0)
@@ -115,17 +115,22 @@ public abstract class BaseCard extends CustomCard {
             this.magicUpgrade = magicUpgrade;
         }
     }
-    protected void setExhaust(boolean baseExhaust, boolean upgExhaust)
+    public void setExhaust(boolean baseExhaust, boolean upgExhaust)
     {
         this.baseExhaust = baseExhaust;
         this.upgExhaust = upgExhaust;
         this.exhaust = baseExhaust;
     }
-    protected void setInnate(boolean baseInnate, boolean upgInnate)
+    public void setInnate(boolean baseInnate, boolean upgInnate)
     {
         this.baseInnate = baseInnate;
         this.isInnate = baseInnate;
         this.upgInnate = upgInnate;
+    }
+
+    public void setMultiDamage(boolean isMultiDamage)
+    {
+        this.isMultiDamage = isMultiDamage;
     }
 
     @Override

@@ -27,6 +27,7 @@ import javassist.NotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
+import もこけね.abstracts.FantasyEffect;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.card_use.LastCardType;
@@ -122,7 +123,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         EditCharactersSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber, PreStartGameSubscriber,
         RenderSubscriber, PostUpdateSubscriber, OnStartBattleSubscriber, StartGameSubscriber, PostBattleSubscriber
 {
-    public static final String modID = "もこけね";
+    public static final String modID = "MokouKeine";
 
     public static final Logger logger = LogManager.getLogger(modID);
 
@@ -175,7 +176,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     }
     public static String assetPath(String partialPath)
     {
-        return modID + "/" + partialPath;
+        return "もこけね/" + partialPath;
     }
 
     public static LobbyMenu lobbyMenu;
@@ -564,6 +565,9 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
 
             BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, null);
         }
+
+        //Initialize fantasy card effects
+        FantasyEffect.initializeEffectLists();
 
         //Initialize multiplayer stuff
         HandleMatchmaking.init();

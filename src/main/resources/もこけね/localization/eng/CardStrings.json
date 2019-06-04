@@ -1,109 +1,109 @@
 {
-  "もこけね:K_Strike": {
+  "MokouKeine:K_Strike": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! damage."
   },
-  "もこけね:K_Defend": {
+  "MokouKeine:K_Defend": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
   },
-  "もこけね:M_Strike": {
+  "MokouKeine:M_Strike": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! damage."
   },
-  "もこけね:M_Defend": {
+  "MokouKeine:M_Defend": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
   },
-  "もこけね:Originate": {
+  "MokouKeine:Originate": {
     "NAME": "Originate",
     "DESCRIPTION": "Add a copy of a random card in your hand to your hand. NL It costs 1 less this combat.",
     "UPGRADE_DESCRIPTION": "Add a copy of a card in your hand to your hand. NL It costs 1 less this combat."
   },
-  "もこけね:Scorch": {
+  "MokouKeine:Scorch": {
     "NAME": "Scorch",
     "DESCRIPTION": "Deal !D! damage !M! times."
   },
-  "もこけね:Record": {
+  "MokouKeine:Record": {
     "NAME": "Record",
     "DESCRIPTION": "Add a copy of the next !M! cards played this turn to your draw pile. NL They cost 1 less this combat. NL Exhaust."
   },
-  "もこけね:SuppressingStrike": {
+  "MokouKeine:SuppressingStrike": {
     "NAME": "Suppressing Strike",
-    "DESCRIPTION": "Deal !D! damage. NL Gain 1 もこけね:Seal."
+    "DESCRIPTION": "Deal !D! damage. NL Gain 1 MokouKeine:Seal."
   },
-  "もこけね:Repose": {
+  "MokouKeine:Repose": {
     "NAME": "Repose",
-    "DESCRIPTION": "Draw !M! cards. NL Gain !M! もこけね:Seals. NL Exhaust."
+    "DESCRIPTION": "Draw !M! cards. NL Gain !M! MokouKeine:Seals. NL Exhaust."
   },
-  "もこけね:Perusal": {
+  "MokouKeine:Perusal": {
     "NAME": "Perusal",
-    "DESCRIPTION": "Add !M! もこけね:Fragment to your hand.",
-    "UPGRADE_DESCRIPTION": "Add !M! もこけね:Fragments to your hand."
+    "DESCRIPTION": "Add !M! MokouKeine:Fragment to your hand.",
+    "UPGRADE_DESCRIPTION": "Add !M! MokouKeine:Fragments to your hand."
   },
-  "もこけね:Fragment": {
+  "MokouKeine:Fragment": {
     "NAME": "Fragment",
-    "DESCRIPTION": "Deal !M! damage for ALL もこけね:Fragment cards.",
+    "DESCRIPTION": "Deal !M! damage for ALL MokouKeine:Fragment cards.",
     "EXTENDED_DESCRIPTION": [
       " NL (Deals !D! damage.)"
     ]
   },
-  "もこけね:AntiquityBurden": {
+  "MokouKeine:AntiquityBurden": {
       "NAME": "Antiquity's Burden",
       "DESCRIPTION": "Enemy's Vulnerable stacks additively until the end of the turn. NL Exhaust."
   },
-  "もこけね:Restraint": {
+  "MokouKeine:Restraint": {
     "NAME": "Restraint",
-    "DESCRIPTION": "Gain !B! Block. NL Gain 1 もこけね:Seal."
+    "DESCRIPTION": "Gain !B! Block. NL Gain 1 MokouKeine:Seal."
   },
-  "もこけね:Forget": {
+  "MokouKeine:Forget": {
     "NAME": "Forget",
     "DESCRIPTION": "Apply 1 Weak to the enemy whenever it loses HP this turn."
   },
-  "もこけね:Purify": {
+  "MokouKeine:Purify": {
     "NAME": "Purify",
     "DESCRIPTION": "Lose !M! HP. NL Remove all of your debuffs. NL Exhaust."
   },
-  "もこけね:Feint": {
+  "MokouKeine:Feint": {
     "NAME": "Feint",
     "DESCRIPTION": "Apply !M! Vulnerable. NL Deal !D! damage to a random enemy other than the target."
   },
-  "もこけね:Memoir": {
+  "MokouKeine:Memoir": {
     "NAME": "Epitaph",
     "DESCRIPTION": "Apply !M! Weak. NL Draw 2 cards."
   },
-  "もこけね:Chronicle": {
+  "MokouKeine:Chronicle": {
     "NAME": "Chronicle",
     "DESCRIPTION": "Whenever you draw a card that did not start in your deck, gain !M! Strength."
   },
-  "もこけね:Protector": {
+  "MokouKeine:Protector": {
     "NAME": "Protector",
     "DESCRIPTION": "Gain !B! Block for each card in your partner's hand."
   },
-  "もこけね:Prosperity": {
+  "MokouKeine:Prosperity": {
     "NAME": "Prosperity",
-    "DESCRIPTION": "Gain !B! Block. NL もこけね:Echo Power: Play a copy of the Power."
+    "DESCRIPTION": "Gain !B! Block. NL MokouKeine:Echo Power: Play a copy of the Power."
   },
-  "もこけね:Addendum": {
+  "MokouKeine:Addendum": {
     "NAME": "Addendum",
-    "DESCRIPTION": "Deal !D! damage. NL もこけね:Echo Attack: Gain [E] [E] and draw !M! card."
+    "DESCRIPTION": "Deal !D! damage. NL MokouKeine:Echo Attack: Gain [E] [E] and draw !M! card."
   },
-  "もこけね:Counterfeit": {
+  "MokouKeine:Counterfeit": {
     "NAME": "Counterfeit",
     "DESCRIPTION": "Exhaust a card in your hand. NL Add !M! new copies of it to your hand. NL Exhaust."
   },
-  "もこけね:Revision": {
+  "MokouKeine:Revision": {
     "NAME": "Revision",
     "DESCRIPTION": "Move any number of cards from your hand to your partner's hand."
   },
-  "もこけね:Divergence": {
+  "MokouKeine:Divergence": {
     "NAME": "Divergence",
     "DESCRIPTION": "Gain !M! Block for ALL your cards that did not start in your deck.",
     "EXTENDED_DESCRIPTION": [
       "NL (Gain !B! Block.)"
     ]
   },
-  "もこけね:Unearth": {
+  "MokouKeine:Unearth": {
     "NAME": "Unearth",
     "DESCRIPTION": "Draw a card. NL If it did not start in your deck, gain",
     "EXTENDED_DESCRIPTION": [
@@ -111,156 +111,208 @@
       "."
     ]
   },
-  "もこけね:Hardcover": {
+  "MokouKeine:Hardcover": {
     "NAME": "Hardcover",
-    "DESCRIPTION": "Deal !D! damage. NL もこけね:Echo Power: Gain !M! Artifact."
+    "DESCRIPTION": "Deal !D! damage. NL MokouKeine:Echo Power: Gain !M! Artifact."
   },
-  "もこけね:Shatter": {
+  "MokouKeine:Shatter": {
     "NAME": "Disparity",
     "DESCRIPTION": "Apply !M! Vulnerable for each enemy in combat."
   },
-  "もこけね:Inhibition": {
+  "MokouKeine:Inhibition": {
     "NAME": "Inhibition",
-    "DESCRIPTION": "At the start of your turn, gain !M! もこけね:Seal."
+    "DESCRIPTION": "At the start of your turn, gain !M! MokouKeine:Seal."
   },
-  "もこけね:HeatUp": {
+  "MokouKeine:HeatUp": {
     "NAME": "Heat Up",
     "DESCRIPTION": "Lose 3 HP. NL Gain !M! Strength."
   },
-  "もこけね:Release": {
+  "MokouKeine:Release": {
     "NAME": "Release",
-    "DESCRIPTION": "Lose all もこけね:Seals. NL Summon a もこけね:Flame for each もこけね:Seal lost. NL Exhaust."
+    "DESCRIPTION": "Lose all MokouKeine:Seals. NL Summon a MokouKeine:Flame for each MokouKeine:Seal lost. NL Exhaust."
   },
-  "もこけね:Reflection": {
+  "MokouKeine:Reflection": {
     "NAME": "Reflection",
     "DESCRIPTION": "Discard your hand. NL Your partner gains [E] for each card discarded. NL Exhaust."
   },
-  "もこけね:Reminisce": {
+  "MokouKeine:Reminisce": {
     "NAME": "Reminisce",
     "DESCRIPTION": "Deal !D! damage for each debuff the enemy has.",
     "EXTENDED_DESCRIPTION": [
       " NL (Deals !M! damage.)"
     ]
   },
-  "もこけね:Huddle": {
+  "MokouKeine:Huddle": {
     "NAME": "Huddle",
     "DESCRIPTION": "Gain !B! Block. NL Draw 1 card each."
   },
-  "もこけね:Blazing": {
+  "MokouKeine:Blazing": {
     "NAME": "Blazing",
     "DESCRIPTION": "Lose 4 HP. NL Draw !M! cards."
   },
-  "もこけね:Detonate": {
+  "MokouKeine:Detonate": {
     "NAME": "Detonate",
     "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, deal !M! damage to ALL enemies."
   },
-  "もこけね:Singe": {
+  "MokouKeine:Singe": {
     "NAME": "Singe",
     "DESCRIPTION": "Deal !D! damage. NL Add a Burn to your hand."
   },
-  "もこけね:Tampering": {
+  "MokouKeine:Tampering": {
     "NAME": "Tampering",
     "DESCRIPTION": "Add a random card to your discard pile. NL It costs 0 this combat. NL Exhaust."
   },
-  "もこけね:Backfire": {
+  "MokouKeine:Backfire": {
     "NAME": "Backfire",
     "DESCRIPTION": "Lose hp deal damage"
   },
-  "もこけね:Eradication": {
+  "MokouKeine:Eradication": {
     "NAME": "Eradication",
     "DESCRIPTION": "Deal !D! damage !M! times."
   },
-  "もこけね:Ignition": {
+  "MokouKeine:Ignition": {
     "NAME": "Ignition",
-    "DESCRIPTION": "Whenever you would gain Strength, summon a もこけね:Flame instead."
+    "DESCRIPTION": "Whenever you would gain Strength, summon a MokouKeine:Flame instead."
   },
-  "もこけね:Smokescreen": {
+  "MokouKeine:Smokescreen": {
     "NAME": "Smokescreen",
-    "DESCRIPTION": "Gain !B! Block. NL Summon a もこけね:Flame."
+    "DESCRIPTION": "Gain !B! Block. NL Summon a MokouKeine:Flame."
   },
-  "もこけね:Refute": {
+  "MokouKeine:Refute": {
     "NAME": "Refute",
     "DESCRIPTION": "Deal !D! damage. NL Exhaust a card in a discard pile."
   },
-  "もこけね:Tragedy": {
+  "MokouKeine:Tragedy": {
     "NAME": "Tragedy",
     "DESCRIPTION": "Deal !D! damage for each stack of Weak and Vulnerable the enemy has. NL The enemy loses all Weak and Vulnerable.",
     "EXTENDED_DESCRIPTION": [
       " NL (Deals !M! damage.)"
     ]
   },
-  "もこけね:Warmup": {
+  "MokouKeine:Warmup": {
     "NAME": "Warmup",
-    "DESCRIPTION": "Summon a もこけね:Flame."
+    "DESCRIPTION": "Summon a MokouKeine:Flame."
   },
-  "もこけね:Indomitable": {
+  "MokouKeine:Indomitable": {
     "NAME": "Indomitable",
     "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak to ALL enemies."
   },
-  "もこけね:Sinister": {
+  "MokouKeine:Sinister": {
     "NAME": "Sinister",
-    "DESCRIPTION": "Deal !D! damage. NL もこけね:Echo Attack: Deal !M! damage."
+    "DESCRIPTION": "Deal !D! damage. NL MokouKeine:Echo Attack: Deal !M! damage."
   },
-  "もこけね:Stabilize": {
+  "MokouKeine:Stabilize": {
     "NAME": "Stabilize",
-    "DESCRIPTION": "Gain !B! Block. NL もこけね:Echo Skill: Gain !M! Block."
+    "DESCRIPTION": "Gain !B! Block. NL MokouKeine:Echo Skill: Gain !M! Block."
   },
-  "もこけね:SealingRite": {
+  "MokouKeine:SealingRite": {
     "NAME": "Sealing Rite",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Gain 1 もこけね:Seal for each enemy in combat. NL Exhaust."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Gain 1 MokouKeine:Seal for each enemy in combat. NL Exhaust."
   },
-  "もこけね:FujiyamaVolcano": {
+  "MokouKeine:FujiyamaVolcano": {
     "NAME": "Fujiyama Volcano",
-    "DESCRIPTION": "Exhaust your hand. NL Summon a もこけね:Flame for each card Exhausted."
+    "DESCRIPTION": "Exhaust your hand. NL Summon a MokouKeine:Flame for each card Exhausted."
   },
-  "もこけね:Blitz": {
+  "MokouKeine:Blitz": {
     "NAME": "Blitz",
     "DESCRIPTION": "Lose 3 HP. NL Deal !D! damage twice.",
     "UPGRADE_DESCRIPTION": "Lose 3 HP. NL Deal !D! damage twice. NL Draw a card."
   },
-  "もこけね:Ruthless": {
+  "MokouKeine:Ruthless": {
     "NAME": "Ruthless",
     "DESCRIPTION": "Whenever an enemy dies, gain !M! Strength.",
     "UPGRADE_DESCRIPTION": "Innate. NL Whenever an enemy dies, gain !M! Strength."
   },
-  "もこけね:Kindle": {
+  "MokouKeine:Kindle": {
     "NAME": "Kindle",
     "DESCRIPTION": "Your partner gains NL [E] [E]. NL Exhaust."
   },
-  "もこけね:Familiarity": {
+  "MokouKeine:Familiarity": {
     "NAME": "Familiarity",
     "DESCRIPTION": "ALL your cards that you have played this combat cost 0 until played."
   },
-  "もこけね:Contemplation": {
+  "MokouKeine:Contemplation": {
     "NAME": "Contemplation",
     "DESCRIPTION": "Whenever you play a card that did not start in your deck, gain !M! Block."
   },
-  "もこけね:PhoenixCall": {
+  "MokouKeine:PhoenixCall": {
     "NAME": "Phoenix's Call",
     "DESCRIPTION": "Exhaust a card. NL Apply !M! Vulnerable."
   },
-  "もこけね:Sacrifice": {
+  "MokouKeine:Sacrifice": {
     "NAME": "Sacrifice",
     "DESCRIPTION": "Deal !D! damage. NL Apply 1 Stun. NL Skip your next turn. NL Exhaust."
   },
-  "もこけね:HakutakuForm": {
+  "MokouKeine:HakutakuForm": {
     "NAME": "Hakutaku Form",
     "DESCRIPTION": "Add a copy of your deck to your draw pile. NL The copies cost 1 less."
   },
-  "もこけね:Memento": {
+  "MokouKeine:Memento": {
     "NAME": "Memento",
     "DESCRIPTION": ""
   },
-  "もこけね:a": {
+  "MokouKeine:a": {
     "NAME": "",
-    "DESCRIPTION": "Summon X もこけね:Flames."
+    "DESCRIPTION": "Summon X MokouKeine:Flames."
   },
-  "もこけね:Hotheaded": {
+  "MokouKeine:Hotheaded": {
     "NAME": "Hotheaded",
     "DESCRIPTION": "Whenever a discard pile is shuffled, lose !M! HP. NL At the start of your turn, gain [E]."
   },
-  "もこけね:c": {
+  "MokouKeine:c": {
     "NAME": "",
     "DESCRIPTION": "Choose !M! of X + !M! cards to add to your hand. NL It costs 0 this combat. NL Exhaust."
+  },
+  "MokouKeine:Fantasy": {
+    "NAME": "Fantasy",
+    "DESCRIPTION": "Create a card. NL Add a copy of ALL cards created by this card this run to your draw pile. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Create an upgraded card. NL Add an upgraded copy of ALL cards created by this card this run to your draw pile. NL Exhaust."
+  },
+  "MokouKeine:FantasyPiece": {
+    "NAME": "???",
+    "DESCRIPTION": "This card's effects have yet to be determined."
+  },
+  "MokouKeine:FantasyAttackNormal": {
+    "NAME": "NormalDamage",
+    "DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": [
+      "Deal !D! damage",
+      "Deal !D! damage to a random enemy",
+      "Deal !D! damage to ALL enemies",
+      " X times.",
+      "."
+    ]
+  },
+  "MokouKeine:FantasyBlockNormal": {
+    "NAME": "NormalBlock",
+    "DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": [
+      "Gain !B! Block X times.",
+      "Gain !B! Block."
+    ]
+  },
+  "MokouKeine:FantasyCardDraw": {
+    "NAME": "CardDraw",
+    "DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": [
+      " NL Draw !M! card.",
+      " NL Draw !M! cards.",
+      " NL Draw X cards.",
+      " NL Draw X + !M! cards."
+    ]
+  },
+  "MokouKeine:FantasyHPLoss": {
+    "NAME": "HPLoss",
+    "DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": [
+      " NL Lose !M! HP."
+    ]
+  },
+  "MokouKeine:FantasyExhaust": {
+    "NAME": "Exhaust",
+    "DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": [
+      " NL Exhaust."
+    ]
   }
 }

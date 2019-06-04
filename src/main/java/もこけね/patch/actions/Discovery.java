@@ -28,9 +28,8 @@ public class Discovery {
     @SpirePrefixPatch
     public static SpireReturn waitForPlayer(DiscoveryAction __instance)
     {
-        if (MultiplayerHelper.active && AbstractDungeon.player instanceof MokouKeine)
+        if (MultiplayerHelper.active && AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE)
         {
-            MokouKeine p = (MokouKeine)AbstractDungeon.player;
             if (TrackCardSource.useOtherEnergy) //played by other player.
             {
                 AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + partnerName + uiStrings.TEXT[1]));

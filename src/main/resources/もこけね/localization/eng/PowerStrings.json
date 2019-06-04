@@ -1,12 +1,12 @@
 {
-  "もこけね:Forget": {
+  "MokouKeine:Forget": {
     "NAME": "Forget",
     "DESCRIPTIONS": [
       "Upon losing HP, apply #b",
       " #yWeak."
     ]
   },
-  "もこけね:Weight": {
+  "MokouKeine:Weight": {
     "NAME": "Weight",
     "DESCRIPTIONS": [
       "This enemy's #yVulnerable stacks additively until the end of the turn.",
@@ -14,13 +14,13 @@
       " turns."
     ]
   },
-  "もこけね:Volatile": {
+  "MokouKeine:Volatile": {
     "NAME": "Volatile",
     "DESCRIPTIONS": [
       "On death, deals damage equal to half of its Max HP to ALL enemies."
     ]
   },
-  "もこけね:Record": {
+  "MokouKeine:Record": {
     "NAME": "Record",
     "DESCRIPTIONS": [
       "Add a copy of the next card played to ",
@@ -31,28 +31,28 @@
       "'s"
     ]
   },
-  "もこけね:Ruthless": {
+  "MokouKeine:Ruthless": {
     "NAME": "Ruthless",
     "DESCRIPTIONS": [
       "Whenever an enemy dies, gain #b",
       " #yStrength."
     ]
   },
-  "もこけね:Inhibition": {
+  "MokouKeine:Inhibition": {
     "NAME": "Inhibition",
     "DESCRIPTIONS": [
       "At the start of your turn, gain #b",
-      " #yもこけねSeal."
+      " #yMokouKeine:Seal."
     ]
   },
-  "もこけね:Execration": {
+  "MokouKeine:Execration": {
     "NAME": "Execration",
     "DESCRIPTIONS": [
       "Whenever you apply a debuff to an enemy, gain #b",
       " #yStrength."
     ]
   },
-  "もこけね:Seal": {
+  "MokouKeine:Seal": {
     "NAME": "Seal",
     "DESCRIPTIONS": [
       "Prevents the next time you would lose HP by spending it.",
@@ -60,12 +60,12 @@
       " times you would lose HP by spending it."
     ]
   },
-  "もこけね:Ignition": {
+  "MokouKeine:Ignition": {
     "NAME": "Ignition",
     "DESCRIPTIONS": [
-      "Whenever you would gain #yStrength, summon a #yもこけねFlame instead.",
+      "Whenever you would gain #yStrength, summon a #yMokouKeine:Flame instead.",
       "Whenever you would gain #yStrength, summon #b",
-      " #yもこけねFlames instead."
+      " #yMokouKeine:Flames instead."
     ]
   }
 }

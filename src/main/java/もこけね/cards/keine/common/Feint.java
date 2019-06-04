@@ -48,7 +48,7 @@ public class Feint extends KeineCard {
             AbstractDungeon.actionManager.addToBottom(new VFXAction(new CardPoofEffect(m.hb.cX, m.hb.cY)));
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false), this.magicNumber));
         }
-        AbstractDungeon.actionManager.addToBottom(new DamageRandomConditionalEnemyAction((monster)->!monster.equals(m), new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+        AbstractDungeon.actionManager.addToBottom(new DamageRandomConditionalEnemyAction((monster)->!monster.equals(m), new DamageInfo(p, this.baseDamage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
     }
 
     @Override

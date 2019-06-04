@@ -39,12 +39,14 @@ public class DamageRandomConditionalEnemyAction extends AbstractGameAction {
         }
         else if (validTargets.size() == 1)
         {
+            damage.applyPowers(damage.owner, validTargets.get(0));
             AbstractDungeon.actionManager.addToTop(new DamageAction(validTargets.get(0), damage, attackEffect));
             this.isDone = true;
             return;
         }
 
         AbstractMonster t = validTargets.get(AbstractDungeon.cardRandomRng.random(validTargets.size() - 1));
+        damage.applyPowers(damage.owner, t);
         AbstractDungeon.actionManager.addToTop(new DamageAction(t, damage, attackEffect));
         this.isDone = true;
     }
