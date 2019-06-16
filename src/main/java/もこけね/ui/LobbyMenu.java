@@ -531,6 +531,33 @@ public class LobbyMenu {
             {
                 FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, TEXT[6], PANEL_CENTER_X, PANEL_CENTER_Y, Color.WHITE);
             }
+            else if (mode == 2) //creating
+            {
+                //name
+                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[0], NAME_LABEL_X, LABEL_Y, Color.WHITE);
+                nameInput.render(sb);
+
+                //public
+                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[11], MOKOU_LABEL_X, PUBLIC_INPUT_TEXT_Y, Color.WHITE);
+                publicRoom.render(sb);
+
+                if (!publicRoom.enabled)
+                {
+                    //password
+                    FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[9], NAME_LABEL_X, PASSWORD_LABEL_Y, Color.WHITE);
+                    passwordInput.render(sb);
+                }
+
+                //character
+                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, characterStrings.NAMES[1], MOKOU_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
+                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, characterStrings.NAMES[2], KEINE_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
+                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[12], RANDOM_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
+                mokouToggle.render(sb);
+                keineToggle.render(sb);
+                randomToggle.render(sb);
+
+                FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, TEXT[13], PANEL_CENTER_X, CREATE_TEXT_Y, lobbyCreateHitbox.hovered ? Color.GOLD : Color.WHITE);
+            }
             else if (lobbies.isEmpty())
             {
                 FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, TEXT[3], PANEL_CENTER_X, PANEL_CENTER_Y, Color.WHITE);
@@ -571,33 +598,6 @@ public class LobbyMenu {
                     }
                     y -= LINE_HEIGHT;
                 }
-            }
-            else if (mode == 2) //creating
-            {
-                //name
-                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[0], NAME_LABEL_X, LABEL_Y, Color.WHITE);
-                nameInput.render(sb);
-
-                //public
-                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[11], MOKOU_LABEL_X, PUBLIC_INPUT_TEXT_Y, Color.WHITE);
-                publicRoom.render(sb);
-
-                if (!publicRoom.enabled)
-                {
-                    //password
-                    FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[9], NAME_LABEL_X, PASSWORD_LABEL_Y, Color.WHITE);
-                    passwordInput.render(sb);
-                }
-
-                //character
-                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, characterStrings.NAMES[1], MOKOU_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
-                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, characterStrings.NAMES[2], KEINE_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
-                FontHelper.renderFontLeftTopAligned(sb, FontHelper.buttonLabelFont, TEXT[12], RANDOM_LABEL_X, CHARACTER_LABEL_Y, Color.WHITE);
-                mokouToggle.render(sb);
-                keineToggle.render(sb);
-                randomToggle.render(sb);
-
-                FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, TEXT[13], PANEL_CENTER_X, CREATE_TEXT_Y, lobbyCreateHitbox.hovered ? Color.GOLD : Color.WHITE);
             }
         }
     }
