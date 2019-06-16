@@ -2,6 +2,7 @@ package もこけね.actions.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.unique.RemoveDebuffsAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,8 +10,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class ReminisceAction extends AbstractGameAction {
-    public ReminisceAction(int damage, AbstractPlayer source, AbstractMonster target)
+public class PurifyAction extends AbstractGameAction {
+    public PurifyAction(int damage, AbstractPlayer source, AbstractMonster target)
     {
         setValues(target, source, damage);
     }
@@ -22,17 +23,15 @@ public class ReminisceAction extends AbstractGameAction {
             this.isDone = true;
             return;
         }
-        int finalDamage = 0;
+
         for (AbstractPower p : target.powers)
         {
             if (p.type == AbstractPower.PowerType.DEBUFF)
-                finalDamage += this.amount;
+            {
+                AbstractDungeon.actionManager.addToTop(new DamageAction(target, new DamageInfo(source, this.amount, DamageInfo.DamageType.NORMAL), AttackEffect.FIRE));
+                AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(target, source, p));
+            }
         }
-        if (finalDamage > 0)
-        {
-            AbstractDungeon.actionManager.addToTop(new DamageAction(target, new DamageInfo(source, finalDamage, DamageInfo.DamageType.NORMAL), finalDamage > 10 ? AttackEffect.SMASH : AttackEffect.BLUNT_LIGHT));
-        }
-        //AbstractDungeon.actionManager.addToTop(new RemoveDebuffsAction(target));
 
         this.isDone = true;
     }
