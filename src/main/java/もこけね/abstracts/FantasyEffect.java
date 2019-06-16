@@ -20,10 +20,10 @@ import java.util.HashMap;
 import static もこけね.もこけねは神の国.logger;
 
 public abstract class FantasyEffect {
-    protected static ArrayList<FantasyEffect> baseAttackEffects = new ArrayList<>();
-    protected static ArrayList<FantasyEffect> baseSkillEffects = new ArrayList<>();
-    protected static ArrayList<FantasyEffect> bonusAttackEffects = new ArrayList<>();
-    protected static ArrayList<FantasyEffect> bonusSkillEffects = new ArrayList<>();
+    public static ArrayList<FantasyEffect> baseAttackEffects = new ArrayList<>();
+    public static ArrayList<FantasyEffect> baseSkillEffects = new ArrayList<>();
+    public static ArrayList<FantasyEffect> bonusAttackEffects = new ArrayList<>();
+    public static ArrayList<FantasyEffect> bonusSkillEffects = new ArrayList<>();
 
     public static HashMap<FantasyEffect, Integer> effectIDs = new HashMap<>(); //effect ID is used to build a unique image string for each card.
 

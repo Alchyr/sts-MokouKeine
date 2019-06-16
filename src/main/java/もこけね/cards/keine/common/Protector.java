@@ -12,7 +12,7 @@ import static もこけね.もこけねは神の国.makeID;
 
 public class Protector extends KeineCard {
     private final static CardInfo cardInfo = new CardInfo(
-            "Protector",
+            "Protect",
             1,
             CardType.SKILL,
             CardTarget.NONE,

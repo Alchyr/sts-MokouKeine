@@ -73,7 +73,7 @@ public class CounterfeitAction extends AbstractGameAction {
                         MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalCardString(indexes.get(c), AbstractDungeon.player.hand, true));
                         first = false;
                     }
-                    AbstractDungeon.player.hand.addToTop(c); //add back to hand to be exhausted
+                    AbstractDungeon.player.hand.addToTop(c);
                 }
                 AbstractDungeon.handCardSelectScreen.selectedCards.group.clear();
                 AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;

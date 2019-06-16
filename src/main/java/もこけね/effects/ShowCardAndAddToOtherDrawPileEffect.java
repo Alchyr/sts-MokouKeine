@@ -60,6 +60,8 @@ public class ShowCardAndAddToOtherDrawPileEffect extends AbstractGameEffect {
                 AbstractDungeon.player.drawPile.addToTop(srcCard);// 83
             }
         }
+
+        srcCard.triggerWhenCopied();
     }// 53
 
     public ShowCardAndAddToOtherDrawPileEffect(AbstractCard srcCard, float x, float y, boolean randomSpot, boolean cardOffset) {
@@ -101,6 +103,8 @@ public class ShowCardAndAddToOtherDrawPileEffect extends AbstractGameEffect {
                 AbstractDungeon.player.drawPile.addToTop(srcCard);// 83
             }
         }
+
+        srcCard.triggerWhenCopied();
     }// 86
 
     private void identifySpawnLocation(float x, float y) {

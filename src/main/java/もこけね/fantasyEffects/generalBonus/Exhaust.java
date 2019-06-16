@@ -15,7 +15,7 @@ import static もこけね.もこけねは神の国.makeID;
 public class Exhaust extends FantasyEffect {
     private static final String[] TEXT = CardCrawlGame.languagePack.getCardStrings(makeID("FantasyExhaust")).EXTENDED_DESCRIPTION;
 
-    private static final float SCALE = 1.5f;
+    private static final float SCALE = 1.4f;
 
     public Exhaust()
     {}

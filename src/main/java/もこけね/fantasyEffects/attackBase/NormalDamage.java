@@ -28,7 +28,7 @@ public class NormalDamage extends FantasyEffect {
             5,
             9,
             16,
-            28
+            24
     };
 
     private static final int[] UPG_DAMAGE = new int[] {

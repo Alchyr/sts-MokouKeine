@@ -1,6 +1,5 @@
 package もこけね.cards.keine.basic;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -19,7 +18,7 @@ public class Originate extends KeineCard {
             CardTarget.NONE,
             CardRarity.BASIC
     );
-    //1 [0] - Whenever the enemy takes damage this turn, apply 1 Weak to it.
+
     public final static String ID = makeID(cardInfo.cardName);
 
     public Originate()

@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import もこけね.abstracts.FantasyEffect;
+import もこけね.abstracts.ReceiveSignalCardsAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.cards.colorless.FantasyCard;
 import もこけね.patch.energy_division.TrackCardSource;
@@ -24,7 +25,8 @@ import static もこけね.もこけねは神の国.makeID;
 public class FantasyAction extends AbstractGameAction {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("Fantasy"));
 
-    private static HashMap<UUID, ArrayList<FantasyCard>> createdCards = new HashMap<>();
+    //probably should save this somewhere, CustomSavable on this probably saving int deck index and created card data in case someone gets it through prismatic shard.
+    protected static HashMap<UUID, ArrayList<AbstractCard>> createdCards = new HashMap<>();
 
 
     private AbstractCard sourceCard;
@@ -44,11 +46,13 @@ public class FantasyAction extends AbstractGameAction {
     public void update() {
         CardChoiceBuilder b;
         FantasyCard baseCard;
+
         switch (stage)
         {
             case 0:
                 if (MultiplayerHelper.active && TrackCardSource.useOtherEnergy && AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE)
                 {
+                    AbstractDungeon.actionManager.addToTop(new ReceiveFantasyCardAction(sourceCard));
                     AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(uiStrings.TEXT[0] + partnerName + uiStrings.TEXT[1]));
                     this.isDone = true;
 
@@ -57,9 +61,18 @@ public class FantasyAction extends AbstractGameAction {
 
                 ++stage;
 
+                AbstractCard attack = new FantasyCard(AbstractCard.CardType.ATTACK);
+                AbstractCard skill = new FantasyCard(AbstractCard.CardType.SKILL);
+
+                if (upgraded)
+                {
+                    attack.upgrade();
+                    skill.upgrade();
+                }
+
                 new CardChoiceBuilder()
-                        .addOption(new FantasyCard(AbstractCard.CardType.ATTACK))
-                        .addOption(new FantasyCard(AbstractCard.CardType.SKILL)).open();
+                        .addOption(attack)
+                        .addOption(skill).open();
                 break;
             case 1:
                 if (AbstractDungeon.cardRewardScreen.discoveryCard instanceof FantasyCard)
@@ -85,7 +98,12 @@ public class FantasyAction extends AbstractGameAction {
                 b = new CardChoiceBuilder();
                 for (int i : possibleCosts)
                 {
-                    b.addOption(new FantasyCard(baseCard.type, i));
+                    AbstractCard costCard = new FantasyCard(baseCard.type, i);
+
+                    if (upgraded)
+                        costCard.upgrade();
+
+                    b.addOption(costCard);
                 }
 
                 ++stage;
@@ -118,7 +136,12 @@ public class FantasyAction extends AbstractGameAction {
 
                 for (FantasyEffect e : chosenOptions)
                 {
-                    b.addOption(new FantasyCard(baseCard.type, baseCard.cost).setBaseEffect(e));
+                    AbstractCard baseEffectCard = new FantasyCard(baseCard.type, baseCard.cost).setBaseEffect(e);
+
+                    if (upgraded)
+                        baseEffectCard.upgrade();
+
+                    b.addOption(baseEffectCard);
                 }
 
                 ++stage;
@@ -151,7 +174,12 @@ public class FantasyAction extends AbstractGameAction {
 
                 for (FantasyEffect e : chosenBonusOptions)
                 {
-                    b.addOption(new FantasyCard(baseCard.type, baseCard.cost).setBaseEffect(baseCard.baseEffect).setBonusEffect(e));
+                    AbstractCard bonusEffectCard = new FantasyCard(baseCard.type, baseCard.cost).setBaseEffect(baseCard.baseEffect).setBonusEffect(e);
+
+                    if (upgraded)
+                        bonusEffectCard.upgrade();
+
+                    b.addOption(bonusEffectCard);
                 }
 
                 ++stage;
@@ -178,6 +206,8 @@ public class FantasyAction extends AbstractGameAction {
 
                 createdCards.get(sourceCard.uuid).add(completeCard);
 
+                MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalFantasyCardString(completeCard));
+
                 ++stage;
 
                 break;
@@ -185,20 +215,25 @@ public class FantasyAction extends AbstractGameAction {
                 addGeneratedCards();
 
                 if (MultiplayerHelper.active && AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE)
+                {
                     MultiplayerHelper.sendP2PString("signalcrrng" + AbstractDungeon.cardRandomRng.counter);
+                }
                 this.isDone = true;
         }
     }
 
     private void addGeneratedCards()
     {
-        ArrayList<FantasyCard> created = createdCards.get(sourceCard.uuid);
+        ArrayList<AbstractCard> created = createdCards.get(sourceCard.uuid);
 
         if (created != null)
         {
-            for (FantasyCard c : created)
+            for (AbstractCard c : created)
             {
-                AbstractDungeon.actionManager.addToTop(new MakeTempCardInDrawPileAction(c.makeStatEquivalentCopy(), 1, true, true));
+                AbstractCard toAdd = c.makeStatEquivalentCopy();
+                if (sourceCard.upgraded)
+                    toAdd.upgrade();
+                AbstractDungeon.actionManager.addToTop(new MakeTempCardInDrawPileAction(toAdd, 1, true, true));
             }
         }
     }

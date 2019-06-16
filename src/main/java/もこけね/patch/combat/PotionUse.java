@@ -61,7 +61,7 @@ public class PotionUse {
     {
         if (AbstractDungeon.player instanceof MokouKeine)
         {
-            ((MokouKeine) AbstractDungeon.player).otherPlayerPotions.clear();
+            MultiplayerHelper.otherPlayerPotions.clear();
             StringBuilder log = new StringBuilder("Other player's potions: ");
 
             String[] ids = info.split("!!!");
@@ -72,7 +72,7 @@ public class PotionUse {
                     AbstractPotion p = PotionHelper.getPotion(id);
                     if (p != null) //just to ensure the ID is a real potion that exists.
                     {
-                        ((MokouKeine) AbstractDungeon.player).otherPlayerPotions.add(id);
+                        MultiplayerHelper.otherPlayerPotions.add(id);
                         log.append(p.name).append(" ");
                     }
                 }
@@ -86,7 +86,7 @@ public class PotionUse {
         String[] args = info.split("!!!");
         if (args.length == 3 && AbstractDungeon.player instanceof MokouKeine)
         {
-            return ((MokouKeine) AbstractDungeon.player).otherPlayerPotions.remove(args[0]);
+            return MultiplayerHelper.otherPlayerPotions.remove(args[0]);
         }
         return false;
     }
@@ -97,7 +97,7 @@ public class PotionUse {
         if (args.length == 2 && AbstractDungeon.player instanceof MokouKeine)
         {
             AbstractPotion toUse = PotionHelper.getPotion(args[0]);
-            if (((MokouKeine) AbstractDungeon.player).otherPlayerPotions.contains(toUse.ID))
+            if (MultiplayerHelper.otherPlayerPotions.contains(toUse.ID))
             {
                 int index = Integer.valueOf(args[1]);
 

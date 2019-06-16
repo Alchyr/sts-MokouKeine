@@ -169,6 +169,89 @@ public class FantasyCard extends BaseCard {//implements CustomSavable<String> { 
 
         return textureString.toString();
     }
+    public String effectString()
+    {
+        StringBuilder effectString = new StringBuilder();
+
+        switch (this.type)
+        {
+            case ATTACK:
+                effectString.append("a:");
+                break;
+            case SKILL:
+                effectString.append("s:");
+                break;
+            default:
+                effectString.append("?:"); //shouldn't happen.
+        }
+
+        effectString.append(this.cost).append(':');
+
+        switch (this.type)
+        {
+            case ATTACK:
+                if (baseEffect != null)
+                    effectString.append(FantasyEffect.baseAttackEffects.indexOf(baseEffect)).append(':');
+
+                if (bonusEffect != null)
+                    effectString.append(FantasyEffect.bonusAttackEffects.indexOf(bonusEffect)).append(':');
+                break;
+            case SKILL:
+                if (baseEffect != null)
+                    effectString.append(FantasyEffect.baseSkillEffects.indexOf(baseEffect)).append(':');
+
+                if (bonusEffect != null)
+                    effectString.append(FantasyEffect.bonusSkillEffects.indexOf(bonusEffect)).append(':');
+                break;
+        }
+
+        if (effectString.length() > 0) //remove trailing :
+            effectString.deleteCharAt(effectString.length() - 1);
+
+        return effectString.toString();
+    }
+    public static FantasyCard fromEffectString(String effectString)
+    {
+        String[] params = effectString.split(":");
+
+        CardType type = CardType.SKILL;
+        int cost = -2;
+        FantasyEffect baseEffect = null;
+        FantasyEffect bonusEffect = null;
+
+        if (params.length > 0)
+        {
+            if (params[0].equals("a"))
+            {
+                type = CardType.ATTACK;
+            }
+        }
+
+        if (params.length > 1)
+        {
+            cost = Integer.parseInt(params[1]);
+        }
+
+        switch (type)
+        {
+            case ATTACK:
+                if (params.length > 2)
+                    baseEffect = FantasyEffect.baseAttackEffects.get(Integer.parseInt(params[2]));
+
+                if (params.length > 3)
+                    bonusEffect = FantasyEffect.bonusAttackEffects.get(Integer.parseInt(params[3]));
+                break;
+            case SKILL:
+                if (params.length > 2)
+                    baseEffect = FantasyEffect.baseSkillEffects.get(Integer.parseInt(params[2]));
+
+                if (params.length > 3)
+                    bonusEffect = FantasyEffect.bonusSkillEffects.get(Integer.parseInt(params[3]));
+                break;
+        }
+
+        return new FantasyCard(type, cost).setBaseEffect(baseEffect).setBonusEffect(bonusEffect);
+    }
 
     protected Texture getCardTexture()
     {

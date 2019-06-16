@@ -21,7 +21,7 @@ public class Girya {
     )
     public static void reportLifting(LiftOption __instance)
     {
-        if (AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE && MultiplayerHelper.active)
+        if (AbstractDungeon.player != null && AbstractDungeon.player.chosenClass == CharacterEnums.MOKOUKEINE && MultiplayerHelper.active)
         {
             MultiplayerHelper.sendP2PString("LIFT");
         }

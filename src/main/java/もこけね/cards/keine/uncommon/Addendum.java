@@ -27,8 +27,8 @@ public class Addendum extends KeineCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int DAMAGE = 10;
-    private static final int UPG_DAMAGE = 4;
+    private static final int DAMAGE = 7;
+    private static final int UPG_DAMAGE = 3;
 
     private static final int DRAW = 1;
 

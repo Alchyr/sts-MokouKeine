@@ -14,9 +14,9 @@ import もこけね.util.CardInfo;
 
 import static もこけね.もこけねは神の国.makeID;
 
-public class Sinister extends KeineCard {
+public class Intrigue extends KeineCard {
     private final static CardInfo cardInfo = new CardInfo(
-            "Sinister",
+            "Intrigue",
             1,
             CardType.ATTACK,
             CardTarget.ENEMY,
@@ -31,7 +31,7 @@ public class Sinister extends KeineCard {
     private static final int BONUS_DAMAGE = 4;
     private static final int UPG_BONUS_DAMAGE = 2;
 
-    public Sinister()
+    public Intrigue()
     {
         super(cardInfo, false);
 
@@ -80,6 +80,6 @@ public class Sinister extends KeineCard {
 
     @Override
     public AbstractCard makeCopy() {
-        return new Sinister();
+        return new Intrigue();
     }
 }

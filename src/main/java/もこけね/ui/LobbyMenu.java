@@ -186,9 +186,14 @@ public class LobbyMenu {
 
                 this.lobbies.add(data);
             }
+
+            this.lobbies.sort(new LobbyData.LobbyDataComparer());
+            page = 0;
+            hoveredIndex = -1;
+            maxPage = this.lobbies.size() / LOBBIES_PER_PAGE;
         }
             //debug code for viewing layout
-            while (this.lobbies.size() < LOBBIES_PER_PAGE * 2.5)
+            /*while (this.lobbies.size() < LOBBIES_PER_PAGE * 2.5)
             {
                 LobbyData testData = new LobbyData();
                 testData.id = null;
@@ -197,12 +202,10 @@ public class LobbyMenu {
                 testData.name = "Lobby " + (this.lobbies.size() + 1);
                 this.lobbies.add(testData);
             }
-
             this.lobbies.sort(new LobbyData.LobbyDataComparer());
-            page = 0;
-        hoveredIndex = -1;
             maxPage = this.lobbies.size() / LOBBIES_PER_PAGE;
-        //}
+
+            */
     }
 
     public void receivePassword(String pword)

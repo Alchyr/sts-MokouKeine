@@ -68,6 +68,13 @@
       "."
     ]
   },
+  "MokouKeine:Ranwid": {
+    "TEXT": [
+      "'s ",
+      "[Locked] ",
+      " does not enough Gold."
+    ]
+  },
   "MokouKeine:DiscardWait": {
     "TEXT": [
       "Waiting for ",

@@ -64,8 +64,8 @@
     "NAME": "Purify",
     "DESCRIPTION": "Lose !M! HP. NL Remove all of your debuffs. NL Exhaust."
   },
-  "MokouKeine:Feint": {
-    "NAME": "Feint",
+  "MokouKeine:Misdirect": {
+    "NAME": "Misdirect",
     "DESCRIPTION": "Apply !M! Vulnerable. NL Deal !D! damage to a random enemy other than the target."
   },
   "MokouKeine:Memoir": {
@@ -76,13 +76,13 @@
     "NAME": "Chronicle",
     "DESCRIPTION": "Whenever you draw a card that did not start in your deck, gain !M! Strength."
   },
-  "MokouKeine:Protector": {
-    "NAME": "Protector",
+  "MokouKeine:Protect": {
+    "NAME": "Protect",
     "DESCRIPTION": "Gain !B! Block for each card in your partner's hand."
   },
   "MokouKeine:Prosperity": {
     "NAME": "Prosperity",
-    "DESCRIPTION": "Gain !B! Block. NL MokouKeine:Echo Power: Play a copy of the Power."
+    "DESCRIPTION": "Gain !B! Block. NL MokouKeine:Echo Power: Play a copy of the last card played."
   },
   "MokouKeine:Addendum": {
     "NAME": "Addendum",
@@ -143,7 +143,7 @@
     ]
   },
   "MokouKeine:Huddle": {
-    "NAME": "Huddle",
+    "NAME": "Unity",
     "DESCRIPTION": "Gain !B! Block. NL Draw 1 card each."
   },
   "MokouKeine:Blazing": {
@@ -184,9 +184,9 @@
   },
   "MokouKeine:Tragedy": {
     "NAME": "Tragedy",
-    "DESCRIPTION": "Deal !D! damage for each stack of Weak and Vulnerable the enemy has. NL The enemy loses all Weak and Vulnerable.",
+    "DESCRIPTION": "Deal !M! damage for each stack of Weak and Vulnerable the enemy has.",
     "EXTENDED_DESCRIPTION": [
-      " NL (Deals !M! damage.)"
+      " NL (Deals !D! damage.)"
     ]
   },
   "MokouKeine:Warmup": {
@@ -195,10 +195,10 @@
   },
   "MokouKeine:Indomitable": {
     "NAME": "Indomitable",
-    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak to ALL enemies."
+    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Vulnerable to ALL enemies."
   },
-  "MokouKeine:Sinister": {
-    "NAME": "Sinister",
+  "MokouKeine:Intrigue": {
+    "NAME": "Intrigue",
     "DESCRIPTION": "Deal !D! damage. NL MokouKeine:Echo Attack: Deal !M! damage."
   },
   "MokouKeine:Stabilize": {
@@ -229,7 +229,7 @@
   },
   "MokouKeine:Familiarity": {
     "NAME": "Familiarity",
-    "DESCRIPTION": "ALL your cards that you have played this combat cost 0 until played."
+    "DESCRIPTION": "ALL your cards that you have played this combat cost 0 until played. NL Exhaust."
   },
   "MokouKeine:Contemplation": {
     "NAME": "Contemplation",
@@ -238,6 +238,43 @@
   "MokouKeine:PhoenixCall": {
     "NAME": "Phoenix's Call",
     "DESCRIPTION": "Exhaust a card. NL Apply !M! Vulnerable."
+  },
+  "MokouKeine:SoaringKick": {
+    "NAME": "Soaring Kick",
+    "DESCRIPTION": "Deal !D! damage. NL This card is played twice."
+  },
+  "MokouKeine:Expiation": {
+    "NAME": "Expiation",
+    "DESCRIPTION": "Gain !B! Block for each Attack played this turn.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (",
+      " Attack played.)",
+      " Attacks played.)"
+    ]
+  },
+  "MokouKeine:SagaWar": {
+    "NAME": "Saga of War",
+    "DESCRIPTION": "Deal !D! damage. NL When this card is copied, deal !M! damage to ALL enemies."
+  },
+  "MokouKeine:SagaPeace": {
+    "NAME": "Saga of Peace",
+    "DESCRIPTION": "Gain !B! Block. NL When this card is copied, draw a card each."
+  },
+  "MokouKeine:SagaTorment": {
+    "NAME": "Saga of Torment",
+    "DESCRIPTION": "Apply !M! Weak. NL When this card is copied, apply !M! Vulnerable to ALL enemies."
+  },
+  "MokouKeine:SagaValor": {
+    "NAME": "Saga of Valor",
+    "DESCRIPTION": "Deal !D! damage twice. NL When this card is copied, gain !M! Strength."
+  },
+  "MokouKeine:SagaDestruction": {
+    "NAME": "Saga of Destruction",
+    "DESCRIPTION": "Deal !D! damage. NL When this card is copied, reduce the cost of a random Attack in each hand by !M! for the combat."
+  },
+  "MokouKeine:SagaCreation": {
+    "NAME": "Saga of Creation",
+    "DESCRIPTION": "Draw !M! cards. NL When this card is copied, your partner gains [E]."
   },
   "MokouKeine:Sacrifice": {
     "NAME": "Sacrifice",

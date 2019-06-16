@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.events.city.Ghosts;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.helpers.SeedHelper;
 import com.megacrit.cardcrawl.helpers.TipTracker;
@@ -60,22 +61,29 @@ import java.util.Collection;
 /*TODO LIST:
 +Upon entering next act and generating map, if other player has already voted, re-check voted node so that it is rendered/works properly.
 
+Cards: Anything that affects order of cards in hand.
+Possible: At start of each turn, and after each card is resolved, send array of card uuids.
+If card play fails, send back current hand state uuids, and reshuffle cards to match if all uuids match.
+
+Patch ShowCardAndAddToDrawPileEffect/ShowCardAndAddToDiscardPileEffect to trigger onCopy
+Just postfix
+
 EVENTS:
-Living Wall - Augumenter - Transmogrifier - Does transform work correctly?
+Living Wall - Augumenter - Transmogrifier - Does transform work correctly? - Worked fine, once
 Ancient Writing - Upgrading does not upgrade other deck
-Council of Ghosts - Doubled apparitions is kind of op... Maybe remove from pool
++Council of Ghosts - Doubled apparitions is kind of op... Maybe remove from pool
 +Removal of bottles - Unbottle other player's bottled card?
 Vampires - Probably strike removal won't work, since pandora's doesn't.
 Falling - Should be fine, but check.
 Mind bloom -
-    I Am Awake - Upgrades do not sync
+    +I Am Awake - Upgrades do not sync
     Other options should be fine.
-A Note For Yourself - Remove from pool
++A Note For Yourself - Remove from pool
 Bonfire Spirits - report hp changes
 Designer In-Spire - ensure transform/upgrades are reported properly
 The Divine Fountain - Make sure it works
-We Meet Again/Ranwid - Gold option: If other player cannot afford it, cannot take
-                        Potion option: Also can take a potion in list used to track other player potions
++We Meet Again/Ranwid - +Gold option: If other player cannot afford it, cannot take
+                        +Potion option: Also can take a potion in list used to track other player potions
                         Card option: Fine as is
 
 Powers:
@@ -113,6 +121,13 @@ Mind Blast
 Secret Weapon/Tool thing
 Jack Of All Trades/Transmutation
 
+Curses:
+Anything to do with cards in hand.
+Pain - Only for the player whose hand it is in?
+Regret - Only for cards in that hand
+
+Other character cards:
+
 extra features:
 Resync command - when sent by host, resyncs other player forcefully
 
@@ -121,7 +136,8 @@ Resync command - when sent by host, resyncs other player forcefully
 @SpireInitializer
 public class もこけねは神の国 implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber,
         EditCharactersSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber, PreStartGameSubscriber,
-        RenderSubscriber, PostUpdateSubscriber, OnStartBattleSubscriber, StartGameSubscriber, PostBattleSubscriber
+        RenderSubscriber, PostUpdateSubscriber, OnStartBattleSubscriber, StartGameSubscriber, PostBattleSubscriber,
+        StartActSubscriber
 {
     public static final String modID = "MokouKeine";
 
@@ -552,6 +568,16 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         //Max hand size is set to 10 immediately before this is called.
         if (CardCrawlGame.chosenCharacter == CharacterEnums.MOKOUKEINE)
             BaseMod.MAX_HAND_SIZE = 6;
+    }
+
+    @Override
+    public void receiveStartAct() {
+        if (CardCrawlGame.chosenCharacter == CharacterEnums.MOKOUKEINE)
+        {
+            //event list should be initialized at this point
+            //remove anything I don't want here
+            AbstractDungeon.eventList.remove(Ghosts.ID);
+        }
     }
 
     @Override

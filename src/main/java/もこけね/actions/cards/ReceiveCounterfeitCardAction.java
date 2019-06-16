@@ -16,6 +16,7 @@ public class ReceiveCounterfeitCardAction extends ReceiveSignalCardsAction {
         if (signaledCards.size > 0)
         {
             AbstractDungeon.actionManager.addToTop(new MakeTempCardInOtherHandAction(signaledCards.removeFirst().makeCopy(), this.amount));
+            signaledGroups.removeFirst();
         }
         this.isDone = true;
     }

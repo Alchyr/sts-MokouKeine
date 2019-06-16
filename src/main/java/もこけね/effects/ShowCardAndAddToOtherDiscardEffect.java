@@ -28,6 +28,7 @@ public class ShowCardAndAddToOtherDiscardEffect extends AbstractGameEffect {
         this.card.drawScale = 0.75F;
         this.card.targetDrawScale = 0.75F;
         CardCrawlGame.sound.play("CARD_OBTAIN");
+
         if (AbstractDungeon.player instanceof MokouKeine)
         {
             ((MokouKeine) AbstractDungeon.player).otherPlayerDiscard.addToTop(srcCard);
@@ -36,6 +37,8 @@ public class ShowCardAndAddToOtherDiscardEffect extends AbstractGameEffect {
         {
             AbstractDungeon.player.discardPile.addToTop(srcCard);
         }
+
+        srcCard.triggerWhenCopied();
     }
 
     public ShowCardAndAddToOtherDiscardEffect(AbstractCard card) {
@@ -53,6 +56,8 @@ public class ShowCardAndAddToOtherDiscardEffect extends AbstractGameEffect {
         {
             AbstractDungeon.player.discardPile.addToTop(card);
         }
+
+        card.triggerWhenCopied();
     }
 
     private void identifySpawnLocation(float x, float y) {

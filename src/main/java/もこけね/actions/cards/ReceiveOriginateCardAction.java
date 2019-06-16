@@ -16,6 +16,7 @@ public class ReceiveOriginateCardAction extends ReceiveSignalCardsAction {
         if (signaledCards.size > 0)
         {
             AbstractCard c = signaledCards.removeFirst().makeStatEquivalentCopy();
+            signaledGroups.removeFirst();
             c.modifyCostForCombat(-1);
             AbstractDungeon.actionManager.addToTop(new MakeTempCardInOtherHandAction(c));
         }

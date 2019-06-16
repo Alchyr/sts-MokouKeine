@@ -6,9 +6,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import もこけね.abstracts.KeineCard;
-import もこけね.actions.cards.TragedyAction;
 import もこけね.util.CardInfo;
 
 import static もこけね.もこけねは神の国.makeID;

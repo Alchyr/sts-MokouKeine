@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import もこけね.cards.colorless.FantasyCard;
 import もこけね.character.MokouKeine;
 
 import static もこけね.もこけねは神の国.logger;
@@ -13,6 +14,13 @@ public abstract class ReceiveSignalCardsAction extends AbstractGameAction {
     public static Queue<AbstractCard> signaledCards = new Queue<>();
     public static Queue<CardGroup> signaledGroups = new Queue<>();
 
+
+    public static String signalFantasyCardString(FantasyCard c)
+    {
+        String sourceType = "";
+
+        return "signalcard" + ("f") + c.effectString();
+    }
     public static String signalCardString(AbstractCard c, CardGroup source, boolean otherGroups)
     {
         String sourceType = "";
@@ -63,7 +71,6 @@ public abstract class ReceiveSignalCardsAction extends AbstractGameAction {
     {
         if (AbstractDungeon.player instanceof MokouKeine)
         {
-            int index = Integer.parseInt(data.substring(2));
             CardGroup source = null;
 
             switch (data.charAt(0))
@@ -99,10 +106,17 @@ public abstract class ReceiveSignalCardsAction extends AbstractGameAction {
                             break;
                     }
                     break;
+                case 'f':
+                    AbstractCard c = FantasyCard.fromEffectString(data.substring(1));
+                    signaledCards.addLast(c);
+                    signaledGroups.addLast(AbstractDungeon.player.limbo);
+                    return;
                 default:
                     logger.error("Invalid signaled card string.");
                     return;
             }
+
+            int index = Integer.parseInt(data.substring(2));
 
             if (source != null && index >= 0 && index < source.group.size())
             {

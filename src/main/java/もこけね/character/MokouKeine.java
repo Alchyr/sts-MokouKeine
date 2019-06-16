@@ -21,14 +21,13 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.FontHelper;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
-import com.megacrit.cardcrawl.helpers.MathHelper;
-import com.megacrit.cardcrawl.helpers.ScreenShake;
+import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.helpers.input.InputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.potions.AbstractPotion;
+import com.megacrit.cardcrawl.potions.PotionSlot;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.ConfusionPower;
 import com.megacrit.cardcrawl.powers.CorruptionPower;
@@ -54,11 +53,14 @@ import もこけね.ui.MokouOrb;
 import もこけね.ui.OtherEnergyPanel;
 import もこけね.util.AltEnergyManager;
 import もこけね.util.AltHandCardgroup;
+import もこけね.util.MultiplayerHelper;
 import もこけね.util.TextureLoader;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.Random;
 
 import static もこけね.ui.OtherDrawPilePanel.OTHER_DRAW_OFFSET;
 import static もこけね.もこけねは神の国.*;
@@ -97,7 +99,6 @@ public class MokouKeine extends CustomPlayer {
     public CardGroup otherPlayerDiscard;
     public CardGroup fakeLimbo;
 
-    public ArrayList<String> otherPlayerPotions = new ArrayList<>();
     //Just to track what potions they have, for ensuring potions aren't played more than they should be.
     //Other player should send a list of potions ids whenever they obtain or use a potion.
 
@@ -1177,8 +1178,46 @@ public class MokouKeine extends CustomPlayer {
     }
 
 
+    public boolean randomOtherPlayerPotion = false;
+    @Override
+    public AbstractPotion getRandomPotion() {
+        ArrayList<AbstractPotion> list = new ArrayList<>();
 
+        if (!isMokou)
+        {
+            for (String potionID : MultiplayerHelper.otherPlayerPotions)
+            {
+                list.add(PotionHelper.getPotion(potionID));
+            }
+        }
 
+        for (AbstractPotion p : this.potions)
+        {
+            if (!(p instanceof PotionSlot)) {
+                list.add(p);
+            }
+        }
+
+        if (isMokou)
+        {
+            for (String potionID : MultiplayerHelper.otherPlayerPotions)
+            {
+                list.add(PotionHelper.getPotion(potionID));
+            }
+        }
+
+        if (list.isEmpty()) {
+            randomOtherPlayerPotion = false;
+            return null;
+        } else {
+            randomOtherPlayerPotion = false;
+            Collections.shuffle(list, new Random(AbstractDungeon.miscRng.randomLong()));
+            if (!potions.contains(list.get(0)))
+                randomOtherPlayerPotion = true;
+
+            return list.get(0);
+        }
+    }
 
     private void drawCurvedLine(SpriteBatch sb, Vector2 controlPoint, Vector2 start, Vector2 end, Vector2 control) {
         float radius = 7.0F * Settings.scale;

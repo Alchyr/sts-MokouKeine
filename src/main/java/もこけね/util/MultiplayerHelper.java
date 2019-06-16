@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepEffect;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepScreenCoverEffect;
 import もこけね.abstracts.ReceiveSignalCardsAction;
@@ -35,6 +36,7 @@ import もこけね.patch.rewards.ObtainRewards;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 import static もこけね.patch.combat.PotionUse.*;
 import static もこけね.patch.rewards.ObtainPotions.*;
@@ -57,6 +59,9 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
 
     private static ByteBuffer packetSendBuffer = ByteBuffer.allocateDirect(4096);
     private static ByteBuffer packetReceiveBuffer = ByteBuffer.allocateDirect(4096);
+
+    public static ArrayList<String> otherPlayerPotions = new ArrayList<>();
+    public static int otherPlayerGold = -1; //set at start of run
 
 
     public static void init()
@@ -400,6 +405,24 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("confirm_lose_potion"))
         {
             confirmLosePotion(msg.substring(19));
+        }
+        else if (msg.startsWith("gold"))
+        {
+            otherPlayerGold = Integer.parseInt(msg.substring(4));
+        }
+        else if (msg.equals("gain_gold"))
+        {
+            for (AbstractRelic r : AbstractDungeon.player.relics)
+            {
+                r.onGainGold();
+            }
+        }
+        else if (msg.equals("lose_gold"))
+        {
+            for (AbstractRelic r : AbstractDungeon.player.relics)
+            {
+                r.onLoseGold();
+            }
         }
         else if (msg.equals("rest"))
         {

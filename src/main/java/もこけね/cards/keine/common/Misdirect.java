@@ -16,9 +16,9 @@ import もこけね.util.CardInfo;
 
 import static もこけね.もこけねは神の国.makeID;
 
-public class Feint extends KeineCard {
+public class Misdirect extends KeineCard {
     private final static CardInfo cardInfo = new CardInfo(
-            "Feint",
+            "Misdirect",
             1,
             CardType.ATTACK,
             CardTarget.ENEMY,
@@ -33,7 +33,7 @@ public class Feint extends KeineCard {
     private static final int DEBUFF = 1;
     private static final int UPG_DEBUFF = 1;
 
-    public Feint()
+    public Misdirect()
     {
         super(cardInfo, false);
 
@@ -53,6 +53,6 @@ public class Feint extends KeineCard {
 
     @Override
     public AbstractCard makeCopy() {
-        return new Feint();
+        return new Misdirect();
     }
 }

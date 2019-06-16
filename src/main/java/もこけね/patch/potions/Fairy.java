@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.relics.MarkOfTheBloom;
 import javassist.CtBehavior;
 import もこけね.character.MokouKeine;
 import もこけね.patch.combat.PotionUse;
+import もこけね.patch.enums.CharacterEnums;
 import もこけね.util.HandleMatchmaking;
 import もこけね.util.MultiplayerHelper;
 
@@ -21,9 +22,9 @@ public class Fairy {
     )
     public static SpireReturn HostPotionsFirst(AbstractPlayer __instance, DamageInfo info)
     {
-        if (MultiplayerHelper.active && !HandleMatchmaking.isHost && __instance instanceof MokouKeine) //host potions are used first
+        if (MultiplayerHelper.active && !HandleMatchmaking.isHost && __instance.chosenClass == CharacterEnums.MOKOUKEINE) //host potions are used first
         {
-            if (((MokouKeine) __instance).otherPlayerPotions.contains(FairyPotion.POTION_ID)) //host's potion will be used automatically
+            if (MultiplayerHelper.otherPlayerPotions.contains(FairyPotion.POTION_ID)) //host's potion will be used automatically
             {
                 __instance.currentHealth = 0;
                 PotionUse.usePotion(FairyPotion.POTION_ID + " -2");
@@ -38,9 +39,9 @@ public class Fairy {
     )
     public static SpireReturn TryOtherBeforeLizardTail(AbstractPlayer __instance, DamageInfo info)
     {
-        if (MultiplayerHelper.active && HandleMatchmaking.isHost && __instance instanceof MokouKeine) //I am the host and I don't have fairy potions.
+        if (MultiplayerHelper.active && HandleMatchmaking.isHost && __instance.chosenClass == CharacterEnums.MOKOUKEINE) //I am the host and I don't have fairy potions.
         {
-            if (((MokouKeine) __instance).otherPlayerPotions.contains(FairyPotion.POTION_ID)) //how bout you, pardner
+            if (MultiplayerHelper.otherPlayerPotions.contains(FairyPotion.POTION_ID)) //how bout you, pardner
             {
                 PotionUse.otherUsePotion(FairyPotion.POTION_ID + "-1 -2");
                 return SpireReturn.Return(null);
@@ -53,9 +54,9 @@ public class Fairy {
     )
     public static SpireReturn TheVeryLastChance(AbstractPlayer __instance, DamageInfo info)
     {
-        if (MultiplayerHelper.active && HandleMatchmaking.isHost && !__instance.hasRelic(MarkOfTheBloom.ID) && __instance instanceof MokouKeine) //I am the host and I don't have fairy potions.
+        if (MultiplayerHelper.active && HandleMatchmaking.isHost && !__instance.hasRelic(MarkOfTheBloom.ID) && __instance.chosenClass == CharacterEnums.MOKOUKEINE) //I am the host and I don't have fairy potions.
         {
-            if (((MokouKeine) __instance).otherPlayerPotions.contains(FairyPotion.POTION_ID)) //how bout you, pardner
+            if (MultiplayerHelper.otherPlayerPotions.contains(FairyPotion.POTION_ID)) //how bout you, pardner
             {
                 __instance.currentHealth = 0;
                 PotionUse.otherUsePotion(FairyPotion.POTION_ID + "-1 -2");

@@ -19,10 +19,10 @@ public class HPLoss extends FantasyEffect {
     private static final String[] TEXT = CardCrawlGame.languagePack.getCardStrings(makeID("FantasyHPLoss")).EXTENDED_DESCRIPTION;
 
     private static final int MIN_COST = 3;
-    private static final int MAX_COST = 9;
+    private static final int MAX_COST = 6;
 
     private static final float MIN_SCALE = 1.15f;
-    private static final float MAX_SCALE = 1.4f;
+    private static final float MAX_SCALE = 1.3f;
 
     private int amount;
 
@@ -81,7 +81,7 @@ public class HPLoss extends FantasyEffect {
     @Override
     public void initialize(FantasyCard c) {
         c.setMagic(amount);
-        float scale = MathUtils.lerp(MIN_SCALE, MAX_SCALE, (amount - MIN_COST) / (MAX_COST - MIN_COST));
+        float scale = MathUtils.lerp(MIN_SCALE, MAX_SCALE, (float)(amount - MIN_COST) / (float)(MAX_COST - MIN_COST));
         if (c.baseBlock != -1)
         {
             c.block = c.baseBlock = MathUtils.floor(c.baseBlock * scale);
