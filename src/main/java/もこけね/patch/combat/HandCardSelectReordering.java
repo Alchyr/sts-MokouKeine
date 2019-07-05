@@ -36,11 +36,11 @@ public class HandCardSelectReordering {
     public static class ReportOnOpen
     {
         @SpirePrefixPatch
-        public static void reportOpening(HandCardSelectScreen __instance, int e, boolean... everythingElse)
+        public static void reportOpening(HandCardSelectScreen __instance)
         {
             if (MultiplayerHelper.active && !originalHand.isEmpty())
             {
-                    MultiplayerHelper.sendP2PString("hand_select");
+                MultiplayerHelper.sendP2PString("hand_select");
             }
         }
     }
