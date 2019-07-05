@@ -214,7 +214,7 @@
     "NAME": "Stabilize",
     "DESCRIPTION": "Gain !B! Block. NL mokoukeine:Echo Skill: Gain !M! Block."
   },
-  "mokoukeine:SealingRite": {
+  "MokouKeine:SealingRite": {
     "NAME": "Sealing Rite",
     "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Gain 1 mokoukeine:Seal for each enemy in combat. NL Exhaust."
   },

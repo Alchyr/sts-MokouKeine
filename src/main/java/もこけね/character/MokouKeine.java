@@ -101,6 +101,22 @@ public class MokouKeine extends CustomPlayer {
     public CardGroup otherPlayerDiscard;
     public CardGroup fakeLimbo;
 
+    private static Method hoverReticleMethod;
+
+    static {
+        try
+        {
+            hoverReticleMethod = AbstractPlayer.class.
+                    getDeclaredMethod("renderHoverReticle", SpriteBatch.class);
+
+            hoverReticleMethod.setAccessible(true);
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage());
+        }
+    }
+
     //Just to track what potions they have, for ensuring potions aren't played more than they should be.
     //Other player should send a list of potions ids whenever they obtain or use a potion.
 
@@ -921,17 +937,11 @@ public class MokouKeine extends CustomPlayer {
                 }
 
                 if (!AbstractDungeon.getCurrRoom().isBattleEnding()) {
-                    try
-                    {
-                        Method hoverReticleMethod = AbstractPlayer.class.
-                                getDeclaredMethod("renderHoverReticle", SpriteBatch.class);
-
-                        hoverReticleMethod.setAccessible(true);
-
+                    try {
                         hoverReticleMethod.invoke(this, sb);
                     }
-                    catch (Exception e)
-                    {
+                    catch (Exception e) {
+                        logger.error("Failed to invoke hoverReticleMethod.");
                         logger.error(e.getMessage());
                     }
                 }
@@ -991,36 +1001,7 @@ public class MokouKeine extends CustomPlayer {
             tmp.nor();
             drawCurvedLine(sb, controlPoint, new Vector2(this.hoveredCard.current_x, this.hoveredCard.current_y), new Vector2(arrowX, arrowY), controlPoint);
             sb.draw(ImageMaster.TARGET_UI_ARROW, arrowX - 128.0F, arrowY - 128.0F, 128.0F, 128.0F, 256.0F, 256.0F, arrowScale, arrowScale, tmp.angle() + 90.0F, 0, 0, 256, 256, false, false);
-
         }
-
-        float hoverTimer = (float)ReflectionHacks.getPrivate(this, AbstractPlayer.class, "hoverTimer");
-
-        if (this.isHoveringDropZone && this.hoveredCard != null && Settings.isInfo) {
-            if (this.hoveredCard.target == AbstractCard.CardTarget.ENEMY && hoveredMonster != null) {
-                hoverTimer = MathHelper.fadeLerpSnap(hoverTimer, 1.0F);
-
-                this.hoveredCard.calculateDamageDisplay(hoveredMonster);
-                FontHelper.renderFontCentered(sb, FontHelper.bannerFont, Integer.toString(this.hoveredCard.damage), hoveredMonster.hb.cX, hoveredMonster.hb.cY + hoveredMonster.hb.height / 2.0F + 80.0F * Settings.scale + hoverTimer * 30.0F * Settings.scale, new Color(1.0F, 0.9F, 0.4F, hoverTimer));
-            } else if (this.hoveredCard.target == AbstractCard.CardTarget.ALL_ENEMY) {
-                hoverTimer = MathHelper.fadeLerpSnap(hoverTimer, 1.0F);
-
-                this.hoveredCard.calculateDamageDisplay(null);
-                float tmpY = 80.0F * Settings.scale + hoverTimer * 30.0F * Settings.scale;
-                int i = 0;
-
-                for(Iterator var4 = AbstractDungeon.getMonsters().monsters.iterator(); var4.hasNext(); ++i) {
-                    AbstractMonster m = (AbstractMonster)var4.next();
-                    FontHelper.renderFontCentered(sb, FontHelper.bannerFont, Integer.toString(this.hoveredCard.multiDamage[i]), m.hb.cX, m.hb.cY + m.hb.height / 2.0F + tmpY, new Color(1.0F, 0.9F, 0.4F, hoverTimer));
-                }
-            } else {
-                hoverTimer = MathHelper.fadeLerpSnap(hoverTimer, 0.0F);
-            }
-        } else {
-            hoverTimer = MathHelper.fadeLerpSnap(hoverTimer, 0.0F);
-        }
-
-        ReflectionHacks.setPrivate(this, AbstractPlayer.class, "hoverTimer", hoverTimer);
     }
 
     // Starting description and loadout
