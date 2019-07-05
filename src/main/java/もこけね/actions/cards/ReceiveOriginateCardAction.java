@@ -13,6 +13,11 @@ public class ReceiveOriginateCardAction extends ReceiveSignalCardsAction {
 
     @Override
     public void update() {
+        if (signals.size > 0)
+        {
+            processCardStrings();
+        }
+
         if (signaledCards.size > 0)
         {
             AbstractCard c = signaledCards.removeFirst().makeStatEquivalentCopy();

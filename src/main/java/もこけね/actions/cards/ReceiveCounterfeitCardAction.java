@@ -16,6 +16,11 @@ public class ReceiveCounterfeitCardAction extends ReceiveSignalCardsAction {
 
     @Override
     public void update() {
+        if (signals.size > 0)
+        {
+            processCardStrings();
+        }
+
         if (signaledCards.size > 0)
         {
             AbstractCard c = signaledCards.removeFirst();
@@ -26,6 +31,7 @@ public class ReceiveCounterfeitCardAction extends ReceiveSignalCardsAction {
             }
             signaledGroups.removeFirst();
         }
+
         this.isDone = true;
     }
 }

@@ -17,6 +17,11 @@ public class ReceiveRevisionCardsAction extends ReceiveSignalCardsAction {
 
     @Override
     public void update() {
+        if (signals.size > 0)
+        {
+            processCardStrings();
+        }
+
         if (signaledCards.size > 0)
         {
             int amt = signaledCards.size;
