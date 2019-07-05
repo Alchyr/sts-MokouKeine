@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import もこけね.abstracts.ReceiveSignalCardsAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
+import もこけね.patch.combat.HandCardSelectReordering;
 import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.util.MultiplayerHelper;
 
@@ -23,16 +24,14 @@ public class CounterfeitAction extends AbstractGameAction {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("Counterfeit"));
     public static final String[] TEXT = uiStrings.TEXT;
 
-    private String exhaustString;
-
-    private HashMap<AbstractCard, Integer> indexes = new HashMap<>();
+    //private String exhaustString;
 
     public CounterfeitAction(int amount)
     {
         this.actionType = ActionType.CARD_MANIPULATION;
         this.duration = Settings.ACTION_DUR_FASTER;
         this.amount = amount;
-        exhaustString = "";
+        //exhaustString = "";
     }
 
     @Override
@@ -51,10 +50,7 @@ public class CounterfeitAction extends AbstractGameAction {
                     return;
                 }
 
-                for (int i = 0; i < AbstractDungeon.player.hand.group.size(); ++i)
-                {
-                    indexes.put(AbstractDungeon.player.hand.group.get(i), i);
-                }
+                HandCardSelectReordering.saveHandPreOpenScreen();
 
                 AbstractDungeon.handCardSelectScreen.open(TEXT[0], 1, false, false);
                 this.tickDuration();
@@ -62,18 +58,14 @@ public class CounterfeitAction extends AbstractGameAction {
             }
 
             if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
-                boolean first = true;
                 for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group)
                 {
-                    if (first)
-                    {
-                        AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(c.makeCopy(), this.amount));
-                        AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(c, AbstractDungeon.player.hand));
-                        exhaustString = "exhaustother_hand " + indexes.get(c);
-                        MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalCardString(indexes.get(c), AbstractDungeon.player.hand, true));
-                        first = false;
-                    }
                     AbstractDungeon.player.hand.addToTop(c);
+
+                    AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(c.makeCopy(), this.amount));
+                    AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(c, AbstractDungeon.player.hand));
+                    //exhaustString = "exhaustother_hand " + AbstractDungeon.player.hand.group.indexOf(c);
+                    MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalCardString(AbstractDungeon.player.hand.group.indexOf(c), AbstractDungeon.player.hand, true));
                 }
                 AbstractDungeon.handCardSelectScreen.selectedCards.group.clear();
                 AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
@@ -83,6 +75,6 @@ public class CounterfeitAction extends AbstractGameAction {
         this.tickDuration();
 
         if (this.isDone)
-            MultiplayerHelper.sendP2PString("signal" + exhaustString); //this will add exhaust action to top, which will resolve before the queued ReceiveCounterfeitCardAction
+            MultiplayerHelper.sendP2PString("signal");// + exhaustString); //this will add exhaust action to top, which will resolve before the queued ReceiveCounterfeitCardAction
     }
 }

@@ -32,10 +32,7 @@ import org.clapper.util.classutil.*;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.card_use.LastCardType;
-import もこけね.patch.combat.BurstActive;
-import もこけね.patch.combat.MixEnemyTempCards;
-import もこけね.patch.combat.PotionUse;
-import もこけね.patch.combat.RequireDoubleEndTurn;
+import もこけね.patch.combat.*;
 import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.GenericEventVoting;
@@ -393,6 +390,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         LastCardType.type = AbstractCard.CardType.CURSE; //to avoid any null issues. Nothing will trigger off of playing curses.
         LastCardType.lastCardCopy = null;
         PotionUse.queuedPotionUse.clear();
+        HandCardSelectReordering.reset();
     }
     @Override
     public void receivePostBattle(AbstractRoom abstractRoom) {
@@ -402,6 +400,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         LastCardType.type = AbstractCard.CardType.CURSE;
         LastCardType.lastCardCopy = null;
         PotionUse.queuedPotionUse.clear();
+        HandCardSelectReordering.reset();
     }
 
     //patched in hook

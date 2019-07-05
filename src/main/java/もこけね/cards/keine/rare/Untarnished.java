@@ -34,6 +34,8 @@ public class Untarnished extends KeineCard {
 
         setBlock(BLOCK, UPG_BLOCK);
         setMagic(BUFF);
+
+        setExhaust(true);
     }
 
     @Override

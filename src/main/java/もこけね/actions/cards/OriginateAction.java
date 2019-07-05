@@ -13,6 +13,7 @@ import もこけね.abstracts.ReceiveSignalCardsAction;
 import もこけね.actions.character.MakeTempCardInOtherHandAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
+import もこけね.patch.combat.HandCardSelectReordering;
 import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.util.MultiplayerHelper;
 
@@ -26,8 +27,6 @@ public class OriginateAction extends AbstractGameAction {
     public static final String[] TEXT = uiStrings.TEXT;
 
     private boolean upgraded;
-
-    private HashMap<AbstractCard, Integer> indexes = new HashMap<>();
 
     public OriginateAction(boolean upgraded)
     {
@@ -44,6 +43,8 @@ public class OriginateAction extends AbstractGameAction {
             {
                 AbstractDungeon.actionManager.addToTop(new ReceiveOriginateCardAction());
                 AbstractDungeon.actionManager.addToTop(new WaitForSignalAction(TEXT[1] + partnerName + TEXT[2]));
+                //Wait for signal action will become current action, with ReceiveOriginateCardAction at top.
+                //When hand card view screen is opened, a HandCardSelectAction will be added on top, before the receive action.
                 this.isDone = true;
                 return;
             }
@@ -55,10 +56,7 @@ public class OriginateAction extends AbstractGameAction {
                         return;
                     }
 
-                    for (int i = 0; i < AbstractDungeon.player.hand.group.size(); ++i)
-                    {
-                        indexes.put(AbstractDungeon.player.hand.group.get(i), i);
-                    }
+                    HandCardSelectReordering.saveHandPreOpenScreen();
 
                     AbstractDungeon.handCardSelectScreen.open(TEXT[0], 1, false, false);
                     this.tickDuration();
@@ -66,18 +64,14 @@ public class OriginateAction extends AbstractGameAction {
                 }
 
                 if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
-                    boolean first = true;
                     for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group)
                     {
-                        if (first)
-                        {
-                            AbstractCard card = c.makeStatEquivalentCopy();
-                            card.modifyCostForCombat(-1);
-                            AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(card));
-                            MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalCardString(indexes.get(c), AbstractDungeon.player.hand, true));
-                            first = false;
-                        }
                         AbstractDungeon.player.hand.addToTop(c); //add back to hand
+
+                        AbstractCard card = c.makeStatEquivalentCopy();
+                        card.modifyCostForCombat(-1);
+                        AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(card));
+                        MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalCardString(AbstractDungeon.player.hand.group.indexOf(c), AbstractDungeon.player.hand, true));
                     }
                     AbstractDungeon.handCardSelectScreen.selectedCards.group.clear();
                     AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;

@@ -1,8 +1,11 @@
 package もこけね.actions.cards;
 
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import もこけね.abstracts.ReceiveSignalCardsAction;
 import もこけね.actions.character.MakeTempCardInOtherHandAction;
+import もこけね.character.MokouKeine;
 
 public class ReceiveCounterfeitCardAction extends ReceiveSignalCardsAction {
     public ReceiveCounterfeitCardAction(int amount)
@@ -15,7 +18,12 @@ public class ReceiveCounterfeitCardAction extends ReceiveSignalCardsAction {
     public void update() {
         if (signaledCards.size > 0)
         {
-            AbstractDungeon.actionManager.addToTop(new MakeTempCardInOtherHandAction(signaledCards.removeFirst().makeCopy(), this.amount));
+            AbstractCard c = signaledCards.removeFirst();
+            AbstractDungeon.actionManager.addToTop(new MakeTempCardInOtherHandAction(c.makeCopy(), this.amount));
+            if (AbstractDungeon.player instanceof MokouKeine)
+            {
+                AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(c, ((MokouKeine) AbstractDungeon.player).otherPlayerHand));
+            }
             signaledGroups.removeFirst();
         }
         this.isDone = true;

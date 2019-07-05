@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepEffect;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepScreenCoverEffect;
 import もこけね.abstracts.ReceiveSignalCardsAction;
+import もこけね.actions.character.HandCardSelectAction;
 import もこけね.actions.character.MakeTempCardInOtherHandAction;
 import もこけね.actions.character.OtherPlayerDiscardAction;
 import もこけね.actions.character.WaitForSignalAction;
@@ -307,6 +308,16 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             {
                 AbstractDungeon.actionManager.addToTop(new DrawCardAction(AbstractDungeon.player, amt));
             }
+        }
+        else if (msg.equals("hand_select")) //other player has opened a hand select screen
+        {
+            logger.info("Other played opened hand select.");
+            AbstractDungeon.actionManager.addToTop(new HandCardSelectAction());
+        }
+        else if (msg.startsWith("hand_select_indexes"))
+        {
+            String[] data = msg.substring(19).split(" ");
+            HandCardSelectAction.setFinalPositions(data);
         }
         else if (msg.startsWith("discover_card"))
         {

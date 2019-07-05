@@ -12,6 +12,7 @@ import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
 import もこけね.effects.ShowCardAndAddToOtherDiscardEffect;
 import もこけね.effects.ShowCardAndAddToOtherHandEffect;
+import もこけね.patch.combat.HandCardSelectReordering;
 import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.util.MultiplayerHelper;
 
@@ -23,8 +24,6 @@ import static もこけね.もこけねは神の国.makeID;
 public class RevisionAction extends AbstractGameAction {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("Revision"));
     public static final String[] TEXT = uiStrings.TEXT;
-
-    private HashMap<AbstractCard, Integer> indexes = new HashMap<>();
 
     public RevisionAction()
     {
@@ -48,11 +47,7 @@ public class RevisionAction extends AbstractGameAction {
                     return;
                 }
 
-                for (int i = 0; i < AbstractDungeon.player.hand.group.size(); ++i)
-                {
-                    indexes.put(AbstractDungeon.player.hand.group.get(i), i);
-                }
-
+                HandCardSelectReordering.saveHandPreOpenScreen();
                 AbstractDungeon.handCardSelectScreen.open(TEXT[0], AbstractDungeon.player.hand.size(), true, true);
                 this.tickDuration();
                 return;
@@ -60,6 +55,7 @@ public class RevisionAction extends AbstractGameAction {
 
             if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
                 int otherHandSpace = BaseMod.MAX_HAND_SIZE - ((MokouKeine) AbstractDungeon.player).otherPlayerHand.size();
+                int handIndex = AbstractDungeon.player.hand.size(); //the next card added would be at this index, which makes it the correct index.
                 for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group)
                 {
                     if (otherHandSpace > 0)
@@ -71,8 +67,7 @@ public class RevisionAction extends AbstractGameAction {
                     {
                         AbstractDungeon.effectList.add(new ShowCardAndAddToOtherDiscardEffect(c));
                     }
-                    MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalCardString(indexes.get(c), AbstractDungeon.player.hand, true));
-
+                    MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalCardString(handIndex++, AbstractDungeon.player.hand, true));
                 }
                 AbstractDungeon.handCardSelectScreen.selectedCards.group.clear();
                 AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;

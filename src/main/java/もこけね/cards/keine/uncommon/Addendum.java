@@ -10,7 +10,9 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import もこけね.abstracts.KeineCard;
+import もこけね.actions.character.SetEnergyGainAction;
 import もこけね.patch.card_use.LastCardType;
+import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CustomCardTags;
 import もこけね.util.CardInfo;
 
@@ -47,6 +49,7 @@ public class Addendum extends KeineCard {
         AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         if (LastCardType.type == CardType.ATTACK)
         {
+            AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(TrackCardSource.useOtherEnergy));
             AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(2));
             AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
         }
