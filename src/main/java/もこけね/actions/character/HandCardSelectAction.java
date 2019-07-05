@@ -1,7 +1,9 @@
 package もこけね.actions.character;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import もこけね.character.MokouKeine;
 
 import java.util.ArrayList;
 
@@ -33,9 +35,24 @@ public class HandCardSelectAction extends AbstractGameAction {
 
     @Override
     public void update() {
-        if (!finalPositions.isEmpty())
+        if (!(AbstractDungeon.player instanceof MokouKeine)) {
+            this.isDone = true;
+        }
+        else if (!finalPositions.isEmpty())
         {
-
+            MokouKeine p = (MokouKeine) AbstractDungeon.player;
+            ArrayList<AbstractCard> newLayout = new ArrayList<>();
+            for (int i : finalPositions)
+            {
+                //i is current index of card in hand
+                if (i < p.otherPlayerHand.group.size()) //i is a valid index within hand
+                {
+                    newLayout.add(p.otherPlayerHand.group.get(i)); //add to start of hand
+                }
+            }
+            //newLayout should be all set up
+            p.otherPlayerHand.group.clear();
+            p.otherPlayerHand.group.addAll(newLayout);
 
             finalPositions.clear();
             if (!queuedPositions.isEmpty())
