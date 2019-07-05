@@ -44,7 +44,7 @@ public class Indomitable extends KeineCard {
         for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters)
         {
             if (!monster.isDeadOrEscaped()) {
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(monster, p, new VulnerablePower(monster, this.magicNumber, false), this.magicNumber));
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(monster, p, new WeakPower(monster, this.magicNumber, false), this.magicNumber));
             }
         }
     }

@@ -16,7 +16,7 @@ public class Purify extends MokouCard {
             "Purify",
             1,
             CardType.ATTACK,
-            CardTarget.NONE,
+            CardTarget.ENEMY,
             CardRarity.UNCOMMON
     );
 

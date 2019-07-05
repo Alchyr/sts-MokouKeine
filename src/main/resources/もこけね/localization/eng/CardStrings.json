@@ -203,8 +203,8 @@
     "DESCRIPTION": "Deal !D! damage. NL Summon a mokoukeine:Flame."
   },
   "MokouKeine:Indomitable": {
-    "NAME": "Indomitable",
-    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Vulnerable to ALL enemies."
+    "NAME": "Determination",
+    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak to ALL enemies."
   },
   "MokouKeine:Intrigue": {
     "NAME": "Intrigue",

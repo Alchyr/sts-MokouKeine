@@ -194,23 +194,25 @@ public class VoteBossRelic {
             if (votedRelic.equals(otherVotedRelic)) {
                 stopBossRelicChooseTimer();
 
+                boolean success = false;
+
                 for (AbstractRelic r : AbstractDungeon.bossRelicScreen.relics)
                 {
                     if (r.relicId.equals(votedRelic))
                     {
                         chosenRelic = r;
                         r.bossObtainLogic();
+                        success = true;
+
+                        MultiplayerHelper.sendP2PString("boss_relic_choose" + r.relicId);
+                        MultiplayerHelper.sendP2PMessage(TEXT[0]);
+
                         break;
                     }
                 }
-                if (chosenRelic == null)
+                if (!success)
                 {
                     logger.error("A relic that doesn't exist won the vote??");
-                }
-                else
-                {
-                    MultiplayerHelper.sendP2PString("boss_relic_choose" + chosenRelic.relicId);
-                    MultiplayerHelper.sendP2PMessage(TEXT[0]);
                 }
             }
             else {

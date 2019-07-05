@@ -37,6 +37,7 @@ import もこけね.patch.energy_division.TrackCardSource;
 import もこけね.patch.enums.CharacterEnums;
 import もこけね.patch.events.GenericEventVoting;
 import もこけね.patch.events.RoomEventVoting;
+import もこけね.patch.lobby.UseMultiplayerQueue;
 import もこけね.ui.LobbyMenu;
 import もこけね.util.HandleMatchmaking;
 import もこけね.patch.map.BossRoomVoting;
@@ -414,6 +415,8 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         {
             TipTracker.neverShowAgain("NEOW_SKIP");
 
+            UseMultiplayerQueue.inQueue = false;
+
             if (Settings.seed == null) {
                 long sourceTime = System.nanoTime();
                 Random rng = new Random(sourceTime);
@@ -463,6 +466,9 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     public static void startSetupGame() //start game where settings have already been set
     {
         TipTracker.neverShowAgain("NEOW_SKIP");
+
+        UseMultiplayerQueue.inQueue = false;
+
         CardCrawlGame.mainMenuScreen.isFadingOut = true;
         CardCrawlGame.mainMenuScreen.fadeOutMusic();
         Settings.isDailyRun = false;
