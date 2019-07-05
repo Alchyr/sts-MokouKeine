@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.screens.options.ToggleButton;
+import もこけね.character.MokouKeine;
 import もこけね.patch.enums.ToggleType;
 import もこけね.util.HandleMatchmaking;
 import もこけね.util.LobbyData;
@@ -434,6 +435,18 @@ public class LobbyMenu {
                             else if (randomToggle.enabled)
                             {
                                 HandleMatchmaking.isMokou = MathUtils.randomBoolean();
+                            }
+
+                            //Set character
+                            for (int i = 0; i < CardCrawlGame.characterManager.getAllCharacters().size(); ++i)
+                            {
+                                if (CardCrawlGame.characterManager.getAllCharacters().get(i) instanceof MokouKeine)
+                                {
+                                    if (((MokouKeine) CardCrawlGame.characterManager.getAllCharacters().get(i)).isMokou ^ HandleMatchmaking.isMokou) //doesn't match
+                                    {
+                                        ((MokouKeine) CardCrawlGame.characterManager.getAllCharacters().get(i)).setMokou(HandleMatchmaking.isMokou);
+                                    }
+                                }
                             }
 
                             HandleMatchmaking.joinorcreate = true;

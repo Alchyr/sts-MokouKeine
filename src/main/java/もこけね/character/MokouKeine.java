@@ -37,6 +37,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.BurningBlood;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import com.megacrit.cardcrawl.ui.panels.TopPanel;
 import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.vfx.cardManip.CardDisappearEffect;
 import もこけね.actions.character.OtherPlayerDeckShuffleAction;
@@ -181,9 +182,6 @@ public class MokouKeine extends CustomPlayer {
 
         this.title = getTitle(this.chosenClass);
 
-        if (AbstractDungeon.topPanel != null)
-            AbstractDungeon.topPanel.setPlayerName();
-
         if (isMokou)
         {
             this.name = characterStrings.NAMES[1];
@@ -206,6 +204,13 @@ public class MokouKeine extends CustomPlayer {
             this.cardRenderColor = KEINE_COLOR.cpy();
             this.slashAttackColor = KEINE_COLOR.cpy();
         }
+
+        if (AbstractDungeon.topPanel != null)
+        {
+            ReflectionHacks.setPrivate(AbstractDungeon.topPanel, TopPanel.class, "title", this.title);
+        }
+
+        logger.info("Set character to " + this.name);
     }
 
     @Override
