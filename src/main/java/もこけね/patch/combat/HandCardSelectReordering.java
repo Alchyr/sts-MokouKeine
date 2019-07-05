@@ -95,7 +95,7 @@ public class HandCardSelectReordering {
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractDungeon.class, "closeCurrentScreen");
-                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+                return LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher);
             }
         }
     }
