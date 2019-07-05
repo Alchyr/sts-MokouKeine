@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.potions.PotionSlot;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.ui.panels.PotionPopUp;
 import com.megacrit.cardcrawl.ui.panels.TopPanel;
 import javassist.CtBehavior;
@@ -119,6 +120,12 @@ public class PotionUse {
                     toUse.use(null);
                     sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[2]);
                 }
+
+                for (AbstractRelic r : AbstractDungeon.player.relics)
+                {
+                    r.onUsePotion();
+                }
+
                 AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
             }
             else {
@@ -154,6 +161,12 @@ public class PotionUse {
                 toUse.use(null);
                 sendP2PMessage(partnerName + TEXT[0] + toUse.name + TEXT[2]);
             }
+
+            for (AbstractRelic r : AbstractDungeon.player.relics)
+            {
+                r.onUsePotion();
+            }
+
             AbstractDungeon.actionManager.addToBottom(new DontUseSpecificEnergyAction());
         }
     }

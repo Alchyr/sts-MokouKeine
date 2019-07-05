@@ -39,7 +39,7 @@ public class Addendum extends KeineCard {
         setDamage(DAMAGE, UPG_DAMAGE);
         setMagic(DRAW);
 
-        tags.add(CustomCardTags.ECHO_ATTACK);
+        tags.add(CustomCardTags.MK_ECHO_ATTACK);
     }
 
     @Override

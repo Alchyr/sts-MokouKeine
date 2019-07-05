@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireSleepEffect;
@@ -18,6 +19,7 @@ import もこけね.actions.character.OtherPlayerDiscardAction;
 import もこけね.actions.character.WaitForSignalAction;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.PlayCardCheck;
+import もこけね.patch.events.BonfireSpirits;
 import もこけね.patch.relics.Girya;
 import もこけね.patch.relics.ReportPurchase;
 import もこけね.patch.combat.RequireDoubleEndTurn;
@@ -106,17 +108,21 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
     }
     public static void sendP2PString(String msg)
     {
-        sendP2PString(currentPartner, msg);
+        if (active)
+            sendP2PString(currentPartner, msg);
     }
     public static void sendP2PMessage(String msg)
     {
-        if (chat != null)
+        if (active)
         {
-            chat.receiveMessage(msg);
-        }
-        String finalMessage = "chat_message" + msg;
+            if (chat != null)
+            {
+                chat.receiveMessage(msg);
+            }
+            String finalMessage = "chat_message" + msg;
 
-        sendP2PString(currentPartner, finalMessage);
+            sendP2PString(currentPartner, finalMessage);
+        }
     }
 
     public static void readPostUpdate()
@@ -235,6 +241,20 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
                 {
                     switch (args[0])
                     {
+                        case "draw":
+                            if (index <= AbstractDungeon.player.drawPile.group.size())
+                            {
+                                AbstractCard toExhaust = AbstractDungeon.player.drawPile.group.get(index);
+                                AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(toExhaust, AbstractDungeon.player.drawPile, true));
+                            }
+                            break;
+                        case "other_draw":
+                            if (AbstractDungeon.player instanceof MokouKeine && index <= ((MokouKeine) AbstractDungeon.player).otherPlayerDraw.group.size())
+                            {
+                                AbstractCard toExhaust = ((MokouKeine) AbstractDungeon.player).otherPlayerDraw.group.get(index);
+                                AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(toExhaust, ((MokouKeine) AbstractDungeon.player).otherPlayerDraw, true));
+                            }
+                            break;
                         case "discard":
                             if (index <= AbstractDungeon.player.discardPile.group.size())
                             {
@@ -361,7 +381,21 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         {
             ObtainRewards.claimReward(msg.substring(12));
         }
-        else if (msg.startsWith("purchase_relic"))
+        else if (msg.startsWith("try_purchase_relic")) //second player attempted to purchase relic
+        {
+            String id = msg.substring(18);
+            AbstractRelic tryPurchase = ReportPurchase.forcePurchase(id);
+            if (tryPurchase != null) //if true, the relic attempting to be purchased was found in the shop and successfuly obtained.
+            {
+                MultiplayerHelper.sendP2PMessage(MultiplayerHelper.partnerName + " bought " + RelicLibrary.getRelic(id).name + ".");
+                MultiplayerHelper.sendP2PString("confirm_purchase_relic" + id);
+            }
+        }
+        else if (msg.startsWith("confirm_purchase_relic")) //receiving confirmation from host to buy a relic
+        {
+            ReportPurchase.normalPurchase(msg.substring(22));
+        }
+        else if (msg.startsWith("purchase_relic")) //host bought a relic
         {
             ReportPurchase.forcePurchase(msg.substring(14));
         }
@@ -409,9 +443,11 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         else if (msg.startsWith("gold"))
         {
             otherPlayerGold = Integer.parseInt(msg.substring(4));
+            logger.info("Other player new gold value: " + otherPlayerGold);
         }
         else if (msg.equals("gain_gold"))
         {
+            logger.info("Other player gained gold.");
             for (AbstractRelic r : AbstractDungeon.player.relics)
             {
                 r.onGainGold();
@@ -419,6 +455,7 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
         }
         else if (msg.equals("lose_gold"))
         {
+            logger.info("Other player lost gold.");
             for (AbstractRelic r : AbstractDungeon.player.relics)
             {
                 r.onLoseGold();
@@ -464,6 +501,10 @@ public class MultiplayerHelper implements SteamNetworkingCallback {
             {
                 AbstractDungeon.player.decreaseMaxHealth(Integer.valueOf(msg.substring(11)));
             }
+        }
+        else if (msg.startsWith("bonfire"))
+        {
+            BonfireSpirits.receiveReward(msg.substring(7));
         }
         else if (msg.equals("start_game"))
         {

@@ -38,7 +38,7 @@ public class Intrigue extends KeineCard {
         setDamage(DAMAGE, UPG_DAMAGE);
         setMagic(BONUS_DAMAGE, UPG_BONUS_DAMAGE);
 
-        tags.add(CustomCardTags.ECHO_ATTACK);
+        tags.add(CustomCardTags.MK_ECHO_ATTACK);
     }
 
     @Override

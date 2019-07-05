@@ -17,6 +17,8 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.EmptyDeckShuffleAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.curses.AscendersBane;
+import com.megacrit.cardcrawl.cards.curses.Necronomicurse;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -1177,6 +1179,21 @@ public class MokouKeine extends CustomPlayer {
         return characterStrings.TEXT[2];
     }
 
+    @Override
+    public boolean isCursed() {
+        for (AbstractCard c : this.masterDeck.group)
+        {
+            if ((c.type == AbstractCard.CardType.CURSE || c.color == AbstractCard.CardColor.CURSE) && !c.cardID.equals(Necronomicurse.ID) && !c.cardID.equals(AscendersBane.ID))
+                return true;
+        }
+        for (AbstractCard c : this.otherPlayerMasterDeck.group)
+        {
+            if ((c.type == AbstractCard.CardType.CURSE || c.color == AbstractCard.CardColor.CURSE) && !c.cardID.equals(Necronomicurse.ID) && !c.cardID.equals(AscendersBane.ID))
+                return true;
+        }
+
+        return false;
+    }
 
     public boolean randomOtherPlayerPotion = false;
     @Override

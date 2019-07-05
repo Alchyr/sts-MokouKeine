@@ -17,7 +17,8 @@ import java.util.ArrayList;
         method = "generateCharacterOptions"
 )
 public class AltCharacterScreen {
-    @SpirePostfixPatch
+    //Current unnecessary. (and also causes a crash.)
+    /*@SpirePostfixPatch
     public static ArrayList<CharacterOption> useAltScreen(ArrayList<CharacterOption> __result)
     {
         int index = 0;
@@ -32,5 +33,5 @@ public class AltCharacterScreen {
         }
 
         return __result;
-    }
+    }*/
 }

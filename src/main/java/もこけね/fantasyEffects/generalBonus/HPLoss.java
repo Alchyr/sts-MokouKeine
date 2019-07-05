@@ -1,5 +1,5 @@
 package もこけね.fantasyEffects.generalBonus;
-
+/*
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
@@ -103,4 +103,4 @@ public class HPLoss extends FantasyEffect {
     public void use(FantasyCard c, AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new LoseHPAction(p, p, c.magicNumber));
     }
-}
+}*/

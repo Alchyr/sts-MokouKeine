@@ -25,7 +25,7 @@ public class Blitz extends MokouCard {
 
     public final static String ID = makeID(cardInfo.cardName);
 
-    private static final int DAMAGE = 3;
+    private static final int DAMAGE = 4;
     private static final int UPG_DAMAGE = 1;
     private static final int HP_LOSS = 3;
 

@@ -36,7 +36,7 @@ public class Stabilize extends KeineCard {
         setBlock(BLOCK, UPG_BLOCK);
         setMagic(BONUS_BLOCK, UPG_BONUS_BLOCK);
 
-        tags.add(CustomCardTags.ECHO_SKILL);
+        tags.add(CustomCardTags.MK_ECHO_SKILL);
     }
 
     @Override

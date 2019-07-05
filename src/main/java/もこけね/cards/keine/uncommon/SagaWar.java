@@ -1,5 +1,6 @@
 package もこけね.cards.keine.uncommon;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -45,6 +46,7 @@ public class SagaWar extends KeineCard {
 
     @Override
     public void triggerWhenCopied() {
+        this.superFlash(Color.VIOLET);
         int[] damage = DamageInfo.createDamageMatrix(this.magicNumber, true);
         AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(AbstractDungeon.player, damage, DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL, true));
     }

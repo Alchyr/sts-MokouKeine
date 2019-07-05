@@ -1,5 +1,5 @@
 package もこけね.actions.cards;
-
+/*
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -47,3 +47,4 @@ public class ReceiveFantasyCardAction extends ReceiveSignalCardsAction {
         }
     }
 }
+*/

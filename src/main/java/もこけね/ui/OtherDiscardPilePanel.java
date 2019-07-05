@@ -190,7 +190,7 @@ public class OtherDiscardPilePanel extends AbstractPanel {
     }
 
     public void pop() {
-        this.scale = Settings.POP_AMOUNT;
+        this.scale = 1.75F * Settings.scale;
     }
 
     public void render(SpriteBatch sb) {

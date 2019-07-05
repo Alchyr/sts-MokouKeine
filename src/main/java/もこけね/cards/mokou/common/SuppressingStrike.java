@@ -34,7 +34,7 @@ public class SuppressingStrike extends MokouCard {
 
         setDamage(DAMAGE, UPG_DAMAGE);
 
-        tags.add(CardTags.STRIKE);
+        //tags.add(CardTags.STRIKE); not anymore...
     }
 
     @Override

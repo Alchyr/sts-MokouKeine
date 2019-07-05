@@ -22,28 +22,28 @@
   },
   "MokouKeine:Scorch": {
     "NAME": "Scorch",
-    "DESCRIPTION": "Deal !D! damage !M! times."
+    "DESCRIPTION": "Deal !D! damage !M! times. NL mokoukeine:Burst: Deal !D! damage."
   },
   "MokouKeine:Record": {
     "NAME": "Record",
     "DESCRIPTION": "Add a copy of the next !M! cards played this turn to your draw pile. NL They cost 1 less this combat. NL Exhaust."
   },
   "MokouKeine:SuppressingStrike": {
-    "NAME": "Suppressing Strike",
-    "DESCRIPTION": "Deal !D! damage. NL Gain 1 MokouKeine:Seal."
+    "NAME": "Constrain",
+    "DESCRIPTION": "Deal !D! damage. NL Gain 1 mokoukeine:Seal."
   },
   "MokouKeine:Repose": {
     "NAME": "Repose",
-    "DESCRIPTION": "Draw !M! cards. NL Gain !M! MokouKeine:Seals. NL Exhaust."
+    "DESCRIPTION": "Draw !M! cards. NL Gain !M! mokoukeine:Seals. NL Exhaust."
   },
   "MokouKeine:Perusal": {
     "NAME": "Perusal",
-    "DESCRIPTION": "Add !M! MokouKeine:Fragment to your hand.",
-    "UPGRADE_DESCRIPTION": "Add !M! MokouKeine:Fragments to your hand."
+    "DESCRIPTION": "Add !M! mokoukeine:Fragment to your hand.",
+    "UPGRADE_DESCRIPTION": "Add !M! mokoukeine:Fragments to your hand."
   },
   "MokouKeine:Fragment": {
     "NAME": "Fragment",
-    "DESCRIPTION": "Deal !M! damage for ALL MokouKeine:Fragment cards.",
+    "DESCRIPTION": "Deal !M! damage for ALL mokoukeine:Fragment cards.",
     "EXTENDED_DESCRIPTION": [
       " NL (Deals !D! damage.)"
     ]
@@ -54,15 +54,31 @@
   },
   "MokouKeine:Restraint": {
     "NAME": "Restraint",
-    "DESCRIPTION": "Gain !B! Block. NL Gain 1 MokouKeine:Seal."
+    "DESCRIPTION": "Gain !B! Block. NL Gain 1 mokoukeine:Seal."
   },
   "MokouKeine:Forget": {
     "NAME": "Forget",
     "DESCRIPTION": "Apply 1 Weak to the enemy whenever it loses HP this turn."
   },
+  "MokouKeine:Erase": {
+    "NAME": "Erase",
+    "DESCRIPTION": "Exhaust a card in a draw pile. NL Draw a card. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Exhaust a card in a draw pile. NL Draw a card."
+  },
+  "MokouKeine:Untarnished": {
+    "NAME": "Untarnished",
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! Artifact. NL Exhaust."
+  },
+  "MokouKeine:Foresight": {
+    "NAME": "Foresight",
+    "DESCRIPTION": "Gain !B! Block. NL Add a copy of this card into your draw pile."
+  },
   "MokouKeine:Purify": {
     "NAME": "Purify",
-    "DESCRIPTION": "Lose !M! HP. NL Remove all of your debuffs. NL Exhaust."
+    "DESCRIPTION": "Remove all of the enemy's debuffs and deal !D! damage for each debuff removed.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Hits !M! times.)"
+    ]
   },
   "MokouKeine:Misdirect": {
     "NAME": "Misdirect",
@@ -82,11 +98,11 @@
   },
   "MokouKeine:Prosperity": {
     "NAME": "Prosperity",
-    "DESCRIPTION": "Gain !B! Block. NL MokouKeine:Echo Power: Play a copy of the last card played."
+    "DESCRIPTION": "Gain !B! Block. NL mokoukeine:Echo Power: Play a copy of the last card played."
   },
   "MokouKeine:Addendum": {
     "NAME": "Addendum",
-    "DESCRIPTION": "Deal !D! damage. NL MokouKeine:Echo Attack: Gain [E] [E] and draw !M! card."
+    "DESCRIPTION": "Deal !D! damage. NL mokoukeine:Echo Attack: Gain [E] [E] and draw !M! card."
   },
   "MokouKeine:Counterfeit": {
     "NAME": "Counterfeit",
@@ -113,7 +129,7 @@
   },
   "MokouKeine:Hardcover": {
     "NAME": "Hardcover",
-    "DESCRIPTION": "Deal !D! damage. NL MokouKeine:Echo Power: Gain !M! Artifact."
+    "DESCRIPTION": "Deal !D! damage. NL mokoukeine:Echo Power: Gain !M! Artifact."
   },
   "MokouKeine:Shatter": {
     "NAME": "Disparity",
@@ -121,7 +137,7 @@
   },
   "MokouKeine:Inhibition": {
     "NAME": "Inhibition",
-    "DESCRIPTION": "At the start of your turn, gain !M! MokouKeine:Seal."
+    "DESCRIPTION": "At the start of your turn, gain !M! mokoukeine:Seal."
   },
   "MokouKeine:HeatUp": {
     "NAME": "Heat Up",
@@ -129,18 +145,11 @@
   },
   "MokouKeine:Release": {
     "NAME": "Release",
-    "DESCRIPTION": "Lose all MokouKeine:Seals. NL Summon a MokouKeine:Flame for each MokouKeine:Seal lost. NL Exhaust."
+    "DESCRIPTION": "Lose all mokoukeine:Seals. NL Summon a mokoukeine:Flame for each mokoukeine:Seal lost. NL Exhaust."
   },
   "MokouKeine:Reflection": {
     "NAME": "Reflection",
     "DESCRIPTION": "Discard your hand. NL Your partner gains [E] for each card discarded. NL Exhaust."
-  },
-  "MokouKeine:Reminisce": {
-    "NAME": "Reminisce",
-    "DESCRIPTION": "Deal !D! damage for each debuff the enemy has.",
-    "EXTENDED_DESCRIPTION": [
-      " NL (Deals !M! damage.)"
-    ]
   },
   "MokouKeine:Huddle": {
     "NAME": "Unity",
@@ -172,11 +181,11 @@
   },
   "MokouKeine:Ignition": {
     "NAME": "Ignition",
-    "DESCRIPTION": "Whenever you would gain Strength, summon a MokouKeine:Flame instead."
+    "DESCRIPTION": "Whenever you would gain Strength, summon a mokoukeine:Flame instead."
   },
   "MokouKeine:Smokescreen": {
     "NAME": "Smokescreen",
-    "DESCRIPTION": "Gain !B! Block. NL Summon a MokouKeine:Flame."
+    "DESCRIPTION": "Gain !B! Block. NL Summon a mokoukeine:Flame."
   },
   "MokouKeine:Refute": {
     "NAME": "Refute",
@@ -191,7 +200,7 @@
   },
   "MokouKeine:Warmup": {
     "NAME": "Warmup",
-    "DESCRIPTION": "Summon a MokouKeine:Flame."
+    "DESCRIPTION": "Deal !D! damage. NL Summon a mokoukeine:Flame."
   },
   "MokouKeine:Indomitable": {
     "NAME": "Indomitable",
@@ -199,19 +208,19 @@
   },
   "MokouKeine:Intrigue": {
     "NAME": "Intrigue",
-    "DESCRIPTION": "Deal !D! damage. NL MokouKeine:Echo Attack: Deal !M! damage."
+    "DESCRIPTION": "Deal !D! damage. NL mokoukeine:Echo Attack: Deal !M! damage."
   },
   "MokouKeine:Stabilize": {
     "NAME": "Stabilize",
-    "DESCRIPTION": "Gain !B! Block. NL MokouKeine:Echo Skill: Gain !M! Block."
+    "DESCRIPTION": "Gain !B! Block. NL mokoukeine:Echo Skill: Gain !M! Block."
   },
-  "MokouKeine:SealingRite": {
+  "mokoukeine:SealingRite": {
     "NAME": "Sealing Rite",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Gain 1 MokouKeine:Seal for each enemy in combat. NL Exhaust."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Gain 1 mokoukeine:Seal for each enemy in combat. NL Exhaust."
   },
   "MokouKeine:FujiyamaVolcano": {
     "NAME": "Fujiyama Volcano",
-    "DESCRIPTION": "Exhaust your hand. NL Summon a MokouKeine:Flame for each card Exhausted."
+    "DESCRIPTION": "Exhaust your hand. NL Summon a mokoukeine:Flame for each card Exhausted."
   },
   "MokouKeine:Blitz": {
     "NAME": "Blitz",
@@ -241,7 +250,7 @@
   },
   "MokouKeine:SoaringKick": {
     "NAME": "Soaring Kick",
-    "DESCRIPTION": "Deal !D! damage. NL This card is played twice."
+    "DESCRIPTION": "Deal !D! damage twice. NL This card is played twice."
   },
   "MokouKeine:Expiation": {
     "NAME": "Expiation",
@@ -266,7 +275,7 @@
   },
   "MokouKeine:SagaValor": {
     "NAME": "Saga of Valor",
-    "DESCRIPTION": "Deal !D! damage twice. NL When this card is copied, gain !M! Strength."
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL When this card is copied, gain !M! Strength."
   },
   "MokouKeine:SagaDestruction": {
     "NAME": "Saga of Destruction",
@@ -290,7 +299,7 @@
   },
   "MokouKeine:a": {
     "NAME": "",
-    "DESCRIPTION": "Summon X MokouKeine:Flames."
+    "DESCRIPTION": "Summon X mokoukeine:Flames."
   },
   "MokouKeine:Hotheaded": {
     "NAME": "Hotheaded",

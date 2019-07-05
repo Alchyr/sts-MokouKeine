@@ -1,5 +1,5 @@
 package もこけね.fantasyEffects.generalBonus;
-
+/*
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -107,4 +107,4 @@ public class CardDraw extends FantasyEffect {
     public void use(FantasyCard c, AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, c.magicNumber));
     }
-}
+}*/

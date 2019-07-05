@@ -75,6 +75,15 @@
       " does not enough Gold."
     ]
   },
+  "MokouKeine:Bonfire": {
+    "TEXT": [
+      " sacrificed a Curse.",
+      " sacrificed a Basic card.",
+      " sacrificed a Common card.",
+      " sacrificed an Uncommon card.",
+      " sacrificed a Rare card."
+    ]
+  },
   "MokouKeine:DiscardWait": {
     "TEXT": [
       "Waiting for ",

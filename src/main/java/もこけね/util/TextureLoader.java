@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 
+import static basemod.abstracts.CustomCard.imgMap;
 import static もこけね.もこけねは神の国.assetPath;
 import static もこけね.もこけねは神の国.logger;
 
@@ -77,56 +78,14 @@ public class TextureLoader
                 textureString = assetPath("img/cards/UnknownCard.png");
                 break;
         }
-
-        if (textures.get(textureString) == null) {
-            try {
-                loadTexture(textureString);
-            } catch (GdxRuntimeException e) {
-                switch (cardType) {
-                    case ATTACK:
-                        textureString = assetPath("img/cards/attacks/default.png");
-                        break;
-                    case SKILL:
-                        textureString = assetPath("img/cards/skills/default.png");
-                        break;
-                    case POWER:
-                        textureString = assetPath("img/cards/powers/default.png");
-                        break;
-                    default:
-                        textureString = assetPath("img/MissingImage.png");
-                        break;
-                }
-            }
-        }
         //no exception, file exists
-        return textureString;
-    }
-
-    public static String getUncheckedTextureString(final String cardName, final AbstractCard.CardType cardType)
-    {
-        String textureString;
-
-        switch (cardType) {
-            case ATTACK:
-                textureString = assetPath("img/cards/Attacks/" + cardName + ".png");
-                break;
-            case SKILL:
-                textureString = assetPath("img/cards/skills/" + cardName + ".png");
-                break;
-            case POWER:
-                textureString = assetPath("img/cards/powers/" + cardName + ".png");
-                break;
-            default:
-                textureString = assetPath("img/cards/UnknownCard.png");
-                break;
-        }
-
         return textureString;
     }
 
     public static String getAndLoadCardTextureString(final String cardName, final AbstractCard.CardType cardType)
     {
         String textureString = getCardTextureString(cardName, cardType);
+        String originalString = textureString;
 
         if (textures.get(textureString) == null) {
             try {
@@ -146,14 +105,16 @@ public class TextureLoader
                         textureString = assetPath("img/MissingImage.png");
                         break;
                 }
+
+                loadCardTexture(originalString, textureString, true);
             }
         }
         //no exception, file exists
-        return textureString;
+        return originalString;
     }
 
     private static void loadTexture(final String textureString) throws GdxRuntimeException {
-        loadTexture(textureString, false);
+        loadTexture(textureString, true);
     }
 
     private static void loadTexture(final String textureString, boolean linearFilter) throws GdxRuntimeException {
@@ -167,6 +128,30 @@ public class TextureLoader
             texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         }
         textures.put(textureString, texture);
+    }
+
+    private static void loadCardTexture(final String textureKey, final String textureString, boolean linearFilter) throws GdxRuntimeException {
+        if (!textures.containsKey(textureString))
+        {
+            Texture texture = new Texture(textureString);
+            if (linearFilter)
+            {
+                texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            }
+            else
+            {
+                texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+            }
+            if (!imgMap.containsKey(textureKey))
+                imgMap.put(textureKey, texture);
+            textures.put(textureKey, texture);
+        }
+        else
+        {
+            if (!imgMap.containsKey(textureKey))
+                imgMap.put(textureKey, textures.get(textureString));
+            textures.put(textureKey, textures.get(textureString));
+        }
     }
 
     public static Texture getPowerTexture(final String powerName)

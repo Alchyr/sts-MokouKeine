@@ -113,13 +113,11 @@ public class VoteBossRelic {
 
     @SpirePatch(
             clz = AbstractRelic.class,
-            method = "update"
+            method = "bossObtainLogic"
     )
     public static class OnTryObtain
     {
-        @SpireInsertPatch(
-                locator = Locator.class
-        )
+        @SpirePrefixPatch
         public static SpireReturn voteNotTake(AbstractRelic __instance)
         {
             if (AbstractDungeon.player instanceof MokouKeine && MultiplayerHelper.active)
@@ -149,7 +147,7 @@ public class VoteBossRelic {
             return SpireReturn.Continue();
         }
 
-        @SpireInsertPatch(
+        /*@SpireInsertPatch(
                 locator = ForceLocator.class
         )
         public static void forceTakeChosen(AbstractRelic __instance)
@@ -166,9 +164,9 @@ public class VoteBossRelic {
                 __instance.hb.hovered = true;
                 InputHelper.justClickedLeft = true;
             }
-        }
+        }*/
 
-        private static class Locator extends SpireInsertLocator
+        /*private static class Locator extends SpireInsertLocator
         {
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
@@ -185,7 +183,7 @@ public class VoteBossRelic {
                 Matcher finalMatcher = new Matcher.FieldAccessMatcher(Hitbox.class, "hovered");
                 return new int[] { LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher)[2] };
             }
-        }
+        }*/
     }
 
 
@@ -201,6 +199,7 @@ public class VoteBossRelic {
                     if (r.relicId.equals(votedRelic))
                     {
                         chosenRelic = r;
+                        r.bossObtainLogic();
                         break;
                     }
                 }
@@ -236,6 +235,7 @@ public class VoteBossRelic {
             if (r.relicId.equals(id))
             {
                 chosenRelic = r;
+                r.bossObtainLogic();
                 break;
             }
         }
@@ -265,6 +265,7 @@ public class VoteBossRelic {
                 if (r.relicId.equals(choose))
                 {
                     chosenRelic = r;
+                    r.bossObtainLogic();
                     break;
                 }
             }

@@ -1,5 +1,5 @@
 package もこけね.abstracts;
-
+/*
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -161,4 +161,4 @@ public abstract class FantasyEffect {
         ALL,
         NONE
     }
-}
+}*/

@@ -5,11 +5,13 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public class CustomCardTags {
     @SpireEnum
-    public static AbstractCard.CardTags ECHO_ATTACK;
+    public static AbstractCard.CardTags MK_ECHO_ATTACK;
     @SpireEnum
-    public static AbstractCard.CardTags ECHO_SKILL;
+    public static AbstractCard.CardTags MK_ECHO_SKILL;
     @SpireEnum
-    public static AbstractCard.CardTags ECHO_POWER;
+    public static AbstractCard.CardTags MK_ECHO_POWER;
     @SpireEnum
-    public static AbstractCard.CardTags FRAGMENT;
+    public static AbstractCard.CardTags MK_BURST;
+    @SpireEnum
+    public static AbstractCard.CardTags MK_FRAGMENT;
 }

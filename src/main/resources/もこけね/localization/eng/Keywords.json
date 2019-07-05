@@ -15,6 +15,14 @@
     "DESCRIPTION": "This effect triggers if the last card played is of the specified type."
   },
   {
+    "PROPER_NAME": "Burst",
+    "NAMES": [
+      "burst",
+      "burst:"
+    ],
+    "DESCRIPTION": "This effect triggers if the target has already been attacked this turn."
+  },
+  {
     "PROPER_NAME": "Seal",
     "NAMES": [
       "seal",

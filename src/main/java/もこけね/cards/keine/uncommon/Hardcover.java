@@ -39,7 +39,7 @@ public class Hardcover extends KeineCard {
         setDamage(DAMAGE, UPG_DAMAGE);
         setMagic(BUFF);
 
-        tags.add(CustomCardTags.ECHO_POWER);
+        tags.add(CustomCardTags.MK_ECHO_POWER);
     }
 
     @Override

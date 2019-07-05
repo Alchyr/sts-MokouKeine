@@ -1,5 +1,5 @@
 package もこけね.fantasyEffects.generalBonus;
-
+/*
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -76,4 +76,4 @@ public class Exhaust extends FantasyEffect {
     @Override
     public void use(FantasyCard c, AbstractPlayer p, AbstractMonster m) {
     }
-}
+}*/

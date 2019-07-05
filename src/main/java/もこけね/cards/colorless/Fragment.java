@@ -33,7 +33,7 @@ public class Fragment extends BaseCard {
         super(CardColor.COLORLESS, cardInfo, false);
         setMagic(DAMAGE, UPG_DAMAGE);
 
-        this.tags.add(CustomCardTags.FRAGMENT);
+        this.tags.add(CustomCardTags.MK_FRAGMENT);
     }
 
 
@@ -78,28 +78,28 @@ public class Fragment extends BaseCard {
             {
 
                 for (AbstractCard c : ((MokouKeine) AbstractDungeon.player).otherPlayerHand.group)
-                    if (c.hasTag(CustomCardTags.FRAGMENT))
+                    if (c.hasTag(CustomCardTags.MK_FRAGMENT))
                         ++amt;
 
                 for (AbstractCard c : ((MokouKeine) AbstractDungeon.player).otherPlayerDraw.group)
-                    if (c.hasTag(CustomCardTags.FRAGMENT))
+                    if (c.hasTag(CustomCardTags.MK_FRAGMENT))
                         ++amt;
 
                 for (AbstractCard c : ((MokouKeine) AbstractDungeon.player).otherPlayerDiscard.group)
-                    if (c.hasTag(CustomCardTags.FRAGMENT))
+                    if (c.hasTag(CustomCardTags.MK_FRAGMENT))
                         ++amt;
             }
 
             for (AbstractCard c : AbstractDungeon.player.hand.group)
-                if (c.hasTag(CustomCardTags.FRAGMENT))
+                if (c.hasTag(CustomCardTags.MK_FRAGMENT))
                     ++amt;
 
             for (AbstractCard c : AbstractDungeon.player.drawPile.group)
-                if (c.hasTag(CustomCardTags.FRAGMENT))
+                if (c.hasTag(CustomCardTags.MK_FRAGMENT))
                     ++amt;
 
             for (AbstractCard c : AbstractDungeon.player.discardPile.group)
-                if (c.hasTag(CustomCardTags.FRAGMENT))
+                if (c.hasTag(CustomCardTags.MK_FRAGMENT))
                     ++amt;
             return amt;
         }

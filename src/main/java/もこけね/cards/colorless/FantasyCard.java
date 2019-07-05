@@ -1,5 +1,5 @@
 package もこけね.cards.colorless;
-
+/*
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -351,3 +351,4 @@ public class FantasyCard extends BaseCard {//implements CustomSavable<String> { 
         return new FantasyCard(this.type, this.cost).setBaseEffect(this.baseEffect).setBonusEffect(this.bonusEffect);
     }
 }
+*/

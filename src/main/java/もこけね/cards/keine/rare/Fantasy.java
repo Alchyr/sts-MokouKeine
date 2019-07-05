@@ -1,5 +1,5 @@
 package もこけね.cards.keine.rare;
-
+/* Disabled because I don't think it just really fits in well. Too many selection screens, not great for multiplayer experience. This would be a good singleplayer card.
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -35,4 +35,4 @@ public class Fantasy extends KeineCard {
     public AbstractCard makeCopy() {
         return new Fantasy();
     }
-}
+}*/

@@ -1,5 +1,5 @@
 package もこけね.fantasyEffects.skillBase;
-
+/*
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -103,3 +103,4 @@ public class NormalBlock extends FantasyEffect {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, c.block));
     }
 }
+*/

@@ -1,5 +1,5 @@
 package もこけね.fantasyEffects.attackBase;
-
+/*
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -176,3 +176,4 @@ public class NormalDamage extends FantasyEffect {
         }
     }
 }
+*/

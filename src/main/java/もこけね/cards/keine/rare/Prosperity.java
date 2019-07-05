@@ -33,7 +33,7 @@ public class Prosperity extends KeineCard {
 
         setBlock(BLOCK, UPG_BLOCK);
 
-        tags.add(CustomCardTags.ECHO_POWER);
+        tags.add(CustomCardTags.MK_ECHO_POWER);
     }
 
     @Override

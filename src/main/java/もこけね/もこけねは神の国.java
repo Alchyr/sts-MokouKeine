@@ -20,6 +20,7 @@ import com.megacrit.cardcrawl.helpers.SeedHelper;
 import com.megacrit.cardcrawl.helpers.TipTracker;
 import com.megacrit.cardcrawl.helpers.TrialHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import javassist.CannotCompileException;
@@ -28,10 +29,10 @@ import javassist.NotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
-import もこけね.abstracts.FantasyEffect;
 import もこけね.character.MokouKeine;
 import もこけね.patch.card_use.DiscardToCorrectPile;
 import もこけね.patch.card_use.LastCardType;
+import もこけね.patch.combat.BurstActive;
 import もこけね.patch.combat.MixEnemyTempCards;
 import もこけね.patch.combat.PotionUse;
 import もこけね.patch.combat.RequireDoubleEndTurn;
@@ -65,21 +66,23 @@ Cards: Anything that affects order of cards in hand.
 Possible: At start of each turn, and after each card is resolved, send array of card uuids.
 If card play fails, send back current hand state uuids, and reshuffle cards to match if all uuids match.
 
-Patch ShowCardAndAddToDrawPileEffect/ShowCardAndAddToDiscardPileEffect to trigger onCopy
++Patch ShowCardAndAddToDrawPileEffect/ShowCardAndAddToDiscardPileEffect to trigger onCopy
 Just postfix
 
 EVENTS:
++Patch AbstractDungeon lines ~2300-2310 (in intellij lines) to ensure it checks both players' gold amounts when disabling certain events
+
 Living Wall - Augumenter - Transmogrifier - Does transform work correctly? - Worked fine, once
 Ancient Writing - Upgrading does not upgrade other deck
 +Council of Ghosts - Doubled apparitions is kind of op... Maybe remove from pool
 +Removal of bottles - Unbottle other player's bottled card?
-Vampires - Probably strike removal won't work, since pandora's doesn't.
++Vampires - Probably strike removal won't work, since pandora's doesn't. - note after looking at code - It will not. Removes directly from arraylist.
 Falling - Should be fine, but check.
 Mind bloom -
     +I Am Awake - Upgrades do not sync
     Other options should be fine.
 +A Note For Yourself - Remove from pool
-Bonfire Spirits - report hp changes
++Bonfire Spirits - report hp changes
 Designer In-Spire - ensure transform/upgrades are reported properly
 The Divine Fountain - Make sure it works
 +We Meet Again/Ranwid - +Gold option: If other player cannot afford it, cannot take
@@ -91,7 +94,7 @@ Powers:
 Automaton orbs - Steal from both decks? Return to appropriate deck when death?
 
 Relics:
-Pandora's Box - Card additions are synced, but card removals are not
+Pandora's Box - Card additions are synced, but card removals are not - Removes directly from cardgroup arraylist.
 +Bottle Relics - canSpawn will desync if one player can bottle but other cannot
 Ninja Scroll? Silent only, so it should be fine, but... I don't trust things.
 +Mummified hand
@@ -106,12 +109,12 @@ Astrolabe - Make sure transformation works properly
 Calling Bell - Ensure both players obtain the relics if one of them chooses to take one. This should work, since it's a combat reward screen, but not 100% sure.
 +Eternal Feather - Count both decks
 Bloody Idol - Heal for 2, triggers on both players' gold gain?
-Necronomicon - Test if it works on cards played by ally. Should be fine?
+Necronomicon - Test if it works on cards played by ally. Should be fine? They don't have freeToPlayOnce set to true, they just use other energy panel.
 Nilry's - Test
 Warped Tongs - Upgrade a random card in each player's hand?
 Strange Spoon - Should work fine, but test
 Toolbox - 1 colorless for each player? Or just 1 colorless in one player's hand?
-Toy Ornithopter/onPotionUse ensure it works when other player uses potion
++Toy Ornithopter/onPotionUse ensure it works when other player uses potion
 Choker - Increase limit to 8?
 
 +Fairy Potion - If one player has fairy potion, should work for both players (check tracked other player potions on death)
@@ -125,8 +128,12 @@ Curses:
 Anything to do with cards in hand.
 Pain - Only for the player whose hand it is in?
 Regret - Only for cards in that hand
+Necronomicurse - Where it goes when Exhausted
 
 Other character cards:
+I don't want to figure out all of them right now.
+Anything with a screen.
+Anything that affects hand, draw pile, or discard pile.
 
 extra features:
 Resync command - when sent by host, resyncs other player forcefully
@@ -397,6 +404,11 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         PotionUse.queuedPotionUse.clear();
     }
 
+    //patched in hook
+    public static void preMonsterTurn(AbstractMonster m) {
+        BurstActive.active.set(m, false);
+    }
+
     public void startGame()
     {
         if (CardCrawlGame.mode == CardCrawlGame.GameMode.CHAR_SELECT)
@@ -536,6 +548,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
     public void receiveEditKeywords()
     {
         String lang = getLangString();
+        String prefix = modID.toLowerCase();
 
         try
         {
@@ -545,7 +558,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
 
             if (keywords != null) {
                 for (KeywordWithProper keyword : keywords) {
-                    BaseMod.addKeyword(modID, keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
+                    BaseMod.addKeyword(prefix, keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
                 }
             }
         }
@@ -557,7 +570,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
 
             if (keywords != null) {
                 for (KeywordWithProper keyword : keywords) {
-                    BaseMod.addKeyword(modID, keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
+                    BaseMod.addKeyword(prefix, keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
                 }
             }
         }
@@ -593,7 +606,7 @@ public class もこけねは神の国 implements EditCardsSubscriber, EditRelics
         }
 
         //Initialize fantasy card effects
-        FantasyEffect.initializeEffectLists();
+        //FantasyEffect.initializeEffectLists();
 
         //Initialize multiplayer stuff
         HandleMatchmaking.init();

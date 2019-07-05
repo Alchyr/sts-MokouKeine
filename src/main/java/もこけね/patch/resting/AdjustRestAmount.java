@@ -78,7 +78,7 @@ public class AdjustRestAmount {
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(ImageMaster.class, "CAMPFIRE_REST_BUTTON");
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(RestOption.class, "updateUsability");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
