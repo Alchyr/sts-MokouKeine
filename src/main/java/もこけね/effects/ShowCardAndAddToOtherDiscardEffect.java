@@ -101,7 +101,8 @@ public class ShowCardAndAddToOtherDiscardEffect extends AbstractGameEffect {
         if (this.duration < 0.0F) {
             this.isDone = true;
             this.card.shrink();
-            SoulAltDiscard.reposition = true;
+            if (AbstractDungeon.player instanceof MokouKeine)
+                SoulAltDiscard.reposition = true;
             AbstractDungeon.getCurrRoom().souls.discard(this.card, true);// 81
         }
 

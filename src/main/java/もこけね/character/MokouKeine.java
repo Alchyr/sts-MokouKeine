@@ -472,19 +472,13 @@ public class MokouKeine extends CustomPlayer {
                     c.lighten(false);
                     c.drawScale = 0.12F;
                     c.targetDrawScale = 0.75F;
-                    if (this.hasPower(ConfusionPower.POWER_ID) && c.cost >= 0) {
-                        int newCost = AbstractDungeon.cardRandomRng.random(3);
-                        if (c.cost != newCost) {
-                            c.cost = newCost;
-                            c.costForTurn = c.cost;
-                            c.isCostModified = true;
-                        }
-                    }
                     c.triggerWhenDrawn();
                     this.otherPlayerHand.addToHand(c);
                     this.otherPlayerDraw.removeTopCard();
-                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
-                        c.setCostForTurn(-99);
+
+                    for (AbstractPower p : this.powers)
+                    {
+                        p.onCardDraw(c);
                     }
                     for (AbstractRelic r : this.relics)
                     {
@@ -506,19 +500,13 @@ public class MokouKeine extends CustomPlayer {
                     c.lighten(false);
                     c.drawScale = 0.12F;
                     c.targetDrawScale = 0.75F;
-                    if (this.hasPower("Confusion") && c.cost >= 0) {
-                        int newCost = AbstractDungeon.cardRandomRng.random(3);
-                        if (c.cost != newCost) {
-                            c.cost = newCost;
-                            c.costForTurn = c.cost;
-                            c.isCostModified = true;
-                        }
-                    }
                     c.triggerWhenDrawn();
                     this.hand.addToHand(c);
                     this.drawPile.removeTopCard();
-                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
-                        c.setCostForTurn(-99);
+
+                    for (AbstractPower p : this.powers)
+                    {
+                        p.onCardDraw(c);
                     }
                     for (AbstractRelic r : this.relics)
                     {
@@ -540,19 +528,13 @@ public class MokouKeine extends CustomPlayer {
                     c.lighten(false);
                     c.drawScale = 0.12F;
                     c.targetDrawScale = 0.75F;
-                    if (this.hasPower(ConfusionPower.POWER_ID) && c.cost >= 0) {
-                        int newCost = AbstractDungeon.cardRandomRng.random(3);
-                        if (c.cost != newCost) {
-                            c.cost = newCost;
-                            c.costForTurn = c.cost;
-                            c.isCostModified = true;
-                        }
-                    }
                     c.triggerWhenDrawn();
                     this.otherPlayerHand.addToHand(c);
                     this.otherPlayerDraw.removeTopCard();
-                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
-                        c.setCostForTurn(-99);
+
+                    for (AbstractPower p : this.powers)
+                    {
+                        p.onCardDraw(c);
                     }
                     for (AbstractRelic r : this.relics)
                     {
@@ -574,19 +556,13 @@ public class MokouKeine extends CustomPlayer {
                     c.lighten(false);
                     c.drawScale = 0.12F;
                     c.targetDrawScale = 0.75F;
-                    if (this.hasPower("Confusion") && c.cost >= 0) {
-                        int newCost = AbstractDungeon.cardRandomRng.random(3);
-                        if (c.cost != newCost) {
-                            c.cost = newCost;
-                            c.costForTurn = c.cost;
-                            c.isCostModified = true;
-                        }
-                    }
                     c.triggerWhenDrawn();
                     this.hand.addToHand(c);
                     this.drawPile.removeTopCard();
-                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
-                        c.setCostForTurn(-99);
+
+                    for (AbstractPower p : this.powers)
+                    {
+                        p.onCardDraw(c);
                     }
                     for (AbstractRelic r : this.relics)
                     {
@@ -622,19 +598,13 @@ public class MokouKeine extends CustomPlayer {
                     c.lighten(false);
                     c.drawScale = 0.12F;
                     c.targetDrawScale = 0.75F;
-                    if (this.hasPower(ConfusionPower.POWER_ID) && c.cost >= 0) {
-                        int newCost = AbstractDungeon.cardRandomRng.random(3);
-                        if (c.cost != newCost) {
-                            c.cost = newCost;
-                            c.costForTurn = c.cost;
-                            c.isCostModified = true;
-                        }
-                    }
                     c.triggerWhenDrawn();
                     this.otherPlayerHand.addToHand(c);
                     this.otherPlayerDraw.removeTopCard();
-                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
-                        c.setCostForTurn(-99);
+
+                    for (AbstractPower p : this.powers)
+                    {
+                        p.onCardDraw(c);
                     }
                     for (AbstractRelic r : this.relics)
                     {
@@ -656,19 +626,13 @@ public class MokouKeine extends CustomPlayer {
                     c.lighten(false);
                     c.drawScale = 0.12F;
                     c.targetDrawScale = 0.75F;
-                    if (this.hasPower("Confusion") && c.cost >= 0) {
-                        int newCost = AbstractDungeon.cardRandomRng.random(3);
-                        if (c.cost != newCost) {
-                            c.cost = newCost;
-                            c.costForTurn = c.cost;
-                            c.isCostModified = true;
-                        }
-                    }
                     c.triggerWhenDrawn();
                     this.hand.addToHand(c);
                     this.drawPile.removeTopCard();
-                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
-                        c.setCostForTurn(-99);
+
+                    for (AbstractPower p : this.powers)
+                    {
+                        p.onCardDraw(c);
                     }
                     for (AbstractRelic r : this.relics)
                     {
@@ -690,19 +654,13 @@ public class MokouKeine extends CustomPlayer {
                     c.lighten(false);
                     c.drawScale = 0.12F;
                     c.targetDrawScale = 0.75F;
-                    if (this.hasPower("Confusion") && c.cost >= 0) {
-                        int newCost = AbstractDungeon.cardRandomRng.random(3);
-                        if (c.cost != newCost) {
-                            c.cost = newCost;
-                            c.costForTurn = c.cost;
-                            c.isCostModified = true;
-                        }
-                    }
                     c.triggerWhenDrawn();
                     this.hand.addToHand(c);
                     this.drawPile.removeTopCard();
-                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
-                        c.setCostForTurn(-99);
+
+                    for (AbstractPower p : this.powers)
+                    {
+                        p.onCardDraw(c);
                     }
                     for (AbstractRelic r : this.relics)
                     {
@@ -723,19 +681,13 @@ public class MokouKeine extends CustomPlayer {
                     c.lighten(false);
                     c.drawScale = 0.12F;
                     c.targetDrawScale = 0.75F;
-                    if (this.hasPower(ConfusionPower.POWER_ID) && c.cost >= 0) {
-                        int newCost = AbstractDungeon.cardRandomRng.random(3);
-                        if (c.cost != newCost) {
-                            c.cost = newCost;
-                            c.costForTurn = c.cost;
-                            c.isCostModified = true;
-                        }
-                    }
                     c.triggerWhenDrawn();
                     this.otherPlayerHand.addToHand(c);
                     this.otherPlayerDraw.removeTopCard();
-                    if (this.hasPower("Corruption") && c.type == AbstractCard.CardType.SKILL) {
-                        c.setCostForTurn(-99);
+
+                    for (AbstractPower p : this.powers)
+                    {
+                        p.onCardDraw(c);
                     }
                     for (AbstractRelic r : this.relics)
                     {

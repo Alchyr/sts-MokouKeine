@@ -70,7 +70,7 @@ public class OriginateAction extends AbstractGameAction {
 
                         AbstractCard card = c.makeStatEquivalentCopy();
                         card.modifyCostForCombat(-1);
-                        AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(card));
+                        AbstractDungeon.actionManager.addToTop(new MakeTempCardInOtherHandAction(card));
                         MultiplayerHelper.sendP2PString(ReceiveSignalCardsAction.signalCardString(AbstractDungeon.player.hand.group.indexOf(c), AbstractDungeon.player.hand, true));
                     }
                     AbstractDungeon.handCardSelectScreen.selectedCards.group.clear();
@@ -105,13 +105,13 @@ public class OriginateAction extends AbstractGameAction {
 
                 c.modifyCostForCombat(-1);
 
-                if (TrackCardSource.useOtherEnergy && AbstractDungeon.player instanceof MokouKeine)
+                if (TrackCardSource.useOtherEnergy)
                 {
-                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInOtherHandAction(c));
+                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(c));
                 }
                 else
                 {
-                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(c));
+                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInOtherHandAction(c));
                 }
                 this.isDone = true;
             }

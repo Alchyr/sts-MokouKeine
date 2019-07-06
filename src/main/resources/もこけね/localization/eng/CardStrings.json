@@ -17,8 +17,8 @@
   },
   "MokouKeine:Originate": {
     "NAME": "Originate",
-    "DESCRIPTION": "Add a copy of a random card in your hand to your hand. NL It costs 1 less this combat.",
-    "UPGRADE_DESCRIPTION": "Add a copy of a card in your hand to your hand. NL It costs 1 less this combat."
+    "DESCRIPTION": "Add a copy of a random card in your hand to your partner's hand. NL It costs 1 less this combat.",
+    "UPGRADE_DESCRIPTION": "Add a copy of a card in your hand to your partner's hand. NL It costs 1 less this combat."
   },
   "MokouKeine:Scorch": {
     "NAME": "Scorch",
@@ -165,7 +165,7 @@
   },
   "MokouKeine:Singe": {
     "NAME": "Singe",
-    "DESCRIPTION": "Deal !D! damage. NL Add a Burn to your hand."
+    "DESCRIPTION": "Deal !D! damage. NL mokoukeine:Burst: Draw a card."
   },
   "MokouKeine:Tampering": {
     "NAME": "Tampering",
@@ -238,7 +238,7 @@
   },
   "MokouKeine:Familiarity": {
     "NAME": "Familiarity",
-    "DESCRIPTION": "ALL your cards that you have played this combat cost 0 until played. NL Exhaust."
+    "DESCRIPTION": "ALL cards that have been played this combat cost 0 until played. NL Exhaust."
   },
   "MokouKeine:Contemplation": {
     "NAME": "Contemplation",
@@ -293,9 +293,18 @@
     "NAME": "Hakutaku Form",
     "DESCRIPTION": "Add a copy of your deck to your draw pile. NL The copies cost 1 less."
   },
+  "MokouKeine:Tampering": {
+    "NAME": "Tampering",
+    "DESCRIPTION": "Upgrade !M! random cards in each hand. NL Exhaust."
+  },
   "MokouKeine:Memento": {
     "NAME": "Memento",
     "DESCRIPTION": ""
+  },
+  "MokouKeine:Anamnesis": {
+    "NAME": "Anamnesis",
+    "DESCRIPTION": "Deal 1 damage to ALL enemies. NL Draw a card. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Deal 1 damage to ALL enemies twice. NL Draw a card. NL Exhaust."
   },
   "MokouKeine:a": {
     "NAME": "",

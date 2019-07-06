@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class FamiliarityAction extends AbstractGameAction {
     public FamiliarityAction()
     {
-
+        this.actionType = ActionType.CARD_MANIPULATION;
     }
 
     @Override

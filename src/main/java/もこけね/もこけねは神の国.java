@@ -64,6 +64,8 @@ Cards: Anything that affects order of cards in hand.
 Possible: At start of each turn, and after each card is resolved, send array of card uuids.
 If card play fails, send back current hand state uuids, and reshuffle cards to match if all uuids match.
 
++Implement new basegame card draw hook for Corruption and Confusion
+
 +Patch ShowCardAndAddToDrawPileEffect/ShowCardAndAddToDiscardPileEffect to trigger onCopy
 Just postfix
 
@@ -89,15 +91,15 @@ The Divine Fountain - Make sure it works
 
 Powers:
 +Hex - Sync generation based on who played card
-Automaton orbs - Steal from both decks? Return to appropriate deck when death?
++Automaton orbs - Steal from both decks? Return to appropriate deck upon death?
 
 Relics:
-Pandora's Box - Card additions are synced, but card removals are not - Removes directly from cardgroup arraylist.
++Pandora's Box - Card additions are synced, but card removals are not - Removes directly from cardgroup arraylist.
 +Bottle Relics - canSpawn will desync if one player can bottle but other cannot
 Ninja Scroll? Silent only, so it should be fine, but... I don't trust things.
 +Mummified hand
 Test how sundial interacts
-Dead Branch - Ensure card goes to the correct hand
+Dead Branch - Ensure card generation actually generates the same card for both players
 +Du-vu doll - Count curses in both decks
 Gambling Chip - test - should be functional.
 +Girya - Patch campsite option
