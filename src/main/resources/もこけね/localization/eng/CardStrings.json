@@ -167,10 +167,6 @@
     "NAME": "Singe",
     "DESCRIPTION": "Deal !D! damage. NL mokoukeine:Burst: Draw a card."
   },
-  "MokouKeine:Tampering": {
-    "NAME": "Tampering",
-    "DESCRIPTION": "Add a random card to your discard pile. NL It costs 0 this combat. NL Exhaust."
-  },
   "MokouKeine:Backfire": {
     "NAME": "Backfire",
     "DESCRIPTION": "Lose hp deal damage"
