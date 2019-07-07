@@ -24,7 +24,7 @@ public class Revision extends KeineCard {
 
     private static final int UPG_COST = 0;
 
-    private static final int BLOCK = 6;
+    private static final int BLOCK = 5;
 
     public Revision()
     {

@@ -34,7 +34,7 @@ public class BossRoomVoting {
             {
                 if (!waitingForBoss)
                 {
-                    MultiplayerHelper.sendP2PMessage(AbstractDungeon.player.name + " is ready to face the boss.");
+                    MultiplayerHelper.sendP2PMessage(CardCrawlGame.playerName + " is ready to face the boss.");
                 }
                 if (otherWaitingForBoss)
                 {

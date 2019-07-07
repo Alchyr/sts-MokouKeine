@@ -49,7 +49,7 @@ public class Addendum extends KeineCard {
         AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         if (LastCardType.type == CardType.ATTACK)
         {
-            AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(TrackCardSource.useOtherEnergy));
+            AbstractDungeon.actionManager.addToBottom(new SetEnergyGainAction(false));
             AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(2));
             AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
         }

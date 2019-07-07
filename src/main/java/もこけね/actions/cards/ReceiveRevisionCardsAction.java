@@ -13,6 +13,7 @@ public class ReceiveRevisionCardsAction extends ReceiveSignalCardsAction {
     public ReceiveRevisionCardsAction()
     {
         this.actionType = ActionType.CARD_MANIPULATION;
+        this.duration = 10.0f;
     }
 
     @Override
@@ -43,7 +44,8 @@ public class ReceiveRevisionCardsAction extends ReceiveSignalCardsAction {
                     AbstractDungeon.effectList.add(new ShowCardAndAddToDiscardEffect(c));
                 }
             }
+            this.isDone = true;
         }
-        this.isDone = true;
+        tickDuration();
     }
 }

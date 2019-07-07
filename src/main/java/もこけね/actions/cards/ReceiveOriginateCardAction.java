@@ -9,6 +9,7 @@ public class ReceiveOriginateCardAction extends ReceiveSignalCardsAction {
     public ReceiveOriginateCardAction()
     {
         this.actionType = ActionType.CARD_MANIPULATION;
+        this.duration = 10.0f;
     }
 
     @Override
@@ -17,14 +18,14 @@ public class ReceiveOriginateCardAction extends ReceiveSignalCardsAction {
         {
             processCardStrings();
         }
-
         if (signaledCards.size > 0)
         {
             AbstractCard c = signaledCards.removeFirst().makeStatEquivalentCopy();
             signaledGroups.removeFirst();
             c.modifyCostForCombat(-1);
             AbstractDungeon.actionManager.addToTop(new MakeTempCardInOtherHandAction(c));
+            this.isDone = true;
         }
-        this.isDone = true;
+        this.tickDuration();
     }
 }

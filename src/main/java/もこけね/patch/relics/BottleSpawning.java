@@ -48,7 +48,7 @@ public class BottleSpawning {
             {
                 for (AbstractCard c : ((MokouKeine) AbstractDungeon.player).otherPlayerMasterDeck.group)
                 {
-                    if (c.type == AbstractCard.CardType.ATTACK)
+                    if (c.type == AbstractCard.CardType.ATTACK && c.rarity != AbstractCard.CardRarity.BASIC)
                         return true;
                 }
                 return false;
@@ -71,7 +71,7 @@ public class BottleSpawning {
             {
                 for (AbstractCard c : ((MokouKeine) AbstractDungeon.player).otherPlayerMasterDeck.group)
                 {
-                    if (c.type == AbstractCard.CardType.SKILL)
+                    if (c.type == AbstractCard.CardType.SKILL && c.rarity != AbstractCard.CardRarity.BASIC)
                         return true;
                 }
                 return false;

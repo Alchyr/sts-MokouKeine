@@ -116,6 +116,7 @@ Strange Spoon - Should work fine, but test
 Toolbox - 1 colorless for each player? Or just 1 colorless in one player's hand?
 +Toy Ornithopter/onPotionUse ensure it works when other player uses potion
 Choker - Increase limit to 8?
+Singing Bowl - Sync hp gain (nerf to 1? eh)
 
 +Fairy Potion - If one player has fairy potion, should work for both players (check tracked other player potions on death)
 

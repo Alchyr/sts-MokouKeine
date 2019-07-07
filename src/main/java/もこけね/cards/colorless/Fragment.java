@@ -39,7 +39,7 @@ public class Fragment extends BaseCard {
 
     @Override
     public void applyPowers() {
-        int amt = fragmentCount();
+        int amt = fragmentCount(this);
         this.baseDamage = this.baseMagicNumber * amt;
         super.applyPowers();
 
@@ -49,7 +49,7 @@ public class Fragment extends BaseCard {
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        int amt = fragmentCount();
+        int amt = fragmentCount(this);
         this.baseDamage = this.baseMagicNumber * amt;
         super.calculateCardDamage(mo);
 
@@ -59,7 +59,7 @@ public class Fragment extends BaseCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (this.magicNumber > 0)
+        if (this.damage > 0)
             AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_HEAVY));
     }
 
@@ -68,38 +68,38 @@ public class Fragment extends BaseCard {
         return new Fragment();
     }
 
-    private static int fragmentCount()
+    private static int fragmentCount(AbstractCard source)
     {
         if (AbstractDungeon.player != null)
         {
-            int amt = 0;
+            int amt = 1;
 
             if (AbstractDungeon.player instanceof MokouKeine)
             {
 
                 for (AbstractCard c : ((MokouKeine) AbstractDungeon.player).otherPlayerHand.group)
-                    if (c.hasTag(CustomCardTags.MK_FRAGMENT))
+                    if (c.hasTag(CustomCardTags.MK_FRAGMENT) && !c.equals(source))
                         ++amt;
 
                 for (AbstractCard c : ((MokouKeine) AbstractDungeon.player).otherPlayerDraw.group)
-                    if (c.hasTag(CustomCardTags.MK_FRAGMENT))
+                    if (c.hasTag(CustomCardTags.MK_FRAGMENT) && !c.equals(source))
                         ++amt;
 
                 for (AbstractCard c : ((MokouKeine) AbstractDungeon.player).otherPlayerDiscard.group)
-                    if (c.hasTag(CustomCardTags.MK_FRAGMENT))
+                    if (c.hasTag(CustomCardTags.MK_FRAGMENT) && !c.equals(source))
                         ++amt;
             }
 
             for (AbstractCard c : AbstractDungeon.player.hand.group)
-                if (c.hasTag(CustomCardTags.MK_FRAGMENT))
+                if (c.hasTag(CustomCardTags.MK_FRAGMENT) && !c.equals(source))
                     ++amt;
 
             for (AbstractCard c : AbstractDungeon.player.drawPile.group)
-                if (c.hasTag(CustomCardTags.MK_FRAGMENT))
+                if (c.hasTag(CustomCardTags.MK_FRAGMENT) && !c.equals(source))
                     ++amt;
 
             for (AbstractCard c : AbstractDungeon.player.discardPile.group)
-                if (c.hasTag(CustomCardTags.MK_FRAGMENT))
+                if (c.hasTag(CustomCardTags.MK_FRAGMENT) && !c.equals(source))
                     ++amt;
             return amt;
         }

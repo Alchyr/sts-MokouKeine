@@ -110,7 +110,7 @@
   },
   "MokouKeine:Revision": {
     "NAME": "Revision",
-    "DESCRIPTION": "Move any number of cards from your hand to your partner's hand."
+    "DESCRIPTION": "Gain !B! Block. NL Move any number of cards from your hand to your partner's hand."
   },
   "MokouKeine:Divergence": {
     "NAME": "Divergence",
@@ -275,7 +275,7 @@
   },
   "MokouKeine:SagaDestruction": {
     "NAME": "Saga of Destruction",
-    "DESCRIPTION": "Deal !D! damage. NL When this card is copied, reduce the cost of a random Attack in each hand by !M! for the combat."
+    "DESCRIPTION": "Deal !D! damage. NL When this card is copied, do something interesting."
   },
   "MokouKeine:SagaCreation": {
     "NAME": "Saga of Creation",
@@ -283,7 +283,7 @@
   },
   "MokouKeine:Sacrifice": {
     "NAME": "Sacrifice",
-    "DESCRIPTION": "Deal !D! damage. NL Apply 1 Stun. NL Skip your next turn. NL Exhaust."
+    "DESCRIPTION": "Deal !D! damage. NL Stun the enemy. NL Skip your next turn. NL Exhaust."
   },
   "MokouKeine:HakutakuForm": {
     "NAME": "Hakutaku Form",
@@ -297,6 +297,10 @@
     "NAME": "Memento",
     "DESCRIPTION": ""
   },
+  "MokouKeine:Desiccate": {
+    "NAME": "Desiccate",
+    "DESCRIPTION": "Deal !D! damage. NL Burst: Enemy loses !M! Strength."
+  },
   "MokouKeine:Anamnesis": {
     "NAME": "Anamnesis",
     "DESCRIPTION": "Deal 1 damage to ALL enemies. NL Draw a card. NL Exhaust.",
@@ -306,8 +310,8 @@
     "NAME": "",
     "DESCRIPTION": "Summon X mokoukeine:Flames."
   },
-  "MokouKeine:Hotheaded": {
-    "NAME": "Hotheaded",
+  "MokouKeine:Hotblooded": {
+    "NAME": "Hot-blooded",
     "DESCRIPTION": "Whenever a discard pile is shuffled, lose !M! HP. NL At the start of your turn, gain [E]."
   },
   "MokouKeine:c": {

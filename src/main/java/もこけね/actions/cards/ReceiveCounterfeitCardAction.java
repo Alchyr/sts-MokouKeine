@@ -12,6 +12,7 @@ public class ReceiveCounterfeitCardAction extends ReceiveSignalCardsAction {
     {
         this.actionType = ActionType.CARD_MANIPULATION;
         this.amount = amount;
+        this.duration = 10.0f;
     }
 
     @Override
@@ -30,8 +31,8 @@ public class ReceiveCounterfeitCardAction extends ReceiveSignalCardsAction {
                 AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(c, ((MokouKeine) AbstractDungeon.player).otherPlayerHand));
             }
             signaledGroups.removeFirst();
+            this.isDone = true;
         }
-
-        this.isDone = true;
+        tickDuration();
     }
 }
