@@ -73,6 +73,7 @@ EVENTS:
 +Patch AbstractDungeon lines ~2300-2310 (in intellij lines) to ensure it checks both players' gold amounts when disabling certain events
 
 Living Wall - Augumenter - Transmogrifier - Does transform work correctly? - Worked fine, once
+Transformation of Transmogrifier is not seeded, but it should work fine since the individually obtained cards and card removal should be reported.
 Ancient Writing - Upgrading does not upgrade other deck
 +Council of Ghosts - Doubled apparitions is kind of op... Maybe remove from pool
 +Removal of bottles - Unbottle other player's bottled card?

@@ -17,7 +17,7 @@ public class Spark extends CustomMonster {
     //Has 20 hp.
     //Summon action should give a value that determines explosion damage, on death.
     //Check upon monster death if all enemies are dead. If so, die.
-    private static final String ID = makeID("Spark");
+    public static final String ID = makeID("Spark");
 
     private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
 
@@ -43,6 +43,10 @@ public class Spark extends CustomMonster {
     @Override
     protected void getMove(int i) {
         setMove((byte)0, Intent.NONE);
+    }
+
+    @Override
+    public void flashIntent() {
     }
 
     @Override
@@ -101,6 +105,5 @@ public class Spark extends CustomMonster {
             this.renderHealth(sb);
             this.renderName(sb);
         }
-
     }
 }

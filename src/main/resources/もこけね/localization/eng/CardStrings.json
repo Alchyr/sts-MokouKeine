@@ -216,7 +216,7 @@
   },
   "MokouKeine:FujiyamaVolcano": {
     "NAME": "Fujiyama Volcano",
-    "DESCRIPTION": "Exhaust your hand. NL Summon a mokoukeine:Flame for each card Exhausted."
+    "DESCRIPTION": "At the end of your next !M! turns, deal 10 damage to ALL enemies."
   },
   "MokouKeine:Blitz": {
     "NAME": "Blitz",

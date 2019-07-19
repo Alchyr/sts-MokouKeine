@@ -5,7 +5,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.MinionPower;
 import javassist.CtBehavior;
+import もこけね.actions.general.KillEnemyAction;
+import もこけね.enemies.Spark;
 import もこけね.interfaces.OnEnemyDeathPower;
 
 @SpirePatch(
@@ -27,6 +30,26 @@ public class OnEnemyDeath {
                 {
                     ((OnEnemyDeathPower) p).onEnemyDeath(__instance);
                 }
+            }
+        }
+
+        //check for minions
+        boolean allMinion = true;
+        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters)
+        {
+            if (!m.isDeadOrEscaped() && !m.hasPower(MinionPower.POWER_ID))
+            {
+                allMinion = false;
+                break;
+            }
+        }
+
+        if (allMinion)
+        {
+            for (AbstractMonster m : AbstractDungeon.getMonsters().monsters)
+            {
+                if (!m.isDeadOrEscaped() && m.id.equals(Spark.ID))
+                AbstractDungeon.actionManager.addToBottom(new KillEnemyAction(m));
             }
         }
     }

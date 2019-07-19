@@ -13,9 +13,10 @@ import もこけね.powers.VolatilePower;
 
 public class SummonSparkAction extends AbstractGameAction {
     private static final float MAX_Y = 250.0F;
-    private static final float MIN_Y = 100.0F;
-    private static final float MIN_X = -200.0F;
-    private static final float MAX_X = 200.0F;
+    private static final float MIN_Y = 150.0F;
+    private static final float MIN_X = -350.0F;
+    private static final float MAX_X = 150.0F;
+    //TODO: Add special case for shield/spear
 
     public SummonSparkAction()
     {
